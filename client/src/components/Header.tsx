@@ -43,37 +43,39 @@ export default function Header() {
           : 'bg-transparent py-4'
       }`}
     >
-      <div className="container mx-auto px-4 flex justify-between items-center">
-        <a 
-          href="#" 
-          onClick={(e) => {
-            e.preventDefault();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-          className="flex items-center group"
-        >
-          <motion.div
-            initial={{ scale: 1 }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400, damping: 10 }}
-            className="text-left"
+      <div className="container mx-auto px-4 flex items-center">
+        <div className="flex-none">
+          <a 
+            href="#" 
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            className="flex items-center group"
           >
-            <div className="flex flex-col items-start">
-              <img 
-                src={ecipleLogo} 
-                alt="eciple logo" 
-                className={`h-8 w-auto object-contain ${scrolled ? 'opacity-90 brightness-0' : 'opacity-100'}`} 
-              />
-              <span className={`text-xs italic mt-1 text-left ${scrolled ? 'text-[#FF7500]' : 'text-white'}`}>
-                Discipleship Reimagined
-              </span>
-            </div>
-          </motion.div>
-        </a>
+            <motion.div
+              initial={{ scale: 1 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              className="text-left"
+            >
+              <div className="flex flex-col items-start">
+                <img 
+                  src={ecipleLogo} 
+                  alt="eciple logo" 
+                  className={`h-8 w-auto object-contain ${scrolled ? 'opacity-90 brightness-0' : 'opacity-100'}`} 
+                />
+                <span className={`text-xs italic mt-1 text-left ${scrolled ? 'text-[#FF7500]' : 'text-white'}`}>
+                  Discipleship Reimagined
+                </span>
+              </div>
+            </motion.div>
+          </a>
+        </div>
         
-        <div className="flex items-center">
-          <nav className="hidden md:block mr-4">
-            <ul className="flex items-center gap-1">
+        <div className="flex-1 flex justify-center">
+          <nav className="hidden md:flex">
+            <ul className="flex items-center gap-5">
               {navItems.map((item, index) => (
                 <motion.li 
                   key={index}
@@ -131,34 +133,36 @@ export default function Header() {
             </ul>
           </nav>
           
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
-            className="hidden md:block"
-          >
-            <Button 
-              asChild 
-              variant="default" 
-              size="sm" 
-              className="bg-[#6148FF] hover:bg-[#5540d4] rounded-full px-5 flex items-center shadow-lg"
+          <div className="flex-none flex items-center gap-3">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4 }}
+              className="hidden md:block"
             >
-              <Link href="/auth" className="flex items-center gap-1.5 py-1">
-                <Lock className="h-4 w-4" />
-                Investor Portal
-              </Link>
+              <Button 
+                asChild 
+                variant="default" 
+                size="sm" 
+                className="bg-[#6148FF] hover:bg-[#5540d4] rounded-full px-5 flex items-center shadow-lg"
+              >
+                <Link href="/auth" className="flex items-center gap-1.5 py-1">
+                  <Lock className="h-4 w-4" />
+                  Investor Portal
+                </Link>
+              </Button>
+            </motion.div>
+            
+            <Button
+              variant="ghost"
+              size="icon"
+              className={`md:hidden ${scrolled ? 'text-foreground' : 'text-white'}`}
+              onClick={toggleMobileMenu}
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
-          </motion.div>
-          
-          <Button
-            variant="ghost"
-            size="icon"
-            className={`md:hidden ${scrolled ? 'text-foreground' : 'text-white'}`}
-            onClick={toggleMobileMenu}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
+          </div>
         </div>
       </div>
       

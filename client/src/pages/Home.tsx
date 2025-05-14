@@ -106,20 +106,7 @@ export default function Home() {
       </main>
       <Footer />
       
-      {/* Investor Portal Button */}
-      <div className="fixed right-4 md:right-8 top-24 z-40">
-        <Button 
-          variant="secondary" 
-          className="font-medium shadow-lg gap-2 group relative overflow-hidden"
-          asChild
-        >
-          <Link href="/auth">
-            <LockKeyhole className="h-4 w-4" />
-            <span>Investor Portal</span>
-            <span className="absolute inset-0 bg-primary/10 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
-          </Link>
-        </Button>
-      </div>
+      {/* Investor Portal button has been moved to the header */}
       
       {/* Scroll to top button */}
       {showScrollTop && (
