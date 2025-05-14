@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import ecipleLogo from "@assets/eciple-logo-white.png";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -49,15 +50,18 @@ export default function Header() {
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
           >
-            <h1 className="text-2xl font-bold font-sans">
-              <span className={`text-secondary ${scrolled ? '' : 'text-accent'}`}>e</span>
-              <span className={scrolled ? 'text-primary' : 'text-white'}>ciple</span>
-            </h1>
-            <span className={`text-xs italic ${
-              scrolled ? 'text-muted-foreground' : 'text-white/80'
-            }`}>
-              Discipleship Reimagined
-            </span>
+            <div className="flex flex-col">
+              <img 
+                src={ecipleLogo} 
+                alt="eciple logo" 
+                className={`h-9 ${scrolled ? 'opacity-90 brightness-0' : 'opacity-100'}`} 
+              />
+              <span className={`text-xs italic mt-1 ${
+                scrolled ? 'text-muted-foreground' : 'text-white/80'
+              }`}>
+                Discipleship Reimagined
+              </span>
+            </div>
           </motion.div>
         </Link>
         

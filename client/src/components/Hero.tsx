@@ -24,7 +24,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="pt-28 pb-20 bg-gradient-to-br from-primary via-secondary to-primary text-white relative overflow-hidden">
+    <section className="pt-28 pb-20 bg-gradient-to-br from-[#FF7500] via-secondary to-[#FF7500] text-white relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
