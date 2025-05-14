@@ -1,8 +1,12 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { setupAuth } from "./auth";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Set up authentication routes (/api/register, /api/login, /api/logout, /api/user)
+  setupAuth(app);
+
   // Contact form submission endpoint
   app.post("/api/contact", async (req, res) => {
     try {
@@ -26,8 +30,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get all contact requests - for administrative purposes
-  app.get("/api/contact", async (req, res) => {
+  // Get all contact requests - for administrative purposes (protected)
+  app.get("/api/contact", (req, res, next) => {
+    // Check if user is authenticated
+    if (!req.isAuthenticated()) {
+      return res.status(401).json({ message: "Not authenticated" });
+    }
+    next();
+  }, async (req, res) => {
     try {
       const contacts = await storage.getAllContactRequests();
       return res.status(200).json(contacts);
