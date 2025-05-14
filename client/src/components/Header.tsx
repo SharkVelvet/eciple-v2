@@ -125,28 +125,6 @@ export default function Header() {
         </nav>
         
         <div className="flex items-center gap-4">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="hidden md:block"
-          >
-            <Button 
-              asChild 
-              variant="outline" 
-              size="sm" 
-              className={`rounded-full ${
-                scrolled 
-                  ? 'border-primary/20 text-primary hover:bg-primary/5' 
-                  : 'border-white/20 text-white hover:bg-white/10'
-              }`}
-            >
-              <Link href="/auth" className="flex items-center gap-1.5">
-                <span>Investor Portal</span>
-                <ExternalLink className="h-3 w-3" />
-              </Link>
-            </Button>
-          </motion.div>
           
           <Button
             variant="ghost"
@@ -246,37 +224,7 @@ export default function Header() {
                   <a href="#contact">Contact</a>
                 </Button>
               </motion.li>
-              <motion.li 
-                variants={{
-                  open: {
-                    y: 0,
-                    opacity: 1,
-                    transition: {
-                      y: { stiffness: 1000, velocity: -100 }
-                    }
-                  },
-                  closed: {
-                    y: 20,
-                    opacity: 0,
-                    transition: {
-                      y: { stiffness: 1000 }
-                    }
-                  }
-                }}
-                className="pt-2"
-              >
-                <Button 
-                  asChild 
-                  variant="outline" 
-                  className="w-full justify-center rounded-full" 
-                  onClick={closeMobileMenu}
-                >
-                  <Link href="/auth">
-                    <span>Investor Portal</span>
-                    <ExternalLink className="ml-1.5 h-3 w-3" />
-                  </Link>
-                </Button>
-              </motion.li>
+
             </motion.ul>
           </motion.div>
         )}
