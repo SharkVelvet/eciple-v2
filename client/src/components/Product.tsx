@@ -86,7 +86,7 @@ export default function Product() {
                   />
                 </div>
                 <CardContent className="p-8">
-                  <div className="text-primary text-4xl mb-4">
+                  <div className="text-foreground text-4xl mb-4">
                     <i className={`fas fa-${feature.icon}`}></i>
                   </div>
                   <h3 className="text-xl font-semibold font-sans mb-3">{feature.title}</h3>
@@ -135,7 +135,7 @@ export default function Product() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.8 + index * 0.1, duration: 0.3 }}
                 >
-                  <CheckCircle className="h-5 w-5 text-primary mr-2 flex-shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-foreground mr-2 flex-shrink-0" />
                   <span>{feature}</span>
                 </motion.li>
               ))}
@@ -165,7 +165,7 @@ export default function Product() {
                   viewport={{ once: true }}
                   transition={{ delay: 0.8 + index * 0.1, duration: 0.3 }}
                 >
-                  <CheckCircle className="h-5 w-5 text-primary mr-2 flex-shrink-0" />
+                  <CheckCircle className="h-5 w-5 text-foreground mr-2 flex-shrink-0" />
                   <span>{feature}</span>
                 </motion.li>
               ))}
