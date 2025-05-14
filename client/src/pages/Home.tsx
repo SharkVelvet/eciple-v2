@@ -100,7 +100,7 @@ export default function Home() {
         <Solution />
         <Product />
         <Competition />
-        <Market />
+        {/* Market section moved to investor dashboard */}
         <Pricing />
         <Contact />
       </main>

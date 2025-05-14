@@ -31,7 +31,6 @@ export default function Header() {
     { name: "Solution", href: "#solution" },
     { name: "Product", href: "#product" },
     { name: "Competition", href: "#competition" },
-    { name: "Market", href: "#market" },
     { name: "Pricing", href: "#pricing" }
   ];
 
@@ -44,11 +43,19 @@ export default function Header() {
       }`}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <Link href="/" className="flex items-center group">
+        <a 
+          href="#" 
+          onClick={(e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          className="flex items-center group"
+        >
           <motion.div
             initial={{ scale: 1 }}
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
+            className="text-left"
           >
             <div className="flex flex-col">
               <img 
@@ -61,7 +68,7 @@ export default function Header() {
               </span>
             </div>
           </motion.div>
-        </Link>
+        </a>
         
         <nav className="hidden md:block">
           <ul className="flex items-center gap-1">
@@ -224,7 +231,6 @@ export default function Header() {
                   <a href="#contact">Contact</a>
                 </Button>
               </motion.li>
-
             </motion.ul>
           </motion.div>
         )}
