@@ -107,15 +107,16 @@ export default function Header() {
             >
               <Button 
                 asChild 
-                variant="outline" 
+                variant="default" 
                 size="sm" 
                 className={`ml-2 ${
-                  scrolled ? 'border-primary text-primary' : 'border-white text-white'
-                } rounded-md px-4 font-medium`}
+                  scrolled ? 'bg-primary' : 'bg-accent'
+                } rounded-full px-5 shadow-lg shadow-accent/20 group relative overflow-hidden`}
               >
                 <Link href="/auth" className="flex items-center gap-1">
                   Investor Portal
                   <ExternalLink className="h-3.5 w-3.5" />
+                  <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                 </Link>
               </Button>
             </motion.li>
@@ -246,13 +247,14 @@ export default function Header() {
               >
                 <Button 
                   asChild 
-                  variant="outline"
-                  className="w-full justify-center rounded-md mb-2 text-foreground border-primary" 
+                  variant="default"
+                  className="w-full justify-center rounded-full mb-2 bg-primary group relative overflow-hidden" 
                   onClick={closeMobileMenu}
                 >
                   <Link href="/auth" className="flex items-center justify-center gap-1">
                     Investor Portal
                     <ExternalLink className="h-3.5 w-3.5" />
+                    <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                   </Link>
                 </Button>
               </motion.li>
