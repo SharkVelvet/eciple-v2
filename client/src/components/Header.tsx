@@ -54,11 +54,9 @@ export default function Header() {
               <img 
                 src={ecipleLogo} 
                 alt="eciple logo" 
-                className={`h-9 ${scrolled ? 'opacity-90 brightness-0' : 'opacity-100'}`} 
+                className={`h-8 w-auto object-contain ${scrolled ? 'opacity-90 brightness-0' : 'opacity-100'}`} 
               />
-              <span className={`text-xs italic mt-1 ${
-                scrolled ? 'text-muted-foreground' : 'text-white/80'
-              }`}>
+              <span className={`text-xs italic mt-1 ${scrolled ? 'text-[#FF7500]' : 'text-white'}`}>
                 Discipleship Reimagined
               </span>
             </div>
