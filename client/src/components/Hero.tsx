@@ -87,7 +87,7 @@ export default function Hero() {
               variants={itemVariants}
             >
               Discipleship <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-accent via-secondary to-accent animate-text-gradient bg-300%">
+              <span className="text-white">
                 Reimagined
               </span>
             </motion.h1>

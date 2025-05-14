@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import ecipleLogo from "@assets/eciple-logo-white.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -43,9 +44,13 @@ export default function Footer() {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <h3 className="text-xl font-bold font-sans mb-4">
-              <span className="text-secondary">e</span>ciple
-            </h3>
+            <div className="mb-4">
+              <img 
+                src={ecipleLogo} 
+                alt="eciple logo" 
+                className="h-10 w-auto object-contain" 
+              />
+            </div>
             <p className="text-white text-opacity-70 mb-4">
               Transforming discipleship through innovative technology and intentional relationships.
             </p>
@@ -115,9 +120,14 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-white border-opacity-20 mt-8 pt-8 text-center">
-          <p className="text-white text-opacity-60">
-            &copy; {currentYear} eciple. All rights reserved. Discipleship Reimagined.
-          </p>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
+            <p className="text-white text-opacity-60">
+              &copy; {currentYear} eciple. All rights reserved. Discipleship Reimagined.
+            </p>
+            <p className="text-white text-opacity-60">
+              Powered by <a href="https://www.fotype.com" className="text-[#FF7500] hover:underline" target="_blank" rel="noopener noreferrer">FOTYPE</a>
+            </p>
+          </div>
         </div>
       </div>
     </footer>
