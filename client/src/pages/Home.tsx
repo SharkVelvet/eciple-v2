@@ -15,7 +15,7 @@ import { ArrowUpCircle, LockKeyhole } from "lucide-react";
 
 export default function Home() {
   useEffect(() => {
-    // Set up smooth scrolling behavior
+    // Set up smooth scrolling behavior with animated transition
     const handleAnchorClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
@@ -25,10 +25,38 @@ export default function Home() {
         
         const targetElement = document.querySelector(targetId as string);
         if (targetElement) {
-          window.scrollTo({
-            top: (targetElement as HTMLElement).offsetTop - 80,
-            behavior: 'smooth'
-          });
+          // Calculate the distance to scroll
+          const offsetTop = (targetElement as HTMLElement).offsetTop;
+          const headerOffset = 80;
+          const elementPosition = offsetTop - headerOffset;
+          const startPosition = window.pageYOffset;
+          const distance = elementPosition - startPosition;
+          
+          // Animate scroll with easing
+          const duration = 800; // ms
+          let start: number | null = null;
+          
+          // Easing function for smoother animation
+          const easeInOutQuad = (t: number): number => {
+            return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+          };
+          
+          const animateScroll = (timestamp: number) => {
+            if (!start) start = timestamp;
+            const progress = timestamp - start;
+            const timePercent = Math.min(progress / duration, 1);
+            const easePercent = easeInOutQuad(timePercent);
+            
+            window.scrollTo({
+              top: startPosition + distance * easePercent,
+            });
+            
+            if (progress < duration) {
+              window.requestAnimationFrame(animateScroll);
+            }
+          };
+          
+          window.requestAnimationFrame(animateScroll);
         }
       }
     };

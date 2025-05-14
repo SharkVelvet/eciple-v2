@@ -281,72 +281,173 @@ export default function InvestorDashboard() {
             </Card>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <Card className="col-span-1">
-              <CardHeader>
-                <CardTitle className="text-lg">Upcoming Events</CardTitle>
-              </CardHeader>
-              <CardContent className="p-4">
-                <div className="space-y-4">
-                  {upcomingEvents.map((event, i) => (
-                    <div key={i} className="p-3 border rounded-md hover:bg-muted/50 transition-colors">
-                      <div className="flex items-center mb-2">
-                        <Calendar className="h-4 w-4 text-primary mr-2" />
-                        <h4 className="font-medium">{event.name}</h4>
-                      </div>
-                      <p className="text-sm text-muted-foreground">
-                        {event.date} at {event.time}
-                      </p>
+          <Card className="col-span-1">
+            <CardHeader>
+              <CardTitle className="text-lg">Market Opportunity</CardTitle>
+            </CardHeader>
+            <CardContent className="p-4">
+              <div className="space-y-4">
+                <div className="p-3 border rounded-md bg-gradient-to-r from-blue-50 to-white">
+                  <h4 className="font-semibold text-primary flex items-center gap-2 mb-2">
+                    <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center">
+                      <ChevronRight className="h-3 w-3 text-primary" />
                     </div>
-                  ))}
+                    Service Addressable Market (SAM)
+                  </h4>
+                  <ul className="space-y-2 text-sm pl-7">
+                    <li className="text-muted-foreground">
+                      <span className="font-medium text-foreground">335,000</span> church congregations in the U.S.
+                    </li>
+                    <li className="text-muted-foreground">
+                      <span className="font-medium text-foreground">150M</span> people
+                    </li>
+                    <li className="text-muted-foreground">
+                      <span className="font-medium text-foreground">$75B</span> in annual giving
+                    </li>
+                  </ul>
                 </div>
-              </CardContent>
-            </Card>
-            
-            <Card className="col-span-1 lg:col-span-2">
-              <CardHeader>
-                <CardTitle className="text-lg">Investment Progress</CardTitle>
-              </CardHeader>
-              <CardContent className="p-4">
-                <div className="space-y-6">
-                  <div>
-                    <div className="flex justify-between mb-2">
-                      <h4 className="font-medium">Fundraising Goal</h4>
-                      <p className="text-sm font-medium">$145K / $200K</p>
+
+                <div className="p-3 border rounded-md bg-gradient-to-r from-indigo-50 to-white">
+                  <h4 className="font-semibold text-primary flex items-center gap-2 mb-2">
+                    <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center">
+                      <ChevronRight className="h-3 w-3 text-primary" />
                     </div>
-                    <Progress value={72.5} className="h-2" />
-                    <p className="text-xs text-muted-foreground mt-2">
-                      72.5% of seed funding goal achieved
-                    </p>
+                    Service Obtainable Market (SOM)
+                  </h4>
+                  <ul className="space-y-2 text-sm pl-7">
+                    <li className="text-muted-foreground">
+                      <span className="font-medium text-foreground">115,000</span> congregations
+                    </li>
+                    <li className="text-muted-foreground">
+                      <span className="font-medium text-foreground">40M</span> weekly attendees
+                    </li>
+                    <li className="text-muted-foreground">
+                      <span className="font-medium text-foreground">$40B</span> in annual giving
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="bg-secondary/10 rounded-md p-3 text-center">
+                  <p className="text-secondary-foreground text-sm font-medium">Estimated Market Size</p>
+                  <p className="font-bold text-lg text-secondary">$227.7 Million</p>
+                  <p className="text-xs text-muted-foreground">among 115,000 evangelical churches</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="col-span-1 lg:col-span-2">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg">Market Trends & Growth</CardTitle>
+            </CardHeader>
+            <CardContent className="p-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div className="space-y-2">
+                  <h4 className="font-medium text-sm">Market Trends</h4>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-start gap-2">
+                      <div className="h-5 w-5 rounded-full bg-secondary/20 flex items-center justify-center text-secondary shrink-0 mt-0.5">
+                        <TrendingUp className="h-3 w-3" />
+                      </div>
+                      <span className="text-muted-foreground">Declining weekly church attendance necessitates focus on existing members</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="h-5 w-5 rounded-full bg-secondary/20 flex items-center justify-center text-secondary shrink-0 mt-0.5">
+                        <TrendingUp className="h-3 w-3" />
+                      </div>
+                      <span className="text-muted-foreground">Younger demographics expect digital tools with data and metrics</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <div className="h-5 w-5 rounded-full bg-secondary/20 flex items-center justify-center text-secondary shrink-0 mt-0.5">
+                        <TrendingUp className="h-3 w-3" />
+                      </div>
+                      <span className="text-muted-foreground">Churches are adopting monthly subscription models over large capital purchases</span>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div className="space-y-2">
+                  <h4 className="font-medium text-sm">Growth Potential</h4>
+                  <div className="p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded-md">
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-sm font-medium">CAGR</span>
+                      <span className="text-sm font-medium text-success">12%</span>
+                    </div>
+                    <Progress value={12} className="h-1.5 mb-2" />
+                    <p className="text-xs text-muted-foreground">Estimated yearly growth for discipleship technology over the next 5 years</p>
                   </div>
                   
-                  <div className="p-4 bg-muted rounded-md">
-                    <h4 className="font-medium mb-2">The Ask</h4>
-                    <ul className="space-y-2 text-sm">
-                      <li className="flex items-start">
-                        <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center text-primary mr-2 mt-0.5">
-                          <ChevronRight className="h-3 w-3" />
-                        </div>
-                        <span>$200K seed funding for 20% of the cap table (pre-money value of $2M)</span>
-                      </li>
-                      <li className="flex items-start">
-                        <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center text-primary mr-2 mt-0.5">
-                          <ChevronRight className="h-3 w-3" />
-                        </div>
-                        <span>Validate product with pilot churches in Q3 2025</span>
-                      </li>
-                      <li className="flex items-start">
-                        <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center text-primary mr-2 mt-0.5">
-                          <ChevronRight className="h-3 w-3" />
-                        </div>
-                        <span>Fund MVP development and path to profitability</span>
-                      </li>
-                    </ul>
+                  <div className="p-3 border rounded-md">
+                    <h5 className="font-medium mb-1 text-sm">Early Adopters</h5>
+                    <p className="text-xs text-muted-foreground mb-2">1,700 megachurches represent our initial focus as they have the resources to be early adopters.</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-medium">Market Penetration</span>
+                      <span className="text-xs font-medium text-primary">Goal: 1.1% by Year 3</span>
+                    </div>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
-          </div>
+              </div>
+              
+              <div className="space-y-3">
+                <h4 className="font-medium text-sm">Investment Progress</h4>
+                <div>
+                  <div className="flex justify-between mb-1">
+                    <h4 className="text-sm">Fundraising Goal</h4>
+                    <p className="text-sm font-medium">$145K / $200K</p>
+                  </div>
+                  <Progress value={72.5} className="h-2" />
+                  <p className="text-xs text-muted-foreground mt-1">
+                    72.5% of seed funding goal achieved
+                  </p>
+                </div>
+                
+                <div className="p-3 bg-muted rounded-md">
+                  <h4 className="font-medium mb-2 text-sm">The Ask</h4>
+                  <ul className="space-y-2 text-xs">
+                    <li className="flex items-start">
+                      <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center text-primary mr-2 mt-0.5">
+                        <ChevronRight className="h-3 w-3" />
+                      </div>
+                      <span>$200K seed funding for 20% of the cap table (pre-money value of $2M)</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center text-primary mr-2 mt-0.5">
+                        <ChevronRight className="h-3 w-3" />
+                      </div>
+                      <span>Validate product with pilot churches in Q3 2025</span>
+                    </li>
+                    <li className="flex items-start">
+                      <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center text-primary mr-2 mt-0.5">
+                        <ChevronRight className="h-3 w-3" />
+                      </div>
+                      <span>Fund MVP development and path to profitability</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="col-span-1 lg:col-span-3">
+            <CardHeader>
+              <CardTitle className="text-lg">Upcoming Events</CardTitle>
+            </CardHeader>
+            <CardContent className="p-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {upcomingEvents.map((event, i) => (
+                  <div key={i} className="p-3 border rounded-md hover:bg-muted/50 transition-colors">
+                    <div className="flex items-center mb-2">
+                      <Calendar className="h-4 w-4 text-primary mr-2" />
+                      <h4 className="font-medium">{event.name}</h4>
+                    </div>
+                    <p className="text-sm text-muted-foreground">
+                      {event.date} at {event.time}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </main>
     </div>

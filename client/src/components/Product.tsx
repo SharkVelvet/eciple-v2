@@ -53,7 +53,7 @@ export default function Product() {
 
   return (
     <section id="product" className="py-16 bg-gray-50 scroll-mt-20">
-      <div className="container mx-auto px-4">
+      <div className="max-w-5xl mx-auto px-4">
         <motion.div 
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
