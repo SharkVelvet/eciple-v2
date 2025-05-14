@@ -125,7 +125,7 @@ export default function Home() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed right-4 md:right-8 bottom-8 z-40 bg-secondary text-secondary-foreground rounded-full p-2 shadow-lg hover:bg-secondary/90 transition-all duration-300 animate-bounce-slow"
+          className="fixed right-4 md:right-8 bottom-8 z-40 bg-[#FF7500] text-white rounded-full p-2 shadow-lg hover:bg-[#FF7500]/90 transition-all duration-300"
           aria-label="Scroll to top"
         >
           <ArrowUpCircle className="h-8 w-8" />
