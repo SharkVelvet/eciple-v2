@@ -87,7 +87,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-16 bg-gradient-to-br from-[#FF7500] to-secondary text-white scroll-mt-20">
-      <div className="max-w-5xl mx-auto px-4">
+      <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <motion.div
             initial={{ opacity: 0, x: -50 }}

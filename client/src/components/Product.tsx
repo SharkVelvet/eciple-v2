@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
+import ecipleWings from "@assets/eciple-wings.png";
 
 export default function Product() {
   const features = [
@@ -76,8 +77,14 @@ export default function Product() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
             >
-              <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-primary bg-opacity-10 rounded-bl-full"></div>
+              <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative overflow-visible">
+                <div className="absolute top-0 right-0 -mr-6 mt-2">
+                  <img 
+                    src={ecipleWings} 
+                    alt="eciple wings" 
+                    className="h-16 w-auto object-contain opacity-90"
+                  />
+                </div>
                 <CardContent className="p-8">
                   <div className="text-primary text-4xl mb-4">
                     <i className={`fas fa-${feature.icon}`}></i>
