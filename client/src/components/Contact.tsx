@@ -125,24 +125,26 @@ export default function Contact() {
                   </motion.li>
                 ))}
               </ul>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="flex flex-col items-start"
-            >
-              <img 
-                src={bobbyPersonImage} 
-                alt="Bobby Person, Founder of eciple" 
-                className="rounded-lg shadow-md w-full h-auto max-w-xs"
-              />
-              <div className="mt-3 text-left">
-                <p className="font-medium text-white">Bobby Person</p>
-                <p className="text-white/80 text-sm">Founder of eciple</p>
-              </div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.8, duration: 0.6 }}
+                className="flex items-center mt-6"
+              >
+                <div className="flex-shrink-0">
+                  <img 
+                    src={bobbyPersonImage} 
+                    alt="Bobby Person, Founder of eciple" 
+                    className="rounded-full object-cover w-[100px] h-[100px] border-2 border-white/20 shadow-md"
+                  />
+                </div>
+                <div className="ml-4">
+                  <p className="font-semibold text-white text-lg">Bobby Person</p>
+                  <p className="text-white/80">Founder of eciple</p>
+                </div>
+              </motion.div>
             </motion.div>
           </motion.div>
           
