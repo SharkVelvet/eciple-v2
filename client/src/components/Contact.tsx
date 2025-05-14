@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import bobbyPersonImage from "@assets/Bobby-Person-2021-scaled.jpg";
 
 export default function Contact() {
   const { toast } = useToast();
@@ -131,12 +132,17 @@ export default function Contact() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3, duration: 0.6 }}
+              className="flex flex-col items-start"
             >
               <img 
-                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=500" 
-                alt="People in a mentorship meeting" 
-                className="rounded-lg shadow-md w-full h-auto"
+                src={bobbyPersonImage} 
+                alt="Bobby Person, Founder of eciple" 
+                className="rounded-lg shadow-md w-full h-auto max-w-xs"
               />
+              <div className="mt-3 text-left">
+                <p className="font-medium text-white">Bobby Person</p>
+                <p className="text-white/80 text-sm">Founder of eciple</p>
+              </div>
             </motion.div>
           </motion.div>
           

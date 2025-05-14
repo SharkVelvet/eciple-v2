@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, X, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -8,6 +8,7 @@ import ecipleLogo from "@assets/eciple-logo-white.png";
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [location] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,13 +58,13 @@ export default function Header() {
             transition={{ type: "spring", stiffness: 400, damping: 10 }}
             className="text-left"
           >
-            <div className="flex flex-col">
+            <div className="flex flex-col items-start">
               <img 
                 src={ecipleLogo} 
                 alt="eciple logo" 
                 className={`h-8 w-auto object-contain ${scrolled ? 'opacity-90 brightness-0' : 'opacity-100'}`} 
               />
-              <span className={`text-xs italic mt-1 ${scrolled ? 'text-[#FF7500]' : 'text-white'}`}>
+              <span className={`text-xs italic mt-1 text-left ${scrolled ? 'text-[#FF7500]' : 'text-white'}`}>
                 Discipleship Reimagined
               </span>
             </div>
@@ -103,6 +104,26 @@ export default function Header() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.4 }}
+            >
+              <Button 
+                asChild 
+                variant="outline" 
+                size="sm" 
+                className={`ml-2 ${
+                  scrolled ? 'border-primary text-primary' : 'border-white text-white'
+                } rounded-md px-4 font-medium`}
+              >
+                <Link href="/auth" className="flex items-center gap-1">
+                  Investor Portal
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </Link>
+              </Button>
+            </motion.li>
+            
+            <motion.li
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5 }}
             >
               <Button 
                 asChild 
@@ -204,6 +225,38 @@ export default function Header() {
                   </a>
                 </motion.li>
               ))}
+              <motion.li 
+                variants={{
+                  open: {
+                    y: 0,
+                    opacity: 1,
+                    transition: {
+                      y: { stiffness: 1000, velocity: -100 }
+                    }
+                  },
+                  closed: {
+                    y: 20,
+                    opacity: 0,
+                    transition: {
+                      y: { stiffness: 1000 }
+                    }
+                  }
+                }}
+                className="pt-2"
+              >
+                <Button 
+                  asChild 
+                  variant="outline"
+                  className="w-full justify-center rounded-md mb-2 text-foreground border-primary" 
+                  onClick={closeMobileMenu}
+                >
+                  <Link href="/auth" className="flex items-center justify-center gap-1">
+                    Investor Portal
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </Link>
+                </Button>
+              </motion.li>
+              
               <motion.li 
                 variants={{
                   open: {
