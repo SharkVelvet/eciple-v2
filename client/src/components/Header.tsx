@@ -73,7 +73,14 @@ export default function Header() {
                 transition={{ delay: index * 0.05 + 0.1 }}
               >
                 <a 
-                  href={item.href} 
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const element = document.querySelector(item.href);
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
                   className={`px-3 py-2 rounded-md font-medium text-sm transition-colors relative group ${
                     scrolled 
                       ? 'text-foreground hover:text-primary' 
@@ -98,7 +105,17 @@ export default function Header() {
                   scrolled ? 'bg-primary' : 'bg-accent'
                 } rounded-full px-5 shadow-lg shadow-accent/20 group relative overflow-hidden`}
               >
-                <a href="#contact" className="flex items-center gap-1">
+                <a 
+                  href="#contact" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const element = document.querySelector('#contact');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="flex items-center gap-1"
+                >
                   Contact
                   <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                 </a>
@@ -188,7 +205,14 @@ export default function Header() {
                 >
                   <a 
                     href={item.href} 
-                    onClick={closeMobileMenu} 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      closeMobileMenu();
+                      const element = document.querySelector(item.href);
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }} 
                     className="block py-2.5 px-4 text-foreground hover:text-primary hover:bg-primary/5 rounded-md transition-colors font-medium"
                   >
                     {item.name}

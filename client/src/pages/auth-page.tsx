@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useLocation } from "wouter";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -22,117 +22,156 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useAuth } from "@/hooks/use-auth";
-import { Sparkles, Key, Users, ShieldCheck } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { Sparkles, Key, Users, ShieldCheck, Lock } from "lucide-react";
 
-const loginSchema = z.object({
-  username: z.string().min(3, {
-    message: "Username must be at least 3 characters.",
+const accessRequestSchema = z.object({
+  firstName: z.string().min(2, {
+    message: "First name must be at least 2 characters.",
   }),
-  password: z.string().min(6, {
-    message: "Password must be at least 6 characters.",
+  lastName: z.string().min(2, {
+    message: "Last name must be at least 2 characters.",
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email address.",
+  }),
+  company: z.string().min(2, {
+    message: "Company must be at least 2 characters.",
   }),
 });
 
-const registerSchema = loginSchema.extend({
-  confirmPassword: z.string().min(6, {
-    message: "Password must be at least 6 characters.",
+const passcodeSchema = z.object({
+  passcode: z.string().min(4, {
+    message: "Passcode must be at least 4 characters.",
   }),
-}).refine((data) => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
 });
 
 export default function AuthPage() {
-  const [activeTab, setActiveTab] = useState<"login" | "register">("login");
+  const [activeTab, setActiveTab] = useState<"request" | "passcode">("request");
   const [, setLocation] = useLocation();
-  const { user, loginMutation, registerMutation } = useAuth();
+  const { toast } = useToast();
+  
+  // The passcode that allows access to the investor dashboard
+  // In a real app, this would be validated against a secure backend
+  const INVESTOR_PASSCODE = "eciple2023";
 
-  // Redirect if already logged in
-  useEffect(() => {
-    if (user) {
-      setLocation("/investor-dashboard");
-    }
-  }, [user, setLocation]);
-
-  const loginForm = useForm<z.infer<typeof loginSchema>>({
-    resolver: zodResolver(loginSchema),
+  const accessRequestForm = useForm<z.infer<typeof accessRequestSchema>>({
+    resolver: zodResolver(accessRequestSchema),
     defaultValues: {
-      username: "",
-      password: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      company: "",
     },
   });
 
-  const registerForm = useForm<z.infer<typeof registerSchema>>({
-    resolver: zodResolver(registerSchema),
+  const passcodeForm = useForm<z.infer<typeof passcodeSchema>>({
+    resolver: zodResolver(passcodeSchema),
     defaultValues: {
-      username: "",
-      password: "",
-      confirmPassword: "",
+      passcode: "",
     },
   });
 
-  const onLoginSubmit = (values: z.infer<typeof loginSchema>) => {
-    loginMutation.mutate(values);
+  const onAccessRequestSubmit = (values: z.infer<typeof accessRequestSchema>) => {
+    // In a real app, this would send the request to a backend service
+    console.log("Access request submitted:", values);
+    toast({
+      title: "Request Received",
+      description: "Thank you for your interest. We'll review your request and contact you soon.",
+    });
+    accessRequestForm.reset();
   };
 
-  const onRegisterSubmit = (values: z.infer<typeof registerSchema>) => {
-    const { confirmPassword, ...userData } = values;
-    registerMutation.mutate(userData);
+  const onPasscodeSubmit = (values: z.infer<typeof passcodeSchema>) => {
+    if (values.passcode === INVESTOR_PASSCODE) {
+      setLocation("/investor-dashboard");
+    } else {
+      toast({
+        title: "Invalid Passcode",
+        description: "The passcode you entered is incorrect. Please try again or request access.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-purple-100 flex flex-col md:flex-row items-center justify-center p-4">
       <div className="w-full md:w-1/2 max-w-md p-4">
-        <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "login" | "register")} className="w-full">
+        <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "request" | "passcode")} className="w-full">
           <div className="flex flex-col items-center mb-6">
             <h1 className="text-2xl md:text-3xl font-bold mb-2 text-center">
-              <span className="text-secondary inline-block">e</span>ciple
+              <span className="text-[#FF7500] inline-block">e</span>ciple
               <span className="ml-2 text-sm text-muted-foreground">Investor Portal</span>
             </h1>
           </div>
           
-          <Card className="w-full border-2 border-primary/10 shadow-lg">
+          <Card className="w-full border-2 border-[#FF7500]/10 shadow-lg">
             <CardHeader>
               <CardTitle className="text-xl text-center">
-                {activeTab === "login" ? "Welcome Back" : "Create Your Account"}
+                {activeTab === "request" ? "Request Investor Access" : "Enter Passcode"}
               </CardTitle>
               <CardDescription className="text-center">
-                {activeTab === "login" 
-                  ? "Sign in to access exclusive investor materials" 
-                  : "Register for investor access to eciple"}
+                {activeTab === "request" 
+                  ? "Submit your information to request access" 
+                  : "Enter your investor passcode to view exclusive materials"}
               </CardDescription>
             </CardHeader>
             <CardContent>
               <TabsList className="grid w-full grid-cols-2 mb-6">
-                <TabsTrigger value="login">Login</TabsTrigger>
-                <TabsTrigger value="register">Register</TabsTrigger>
+                <TabsTrigger value="request">Request Access</TabsTrigger>
+                <TabsTrigger value="passcode">Enter Passcode</TabsTrigger>
               </TabsList>
               
-              <TabsContent value="login">
-                <Form {...loginForm}>
-                  <form onSubmit={loginForm.handleSubmit(onLoginSubmit)} className="space-y-4">
+              <TabsContent value="request">
+                <Form {...accessRequestForm}>
+                  <form onSubmit={accessRequestForm.handleSubmit(onAccessRequestSubmit)} className="space-y-4">
                     <FormField
-                      control={loginForm.control}
-                      name="username"
+                      control={accessRequestForm.control}
+                      name="firstName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Username</FormLabel>
+                          <FormLabel>First Name</FormLabel>
                           <FormControl>
-                            <Input placeholder="Your username" {...field} />
+                            <Input placeholder="Your first name" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
                       )}
                     />
                     <FormField
-                      control={loginForm.control}
-                      name="password"
+                      control={accessRequestForm.control}
+                      name="lastName"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Password</FormLabel>
+                          <FormLabel>Last Name</FormLabel>
                           <FormControl>
-                            <Input type="password" placeholder="Your password" {...field} />
+                            <Input placeholder="Your last name" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={accessRequestForm.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input type="email" placeholder="Your email address" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={accessRequestForm.control}
+                      name="company"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Company</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Your company name" {...field} />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -140,52 +179,32 @@ export default function AuthPage() {
                     />
                     <Button 
                       type="submit" 
-                      className="w-full mt-6"
-                      disabled={loginMutation.isPending}
+                      className="w-full mt-6 bg-[#FF7500] hover:bg-[#FF7500]/90"
                     >
-                      {loginMutation.isPending ? "Signing in..." : "Sign In"}
+                      Submit Request
                     </Button>
                   </form>
                 </Form>
               </TabsContent>
               
-              <TabsContent value="register">
-                <Form {...registerForm}>
-                  <form onSubmit={registerForm.handleSubmit(onRegisterSubmit)} className="space-y-4">
+              <TabsContent value="passcode">
+                <Form {...passcodeForm}>
+                  <form onSubmit={passcodeForm.handleSubmit(onPasscodeSubmit)} className="space-y-4">
                     <FormField
-                      control={registerForm.control}
-                      name="username"
+                      control={passcodeForm.control}
+                      name="passcode"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Username</FormLabel>
+                          <FormLabel>Investor Passcode</FormLabel>
                           <FormControl>
-                            <Input placeholder="Choose a username" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={registerForm.control}
-                      name="password"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Password</FormLabel>
-                          <FormControl>
-                            <Input type="password" placeholder="Create a password" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={registerForm.control}
-                      name="confirmPassword"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Confirm Password</FormLabel>
-                          <FormControl>
-                            <Input type="password" placeholder="Confirm your password" {...field} />
+                            <div className="relative">
+                              <Lock className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" />
+                              <Input 
+                                className="pl-9" 
+                                placeholder="Enter your passcode" 
+                                {...field} 
+                              />
+                            </div>
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -193,10 +212,9 @@ export default function AuthPage() {
                     />
                     <Button 
                       type="submit" 
-                      className="w-full mt-6"
-                      disabled={registerMutation.isPending}
+                      className="w-full mt-6 bg-[#FF7500] hover:bg-[#FF7500]/90"
                     >
-                      {registerMutation.isPending ? "Creating account..." : "Create Account"}
+                      Access Portal
                     </Button>
                   </form>
                 </Form>
@@ -204,19 +222,19 @@ export default function AuthPage() {
             </CardContent>
             <CardFooter className="flex flex-col space-y-2 text-center text-sm">
               <p className="text-muted-foreground">
-                {activeTab === "login" 
-                  ? "Don't have an account? " 
-                  : "Already have an account? "}
+                {activeTab === "request" 
+                  ? "Already have a passcode? " 
+                  : "Need to request access? "}
                 <button
                   type="button"
-                  className="text-primary underline"
-                  onClick={() => setActiveTab(activeTab === "login" ? "register" : "login")}
+                  className="text-[#FF7500] underline"
+                  onClick={() => setActiveTab(activeTab === "request" ? "passcode" : "request")}
                 >
-                  {activeTab === "login" ? "Register here" : "Sign in"}
+                  {activeTab === "request" ? "Enter it here" : "Request here"}
                 </button>
               </p>
               <p className="text-muted-foreground">
-                <a href="/" className="text-primary underline">Return to public site</a>
+                <a href="/" className="text-[#FF7500] underline">Return to public site</a>
               </p>
             </CardFooter>
           </Card>
@@ -225,14 +243,14 @@ export default function AuthPage() {
       
       <div className="hidden md:flex w-1/2 p-8 flex-col items-center justify-center">
         <div className="max-w-md space-y-6">
-          <h2 className="text-3xl font-bold text-primary">Investor Access</h2>
+          <h2 className="text-3xl font-bold text-[#FF7500]">Investor Access</h2>
           <p className="text-muted-foreground">
             Welcome to the exclusive eciple investor portal. Access detailed market analyses, financial projections, and strategic roadmaps.
           </p>
           
           <div className="grid grid-cols-2 gap-4 mt-8">
             <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
-              <Sparkles className="h-8 w-8 text-secondary mb-2" />
+              <Sparkles className="h-8 w-8 text-[#FF7500] mb-2" />
               <h3 className="font-semibold">Investment Opportunities</h3>
               <p className="text-sm text-center text-muted-foreground">Detailed funding rounds and equity options</p>
             </div>
@@ -244,13 +262,13 @@ export default function AuthPage() {
             </div>
             
             <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
-              <Users className="h-8 w-8 text-primary mb-2" />
+              <Users className="h-8 w-8 text-[#FF7500] mb-2" />
               <h3 className="font-semibold">Investor Community</h3>
               <p className="text-sm text-center text-muted-foreground">Connect with other potential stakeholders</p>
             </div>
             
             <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
-              <ShieldCheck className="h-8 w-8 text-success mb-2" />
+              <ShieldCheck className="h-8 w-8 text-accent mb-2" />
               <h3 className="font-semibold">Due Diligence</h3>
               <p className="text-sm text-center text-muted-foreground">Complete financial and market analyses</p>
             </div>
