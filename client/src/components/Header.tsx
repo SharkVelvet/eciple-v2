@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, X, ExternalLink } from "lucide-react";
+import { Menu, X, ExternalLink, Lock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ecipleLogo from "@assets/eciple-logo-white.png";
 
@@ -71,89 +71,84 @@ export default function Header() {
           </motion.div>
         </a>
         
-        <nav className="hidden md:block">
-          <ul className="flex items-center gap-1">
-            {navItems.map((item, index) => (
-              <motion.li 
-                key={index}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 + 0.1 }}
-              >
-                <a 
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const element = document.querySelector(item.href);
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                  className={`px-3 py-2 rounded-md font-medium text-sm transition-colors relative group ${
-                    scrolled 
-                      ? 'text-foreground hover:text-primary' 
-                      : 'text-white/90 hover:text-white'
-                  }`}
+        <div className="flex items-center">
+          <nav className="hidden md:block mr-4">
+            <ul className="flex items-center gap-1">
+              {navItems.map((item, index) => (
+                <motion.li 
+                  key={index}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.05 + 0.1 }}
                 >
-                  <span className="relative z-10">{item.name}</span>
-                  <span className="absolute inset-0 rounded-md bg-white/0 group-hover:bg-white/10 transition-colors duration-200"></span>
-                </a>
+                  <a 
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const element = document.querySelector(item.href);
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                    className={`px-3 py-2 rounded-md font-medium text-sm transition-colors relative group ${
+                      scrolled 
+                        ? 'text-foreground hover:text-primary' 
+                        : 'text-white/90 hover:text-white'
+                    }`}
+                  >
+                    <span className="relative z-10">{item.name}</span>
+                    <span className="absolute inset-0 rounded-md bg-white/0 group-hover:bg-white/10 transition-colors duration-200"></span>
+                  </a>
+                </motion.li>
+              ))}
+              <motion.li
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                <Button 
+                  asChild 
+                  variant="default" 
+                  size="sm" 
+                  className="ml-2 rounded-full px-5 shadow-lg shadow-accent/20 group relative overflow-hidden"
+                >
+                  <a 
+                    href="#contact" 
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const element = document.querySelector('#contact');
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
+                    className="flex items-center gap-1"
+                  >
+                    Contact
+                    <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
+                  </a>
+                </Button>
               </motion.li>
-            ))}
-            <motion.li
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.4 }}
+            </ul>
+          </nav>
+          
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4 }}
+            className="hidden md:block"
+          >
+            <Button 
+              asChild 
+              variant="default" 
+              size="sm" 
+              className="bg-[#6148FF] hover:bg-[#5540d4] rounded-full px-5 flex items-center shadow-lg"
             >
-              <Button 
-                asChild 
-                variant="default" 
-                size="sm" 
-                className={`ml-2 ${
-                  scrolled ? 'bg-primary' : 'bg-accent'
-                } rounded-full px-5 shadow-lg shadow-accent/20 group relative overflow-hidden`}
-              >
-                <Link href="/auth" className="flex items-center gap-1">
-                  Investor Portal
-                  <ExternalLink className="h-3.5 w-3.5" />
-                  <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
-                </Link>
-              </Button>
-            </motion.li>
-            
-            <motion.li
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.5 }}
-            >
-              <Button 
-                asChild 
-                variant="default" 
-                size="sm" 
-                className={`ml-2 ${
-                  scrolled ? 'bg-primary' : 'bg-accent'
-                } rounded-full px-5 shadow-lg shadow-accent/20 group relative overflow-hidden`}
-              >
-                <a 
-                  href="#contact" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const element = document.querySelector('#contact');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                  className="flex items-center gap-1"
-                >
-                  Contact
-                  <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
-                </a>
-              </Button>
-            </motion.li>
-          </ul>
-        </nav>
-        
-        <div className="flex items-center gap-4">
+              <Link href="/auth" className="flex items-center gap-1.5 py-1">
+                <Lock className="h-4 w-4" />
+                Investor Portal
+              </Link>
+            </Button>
+          </motion.div>
           
           <Button
             variant="ghost"
@@ -248,13 +243,12 @@ export default function Header() {
                 <Button 
                   asChild 
                   variant="default"
-                  className="w-full justify-center rounded-full mb-2 bg-primary group relative overflow-hidden" 
+                  className="w-full justify-center rounded-full mb-2 bg-[#6148FF]" 
                   onClick={closeMobileMenu}
                 >
-                  <Link href="/auth" className="flex items-center justify-center gap-1">
+                  <Link href="/auth" className="flex items-center justify-center gap-1.5">
+                    <Lock className="h-4 w-4" />
                     Investor Portal
-                    <ExternalLink className="h-3.5 w-3.5" />
-                    <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                   </Link>
                 </Button>
               </motion.li>
