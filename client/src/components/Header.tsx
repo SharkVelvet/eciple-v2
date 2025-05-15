@@ -40,7 +40,7 @@ export default function Header() {
     <header 
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-white/90 backdrop-blur-md shadow-lg py-2' 
+          ? 'bg-[#223349] shadow-lg py-2' 
           : 'bg-transparent py-4'
       }`}
     >
@@ -64,11 +64,11 @@ export default function Header() {
               >
                 <div className="flex flex-col items-start">
                   <img 
-                    src={scrolled ? ecipleOrangeLogo : ecipleLogo} 
+                    src={ecipleLogo} 
                     alt="eciple logo" 
                     className="h-8 w-auto object-contain" 
                   />
-                  <span className={`text-xs italic mt-0 text-left ${scrolled ? 'text-[#223349]' : 'text-white'}`}>
+                  <span className="text-xs italic mt-0 text-left text-white">
                     Discipleship Reimagined
                   </span>
                 </div>
@@ -96,11 +96,7 @@ export default function Header() {
                           element.scrollIntoView({ behavior: 'smooth' });
                         }
                       }}
-                      className={`px-3 py-2 rounded-md font-medium text-sm transition-colors relative group ${
-                        scrolled 
-                          ? 'text-foreground hover:text-primary' 
-                          : 'text-white/90 hover:text-white'
-                      }`}
+                      className="px-3 py-2 rounded-md font-medium text-sm transition-colors relative group text-white/90 hover:text-white"
                     >
                       <span className="relative z-10">{item.name}</span>
                       <span className="absolute inset-0 rounded-md bg-white/0 group-hover:bg-white/10 transition-colors duration-200"></span>
