@@ -82,10 +82,10 @@ export default function WelcomePage() {
               
               <Button 
                 type="submit" 
-                className="w-full bg-accent hover:bg-accent/90"
+                className="w-full bg-[#FF4041] hover:bg-[#FF4041]/90 text-white"
                 disabled={isLoading}
               >
-                {isLoading ? "Verifying..." : "Access Site"}
+                {isLoading ? "Verifying..." : "Access Project"}
               </Button>
             </form>
           </CardContent>
