@@ -326,7 +326,7 @@ export default function InvestorDashboard() {
           <div className="p-4 md:p-6 space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl font-bold text-[#223349]">Financial Projections</CardTitle>
+                <CardTitle className="text-xl font-bold text-[#15BEE2]">Financial Projections</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="mb-8">
@@ -380,7 +380,7 @@ export default function InvestorDashboard() {
           <div className="p-4 md:p-6 space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl font-bold text-[#223349]">Market Overview</CardTitle>
+                <CardTitle className="text-xl font-bold text-[#15BEE2]">Market Overview</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="space-y-4">
@@ -414,7 +414,7 @@ export default function InvestorDashboard() {
           <div className="p-4 md:p-6 space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl font-bold text-[#223349]">Investment Timeline</CardTitle>
+                <CardTitle className="text-xl font-bold text-[#15BEE2]">Investment Timeline</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="mb-8">
@@ -423,7 +423,7 @@ export default function InvestorDashboard() {
                     <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-border"></div>
                     
                     <div className="relative pl-12 pb-8">
-                      <div className="absolute left-0 flex items-center justify-center w-8 h-8 rounded-full bg-[#223349] text-white">
+                      <div className="absolute left-0 flex items-center justify-center w-8 h-8 rounded-full bg-[#15BEE2] text-white">
                         <span className="text-sm font-medium">1</span>
                       </div>
                       <div className="bg-card border rounded-md p-4">
