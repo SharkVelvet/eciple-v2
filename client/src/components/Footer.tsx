@@ -78,7 +78,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {links.quickLinks.map((link, index) => (
                 <li key={index}>
-                  <a href={link.href} className="text-white text-opacity-70 hover:text-accent transition-colors">
+                  <a href={link.href} className="text-white text-opacity-70 hover:text-white transition-colors">
                     {link.name}
                   </a>
                 </li>
@@ -96,7 +96,7 @@ export default function Footer() {
             <ul className="space-y-2">
               {links.resources.map((link, index) => (
                 <li key={index}>
-                  <a href={link.href} className="text-white text-opacity-70 hover:text-accent transition-colors">
+                  <a href={link.href} className="text-white text-opacity-70 hover:text-white transition-colors">
                     {link.name}
                   </a>
                 </li>
@@ -131,12 +131,12 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-white border-opacity-20 mt-8 pt-8 text-center">
-          <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4">
+          <div className="flex flex-col items-center justify-center gap-2">
             <p className="text-white text-opacity-60">
               &copy; {currentYear} eciple. All rights reserved. Discipleship Reimagined.
             </p>
             <p className="text-white text-opacity-60">
-              Powered by <a href="https://www.fotype.com" className="text-[#FF7500] hover:underline" target="_blank" rel="noopener noreferrer">FOTYPE</a>
+              Built by <a href="https://www.fotype.com" className="text-[#15BEE2] hover:text-white" target="_blank" rel="noopener noreferrer">FOTYPE</a>
             </p>
           </div>
         </div>

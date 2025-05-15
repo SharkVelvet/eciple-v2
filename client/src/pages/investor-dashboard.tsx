@@ -20,7 +20,7 @@ import {
   X,
   ChevronRight
 } from "lucide-react";
-import ecipleLogo from "@assets/eciple-orange.png";
+import ecipleLogo from "@assets/eciple-white.png";
 
 export default function InvestorDashboard() {
   const [username, setUsername] = useState("Investor");
@@ -87,7 +87,7 @@ export default function InvestorDashboard() {
       `}>
         <div className="h-full flex flex-col overflow-hidden md:px-2 py-4">
           <div className="px-3 py-2 flex items-center justify-between md:justify-center border-b mb-4">
-            <h2 className="text-xl font-bold text-[#FF7500] flex items-center">
+            <h2 className="text-xl font-bold text-[#223349] flex items-center">
               <img src={ecipleLogo} alt="eciple" className="h-6 mr-2" />
               <span className="text-xs text-muted-foreground ml-1">Portal</span>
             </h2>
@@ -328,7 +328,7 @@ export default function InvestorDashboard() {
           <div className="p-4 md:p-6 space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl font-bold text-[#FF7500]">Financial Projections</CardTitle>
+                <CardTitle className="text-xl font-bold text-[#223349]">Financial Projections</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="mb-8">
@@ -382,7 +382,7 @@ export default function InvestorDashboard() {
           <div className="p-4 md:p-6 space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl font-bold text-[#FF7500]">Market Overview</CardTitle>
+                <CardTitle className="text-xl font-bold text-[#223349]">Market Overview</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="space-y-4">
@@ -416,7 +416,7 @@ export default function InvestorDashboard() {
           <div className="p-4 md:p-6 space-y-6">
             <Card>
               <CardHeader>
-                <CardTitle className="text-xl font-bold text-[#FF7500]">Investment Timeline</CardTitle>
+                <CardTitle className="text-xl font-bold text-[#223349]">Investment Timeline</CardTitle>
               </CardHeader>
               <CardContent className="p-6">
                 <div className="mb-8">
@@ -425,13 +425,13 @@ export default function InvestorDashboard() {
                     <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-border"></div>
                     
                     <div className="relative pl-12 pb-8">
-                      <div className="absolute left-0 flex items-center justify-center w-8 h-8 rounded-full bg-[#FF7500] text-white">
+                      <div className="absolute left-0 flex items-center justify-center w-8 h-8 rounded-full bg-[#223349] text-white">
                         <span className="text-sm font-medium">1</span>
                       </div>
                       <div className="bg-card border rounded-md p-4">
                         <h4 className="font-semibold text-base flex justify-between">
                           <span>Seed Round</span>
-                          <span className="text-[#FF7500]">$750K</span>
+                          <span className="text-[#223349]">$750K</span>
                         </h4>
                         <p className="text-sm text-muted-foreground mt-2">Q2 2025 - Initial MVP development, early church partnerships, and team building</p>
                       </div>
