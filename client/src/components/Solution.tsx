@@ -22,7 +22,7 @@ export default function Solution() {
 
   return (
     <section id="solution" className="py-16 bg-white scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-[1180px] mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-10">
           <motion.div 
             className="lg:w-1/2"

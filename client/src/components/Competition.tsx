@@ -43,7 +43,7 @@ export default function Competition() {
 
   return (
     <section id="competition" className="py-16 bg-white scroll-mt-20">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-[1180px] mx-auto px-4">
         <motion.div 
           className="text-center mb-12"
           initial={{ opacity: 0, y: 20 }}
