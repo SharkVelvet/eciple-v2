@@ -1,20 +1,16 @@
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
-import { useToast } from "@/hooks/use-toast";
+
 import ecipleLogo from "@assets/eciple-white.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const [, setLocation] = useLocation();
-  const { toast } = useToast();
+
   
   // Handle main site logout
   const handleLogout = () => {
     localStorage.removeItem("mainSiteAuthenticated");
-    toast({
-      title: "Logged Out",
-      description: "You have been logged out of the site.",
-    });
     setLocation("/");
   };
   
