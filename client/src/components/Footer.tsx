@@ -126,9 +126,8 @@ export default function Footer() {
                 <span className="text-accent mr-2 mt-1 group-hover:text-white transition-colors">
                   <i className="fas fa-phone"></i>
                 </span>
-                <span className="text-white text-opacity-70 group-hover:text-white transition-colors flex items-center">
+                <span className="text-white text-opacity-70 group-hover:text-white transition-colors">
                   {links.contact[1].text}
-                  <span className="ml-2 text-xs opacity-70">(click to logout)</span>
                 </span>
               </li>
             </ul>
