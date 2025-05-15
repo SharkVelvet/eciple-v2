@@ -109,20 +109,11 @@ export default function Hero() {
                 asChild 
                 className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20"
               >
-                <a href="#contact" className="flex items-center gap-2">
-                  Request Demo
+                <a href="#product" className="flex items-center gap-2">
+                  Learn More
                   <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                   <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                 </a>
-              </Button>
-              
-              <Button 
-                size="lg" 
-                variant="outline" 
-                asChild 
-                className="bg-white/10 hover:bg-white/20 text-white border-white/20 rounded-full"
-              >
-                <a href="#product">Learn More</a>
               </Button>
             </motion.div>
             
