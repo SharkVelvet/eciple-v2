@@ -44,7 +44,7 @@ export default function Header() {
           : 'bg-transparent py-4'
       }`}
     >
-      <div className="container mx-auto px-4">
+      <div className="max-w-[1180px] mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo - Left aligned */}
           <div className="flex-none">
