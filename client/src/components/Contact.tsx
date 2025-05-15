@@ -6,12 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useToast } from "@/hooks/use-toast";
+
 import { apiRequest } from "@/lib/queryClient";
 import bobbyPersonImage from "@assets/Bobby-Person-2021-scaled.jpg";
 
 export default function Contact() {
-  const { toast } = useToast();
+
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
