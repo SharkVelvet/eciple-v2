@@ -14,17 +14,12 @@ export default function Footer() {
       { name: "Pricing", href: "#pricing" }
     ],
     resources: [
-      { name: "Blog", href: "#" },
-      { name: "Case Studies", href: "#" },
-      { name: "Discipleship Resources", href: "#" },
-      { name: "Help Center", href: "#" },
       { name: "Privacy Policy", href: "#" },
       { name: "Terms of Service", href: "#" }
     ],
     contact: [
-      { icon: "envelope", text: "info@eciple.com" },
-      { icon: "phone", text: "(555) 123-4567" },
-      { icon: "map-marker-alt", text: "123 Discipleship Way\nNashville, TN 37203" }
+      { icon: "envelope", text: "bobby@eciple.com" },
+      { icon: "phone", text: "Call / Text: 813.400.9384" }
     ],
     social: [
       { icon: "facebook-f", href: "#" },
