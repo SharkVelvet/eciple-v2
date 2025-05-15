@@ -188,7 +188,7 @@ export default function InvestorDashboard() {
             </h1>
             <div className="ml-auto flex items-center gap-4">
               <Button size="sm" variant="outline" asChild>
-                <Link href="/">Visit Public Site</Link>
+                <Link href="/">Visit Main Site</Link>
               </Button>
             </div>
           </div>
