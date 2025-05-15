@@ -13,11 +13,11 @@
   --card-foreground: 235 16% 26%;
   --border: 220 13% 91%;
   --input: 220 13% 91%;
-  --primary: 25 100% 50%; /* Updated to #FF7500 */
+  --primary: 212 40% 21%; /* Updated to #223349 */
   --primary-foreground: 210 40% 98%;
-  --secondary: 252 100% 60%;
+  --secondary: 199 79% 48%; /* Updated to #15BEE2 */
   --secondary-foreground: 210 40% 98%;
-  --accent: 200 80% 50%; /* Complementary blue color to orange */
+  --accent: 210 97% 38%; /* Updated to #0368C1 */
   --accent-foreground: 210 40% 98%;
   --success: 142 72% 29%;
   --success-foreground: 210 40% 98%;
@@ -25,7 +25,7 @@
   --warning-foreground: 210 40% 98%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 210 40% 98%;
-  --ring: 25 100% 50%; /* Updated to match primary */
+  --ring: 212 40% 21%; /* Updated to match primary #223349 */
   --radius: 0.75rem;
   }
   .dark {

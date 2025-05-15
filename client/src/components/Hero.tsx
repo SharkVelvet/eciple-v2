@@ -24,11 +24,11 @@ export default function Hero() {
   };
 
   return (
-    <section className="pt-28 pb-20 bg-gradient-to-br from-[#FF7500] via-[#FF7500]/80 to-[#7c3aed] text-white relative overflow-hidden">
+    <section className="pt-28 pb-20 bg-gradient-to-br from-[#15BEE2] via-[#15BEE2]/80 to-[#0368C1] text-white relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
-          className="absolute top-1/4 -left-20 w-60 h-60 bg-[#7c3aed]/30 rounded-full blur-3xl"
+          className="absolute top-1/4 -left-20 w-60 h-60 bg-[#0368C1]/30 rounded-full blur-3xl"
           animate={{ 
             x: [0, 40, 0],
             y: [0, 30, 0],
@@ -52,7 +52,7 @@ export default function Hero() {
           }}
         />
         <motion.div 
-          className="absolute top-1/3 right-1/4 w-40 h-40 bg-[#7c3aed]/30 rounded-full blur-3xl"
+          className="absolute top-1/3 right-1/4 w-40 h-40 bg-[#15BEE2]/30 rounded-full blur-3xl"
           animate={{ 
             x: [0, 30, 0],
             y: [0, -40, 0],
