@@ -60,7 +60,7 @@ export default function WelcomePage() {
             alt="eciple" 
             className="mx-auto h-16 mb-6" 
           />
-          <h1 className="text-white text-2xl md:text-3xl font-bold">Welcome to eciple</h1>
+          <h1 className="text-white text-2xl md:text-3xl font-bold">Welcome to FOTYPE PROJECTS</h1>
           <p className="text-white/70 mt-2">
             Please enter the access code to continue
           </p>
@@ -92,8 +92,8 @@ export default function WelcomePage() {
         </Card>
         
         <div className="mt-8 text-center text-white/50 text-sm">
-          <p>Discipleship Reimagined</p>
-          <p className="mt-1">© {new Date().getFullYear()} eciple. All rights reserved.</p>
+          <p>Creative Digital Solutions</p>
+          <p className="mt-1">© {new Date().getFullYear()} FOTYPE PROJECTS. All rights reserved.</p>
         </div>
       </motion.div>
     </div>
