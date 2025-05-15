@@ -11,7 +11,7 @@ import Pricing from "@/components/Pricing";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowUpCircle, LogOut } from "lucide-react";
+import { ArrowUp, LogOut } from "lucide-react";
 
 
 export default function Home() {
