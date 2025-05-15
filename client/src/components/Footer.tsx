@@ -135,7 +135,7 @@ export default function Footer() {
             <p className="text-white text-opacity-60">
               &copy; {currentYear} eciple. All rights reserved. Discipleship Reimagined.
             </p>
-            <p className="text-white text-opacity-60">
+            <p className="text-white text-opacity-60 text-xs">
               Built by <a href="https://www.fotype.com" className="text-[#15BEE2] hover:text-white" target="_blank" rel="noopener noreferrer">FOTYPE</a>
             </p>
           </div>

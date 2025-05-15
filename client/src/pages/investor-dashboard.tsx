@@ -109,8 +109,8 @@ export default function InvestorDashboard() {
           <nav className="flex-1 px-3 py-4">
             <div className="space-y-1">
               <Button 
-                variant={activeSection === "dashboard" ? "secondary" : "ghost"} 
-                className={`w-full justify-start ${activeSection === "dashboard" ? "text-white" : "text-muted-foreground"}`}
+                variant={activeSection === "dashboard" ? "ghost" : "ghost"} 
+                className={`w-full justify-start ${activeSection === "dashboard" ? "bg-[#223349] text-white" : "text-muted-foreground"}`}
                 onClick={() => setActiveSection("dashboard")}
               >
                 <FileText className="mr-2 h-4 w-4" />
@@ -118,8 +118,8 @@ export default function InvestorDashboard() {
               </Button>
               
               <Button 
-                variant={activeSection === "financials" ? "secondary" : "ghost"} 
-                className={`w-full justify-start ${activeSection === "financials" ? "text-white" : "text-muted-foreground"}`}
+                variant="ghost"
+                className={`w-full justify-start ${activeSection === "financials" ? "bg-[#223349] text-white" : "text-muted-foreground"}`}
                 onClick={() => setActiveSection("financials")}
               >
                 <BarChart className="mr-2 h-4 w-4" />
@@ -127,8 +127,8 @@ export default function InvestorDashboard() {
               </Button>
               
               <Button 
-                variant={activeSection === "market" ? "secondary" : "ghost"} 
-                className={`w-full justify-start ${activeSection === "market" ? "text-white" : "text-muted-foreground"}`}
+                variant="ghost"
+                className={`w-full justify-start ${activeSection === "market" ? "bg-[#223349] text-white" : "text-muted-foreground"}`}
                 onClick={() => setActiveSection("market")}
               >
                 <Users className="mr-2 h-4 w-4" />
@@ -136,8 +136,8 @@ export default function InvestorDashboard() {
               </Button>
               
               <Button 
-                variant={activeSection === "timeline" ? "secondary" : "ghost"} 
-                className={`w-full justify-start ${activeSection === "timeline" ? "text-white" : "text-muted-foreground"}`}
+                variant="ghost"
+                className={`w-full justify-start ${activeSection === "timeline" ? "bg-[#223349] text-white" : "text-muted-foreground"}`}
                 onClick={() => setActiveSection("timeline")}
               >
                 <Calendar className="mr-2 h-4 w-4" />
