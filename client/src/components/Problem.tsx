@@ -2,8 +2,33 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, Users, LineChart, Gauge, FileText, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useContext, useState } from "react";
+import { AdminContext } from "@/pages/Home";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function Problem() {
+  // Access the admin context
+  const { isAdmin, editMode, editableContent, updateContent } = useContext(AdminContext);
+  
+  // Define editable text content keys
+  const problemText = "problem_text";
+  const bottomLineTitle = "bottom_line_title";
+  const bottomLineText = "bottom_line_text";
+  const mentorshipText = "mentorship_text";
+  const curriculumText = "curriculum_text";
+  const growthText = "growth_text";
+  const metricsText = "metrics_text";
+  
+  // Get content or default values if not yet saved
+  const getProblemText = () => editableContent[problemText] || 
+    "Despite 82% of pastors saying discipleship is a priority, only 29% think their church does it effectively.";
+  const getBottomLineTitle = () => editableContent[bottomLineTitle] || "The Bottom Line";
+  const getBottomLineText = () => editableContent[bottomLineText] || "There are critical gaps in:";
+  const getMentorshipText = () => editableContent[mentorshipText] || "Mentorship programs and mentor training";
+  const getCurriculumText = () => editableContent[curriculumText] || "Customizable, engaging curriculum";
+  const getGrowthText = () => editableContent[growthText] || "Structured growth pathways";
+  const getMetricsText = () => editableContent[metricsText] || "Metrics and progress tracking";
+  
   const stats = [
     { 
       percentage: "55%", 
@@ -83,9 +108,23 @@ export default function Problem() {
                 <h2 className="text-4xl md:text-5xl font-bold font-sans bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">The Problem</h2>
               </div>
               
-              <p className="text-xl leading-relaxed text-foreground/80 max-w-xl">
-                Despite <span className="font-semibold text-primary">82% of pastors</span> saying discipleship is a priority, only <span className="font-semibold text-secondary">29% think</span> their church does it effectively.
-              </p>
+              {editMode && isAdmin ? (
+                <Textarea
+                  value={getProblemText()}
+                  onChange={(e) => updateContent(problemText, e.target.value)}
+                  className="text-xl leading-relaxed text-foreground/80 w-full min-h-[100px] resize-y"
+                />
+              ) : (
+                <p className="text-xl leading-relaxed text-foreground/80 max-w-xl">
+                  {getProblemText().includes("82%") ? (
+                    <>
+                      Despite <span className="font-semibold text-primary">82% of pastors</span> saying discipleship is a priority, only <span className="font-semibold text-secondary">29% think</span> their church does it effectively.
+                    </>
+                  ) : (
+                    getProblemText()
+                  )}
+                </p>
+              )}
             </motion.div>
             
             <motion.div 
