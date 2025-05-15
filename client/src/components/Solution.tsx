@@ -1,7 +1,20 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
+import { useContext } from "react";
+import { AdminContext } from "@/pages/Home";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function Solution() {
+  // Access the admin context
+  const { isAdmin, editMode, editableContent, updateContent } = useContext(AdminContext);
+  
+  // Define editable text content keys
+  const solutionMainText = "solution_main_text";
+  
+  // Get content or default values if not yet saved
+  const getSolutionMainText = () => editableContent[solutionMainText] || 
+    "eciple is a comprehensive discipleship enablement platform that empowers churches to build stronger faith communities through intentional relationships.";
   const solutionPoints = [
     {
       icon: "user-friends",
@@ -46,9 +59,17 @@ export default function Solution() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-6">The Solution</h2>
-            <p className="text-lg mb-8 text-foreground">
-              eciple is a comprehensive discipleship enablement platform that empowers churches to build stronger faith communities through intentional relationships.
-            </p>
+            {editMode && isAdmin ? (
+              <Textarea
+                value={getSolutionMainText()}
+                onChange={(e) => updateContent(solutionMainText, e.target.value)}
+                className="text-lg mb-8 text-foreground w-full min-h-[80px] resize-y"
+              />
+            ) : (
+              <p className="text-lg mb-8 text-foreground">
+                {getSolutionMainText()}
+              </p>
+            )}
             
             <div className="space-y-6">
               {solutionPoints.map((point, index) => (

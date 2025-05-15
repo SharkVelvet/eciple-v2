@@ -137,32 +137,90 @@ export default function Problem() {
               <div className="absolute -top-4 -right-4 bg-gradient-to-br from-secondary to-primary text-white text-sm font-medium px-4 py-1 rounded-full shadow-lg">
                 Key Finding
               </div>
-              <h3 className="text-xl font-bold mb-4">The Bottom Line</h3>
-              <p className="text-foreground/80 mb-4">There are critical gaps in:</p>
+              <h3 className="text-xl font-bold mb-4">
+                {editMode && isAdmin ? (
+                  <input
+                    type="text"
+                    value={getBottomLineTitle()}
+                    onChange={(e) => updateContent(bottomLineTitle, e.target.value)}
+                    className="w-full p-1 border border-primary/20 rounded"
+                  />
+                ) : (
+                  getBottomLineTitle()
+                )}
+              </h3>
+              <p className="text-foreground/80 mb-4">
+                {editMode && isAdmin ? (
+                  <input
+                    type="text"
+                    value={getBottomLineText()}
+                    onChange={(e) => updateContent(bottomLineText, e.target.value)}
+                    className="w-full p-1 border border-primary/20 rounded"
+                  />
+                ) : (
+                  getBottomLineText()
+                )}
+              </p>
               <ul className="space-y-3">
                 <li className="flex items-center gap-2">
                   <div className="h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center">
                     <ArrowRight className="h-3 w-3 text-secondary" />
                   </div>
-                  <span>Mentorship programs and mentor training</span>
+                  {editMode && isAdmin ? (
+                    <input
+                      type="text"
+                      value={getMentorshipText()}
+                      onChange={(e) => updateContent(mentorshipText, e.target.value)}
+                      className="w-full p-1 border border-primary/20 rounded"
+                    />
+                  ) : (
+                    <span>{getMentorshipText()}</span>
+                  )}
                 </li>
                 <li className="flex items-center gap-2">
                   <div className="h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center">
                     <ArrowRight className="h-3 w-3 text-secondary" />
                   </div>
-                  <span>Customizable, engaging curriculum</span>
+                  {editMode && isAdmin ? (
+                    <input
+                      type="text"
+                      value={getCurriculumText()}
+                      onChange={(e) => updateContent(curriculumText, e.target.value)}
+                      className="w-full p-1 border border-primary/20 rounded"
+                    />
+                  ) : (
+                    <span>{getCurriculumText()}</span>
+                  )}
                 </li>
                 <li className="flex items-center gap-2">
                   <div className="h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center">
                     <ArrowRight className="h-3 w-3 text-secondary" />
                   </div>
-                  <span>Structured growth pathways</span>
+                  {editMode && isAdmin ? (
+                    <input
+                      type="text"
+                      value={getGrowthText()}
+                      onChange={(e) => updateContent(growthText, e.target.value)}
+                      className="w-full p-1 border border-primary/20 rounded"
+                    />
+                  ) : (
+                    <span>{getGrowthText()}</span>
+                  )}
                 </li>
                 <li className="flex items-center gap-2">
                   <div className="h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center">
                     <ArrowRight className="h-3 w-3 text-secondary" />
                   </div>
-                  <span>Metrics and progress tracking</span>
+                  {editMode && isAdmin ? (
+                    <input
+                      type="text"
+                      value={getMetricsText()}
+                      onChange={(e) => updateContent(metricsText, e.target.value)}
+                      className="w-full p-1 border border-primary/20 rounded"
+                    />
+                  ) : (
+                    <span>{getMetricsText()}</span>
+                  )}
                 </li>
               </ul>
               
