@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import ecipleLogo from "@assets/eciple-orange.png";
+import fotypeLogo from "@assets/fotype-logo-hi-five.png";
 
 export default function WelcomePage() {
   const [password, setPassword] = useState("");
@@ -31,7 +31,7 @@ export default function WelcomePage() {
         localStorage.setItem("mainSiteAuthenticated", "true");
         toast({
           title: "Success",
-          description: "Welcome to eciple",
+          description: "Welcome to FOTYPE PROJECTS",
           variant: "default",
         });
         setLocation("/home");
@@ -56,8 +56,8 @@ export default function WelcomePage() {
       >
         <div className="text-center mb-8">
           <img 
-            src={ecipleLogo} 
-            alt="eciple" 
+            src={fotypeLogo} 
+            alt="FOTYPE" 
             className="mx-auto h-16 mb-6" 
           />
           <h1 className="text-white text-2xl md:text-3xl font-bold">Welcome to FOTYPE PROJECTS</h1>
