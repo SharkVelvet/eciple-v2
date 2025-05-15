@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useToast } from "@/hooks/use-toast";
+
 import { Sparkles, Key, Users, ShieldCheck, Lock } from "lucide-react";
 
 const accessRequestSchema = z.object({
@@ -49,7 +49,7 @@ const passcodeSchema = z.object({
 export default function AuthPage() {
   const [activeTab, setActiveTab] = useState<"request" | "passcode">("request");
   const [, setLocation] = useLocation();
-  const { toast } = useToast();
+
   
   // The passcode that allows access to the investor dashboard
   // In a real app, this would be validated against a secure backend
@@ -91,10 +91,7 @@ export default function AuthPage() {
   const onAccessRequestSubmit = (values: z.infer<typeof accessRequestSchema>) => {
     // In a real app, this would send the request to a backend service
     console.log("Access request submitted:", values);
-    toast({
-      title: "Request Received",
-      description: "Thank you for your interest. We'll review your request and contact you soon.",
-    });
+    // No toast notification
     accessRequestForm.reset();
   };
   
@@ -104,18 +101,11 @@ export default function AuthPage() {
       localStorage.setItem("investorAuthenticated", "true");
       localStorage.setItem("investorUsername", "Investor");
       
-      toast({
-        title: "Access Granted",
-        description: "Welcome to the investor dashboard.",
-      });
-      
+      // No toast notification
       setLocation("/investor-dashboard");
     } else {
-      toast({
-        title: "Invalid Passcode",
-        description: "The passcode you entered is incorrect. Please try again or request access.",
-        variant: "destructive",
-      });
+      // No toast notification for failure
+      console.log("Invalid passcode attempt");
     }
   };
 
