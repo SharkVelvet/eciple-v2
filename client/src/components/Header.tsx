@@ -68,7 +68,7 @@ export default function Header() {
                     alt="eciple logo" 
                     className="h-8 w-auto object-contain" 
                   />
-                  <span className={`text-xs italic mt-0 text-left ${scrolled ? 'text-[#FF7500]' : 'text-white'}`}>
+                  <span className={`text-xs italic mt-0 text-left ${scrolled ? 'text-[#223349]' : 'text-white'}`}>
                     Discipleship Reimagined
                   </span>
                 </div>
