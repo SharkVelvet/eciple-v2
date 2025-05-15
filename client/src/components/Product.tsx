@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
-import ecipleWings from "@assets/eciple-wings.png";
+import ecipleWings from "@assets/eciple-wing-blue-grad.png";
 
 export default function Product() {
   const features = [
