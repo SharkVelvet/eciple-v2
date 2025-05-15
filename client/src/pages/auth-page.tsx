@@ -110,17 +110,17 @@ export default function AuthPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-white to-purple-100 flex flex-col md:flex-row items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#223349]/10 via-white to-[#15BEE2]/10 flex flex-col md:flex-row items-center justify-center p-4">
       <div className="w-full md:w-1/2 max-w-md p-4">
         <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "request" | "passcode")} className="w-full">
           <div className="flex flex-col items-center mb-6">
             <h1 className="text-2xl md:text-3xl font-bold mb-2 text-center">
-              <span className="text-[#FF7500] inline-block">e</span>ciple
+              <span className="text-[#223349] inline-block">e</span>ciple
               <span className="ml-2 text-sm text-muted-foreground">Investor Portal</span>
             </h1>
           </div>
           
-          <Card className="w-full border-2 border-[#FF7500]/10 shadow-lg">
+          <Card className="w-full border-2 border-[#15BEE2]/10 shadow-lg">
             <CardHeader>
               <CardTitle className="text-xl text-center">
                 {activeTab === "request" ? "Request Investor Access" : "Enter Passcode"}
@@ -194,7 +194,7 @@ export default function AuthPage() {
                     />
                     <Button 
                       type="submit" 
-                      className="w-full mt-6 bg-[#FF7500] hover:bg-[#FF7500]/90"
+                      className="w-full mt-6 bg-[#223349] hover:bg-[#15BEE2]"
                     >
                       Submit Request
                     </Button>
@@ -227,7 +227,7 @@ export default function AuthPage() {
                     />
                     <Button 
                       type="submit" 
-                      className="w-full mt-6 bg-[#FF7500] hover:bg-[#FF7500]/90"
+                      className="w-full mt-6 bg-[#223349] hover:bg-[#15BEE2]"
                     >
                       Access Portal
                     </Button>
@@ -242,14 +242,14 @@ export default function AuthPage() {
                   : "Need to request access? "}
                 <button
                   type="button"
-                  className="text-[#FF7500] underline"
+                  className="text-[#15BEE2] underline"
                   onClick={() => setActiveTab(activeTab === "request" ? "passcode" : "request")}
                 >
                   {activeTab === "request" ? "Enter it here" : "Request here"}
                 </button>
               </p>
               <p className="text-muted-foreground">
-                <a href="/" className="text-[#FF7500] underline">Return to public site</a>
+                <a href="/" className="text-[#15BEE2] underline">Return to public site</a>
               </p>
             </CardFooter>
           </Card>
@@ -258,15 +258,15 @@ export default function AuthPage() {
       
       <div className="hidden md:flex w-1/2 p-8 flex-col items-center justify-center">
         <div className="max-w-md space-y-6">
-          <h2 className="text-3xl font-bold text-[#FF7500]">Investor Access</h2>
+          <h2 className="text-3xl font-bold text-[#223349]">Investor Access</h2>
           <p className="text-muted-foreground">
             Welcome to the exclusive eciple investor portal. Access detailed market analyses, financial projections, and strategic roadmaps.
           </p>
           
           <div className="grid grid-cols-2 gap-4 mt-8">
             <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
-              <Sparkles className="h-8 w-8 text-[#FF7500] mb-2" />
-              <h3 className="font-semibold">Investment Opportunities</h3>
+              <Sparkles className="h-8 w-8 text-[#15BEE2] mb-2" />
+              <h3 className="font-semibold text-center">Investment Opportunities</h3>
               <p className="text-sm text-center text-muted-foreground">Detailed funding rounds and equity options</p>
             </div>
             
@@ -277,7 +277,7 @@ export default function AuthPage() {
             </div>
             
             <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-md">
-              <Users className="h-8 w-8 text-[#FF7500] mb-2" />
+              <Users className="h-8 w-8 text-[#15BEE2] mb-2" />
               <h3 className="font-semibold">Investor Community</h3>
               <p className="text-sm text-center text-muted-foreground">Connect with other potential stakeholders</p>
             </div>
