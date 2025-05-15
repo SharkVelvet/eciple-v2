@@ -114,8 +114,9 @@ export default function Home() {
     }));
   };
   
-  // Load saved content on initial load
+  // Load saved content and check admin status on initial load
   useEffect(() => {
+    // Load saved content
     const savedContent = localStorage.getItem('siteContent');
     if (savedContent) {
       try {
@@ -123,6 +124,12 @@ export default function Home() {
       } catch (e) {
         console.error("Failed to parse saved content", e);
       }
+    }
+    
+    // Check for admin status
+    const adminStatus = localStorage.getItem('isAdmin');
+    if (adminStatus === 'true') {
+      setIsAdmin(true);
     }
   }, []);
 

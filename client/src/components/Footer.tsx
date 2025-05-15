@@ -1,17 +1,46 @@
 import { motion } from "framer-motion";
 import { useLocation } from "wouter";
+import { useState } from "react";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
 
 import ecipleLogo from "@assets/eciple-white.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
   const [, setLocation] = useLocation();
-
+  const { toast } = useToast();
+  const [showAdminDialog, setShowAdminDialog] = useState(false);
+  const [adminPassword, setAdminPassword] = useState("");
   
   // Handle main site logout
   const handleLogout = () => {
     localStorage.removeItem("mainSiteAuthenticated");
     setLocation("/");
+  };
+  
+  // Handle admin login
+  const handleAdminLogin = () => {
+    if (adminPassword === "bobby") {
+      localStorage.setItem("isAdmin", "true");
+      setShowAdminDialog(false);
+      setAdminPassword(""); // Clear password
+      toast({
+        title: "Admin Access Granted",
+        description: "You now have admin privileges.",
+      });
+      // Force a reload to update the admin state
+      window.location.reload();
+    } else {
+      toast({
+        title: "Invalid Password",
+        description: "Please try again with the correct password.",
+        variant: "destructive",
+      });
+    }
   };
   
   const links = {
@@ -26,7 +55,7 @@ export default function Footer() {
     resources: [
       { name: "Privacy Policy", href: "#" },
       { name: "Terms of Service", href: "#" },
-      { name: "Admin Login", href: "#admin" }
+      { name: "Admin Login", href: "#", onClick: () => setShowAdminDialog(true) }
     ],
     contact: [
       { icon: "envelope", text: "bobby@eciple.com" },
@@ -42,6 +71,44 @@ export default function Footer() {
 
   return (
     <footer className="bg-[#223349] text-white py-12">
+      {/* Admin Login Dialog */}
+      <Dialog open={showAdminDialog} onOpenChange={setShowAdminDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Admin Access</DialogTitle>
+            <DialogDescription>
+              Enter your password to access admin features.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid gap-2">
+              <Label htmlFor="admin-password">Password</Label>
+              <Input 
+                id="admin-password"
+                type="password"
+                value={adminPassword}
+                onChange={(e) => setAdminPassword(e.target.value)}
+                placeholder="Enter admin password"
+                autoComplete="off"
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleAdminLogin();
+                  }
+                }}
+              />
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowAdminDialog(false)}>
+              Cancel
+            </Button>
+            <Button onClick={handleAdminLogin}>
+              Login
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      
       <div className="max-w-[1180px] mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <motion.div
@@ -97,7 +164,16 @@ export default function Footer() {
             <ul className="space-y-2">
               {links.resources.map((link, index) => (
                 <li key={index}>
-                  <a href={link.href} className="text-white text-opacity-70 hover:text-white transition-colors">
+                  <a 
+                    href={link.href} 
+                    className="text-white text-opacity-70 hover:text-white transition-colors"
+                    onClick={(e) => {
+                      if (link.onClick) {
+                        e.preventDefault();
+                        link.onClick();
+                      }
+                    }}
+                  >
                     {link.name}
                   </a>
                 </li>
