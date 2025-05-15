@@ -143,6 +143,8 @@ export default function Contact() {
                 <div className="ml-4">
                   <p className="font-semibold text-white text-lg">Bobby Person</p>
                   <p className="text-white/80">Founder of eciple</p>
+                  <p className="text-white/80 mt-1">Call / Text: 813.400.9384</p>
+                  <p className="text-white/80">Email: bobby@eciple.com</p>
                 </div>
               </motion.div>
             </motion.div>
