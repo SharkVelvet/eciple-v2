@@ -141,7 +141,7 @@ export default function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                className={`${scrolled ? 'text-foreground' : 'text-white'}`}
+                className="text-white"
                 onClick={toggleMobileMenu}
                 aria-label="Toggle menu"
               >
@@ -180,7 +180,7 @@ export default function Header() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-white w-full py-3 shadow-lg absolute overflow-hidden"
+            className="md:hidden bg-[#223349] w-full py-3 shadow-lg absolute overflow-hidden"
           >
             <motion.ul 
               className="flex flex-col space-y-1 px-4"
@@ -225,7 +225,7 @@ export default function Header() {
                         element.scrollIntoView({ behavior: 'smooth' });
                       }
                     }} 
-                    className="block py-2.5 px-4 text-foreground hover:text-primary hover:bg-primary/5 rounded-md transition-colors font-medium"
+                    className="block py-2.5 px-4 text-white hover:text-white/90 hover:bg-white/10 rounded-md transition-colors font-medium"
                   >
                     {item.name}
                   </a>
