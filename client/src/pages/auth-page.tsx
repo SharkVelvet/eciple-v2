@@ -23,6 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/use-auth";
 import { Sparkles, Key, Users, ShieldCheck, Lock } from "lucide-react";
 
 const accessRequestSchema = z.object({
@@ -82,9 +83,25 @@ export default function AuthPage() {
     accessRequestForm.reset();
   };
 
+  const { registerMutation } = useAuth();
+  
   const onPasscodeSubmit = (values: z.infer<typeof passcodeSchema>) => {
     if (values.passcode === INVESTOR_PASSCODE) {
-      setLocation("/investor-dashboard");
+      // Create a temporary user account with the passcode
+      registerMutation.mutate(
+        {
+          username: "investor",
+          password: values.passcode,
+          firstName: "Investor",
+          lastName: "User",
+          email: "investor@example.com",
+        },
+        {
+          onSuccess: () => {
+            setLocation("/investor-dashboard");
+          },
+        }
+      );
     } else {
       toast({
         title: "Invalid Passcode",
