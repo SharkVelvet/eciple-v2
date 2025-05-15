@@ -4,14 +4,14 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { useToast } from "@/hooks/use-toast";
+
 import fotypeLogo from "@assets/fotype-logo-hi-five.png";
 
 export default function WelcomePage() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [, setLocation] = useLocation();
-  const { toast } = useToast();
+
   
   // Check if already authenticated
   useEffect(() => {
@@ -29,18 +29,11 @@ export default function WelcomePage() {
     setTimeout(() => {
       if (password === "VanNuno@41456") {
         localStorage.setItem("mainSiteAuthenticated", "true");
-        toast({
-          title: "Success",
-          description: "Welcome to FOTYPE PROJECTS",
-          variant: "default",
-        });
+        // No toast notification
         setLocation("/home");
       } else {
-        toast({
-          title: "Access Denied",
-          description: "Incorrect password. Please try again.",
-          variant: "destructive",
-        });
+        // No toast notification
+        console.log("Access denied - incorrect password");
         setIsLoading(false);
       }
     }, 800);

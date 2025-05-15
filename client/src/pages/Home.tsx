@@ -12,11 +12,11 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { ArrowUpCircle, LogOut } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+
 
 export default function Home() {
   const [, setLocation] = useLocation();
-  const { toast } = useToast();
+
   
   // Check if user is authenticated for main site
   useEffect(() => {
@@ -29,10 +29,7 @@ export default function Home() {
   // Handle main site logout
   const handleMainSiteLogout = () => {
     localStorage.removeItem("mainSiteAuthenticated");
-    toast({
-      title: "Logged Out",
-      description: "You have been logged out of the site.",
-    });
+    // No toast notification
     setLocation("/");
   };
   useEffect(() => {
