@@ -157,7 +157,7 @@ export default function InvestorDashboard() {
               
               <Button 
                 variant="ghost" 
-                className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10"
+                className="w-full justify-start text-[#15BEE2] hover:text-[#0368C1] hover:bg-[#15BEE2]/10"
                 onClick={handleLogout}
               >
                 <LogOut className="mr-2 h-4 w-4" />
@@ -210,9 +210,7 @@ export default function InvestorDashboard() {
                   </CardHeader>
                   <CardContent className="p-4 pt-0">
                     <div className="text-2xl font-bold">{metric.value}</div>
-                    <div className={`text-xs font-medium ${
-                      metric.change.startsWith("+") ? "text-success" : "text-destructive"
-                    }`}>
+                    <div className="text-xs font-medium text-[#15BEE2]">
                       {metric.change} from previous estimates
                     </div>
                   </CardContent>
@@ -301,7 +299,7 @@ export default function InvestorDashboard() {
                     {documents.map((doc, i) => (
                       <div key={i} className="flex items-center justify-between p-2 border rounded-md hover:bg-muted/50 transition-colors group">
                         <div className="flex items-center">
-                          <div className="h-9 w-9 rounded-md bg-primary/10 flex items-center justify-center text-primary mr-3">
+                          <div className="h-9 w-9 rounded-md bg-[#15BEE2]/10 flex items-center justify-center text-[#15BEE2] mr-3">
                             <FileText className="h-5 w-5" />
                           </div>
                           <div>
@@ -389,9 +387,9 @@ export default function InvestorDashboard() {
                   <h3 className="text-lg font-semibold">Market Opportunity</h3>
                   <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                     <div className="p-4 border rounded-md bg-gradient-to-r from-blue-50 to-white">
-                      <h4 className="font-semibold text-primary flex items-center gap-2 mb-2">
-                        <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center">
-                          <ChevronRight className="h-3 w-3 text-primary" />
+                      <h4 className="font-semibold text-[#15BEE2] flex items-center gap-2 mb-2">
+                        <div className="h-5 w-5 rounded-full bg-[#15BEE2]/20 flex items-center justify-center">
+                          <ChevronRight className="h-3 w-3 text-[#15BEE2]" />
                         </div>
                         Total Addressable Market (TAM)
                       </h4>
@@ -431,7 +429,7 @@ export default function InvestorDashboard() {
                       <div className="bg-card border rounded-md p-4">
                         <h4 className="font-semibold text-base flex justify-between">
                           <span>Seed Round</span>
-                          <span className="text-[#223349]">$750K</span>
+                          <span className="text-[#15BEE2]">$750K</span>
                         </h4>
                         <p className="text-sm text-muted-foreground mt-2">Q2 2025 - Initial MVP development, early church partnerships, and team building</p>
                       </div>
