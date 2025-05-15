@@ -11,11 +11,13 @@ import Pricing from "@/components/Pricing";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowUpCircle, LockKeyhole } from "lucide-react";
+import { ArrowUpCircle, LogOut } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function Home() {
   const [, setLocation] = useLocation();
-
+  const { toast } = useToast();
+  
   // Check if user is authenticated for main site
   useEffect(() => {
     const isMainSiteAuthenticated = localStorage.getItem("mainSiteAuthenticated");
@@ -23,6 +25,16 @@ export default function Home() {
       setLocation("/");
     }
   }, [setLocation]);
+  
+  // Handle main site logout
+  const handleMainSiteLogout = () => {
+    localStorage.removeItem("mainSiteAuthenticated");
+    toast({
+      title: "Logged Out",
+      description: "You have been logged out of the site.",
+    });
+    setLocation("/");
+  };
   useEffect(() => {
     // Set up smooth scrolling behavior with animated transition
     const handleAnchorClick = (e: MouseEvent) => {
@@ -121,12 +133,21 @@ export default function Home() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed right-4 md:right-8 bottom-8 z-40 bg-[#FF7500] text-white rounded-full p-2 shadow-lg hover:bg-[#FF7500]/90 transition-all duration-300"
+          className="fixed right-4 md:right-8 bottom-24 z-40 bg-[#FF7500] text-white rounded-full p-2 shadow-lg hover:bg-[#FF7500]/90 transition-all duration-300"
           aria-label="Scroll to top"
         >
           <ArrowUpCircle className="h-8 w-8" />
         </button>
       )}
+      
+      {/* Site Logout button */}
+      <button
+        onClick={handleMainSiteLogout}
+        className="fixed right-4 md:right-8 bottom-8 z-40 bg-red-500 text-white rounded-full p-2 shadow-lg hover:bg-red-600 transition-all duration-300"
+        aria-label="Logout from site"
+      >
+        <LogOut className="h-8 w-8" />
+      </button>
     </div>
   );
 }
