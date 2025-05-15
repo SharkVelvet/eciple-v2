@@ -40,8 +40,8 @@ export default function Header() {
     <header 
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-[#223349] shadow-lg py-2' 
-          : 'bg-transparent py-4'
+          ? 'bg-[#223349] shadow-lg py-4' 
+          : 'bg-transparent py-6'
       }`}
     >
       <div className="max-w-[1180px] mx-auto px-4">
