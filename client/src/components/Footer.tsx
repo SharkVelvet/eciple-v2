@@ -1,8 +1,22 @@
 import { motion } from "framer-motion";
+import { useLocation } from "wouter";
+import { useToast } from "@/hooks/use-toast";
 import ecipleLogo from "@assets/eciple-white.png";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const [, setLocation] = useLocation();
+  const { toast } = useToast();
+  
+  // Handle main site logout
+  const handleLogout = () => {
+    localStorage.removeItem("mainSiteAuthenticated");
+    toast({
+      title: "Logged Out",
+      description: "You have been logged out of the site.",
+    });
+    setLocation("/");
+  };
   
   const links = {
     quickLinks: [
@@ -102,14 +116,21 @@ export default function Footer() {
           >
             <h4 className="text-lg font-semibold font-sans mb-4">Contact Us</h4>
             <ul className="space-y-2">
-              {links.contact.map((item, index) => (
-                <li key={index} className="flex items-start">
-                  <span className="text-accent mr-2 mt-1">
-                    <i className={`fas fa-${item.icon}`}></i>
-                  </span>
-                  <span className="text-white text-opacity-70">{item.text}</span>
-                </li>
-              ))}
+              <li className="flex items-start">
+                <span className="text-accent mr-2 mt-1">
+                  <i className="fas fa-envelope"></i>
+                </span>
+                <span className="text-white text-opacity-70">{links.contact[0].text}</span>
+              </li>
+              <li className="flex items-start cursor-pointer group" onClick={handleLogout}>
+                <span className="text-accent mr-2 mt-1 group-hover:text-white transition-colors">
+                  <i className="fas fa-phone"></i>
+                </span>
+                <span className="text-white text-opacity-70 group-hover:text-white transition-colors flex items-center">
+                  {links.contact[1].text}
+                  <span className="ml-2 text-xs opacity-70">(click to logout)</span>
+                </span>
+              </li>
             </ul>
           </motion.div>
         </div>
