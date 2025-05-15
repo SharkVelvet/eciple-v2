@@ -24,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import { Sparkles, Key, Users, ShieldCheck, Lock } from "lucide-react";
+import ecipleBlueLogo from "@assets/eciple-blue.png";
 
 const accessRequestSchema = z.object({
   firstName: z.string().min(2, {
@@ -114,10 +115,10 @@ export default function AuthPage() {
       <div className="w-full md:w-1/2 max-w-md p-4">
         <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "request" | "passcode")} className="w-full">
           <div className="flex flex-col items-center mb-6">
-            <h1 className="text-2xl md:text-3xl font-bold mb-2 text-center">
-              <span className="text-[#223349] inline-block">e</span>ciple
-              <span className="ml-2 text-sm text-muted-foreground">Investor Portal</span>
-            </h1>
+            <div className="mb-2">
+              <img src={ecipleBlueLogo} alt="eciple logo" className="h-12" />
+            </div>
+            <span className="text-sm text-muted-foreground">Investor Portal</span>
           </div>
           
           <Card className="w-full border-2 border-[#15BEE2]/10 shadow-lg">

@@ -20,7 +20,7 @@ import {
   X,
   ChevronRight
 } from "lucide-react";
-import ecipleLogo from "@assets/eciple-white.png";
+import ecipleLogo from "@assets/eciple-blue.png";
 
 export default function InvestorDashboard() {
   const [username, setUsername] = useState("Investor");
@@ -88,7 +88,7 @@ export default function InvestorDashboard() {
         <div className="h-full flex flex-col overflow-hidden md:px-2 py-4">
           <div className="px-3 py-2 flex items-center justify-between md:justify-center border-b mb-4">
             <h2 className="text-xl font-bold text-[#223349] flex items-center">
-              <img src={ecipleLogo} alt="eciple" className="h-6 mr-2" />
+              <img src={ecipleLogo} alt="eciple" className="h-8 mr-2" />
               <span className="text-xs text-muted-foreground ml-1">Portal</span>
             </h2>
             <Button 
