@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -23,7 +23,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
-import { useAuth } from "@/hooks/use-auth";
 import { Sparkles, Key, Users, ShieldCheck, Lock } from "lucide-react";
 
 const accessRequestSchema = z.object({
@@ -56,6 +55,14 @@ export default function AuthPage() {
   // In a real app, this would be validated against a secure backend
   const INVESTOR_PASSCODE = "eciple2023";
 
+  // Check if user is already authenticated
+  useEffect(() => {
+    const isAuthenticated = localStorage.getItem("investorAuthenticated") === "true";
+    if (isAuthenticated) {
+      setLocation("/investor-dashboard");
+    }
+  }, [setLocation]);
+
   const accessRequestForm = useForm<z.infer<typeof accessRequestSchema>>({
     resolver: zodResolver(accessRequestSchema),
     defaultValues: {
@@ -82,26 +89,19 @@ export default function AuthPage() {
     });
     accessRequestForm.reset();
   };
-
-  const { registerMutation } = useAuth();
   
   const onPasscodeSubmit = (values: z.infer<typeof passcodeSchema>) => {
     if (values.passcode === INVESTOR_PASSCODE) {
-      // Create a temporary user account with the passcode
-      registerMutation.mutate(
-        {
-          username: "investor",
-          password: values.passcode,
-          firstName: "Investor",
-          lastName: "User",
-          email: "investor@example.com",
-        },
-        {
-          onSuccess: () => {
-            setLocation("/investor-dashboard");
-          },
-        }
-      );
+      // Store authentication in localStorage
+      localStorage.setItem("investorAuthenticated", "true");
+      localStorage.setItem("investorUsername", "Investor");
+      
+      toast({
+        title: "Access Granted",
+        description: "Welcome to the investor dashboard.",
+      });
+      
+      setLocation("/investor-dashboard");
     } else {
       toast({
         title: "Invalid Passcode",

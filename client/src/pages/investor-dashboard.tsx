@@ -1,6 +1,5 @@
-import { useState } from "react";
-import { Link } from "wouter";
-import { useAuth } from "@/hooks/use-auth";
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -23,11 +22,21 @@ import {
 } from "lucide-react";
 
 export default function InvestorDashboard() {
-  const { user, logoutMutation } = useAuth();
+  const [username, setUsername] = useState("Investor");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [, setLocation] = useLocation();
+
+  useEffect(() => {
+    const storedUsername = localStorage.getItem("investorUsername");
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
 
   const handleLogout = () => {
-    logoutMutation.mutate();
+    localStorage.removeItem("investorAuthenticated");
+    localStorage.removeItem("investorUsername");
+    setLocation("/");
   };
 
   const metrics = [
@@ -77,7 +86,7 @@ export default function InvestorDashboard() {
           
           <div className="px-3 py-2">
             <p className="text-sm text-muted-foreground mb-1">Welcome,</p>
-            <p className="font-medium">{user?.username}</p>
+            <p className="font-medium">{username}</p>
           </div>
           
           <nav className="flex-1 px-3 py-4">
@@ -125,10 +134,9 @@ export default function InvestorDashboard() {
                 variant="ghost" 
                 className="w-full justify-start text-destructive hover:text-destructive hover:bg-destructive/10"
                 onClick={handleLogout}
-                disabled={logoutMutation.isPending}
               >
                 <LogOut className="mr-2 h-4 w-4" />
-                <span>{logoutMutation.isPending ? "Logging out..." : "Logout"}</span>
+                <span>Logout</span>
               </Button>
             </div>
           </div>
