@@ -40,7 +40,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-foreground text-white py-12">
+    <footer className="bg-[#223349] text-white py-12">
       <div className="max-w-[1180px] mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <motion.div
@@ -61,7 +61,7 @@ export default function Footer() {
             </p>
             <div className="flex space-x-4">
               {links.social.map((item, index) => (
-                <a key={index} href={item.href} className="text-white hover:text-accent transition-colors">
+                <a key={index} href={item.href} className="text-white text-opacity-80 hover:text-white transition-colors">
                   <i className={`fab fa-${item.icon}`}></i>
                 </a>
               ))}
