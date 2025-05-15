@@ -37,11 +37,7 @@ export default function Contact() {
     
     // Validate form
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.churchName) {
-      toast({
-        title: "Missing Information",
-        description: "Please fill out all required fields.",
-        variant: "destructive"
-      });
+      // Form validation without toast
       return;
     }
 
@@ -50,13 +46,7 @@ export default function Contact() {
     try {
       await apiRequest("POST", "/api/contact", formData);
       
-      toast({
-        title: "Information Received",
-        description: "Thank you for your interest! We'll contact you soon.",
-        variant: "default"
-      });
-      
-      // Reset form
+      // Reset form without toast notification
       setFormData({
         firstName: "",
         lastName: "",
@@ -67,11 +57,7 @@ export default function Contact() {
         message: ""
       });
     } catch (error) {
-      toast({
-        title: "Error",
-        description: "There was a problem submitting your request. Please try again.",
-        variant: "destructive"
-      });
+      console.error("Form submission error:", error);
     } finally {
       setLoading(false);
     }
