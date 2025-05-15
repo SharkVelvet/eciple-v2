@@ -250,7 +250,7 @@ export default function AuthPage() {
                 </button>
               </p>
               <p className="text-muted-foreground">
-                <a href="/" className="text-[#15BEE2] underline">Return to public site</a>
+                <a href="/" className="text-[#15BEE2] underline">Visit Main Site</a>
               </p>
             </CardFooter>
           </Card>

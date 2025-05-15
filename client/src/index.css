@@ -39,11 +39,11 @@
   --card-foreground: 210 40% 98%;
   --border: 217 19% 27%;
   --input: 217 19% 27%;
-  --primary: 25 100% 60%; /* Brighter #FF7500 for dark mode */
-  --primary-foreground: 222 16% 28%;
-  --secondary: 252 100% 70%;
+  --primary: 212 40% 21%; /* Updated to #223349 for dark mode too */
+  --primary-foreground: 210 40% 98%;
+  --secondary: 199 79% 48%; /* Updated to #15BEE2 for dark mode too */
   --secondary-foreground: 222 16% 28%;
-  --accent: 200 80% 60%; /* Complementary blue color */
+  --accent: 210 97% 38%; /* Updated to #0368C1 for dark mode too */
   --accent-foreground: 222 16% 28%;
   --success: 142 72% 38%;
   --success-foreground: 222 16% 28%;
@@ -51,7 +51,7 @@
   --warning-foreground: 222 16% 28%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 210 40% 98%;
-  --ring: 25 100% 60%; /* Match primary */
+  --ring: 212 40% 21%; /* Updated to match primary #223349 */
   --radius: 0.75rem;
 }
 

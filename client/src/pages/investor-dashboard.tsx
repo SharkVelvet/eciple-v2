@@ -151,7 +151,7 @@ export default function InvestorDashboard() {
               <Button variant="ghost" className="w-full justify-start text-muted-foreground" asChild>
                 <Link href="/">
                   <ChevronRight className="mr-2 h-4 w-4" />
-                  <span>Visit Public Site</span>
+                  <span>Visit Main Site</span>
                 </Link>
               </Button>
               
