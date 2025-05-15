@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X, Lock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ecipleLogo from "@assets/eciple-logo-white.png";
+import ecipleOrangeLogo from "@assets/eciple-orange.png";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -63,9 +64,9 @@ export default function Header() {
               >
                 <div className="flex flex-col items-start">
                   <img 
-                    src={ecipleLogo} 
+                    src={scrolled ? ecipleOrangeLogo : ecipleLogo} 
                     alt="eciple logo" 
-                    className={`h-8 w-auto object-contain ${scrolled ? 'opacity-90 brightness-0 invert sepia-[.5] saturate-[45] hue-rotate-[335deg]' : 'opacity-100'}`} 
+                    className="h-8 w-auto object-contain" 
                   />
                   <span className={`text-xs italic mt-0 text-left ${scrolled ? 'text-[#FF7500]' : 'text-white'}`}>
                     Discipleship Reimagined
