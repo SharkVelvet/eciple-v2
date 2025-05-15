@@ -133,21 +133,12 @@ export default function Home() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="fixed right-4 md:right-8 bottom-24 z-40 bg-[#FF7500] text-white rounded-full p-2 shadow-lg hover:bg-[#FF7500]/90 transition-all duration-300"
+          className="fixed right-4 md:right-8 bottom-8 z-40 bg-[#FF7500] text-white rounded-full p-2 shadow-lg hover:bg-[#FF7500]/90 transition-all duration-300"
           aria-label="Scroll to top"
         >
           <ArrowUpCircle className="h-8 w-8" />
         </button>
       )}
-      
-      {/* Site Logout button */}
-      <button
-        onClick={handleMainSiteLogout}
-        className="fixed right-4 md:right-8 bottom-8 z-40 bg-red-500 text-white rounded-full p-2 shadow-lg hover:bg-red-600 transition-all duration-300"
-        aria-label="Logout from site"
-      >
-        <LogOut className="h-8 w-8" />
-      </button>
     </div>
   );
 }
