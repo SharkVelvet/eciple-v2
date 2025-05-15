@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/Home";
 import AuthPage from "@/pages/auth-page";
 import InvestorDashboard from "@/pages/investor-dashboard";
+import WelcomePage from "@/pages/welcome-page";
 import NotFound from "@/pages/not-found";
 import { AuthProvider } from "@/hooks/use-auth";
 import { ProtectedRoute } from "@/lib/protected-route";
@@ -13,9 +14,19 @@ import { ProtectedRoute } from "@/lib/protected-route";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Home} />
+      {/* Initial welcome page with password protection */}
+      <Route path="/" component={WelcomePage} />
+      
+      {/* Main site (protected by welcome page authentication) */}
+      <Route path="/home" component={Home} />
+      
+      {/* Investor portal authentication */}
       <Route path="/auth" component={AuthPage} />
-      <ProtectedRoute path="/investor-dashboard" component={InvestorDashboard} />
+      
+      {/* Investor dashboard (protected by investor authentication) */}
+      <Route path="/investor-dashboard" component={InvestorDashboard} />
+      
+      {/* 404 page */}
       <Route component={NotFound} />
     </Switch>
   );

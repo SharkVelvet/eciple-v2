@@ -57,6 +57,14 @@ export default function AuthPage() {
 
   // Check if user is already authenticated
   useEffect(() => {
+    // Check if authenticated for main site access
+    const isMainSiteAuthenticated = localStorage.getItem("mainSiteAuthenticated");
+    if (isMainSiteAuthenticated !== "true") {
+      setLocation("/");
+      return;
+    }
+    
+    // Check if already investor authenticated
     const isAuthenticated = localStorage.getItem("investorAuthenticated") === "true";
     if (isAuthenticated) {
       setLocation("/investor-dashboard");

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Problem from "@/components/Problem";
@@ -14,6 +14,15 @@ import { Button } from "@/components/ui/button";
 import { ArrowUpCircle, LockKeyhole } from "lucide-react";
 
 export default function Home() {
+  const [, setLocation] = useLocation();
+
+  // Check if user is authenticated for main site
+  useEffect(() => {
+    const isMainSiteAuthenticated = localStorage.getItem("mainSiteAuthenticated");
+    if (isMainSiteAuthenticated !== "true") {
+      setLocation("/");
+    }
+  }, [setLocation]);
   useEffect(() => {
     // Set up smooth scrolling behavior with animated transition
     const handleAnchorClick = (e: MouseEvent) => {

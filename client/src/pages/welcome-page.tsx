@@ -1,0 +1,101 @@
+import { useState, useEffect } from "react";
+import { useLocation } from "wouter";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
+import ecipleLogo from "@assets/eciple-orange.png";
+
+export default function WelcomePage() {
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [, setLocation] = useLocation();
+  const { toast } = useToast();
+  
+  // Check if already authenticated
+  useEffect(() => {
+    const isMainSiteAuthenticated = localStorage.getItem("mainSiteAuthenticated");
+    if (isMainSiteAuthenticated === "true") {
+      setLocation("/home");
+    }
+  }, [setLocation]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    // Simulate loading
+    setTimeout(() => {
+      if (password === "VanNuno@41456") {
+        localStorage.setItem("mainSiteAuthenticated", "true");
+        toast({
+          title: "Success",
+          description: "Welcome to eciple",
+          variant: "default",
+        });
+        setLocation("/home");
+      } else {
+        toast({
+          title: "Access Denied",
+          description: "Incorrect password. Please try again.",
+          variant: "destructive",
+        });
+        setIsLoading(false);
+      }
+    }, 800);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-foreground to-background flex items-center justify-center px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="w-full max-w-md"
+      >
+        <div className="text-center mb-8">
+          <img 
+            src={ecipleLogo} 
+            alt="eciple" 
+            className="mx-auto h-16 mb-6" 
+          />
+          <h1 className="text-white text-2xl md:text-3xl font-bold">Welcome to eciple</h1>
+          <p className="text-white/70 mt-2">
+            Please enter the access code to continue
+          </p>
+        </div>
+        
+        <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+          <CardContent className="pt-6">
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <Input
+                  type="password"
+                  placeholder="Enter access code"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/50"
+                  required
+                />
+              </div>
+              
+              <Button 
+                type="submit" 
+                className="w-full bg-accent hover:bg-accent/90"
+                disabled={isLoading}
+              >
+                {isLoading ? "Verifying..." : "Access Site"}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+        
+        <div className="mt-8 text-center text-white/50 text-sm">
+          <p>Discipleship Reimagined</p>
+          <p className="mt-1">© {new Date().getFullYear()} eciple. All rights reserved.</p>
+        </div>
+      </motion.div>
+    </div>
+  );
+}

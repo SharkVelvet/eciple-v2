@@ -29,11 +29,26 @@ export default function InvestorDashboard() {
   const [activeSection, setActiveSection] = useState("dashboard");
 
   useEffect(() => {
+    // Check if authenticated for main site access
+    const isMainSiteAuthenticated = localStorage.getItem("mainSiteAuthenticated");
+    if (isMainSiteAuthenticated !== "true") {
+      setLocation("/");
+      return;
+    }
+    
+    // Check if authenticated for investor access
+    const isInvestorAuthenticated = localStorage.getItem("investorAuthenticated");
+    if (isInvestorAuthenticated !== "true") {
+      setLocation("/auth");
+      return;
+    }
+    
+    // Get username if available
     const storedUsername = localStorage.getItem("investorUsername");
     if (storedUsername) {
       setUsername(storedUsername);
     }
-  }, []);
+  }, [setLocation]);
 
   const handleLogout = () => {
     localStorage.removeItem("investorAuthenticated");
