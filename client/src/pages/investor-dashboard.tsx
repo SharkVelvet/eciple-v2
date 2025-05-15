@@ -20,11 +20,13 @@ import {
   X,
   ChevronRight
 } from "lucide-react";
+import ecipleLogo from "@assets/eciple-orange.png";
 
 export default function InvestorDashboard() {
   const [username, setUsername] = useState("Investor");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [, setLocation] = useLocation();
+  const [activeSection, setActiveSection] = useState("dashboard");
 
   useEffect(() => {
     const storedUsername = localStorage.getItem("investorUsername");
@@ -70,8 +72,8 @@ export default function InvestorDashboard() {
       `}>
         <div className="h-full flex flex-col overflow-hidden md:px-2 py-4">
           <div className="px-3 py-2 flex items-center justify-between md:justify-center border-b mb-4">
-            <h2 className="text-xl font-bold text-primary">
-              <span className="text-secondary">e</span>ciple 
+            <h2 className="text-xl font-bold text-[#FF7500] flex items-center">
+              <img src={ecipleLogo} alt="eciple" className="h-6 mr-2" />
               <span className="text-xs text-muted-foreground ml-1">Portal</span>
             </h2>
             <Button 
@@ -91,32 +93,40 @@ export default function InvestorDashboard() {
           
           <nav className="flex-1 px-3 py-4">
             <div className="space-y-1">
-              <Button variant="secondary" className="w-full justify-start" asChild>
-                <div>
-                  <FileText className="mr-2 h-4 w-4" />
-                  <span>Dashboard</span>
-                </div>
+              <Button 
+                variant={activeSection === "dashboard" ? "secondary" : "ghost"} 
+                className="w-full justify-start text-muted-foreground"
+                onClick={() => setActiveSection("dashboard")}
+              >
+                <FileText className="mr-2 h-4 w-4" />
+                <span>Dashboard</span>
               </Button>
               
-              <Button variant="ghost" className="w-full justify-start text-muted-foreground" asChild>
-                <div>
-                  <BarChart className="mr-2 h-4 w-4" />
-                  <span>Financials</span>
-                </div>
+              <Button 
+                variant={activeSection === "financials" ? "secondary" : "ghost"} 
+                className="w-full justify-start text-muted-foreground"
+                onClick={() => setActiveSection("financials")}
+              >
+                <BarChart className="mr-2 h-4 w-4" />
+                <span>Financials</span>
               </Button>
               
-              <Button variant="ghost" className="w-full justify-start text-muted-foreground" asChild>
-                <div>
-                  <Users className="mr-2 h-4 w-4" />
-                  <span>Market Data</span>
-                </div>
+              <Button 
+                variant={activeSection === "market" ? "secondary" : "ghost"} 
+                className="w-full justify-start text-muted-foreground"
+                onClick={() => setActiveSection("market")}
+              >
+                <Users className="mr-2 h-4 w-4" />
+                <span>Market Data</span>
               </Button>
               
-              <Button variant="ghost" className="w-full justify-start text-muted-foreground" asChild>
-                <div>
-                  <Calendar className="mr-2 h-4 w-4" />
-                  <span>Timeline</span>
-                </div>
+              <Button 
+                variant={activeSection === "timeline" ? "secondary" : "ghost"} 
+                className="w-full justify-start text-muted-foreground"
+                onClick={() => setActiveSection("timeline")}
+              >
+                <Calendar className="mr-2 h-4 w-4" />
+                <span>Timeline</span>
               </Button>
             </div>
           </nav>
@@ -155,7 +165,12 @@ export default function InvestorDashboard() {
             >
               <Menu className="h-5 w-5" />
             </Button>
-            <h1 className="text-lg font-semibold">Investor Dashboard</h1>
+            <h1 className="text-lg font-semibold">
+              {activeSection === "dashboard" && "Investor Dashboard"}
+              {activeSection === "financials" && "Financial Data"}
+              {activeSection === "market" && "Market Analysis"}
+              {activeSection === "timeline" && "Investment Timeline"}
+            </h1>
             <div className="ml-auto flex items-center gap-4">
               <Button size="sm" variant="outline" asChild>
                 <Link href="/">Visit Public Site</Link>
@@ -164,299 +179,254 @@ export default function InvestorDashboard() {
           </div>
         </div>
         
-        <div className="p-4 md:p-6 space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {metrics.map((metric, i) => (
-              <Card key={i} className="overflow-hidden border-2 border-primary/5">
-                <CardHeader className="p-4 pb-2">
-                  <div className="flex justify-between items-center">
-                    <CardTitle className="text-sm font-medium text-muted-foreground">
-                      {metric.name}
-                    </CardTitle>
-                    <metric.icon className="h-4 w-4 text-muted-foreground" />
-                  </div>
-                </CardHeader>
-                <CardContent className="p-4 pt-0">
-                  <div className="text-2xl font-bold">{metric.value}</div>
-                  <div className={`text-xs font-medium ${
-                    metric.change.startsWith("+") ? "text-success" : "text-destructive"
-                  }`}>
-                    {metric.change} from previous estimates
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+        {/* Dashboard Section */}
+        {activeSection === "dashboard" && (
+          <div className="p-4 md:p-6 space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {metrics.map((metric, i) => (
+                <Card key={i} className="overflow-hidden border-2 border-primary/5">
+                  <CardHeader className="p-4 pb-2">
+                    <div className="flex justify-between items-center">
+                      <CardTitle className="text-sm font-medium text-muted-foreground">
+                        {metric.name}
+                      </CardTitle>
+                      <metric.icon className="h-4 w-4 text-muted-foreground" />
+                    </div>
+                  </CardHeader>
+                  <CardContent className="p-4 pt-0">
+                    <div className="text-2xl font-bold">{metric.value}</div>
+                    <div className={`text-xs font-medium ${
+                      metric.change.startsWith("+") ? "text-success" : "text-destructive"
+                    }`}>
+                      {metric.change} from previous estimates
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">Financial Snapshot</CardTitle>
-              </CardHeader>
-              <CardContent className="p-4">
-                <Tabs defaultValue="revenue">
-                  <TabsList className="grid w-full grid-cols-3 mb-4">
-                    <TabsTrigger value="revenue">Revenue</TabsTrigger>
-                    <TabsTrigger value="costs">Costs</TabsTrigger>
-                    <TabsTrigger value="growth">Growth</TabsTrigger>
-                  </TabsList>
-                  <TabsContent value="revenue" className="space-y-4">
-                    <div className="h-[250px] flex items-center justify-center p-6 border rounded-md">
-                      <AreaChart className="h-40 w-40 text-muted-foreground" />
-                      <div className="ml-4">
-                        <h3 className="font-medium">Projected Revenue</h3>
-                        <p className="text-sm text-muted-foreground">
-                          Year 1: $750K | Year 2: $1.5M | Year 3: $2.3M
-                        </p>
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span>Average Revenue Per User (ARPU)</span>
-                        <span className="font-medium">$178/month</span>
-                      </div>
-                      <Progress value={70} className="h-2" />
-                    </div>
-                  </TabsContent>
-                  <TabsContent value="costs" className="space-y-4">
-                    <div className="h-[250px] flex items-center justify-center p-6 border rounded-md">
-                      <PieChart className="h-40 w-40 text-muted-foreground" />
-                      <div className="ml-4">
-                        <h3 className="font-medium">Cost Breakdown</h3>
-                        <p className="text-sm text-muted-foreground">
-                          Development: 45% | Marketing: 30% | Operations: 25%
-                        </p>
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span>Burn Rate</span>
-                        <span className="font-medium">$48K/month</span>
-                      </div>
-                      <Progress value={55} className="h-2" />
-                    </div>
-                  </TabsContent>
-                  <TabsContent value="growth" className="space-y-4">
-                    <div className="h-[250px] flex items-center justify-center p-6 border rounded-md">
-                      <LineChart className="h-40 w-40 text-muted-foreground" />
-                      <div className="ml-4">
-                        <h3 className="font-medium">Church Adoption Rate</h3>
-                        <p className="text-sm text-muted-foreground">
-                          Year 1: 250 | Year 2: 650 | Year 3: 1,250
-                        </p>
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-sm">
-                        <span>Market Penetration</span>
-                        <span className="font-medium">1.1% (Year 3)</span>
-                      </div>
-                      <Progress value={22} className="h-2" />
-                    </div>
-                  </TabsContent>
-                </Tabs>
-              </CardContent>
-            </Card>
-            
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">
-                  Investment Documents
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-4">
-                <div className="space-y-4">
-                  {documents.map((doc, i) => (
-                    <div key={i} className="flex items-center justify-between p-2 border rounded-md hover:bg-muted/50 transition-colors group">
-                      <div className="flex items-center">
-                        <div className="h-9 w-9 rounded-md bg-primary/10 flex items-center justify-center text-primary mr-3">
-                          <FileText className="h-5 w-5" />
-                        </div>
-                        <div>
-                          <h4 className="font-medium">{doc.name}</h4>
-                          <p className="text-xs text-muted-foreground">
-                            {doc.type} • {doc.size} • {doc.date}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Financial Snapshot</CardTitle>
+                </CardHeader>
+                <CardContent className="p-4">
+                  <Tabs defaultValue="revenue">
+                    <TabsList className="grid w-full grid-cols-3 mb-4">
+                      <TabsTrigger value="revenue">Revenue</TabsTrigger>
+                      <TabsTrigger value="costs">Costs</TabsTrigger>
+                      <TabsTrigger value="growth">Growth</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="revenue" className="space-y-4">
+                      <div className="h-[250px] flex items-center justify-center p-6 border rounded-md">
+                        <AreaChart className="h-40 w-40 text-muted-foreground" />
+                        <div className="ml-4">
+                          <h3 className="font-medium">Projected Revenue</h3>
+                          <p className="text-sm text-muted-foreground">
+                            Year 1: $750K | Year 2: $1.5M | Year 3: $2.3M
                           </p>
                         </div>
                       </div>
-                      <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-opacity">
-                        <Download className="h-4 w-4" />
-                      </Button>
-                    </div>
-                  ))}
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span>Average Revenue Per User (ARPU)</span>
+                          <span className="font-medium">$178/month</span>
+                        </div>
+                        <Progress value={70} className="h-2" />
+                      </div>
+                    </TabsContent>
+                    <TabsContent value="costs" className="space-y-4">
+                      <div className="h-[250px] flex items-center justify-center p-6 border rounded-md">
+                        <PieChart className="h-40 w-40 text-muted-foreground" />
+                        <div className="ml-4">
+                          <h3 className="font-medium">Cost Breakdown</h3>
+                          <p className="text-sm text-muted-foreground">
+                            Development: 45% | Marketing: 30% | Operations: 25%
+                          </p>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span>Burn Rate</span>
+                          <span className="font-medium">$48K/month</span>
+                        </div>
+                        <Progress value={55} className="h-2" />
+                      </div>
+                    </TabsContent>
+                    <TabsContent value="growth" className="space-y-4">
+                      <div className="h-[250px] flex items-center justify-center p-6 border rounded-md">
+                        <LineChart className="h-40 w-40 text-muted-foreground" />
+                        <div className="ml-4">
+                          <h3 className="font-medium">Church Adoption Rate</h3>
+                          <p className="text-sm text-muted-foreground">
+                            Year 1: 250 | Year 2: 650 | Year 3: 1,250
+                          </p>
+                        </div>
+                      </div>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span>Market Penetration</span>
+                          <span className="font-medium">1.1% (Year 3)</span>
+                        </div>
+                        <Progress value={22} className="h-2" />
+                      </div>
+                    </TabsContent>
+                  </Tabs>
+                </CardContent>
+              </Card>
+              
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">
+                    Investment Documents
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="p-4">
+                  <div className="space-y-4">
+                    {documents.map((doc, i) => (
+                      <div key={i} className="flex items-center justify-between p-2 border rounded-md hover:bg-muted/50 transition-colors group">
+                        <div className="flex items-center">
+                          <div className="h-9 w-9 rounded-md bg-primary/10 flex items-center justify-center text-primary mr-3">
+                            <FileText className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <h4 className="font-medium">{doc.name}</h4>
+                            <p className="text-xs text-muted-foreground">
+                              {doc.type} • {doc.size} • {doc.date}
+                            </p>
+                          </div>
+                        </div>
+                        <Button variant="ghost" size="icon" className="opacity-0 group-hover:opacity-100 transition-opacity">
+                          <Download className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        )}
+        
+        {/* Financials Section */}
+        {activeSection === "financials" && (
+          <div className="p-4 md:p-6 space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl font-bold text-[#FF7500]">Financial Projections</CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="mb-8">
+                  <h3 className="text-lg font-semibold mb-4">Revenue Model</h3>
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full divide-y divide-border">
+                      <thead>
+                        <tr>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Source</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Year 1</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Year 2</th>
+                          <th className="px-4 py-3 text-left text-xs font-medium text-muted-foreground uppercase tracking-wider">Year 3</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border">
+                        <tr>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm">Subscription Fees</td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm">$534,000</td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm">$1,170,000</td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm">$1,950,000</td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm">Setup & Training</td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm">$125,000</td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm">$200,000</td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm">$250,000</td>
+                        </tr>
+                        <tr>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm">Additional Services</td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm">$91,000</td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm">$130,000</td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm">$200,000</td>
+                        </tr>
+                        <tr className="bg-muted/30">
+                          <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold">Total Revenue</td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold">$750,000</td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold">$1,500,000</td>
+                          <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold">$2,300,000</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </CardContent>
             </Card>
           </div>
-          
-          <Card className="col-span-1">
-            <CardHeader>
-              <CardTitle className="text-lg">Market Opportunity</CardTitle>
-            </CardHeader>
-            <CardContent className="p-4">
-              <div className="space-y-4">
-                <div className="p-3 border rounded-md bg-gradient-to-r from-blue-50 to-white">
-                  <h4 className="font-semibold text-primary flex items-center gap-2 mb-2">
-                    <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center">
-                      <ChevronRight className="h-3 w-3 text-primary" />
-                    </div>
-                    Service Addressable Market (SAM)
-                  </h4>
-                  <ul className="space-y-2 text-sm pl-7">
-                    <li className="text-muted-foreground">
-                      <span className="font-medium text-foreground">335,000</span> church congregations in the U.S.
-                    </li>
-                    <li className="text-muted-foreground">
-                      <span className="font-medium text-foreground">150M</span> people
-                    </li>
-                    <li className="text-muted-foreground">
-                      <span className="font-medium text-foreground">$75B</span> in annual giving
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="p-3 border rounded-md bg-gradient-to-r from-indigo-50 to-white">
-                  <h4 className="font-semibold text-primary flex items-center gap-2 mb-2">
-                    <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center">
-                      <ChevronRight className="h-3 w-3 text-primary" />
-                    </div>
-                    Service Obtainable Market (SOM)
-                  </h4>
-                  <ul className="space-y-2 text-sm pl-7">
-                    <li className="text-muted-foreground">
-                      <span className="font-medium text-foreground">115,000</span> congregations
-                    </li>
-                    <li className="text-muted-foreground">
-                      <span className="font-medium text-foreground">40M</span> weekly attendees
-                    </li>
-                    <li className="text-muted-foreground">
-                      <span className="font-medium text-foreground">$40B</span> in annual giving
-                    </li>
-                  </ul>
-                </div>
-                
-                <div className="bg-secondary/10 rounded-md p-3 text-center">
-                  <p className="text-secondary-foreground text-sm font-medium">Estimated Market Size</p>
-                  <p className="font-bold text-lg text-secondary">$227.7 Million</p>
-                  <p className="text-xs text-muted-foreground">among 115,000 evangelical churches</p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="col-span-1 lg:col-span-2">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-lg">Market Trends & Growth</CardTitle>
-            </CardHeader>
-            <CardContent className="p-4">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                <div className="space-y-2">
-                  <h4 className="font-medium text-sm">Market Trends</h4>
-                  <ul className="space-y-2 text-sm">
-                    <li className="flex items-start gap-2">
-                      <div className="h-5 w-5 rounded-full bg-secondary/20 flex items-center justify-center text-secondary shrink-0 mt-0.5">
-                        <TrendingUp className="h-3 w-3" />
-                      </div>
-                      <span className="text-muted-foreground">Declining weekly church attendance necessitates focus on existing members</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="h-5 w-5 rounded-full bg-secondary/20 flex items-center justify-center text-secondary shrink-0 mt-0.5">
-                        <TrendingUp className="h-3 w-3" />
-                      </div>
-                      <span className="text-muted-foreground">Younger demographics expect digital tools with data and metrics</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <div className="h-5 w-5 rounded-full bg-secondary/20 flex items-center justify-center text-secondary shrink-0 mt-0.5">
-                        <TrendingUp className="h-3 w-3" />
-                      </div>
-                      <span className="text-muted-foreground">Churches are adopting monthly subscription models over large capital purchases</span>
-                    </li>
-                  </ul>
-                </div>
-                
-                <div className="space-y-2">
-                  <h4 className="font-medium text-sm">Growth Potential</h4>
-                  <div className="p-3 bg-gradient-to-r from-green-50 to-blue-50 rounded-md">
-                    <div className="flex items-center justify-between mb-1">
-                      <span className="text-sm font-medium">CAGR</span>
-                      <span className="text-sm font-medium text-success">12%</span>
-                    </div>
-                    <Progress value={12} className="h-1.5 mb-2" />
-                    <p className="text-xs text-muted-foreground">Estimated yearly growth for discipleship technology over the next 5 years</p>
-                  </div>
-                  
-                  <div className="p-3 border rounded-md">
-                    <h5 className="font-medium mb-1 text-sm">Early Adopters</h5>
-                    <p className="text-xs text-muted-foreground mb-2">1,700 megachurches represent our initial focus as they have the resources to be early adopters.</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-xs font-medium">Market Penetration</span>
-                      <span className="text-xs font-medium text-primary">Goal: 1.1% by Year 3</span>
+        )}
+        
+        {/* Market Section */}
+        {activeSection === "market" && (
+          <div className="p-4 md:p-6 space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl font-bold text-[#FF7500]">Market Overview</CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="space-y-4">
+                  <h3 className="text-lg font-semibold">Market Opportunity</h3>
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                    <div className="p-4 border rounded-md bg-gradient-to-r from-blue-50 to-white">
+                      <h4 className="font-semibold text-primary flex items-center gap-2 mb-2">
+                        <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center">
+                          <ChevronRight className="h-3 w-3 text-primary" />
+                        </div>
+                        Total Addressable Market (TAM)
+                      </h4>
+                      <ul className="space-y-2 text-sm pl-4">
+                        <li className="text-muted-foreground">
+                          <span className="font-medium text-foreground">384,000</span> churches in the U.S. and Canada
+                        </li>
+                        <li className="text-muted-foreground">
+                          <span className="font-medium text-foreground">$1.3B</span> annual spending on church software
+                        </li>
+                      </ul>
                     </div>
                   </div>
                 </div>
-              </div>
-              
-              <div className="space-y-3">
-                <h4 className="font-medium text-sm">Investment Progress</h4>
-                <div>
-                  <div className="flex justify-between mb-1">
-                    <h4 className="text-sm">Fundraising Goal</h4>
-                    <p className="text-sm font-medium">$145K / $200K</p>
-                  </div>
-                  <Progress value={72.5} className="h-2" />
-                  <p className="text-xs text-muted-foreground mt-1">
-                    72.5% of seed funding goal achieved
-                  </p>
-                </div>
-                
-                <div className="p-3 bg-muted rounded-md">
-                  <h4 className="font-medium mb-2 text-sm">The Ask</h4>
-                  <ul className="space-y-2 text-xs">
-                    <li className="flex items-start">
-                      <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center text-primary mr-2 mt-0.5">
-                        <ChevronRight className="h-3 w-3" />
+              </CardContent>
+            </Card>
+          </div>
+        )}
+        
+        {/* Timeline Section */}
+        {activeSection === "timeline" && (
+          <div className="p-4 md:p-6 space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl font-bold text-[#FF7500]">Investment Timeline</CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="mb-8">
+                  <h3 className="text-lg font-semibold mb-6">Investment Rounds</h3>
+                  <div className="relative">
+                    <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-border"></div>
+                    
+                    <div className="relative pl-12 pb-8">
+                      <div className="absolute left-0 flex items-center justify-center w-8 h-8 rounded-full bg-[#FF7500] text-white">
+                        <span className="text-sm font-medium">1</span>
                       </div>
-                      <span>$200K seed funding for 20% of the cap table (pre-money value of $2M)</span>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center text-primary mr-2 mt-0.5">
-                        <ChevronRight className="h-3 w-3" />
+                      <div className="bg-card border rounded-md p-4">
+                        <h4 className="font-semibold text-base flex justify-between">
+                          <span>Seed Round</span>
+                          <span className="text-[#FF7500]">$750K</span>
+                        </h4>
+                        <p className="text-sm text-muted-foreground mt-2">Q2 2025 - Initial MVP development, early church partnerships, and team building</p>
                       </div>
-                      <span>Validate product with pilot churches in Q3 2025</span>
-                    </li>
-                    <li className="flex items-start">
-                      <div className="h-5 w-5 rounded-full bg-primary/20 flex items-center justify-center text-primary mr-2 mt-0.5">
-                        <ChevronRight className="h-3 w-3" />
-                      </div>
-                      <span>Fund MVP development and path to profitability</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="col-span-1 lg:col-span-3">
-            <CardHeader>
-              <CardTitle className="text-lg">Upcoming Events</CardTitle>
-            </CardHeader>
-            <CardContent className="p-4">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {upcomingEvents.map((event, i) => (
-                  <div key={i} className="p-3 border rounded-md hover:bg-muted/50 transition-colors">
-                    <div className="flex items-center mb-2">
-                      <Calendar className="h-4 w-4 text-primary mr-2" />
-                      <h4 className="font-medium">{event.name}</h4>
                     </div>
-                    <p className="text-sm text-muted-foreground">
-                      {event.date} at {event.time}
-                    </p>
                   </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        )}
       </main>
     </div>
   );
