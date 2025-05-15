@@ -3,7 +3,7 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Lock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import ecipleLogo from "@assets/eciple-logo-white.png";
+import ecipleLogo from "@assets/eciple-white.png";
 import ecipleOrangeLogo from "@assets/eciple-orange.png";
 
 export default function Header() {
