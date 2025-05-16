@@ -148,7 +148,16 @@ export default function Hero() {
                 className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20"
               >
                 <a href="#product" className="flex items-center gap-2">
-                  Learn More
+                  {editMode && isAdmin ? (
+                    <Input
+                      type="text"
+                      value={getHeroCtaText()}
+                      onChange={(e) => updateContent(heroCtaText, e.target.value)}
+                      className="w-24 text-white bg-transparent border-white/20 p-0 h-auto text-center"
+                    />
+                  ) : (
+                    getHeroCtaText()
+                  )}
                   <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                   <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                 </a>
