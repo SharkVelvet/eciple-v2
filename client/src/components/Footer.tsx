@@ -54,8 +54,7 @@ export default function Footer() {
     ],
     resources: [
       { name: "Privacy Policy", href: "#" },
-      { name: "Terms of Service", href: "#" },
-      { name: "Admin Login", href: "#", onClick: () => setShowAdminDialog(true) }
+      { name: "Terms of Service", href: "#" }
     ],
     contact: [
       { icon: "envelope", text: "bobby@eciple.com" },
