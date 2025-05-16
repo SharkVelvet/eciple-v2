@@ -165,10 +165,28 @@ export default function Product() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h3 className="text-2xl font-bold font-sans text-primary mb-4">Powerful Analytics Dashboard</h3>
-            <p className="text-foreground text-opacity-80 mb-6">
-              Provides pastors with critical data points such as:
-            </p>
+            <h3 className="text-2xl font-bold font-sans text-primary mb-4">
+              {editMode && isAdmin ? (
+                <Input
+                  type="text"
+                  value={getCentralizedTitle()}
+                  onChange={(e) => updateContent(centralizedTitle, e.target.value)}
+                />
+              ) : (
+                getCentralizedTitle()
+              )}
+            </h3>
+            {editMode && isAdmin ? (
+              <Textarea
+                value={getCentralizedText()}
+                onChange={(e) => updateContent(centralizedText, e.target.value)}
+                className="text-foreground mb-6 resize-y w-full"
+              />
+            ) : (
+              <p className="text-foreground text-opacity-80 mb-6">
+                {getCentralizedText()}
+              </p>
+            )}
             <ul className="space-y-3">
               {analyticsFeatures.map((feature, index) => (
                 <motion.li 
@@ -195,10 +213,28 @@ export default function Product() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h3 className="text-2xl font-bold font-sans text-primary mb-4">Mobile Experience</h3>
-            <p className="text-foreground text-opacity-80 mb-6">
-              A seamless mobile experience that keeps discipleship accessible wherever members are.
-            </p>
+            <h3 className="text-2xl font-bold font-sans text-primary mb-4">
+              {editMode && isAdmin ? (
+                <Input
+                  type="text"
+                  value={getMobileTitle()}
+                  onChange={(e) => updateContent(mobileTitle, e.target.value)}
+                />
+              ) : (
+                getMobileTitle()
+              )}
+            </h3>
+            {editMode && isAdmin ? (
+              <Textarea
+                value={getMobileText()}
+                onChange={(e) => updateContent(mobileText, e.target.value)}
+                className="text-foreground mb-6 resize-y w-full"
+              />
+            ) : (
+              <p className="text-foreground text-opacity-80 mb-6">
+                {getMobileText()}
+              </p>
+            )}
             <ul className="space-y-3">
               {mobileFeatures.map((feature, index) => (
                 <motion.li 

@@ -2,8 +2,23 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
+import { useContext } from "react";
+import { AdminContext } from "@/pages/Home";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function Pricing() {
+  // Access admin context
+  const { isAdmin, editMode, editableContent, updateContent } = useContext(AdminContext);
+  
+  // Define editable text content keys
+  const pricingTitle = "pricing_title";
+  const pricingSubtitle = "pricing_subtitle";
+  
+  // Helper functions to get content or default values
+  const getPricingTitle = () => editableContent[pricingTitle] || "Flexible Pricing Options";
+  const getPricingSubtitle = () => editableContent[pricingSubtitle] || 
+    "Simple, transparent pricing that scales with your church.";
   const plans = [
     {
       name: "Starter",
