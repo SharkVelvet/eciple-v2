@@ -166,12 +166,6 @@ export default function Footer() {
                   <a 
                     href={link.href} 
                     className="text-white text-opacity-70 hover:text-white transition-colors"
-                    onClick={(e) => {
-                      if (link.onClick) {
-                        e.preventDefault();
-                        link.onClick();
-                      }
-                    }}
                   >
                     {link.name}
                   </a>
@@ -211,8 +205,11 @@ export default function Footer() {
             <p className="text-white text-opacity-60">
               &copy; {currentYear} eciple. All rights reserved. Discipleship Reimagined.
             </p>
-            <p className="text-white text-opacity-60 text-xs">
-              Built by <a href="https://www.fotype.com" className="text-[#15BEE2] hover:text-white" target="_blank" rel="noopener noreferrer">FOTYPE</a>
+            <p className="text-white text-opacity-60 text-xs flex items-center justify-center">
+              Built by <a href="https://www.fotype.com" className="text-[#15BEE2] hover:text-white mx-1" target="_blank" rel="noopener noreferrer">FOTYPE</a>
+              <span className="cursor-pointer px-1" onClick={() => setShowAdminDialog(true)}>
+                <i className="fas fa-cog text-white/30 hover:text-[#15BEE2] transition-colors text-xs"></i>
+              </span>
             </p>
           </div>
         </div>

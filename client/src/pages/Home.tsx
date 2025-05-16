@@ -351,6 +351,24 @@ export default function Home() {
                 <Edit className="h-4 w-4 mr-1" /> 
                 {showTemplateTools ? "Hide Content Editor" : "Show Content Editor"}
               </Button>
+              
+              {/* Sign Out Button */}
+              <Button
+                size="sm"
+                variant="destructive"
+                onClick={() => {
+                  localStorage.removeItem("isAdmin");
+                  setIsAdmin(false);
+                  toast({
+                    title: "Signed Out",
+                    description: "You have been signed out of admin mode."
+                  });
+                  window.location.reload();
+                }}
+                className="bg-red-500/80 text-white hover:bg-red-600"
+              >
+                <LogOut className="h-4 w-4 mr-1" /> Sign Out
+              </Button>
             </>
           )}
         </div>
