@@ -40,29 +40,28 @@ export default function Header() {
     <header 
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-[#223349] shadow-lg py-6 md:py-4' 
-          : 'bg-transparent py-8 md:py-6'
+          ? 'bg-[#223349] shadow-lg py-4 md:py-4' 
+          : 'bg-transparent py-6 md:py-6'
       }`}
     >
       <div className="max-w-[1180px] mx-auto px-8 md:px-4">
-        <div className="flex items-center justify-between h-full">
+        <div className="flex items-center justify-between" style={{ minHeight: '60px' }}>
           {/* Logo - Left aligned */}
-          <div className="flex-none flex items-center">
+          <div className="flex-none">
             <a 
               href="#" 
               onClick={(e) => {
                 e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="flex items-center group"
+              className="block"
             >
               <motion.div
                 initial={{ scale: 1 }}
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                className="text-left flex items-center"
               >
-                <div className="flex flex-col items-start justify-center">
+                <div className="flex flex-col items-start">
                   <img 
                     src={ecipleLogo} 
                     alt="eciple logo" 
@@ -180,7 +179,7 @@ export default function Header() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-[#223349] w-full py-5 shadow-lg absolute overflow-hidden"
+            className="md:hidden bg-[#223349] w-full py-5 shadow-lg absolute overflow-hidden top-full"
           >
             <motion.ul 
               className="flex flex-col space-y-1 px-8 max-w-lg mx-auto"
