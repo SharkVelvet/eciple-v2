@@ -148,7 +148,36 @@ export default function Contact() {
                 ))}
               </ul>
               
-              {/* Contact information moved to footer or removed as requested */}
+              {/* Founder information */}
+              <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 bg-white/5 p-4 rounded-lg">
+                <div className="w-24 h-24 rounded-full overflow-hidden flex-shrink-0">
+                  <img 
+                    src={bobbyPersonImage} 
+                    alt="Bobby Bemis" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h4 className="text-lg font-semibold mb-1">
+                    {editMode && isAdmin ? (
+                      <Input
+                        type="text"
+                        value={getFounderTitle()}
+                        onChange={(e) => updateContent(founderTitle, e.target.value)}
+                        className="text-white bg-transparent border-white/20"
+                      />
+                    ) : (
+                      getFounderTitle()
+                    )}
+                  </h4>
+                  <p className="text-white text-opacity-80 mb-2">
+                    Call / Text: 813.400.9384
+                  </p>
+                  <p className="text-white text-opacity-80">
+                    Email: bobby@eciple.com
+                  </p>
+                </div>
+              </div>
             </motion.div>
           </motion.div>
           
