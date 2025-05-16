@@ -2,8 +2,33 @@ import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
 import ecipleWings from "@assets/eciple-wing-blue-grad.png";
+import { useContext } from "react";
+import { AdminContext } from "@/pages/Home";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function Product() {
+  // Access admin context
+  const { isAdmin, editMode, editableContent, updateContent } = useContext(AdminContext);
+  
+  // Define editable text content keys
+  const productMainTitle = "product_main_title";
+  const productMainText = "product_main_text";
+  const centralizedTitle = "centralized_title";
+  const centralizedText = "centralized_text";
+  const mobileTitle = "mobile_title";
+  const mobileText = "mobile_text";
+  
+  // Helper functions to get content or default values
+  const getProductMainTitle = () => editableContent[productMainTitle] || "Product Features";
+  const getProductMainText = () => editableContent[productMainText] || 
+    "eciple provides a comprehensive set of tools for effective discipleship management and growth.";
+  const getCentralizedTitle = () => editableContent[centralizedTitle] || "Centralized Dashboard";
+  const getCentralizedText = () => editableContent[centralizedText] || 
+    "A robust backend for pastors and leaders to track discipleship relationships and growth.";
+  const getMobileTitle = () => editableContent[mobileTitle] || "Mobile Experience";
+  const getMobileText = () => editableContent[mobileText] || 
+    "A seamless mobile experience that keeps discipleship accessible wherever members are.";
   const features = [
     {
       icon: "clipboard-check",
@@ -62,10 +87,29 @@ export default function Product() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-4">The Product</h2>
-          <p className="text-lg max-w-3xl mx-auto text-foreground text-opacity-80">
-            A comprehensive platform designed to facilitate meaningful discipleship relationships.
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-4">
+            {editMode && isAdmin ? (
+              <Input
+                type="text"
+                value={getProductMainTitle()}
+                onChange={(e) => updateContent(productMainTitle, e.target.value)}
+                className="text-center"
+              />
+            ) : (
+              getProductMainTitle()
+            )}
+          </h2>
+          {editMode && isAdmin ? (
+            <Textarea
+              value={getProductMainText()}
+              onChange={(e) => updateContent(productMainText, e.target.value)}
+              className="text-lg max-w-3xl mx-auto text-foreground text-opacity-80 resize-y"
+            />
+          ) : (
+            <p className="text-lg max-w-3xl mx-auto text-foreground text-opacity-80">
+              {getProductMainText()}
+            </p>
+          )}
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
