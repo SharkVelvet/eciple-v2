@@ -122,10 +122,14 @@ export default function Home() {
     const savedContent = localStorage.getItem('siteContent');
     if (savedContent) {
       try {
-        setEditableContent(JSON.parse(savedContent));
+        const parsedContent = JSON.parse(savedContent);
+        console.log("Loading content from localStorage:", Object.keys(parsedContent).length, "items");
+        setEditableContent(parsedContent);
       } catch (e) {
         console.error("Failed to parse saved content", e);
       }
+    } else {
+      console.log("No saved content found in localStorage");
     }
     
     // Check for admin status
@@ -133,6 +137,22 @@ export default function Home() {
     if (adminStatus === 'true') {
       setIsAdmin(true);
     }
+    
+    // Force a reload of content every few seconds when in edit mode
+    // This ensures any changes from document uploads are reflected
+    const intervalId = setInterval(() => {
+      const latestContent = localStorage.getItem('siteContent');
+      if (latestContent) {
+        try {
+          const parsedContent = JSON.parse(latestContent);
+          setEditableContent(parsedContent);
+        } catch (e) {
+          console.error("Failed to refresh content", e);
+        }
+      }
+    }, 2000); // Check every 2 seconds
+    
+    return () => clearInterval(intervalId);
   }, []);
 
   
