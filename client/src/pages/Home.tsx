@@ -420,11 +420,11 @@ export default function Home() {
         {showScrollTop && (
           <button
             onClick={scrollToTop}
-            className="fixed right-4 md:right-8 bottom-8 z-40 text-[#15BEE2] p-2 hover:text-[#0368C1] transition-all duration-300"
+            className="fixed right-4 md:right-8 bottom-8 z-40 bg-[#15BEE2] text-white rounded-full p-2 hover:bg-[#0368C1] transition-all duration-300 shadow-lg"
             aria-label="Scroll to top"
             style={{ bottom: isAdmin ? (showTemplateTools ? '95px' : '60px') : '2rem' }}
           >
-            <ArrowUp className="h-6 w-6" />
+            <ArrowUp className="h-5 w-5" />
           </button>
         )}
       </div>
