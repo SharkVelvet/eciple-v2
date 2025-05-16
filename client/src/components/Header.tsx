@@ -261,7 +261,7 @@ export default function Header() {
                       element.scrollIntoView({ behavior: 'smooth' });
                     }
                   }}
-                  className="flex items-center gap-2 py-3 px-4 text-white bg-[#15BEE2] hover:bg-[#0368C1] rounded-md transition-colors font-medium"
+                  className="flex items-center gap-2 py-3 px-4 text-white hover:text-white/90 hover:bg-white/10 rounded-md transition-colors font-medium"
                 >
                   <Phone className="h-4 w-4" />
                   Contact Us
