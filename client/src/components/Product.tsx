@@ -106,7 +106,7 @@ export default function Product() {
               className="text-lg max-w-3xl mx-auto text-foreground text-opacity-80 resize-y"
             />
           ) : (
-            <p className="text-lg max-w-3xl mx-auto text-foreground text-opacity-80">
+            <p className="text-lg max-w-3xl mx-auto text-foreground text-opacity-80 product-subheading">
               {getProductMainText()}
             </p>
           )}
