@@ -118,19 +118,27 @@ export default function Home() {
   
   // Load saved content and check admin status on initial load
   useEffect(() => {
-    // Load saved content
-    const savedContent = localStorage.getItem('siteContent');
-    if (savedContent) {
-      try {
-        const parsedContent = JSON.parse(savedContent);
-        console.log("Loading content from localStorage:", Object.keys(parsedContent).length, "items");
-        setEditableContent(parsedContent);
-      } catch (e) {
-        console.error("Failed to parse saved content", e);
+    // Reset to get a clean start
+    localStorage.removeItem('tempContent');
+    
+    // Load saved content from localStorage (our source of truth)
+    const loadSavedContent = () => {
+      const savedContent = localStorage.getItem('siteContent');
+      if (savedContent) {
+        try {
+          const parsedContent = JSON.parse(savedContent);
+          console.log("Loading content from localStorage:", Object.keys(parsedContent).length, "items");
+          setEditableContent(parsedContent);
+        } catch (e) {
+          console.error("Failed to parse saved content", e);
+        }
+      } else {
+        console.log("No saved content found in localStorage");
       }
-    } else {
-      console.log("No saved content found in localStorage");
-    }
+    };
+    
+    // Load content initially
+    loadSavedContent();
     
     // Check for admin status
     const adminStatus = localStorage.getItem('isAdmin');
@@ -138,21 +146,31 @@ export default function Home() {
       setIsAdmin(true);
     }
     
-    // Force a reload of content every few seconds when in edit mode
-    // This ensures any changes from document uploads are reflected
-    const intervalId = setInterval(() => {
-      const latestContent = localStorage.getItem('siteContent');
-      if (latestContent) {
+    // Create a storage event listener to detect changes to localStorage from any component
+    // This lets the page update immediately when content is changed via the editor
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === 'siteContent' && event.newValue) {
+        console.log("Content changed in localStorage, reloading content");
         try {
-          const parsedContent = JSON.parse(latestContent);
-          setEditableContent(parsedContent);
+          const newContent = JSON.parse(event.newValue);
+          setEditableContent(newContent);
         } catch (e) {
-          console.error("Failed to refresh content", e);
+          console.error("Failed to parse updated content", e);
         }
       }
-    }, 2000); // Check every 2 seconds
+    };
     
-    return () => clearInterval(intervalId);
+    // Add event listener for storage changes
+    window.addEventListener('storage', handleStorageChange);
+    
+    // Also set up a polling refresh as a backup
+    const intervalId = setInterval(loadSavedContent, 2000);
+    
+    // Clean up
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      clearInterval(intervalId);
+    };
   }, []);
 
   

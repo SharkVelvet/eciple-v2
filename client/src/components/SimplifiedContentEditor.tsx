@@ -72,25 +72,44 @@ export default function SimplifiedContentEditor({
     e.preventDefault();
     
     try {
-      // Always save complete form data
-      onSave(formData);
+      console.log("Saving content with keys:", Object.keys(formData));
       
-      // Save directly to localStorage
-      localStorage.setItem('siteContent', JSON.stringify(formData));
+      // First, clear localStorage to ensure no old data persists
+      localStorage.removeItem('siteContent');
       
-      // Notify success
-      toast({
-        title: "Content Updated",
-        description: "Your changes have been saved. The page will reload to show updates.",
-      });
-      
-      // Close the dialog
-      onClose();
-      
-      // Force page reload after a brief delay
+      // Force a brief delay before setting new content
       setTimeout(() => {
-        window.location.reload();
-      }, 1000);
+        // Add a timestamp to force the content to be recognized as new
+        const contentWithTimestamp = {
+          ...formData,
+          _lastUpdated: new Date().toISOString()
+        };
+        
+        // Save to localStorage
+        localStorage.setItem('siteContent', JSON.stringify(contentWithTimestamp));
+        
+        // Also save to a backup location
+        localStorage.setItem('siteContent_backup', JSON.stringify(contentWithTimestamp));
+        
+        console.log("Content saved to localStorage:", Object.keys(contentWithTimestamp).length, "items");
+        
+        // Call the onSave callback
+        onSave(contentWithTimestamp);
+        
+        // Notify success
+        toast({
+          title: "Content Updated",
+          description: "Your changes have been saved. The page will reload to show updates.",
+        });
+        
+        // Close the dialog
+        onClose();
+        
+        // Force hard reload to ensure all components re-render with new content
+        setTimeout(() => {
+          window.location.href = window.location.href;
+        }, 1000);
+      }, 100);
     } catch (error) {
       console.error("Error saving content:", error);
       toast({
