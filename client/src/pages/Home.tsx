@@ -344,13 +344,29 @@ export default function Home() {
           <ContentDocumentUploader 
             currentContent={editableContent} 
             onContentUpdate={(newContent) => {
-              setEditableContent(newContent);
-              // Save to localStorage
-              localStorage.setItem('siteContent', JSON.stringify(newContent));
+              console.log("Updating content in Home component:", Object.keys(newContent).length, "items");
+              
+              // Save to localStorage with timestamp to ensure it's different
+              const contentWithTimestamp = {
+                ...newContent,
+                _lastUpdated: new Date().toISOString()
+              };
+              
+              // Update state first
+              setEditableContent(contentWithTimestamp);
+              
+              // Then save to localStorage
+              localStorage.setItem('siteContent', JSON.stringify(contentWithTimestamp));
+              
               toast({
                 title: "Content Updated",
-                description: "Your website content has been updated from the document.",
+                description: "Content saved successfully. The page will reload to show your changes.",
               });
+              
+              // Force reload after a brief delay to ensure state is updated
+              setTimeout(() => {
+                window.location.reload();
+              }, 1000);
             }} 
           />
         </div>
