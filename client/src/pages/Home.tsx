@@ -10,7 +10,7 @@ import Market from "@/components/Market";
 import Pricing from "@/components/Pricing";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import DirectHeroEditor from "@/components/DirectHeroEditor";
+import DirectInlineEditor from "@/components/DirectInlineEditor";
 import { Button } from "@/components/ui/button";
 import { ArrowUp, LogOut, Edit, Save, X, FileDown } from "lucide-react";
 import {
@@ -359,12 +359,12 @@ export default function Home() {
       {/* Template tools panel */}
       {showTemplateTools && !editMode && (
         <div className="mt-3 pb-1 border-t border-white/20 pt-3">
-          {/* Direct Hero editor replaces the ContentDocumentUploader */}
+          {/* Direct inline editor for immediate content updates */}
           <div className="space-y-3">
             <p className="text-white/60 text-sm">
               Edit content using the button below to make changes to your website.
             </p>
-            <DirectHeroEditor />
+            <DirectInlineEditor />
           </div>
         </div>
       )}
