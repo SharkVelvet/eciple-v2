@@ -87,7 +87,10 @@ export default function Competition() {
                 <TableRow key={rowIndex} className={rowIndex % 2 === 0 ? "bg-gray-50" : ""}>
                   <TableCell className="font-medium">{feature}</TableCell>
                   {supportMatrix[rowIndex].map((support, colIndex) => (
-                    <TableCell key={colIndex} className="text-center">
+                    <TableCell 
+                      key={colIndex} 
+                      className={`text-center ${colIndex === 0 ? 'bg-gradient-to-b from-[#15BEE2]/10 to-white' : ''}`}
+                    >
                       {renderSupportIcon(support)}
                     </TableCell>
                   ))}
