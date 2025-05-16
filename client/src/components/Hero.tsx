@@ -147,7 +147,17 @@ export default function Hero() {
                 asChild 
                 className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20"
               >
-                <a href="#product" className="flex items-center gap-2">
+                <a 
+                  href="#product" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const element = document.querySelector('#product');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="flex items-center gap-2"
+                >
                   {editMode && isAdmin ? (
                     <Input
                       type="text"
