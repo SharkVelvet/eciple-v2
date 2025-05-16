@@ -83,33 +83,50 @@ export default function ContentDocumentUploader({
     setUploadProgress(10);
 
     try {
-      // Simulate file processing progress
+      // Display progress to user
       setUploadProgress(30);
       setTimeout(() => setUploadProgress(50), 500);
       
-      // Parse the docx file
+      // Parse the docx file to get updated content
       const parsedContent = await parseDocx(file);
       setUploadProgress(80);
       
-      // Update the content if we have any changes
-      if (parsedContent && Object.keys(parsedContent).length > 0) {
-        onContentUpdate({
-          ...currentContent,
-          ...parsedContent
-        });
-        
-        setUploadProgress(100);
-        setTimeout(() => {
-          setIsUploading(false);
-          setUploadProgress(0);
-          toast({
-            title: "Content Updated",
-            description: "Your website content has been updated successfully.",
-          });
-        }, 500);
-      } else {
-        throw new Error("No content changes found in the document");
+      // Force a reload of the current saved content
+      const savedContent = localStorage.getItem('siteContent');
+      let existingContent: Record<string, string> = {};
+      
+      if (savedContent) {
+        try {
+          existingContent = JSON.parse(savedContent);
+          console.log("Loaded existing content:", Object.keys(existingContent).length, "items");
+        } catch (e) {
+          console.error("Failed to parse saved content", e);
+        }
       }
+      
+      // Update with merged content (prioritizing new changes)
+      const mergedContent = {
+        ...existingContent,
+        ...parsedContent
+      };
+      
+      // Save the updated content to localStorage and update state
+      localStorage.setItem('siteContent', JSON.stringify(mergedContent));
+      
+      // Update the content in our application state
+      onContentUpdate(mergedContent);
+      
+      // Force a page refresh to make sure all components see the changes
+      setTimeout(() => {
+        setUploadProgress(100);
+        window.location.reload();
+      }, 1000);
+      
+      // Show success message
+      toast({
+        title: "Content Updated",
+        description: "Your website content has been updated successfully. The page will refresh to show changes.",
+      });
     } catch (error) {
       console.error("Error processing document:", error);
       setIsUploading(false);
