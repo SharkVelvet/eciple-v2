@@ -16,11 +16,31 @@ export default function Hero() {
   const heroSubheading = "hero_subheading";
   const heroCtaText = "hero_cta_text";
   
+  // Read content directly from localStorage for immediate updates
+  const getContentFromLocalStorage = (key: string, defaultValue: string) => {
+    try {
+      const savedContent = localStorage.getItem('siteContent');
+      if (savedContent) {
+        const parsed = JSON.parse(savedContent);
+        if (parsed && parsed[key]) {
+          return parsed[key];
+        }
+      }
+    } catch (e) {
+      console.error("Error reading from localStorage:", e);
+    }
+    return defaultValue;
+  };
+  
   // Helper functions to get content values with fallback to defaults
-  const getHeroHeading = () => editableContent[heroHeading] || "Discipleship Reimagined";
-  const getHeroSubheading = () => editableContent[heroSubheading] || 
-    "Revolutionizing how churches connect, disciple, and grow their communities through intentional relationships.";
-  const getHeroCtaText = () => editableContent[heroCtaText] || "Learn More";
+  const getHeroHeading = () => 
+    getContentFromLocalStorage(heroHeading, "Discipleship Reimagined");
+    
+  const getHeroSubheading = () => 
+    getContentFromLocalStorage(heroSubheading, "Revolutionizing how churches connect, disciple, and grow their communities through intentional relationships.");
+    
+  const getHeroCtaText = () => 
+    getContentFromLocalStorage(heroCtaText, "Learn More");
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

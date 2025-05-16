@@ -56,43 +56,41 @@ export default function DirectHeroEditor() {
   // Handle saving changes
   const handleSaveChanges = () => {
     try {
-      // Get existing content first
-      const existingContent = {};
-      try {
-        const saved = localStorage.getItem('siteContent');
-        if (saved) {
-          Object.assign(existingContent, JSON.parse(saved));
-        }
-      } catch (e) {
-        console.error("Error loading existing content:", e);
-      }
+      console.log("Saving content with these values:", {
+        hero_heading: heroHeading,
+        hero_subheading: heroSubheading,
+        hero_cta_text: heroCtaText
+      });
       
-      // Create the updated content
-      const updatedContent = {
-        ...existingContent,
+      // Clear all localStorage first to make sure we don't have any cached content
+      localStorage.removeItem('siteContent');
+      localStorage.removeItem('editableContent');
+      
+      // Create new content object with current values and timestamp
+      const contentToSave = {
         hero_heading: heroHeading,
         hero_subheading: heroSubheading,
         hero_cta_text: heroCtaText,
-        _updated: Date.now() // Add timestamp to force recognition as new content
+        timestamp: Date.now()
       };
       
       // Save to localStorage
-      localStorage.setItem('siteContent', JSON.stringify(updatedContent));
-      console.log("Saved content to localStorage:", updatedContent);
+      localStorage.setItem('siteContent', JSON.stringify(contentToSave));
+      console.log("Content saved to localStorage:", contentToSave);
       
       // Show a success message
       toast({
-        title: "Content Updated",
-        description: "Your changes have been saved. The page will reload to show changes.",
+        title: "Content Updated Successfully",
+        description: "Your changes have been saved. The page will reload to show your changes.",
       });
       
       // Close the editor
       setShowEditor(false);
       
-      // Force a hard page reload to ensure changes take effect
+      // Force a hard page reload after a brief delay
       setTimeout(() => {
-        window.location.href = window.location.href + '?updated=' + Date.now();
-      }, 1000);
+        window.location.replace(window.location.href.split('?')[0] + '?cache=' + Date.now());
+      }, 1500);
     } catch (error) {
       console.error("Error saving content:", error);
       toast({
