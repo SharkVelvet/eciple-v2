@@ -36,7 +36,7 @@ export default function Competition() {
   ];
 
   const renderSupportIcon = (level: number) => {
-    if (level === 2) return <CheckCircle className="h-5 w-5 text-success mx-auto" />;
+    if (level === 2) return <CheckCircle className="h-5 w-5 text-[#15BEE2] mx-auto" />;
     if (level === 1) return <MinusCircle className="h-5 w-5 text-warning mx-auto" />;
     return <XCircle className="h-5 w-5 text-muted-foreground mx-auto" />;
   };
@@ -66,7 +66,7 @@ export default function Competition() {
         >
           <Table className="min-w-full">
             <TableHeader>
-              <TableRow className="bg-primary">
+              <TableRow className="bg-[#223349] hover:bg-[#223349]">
                 <TableHead className="text-white">Features</TableHead>
                 {competitors.map((competitor, index) => (
                   <TableHead key={index} className="text-center text-white">
