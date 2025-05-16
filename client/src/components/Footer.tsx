@@ -195,11 +195,11 @@ export default function Footer() {
                 </span>
                 <span className="text-white text-opacity-70">{links.contact[0].text}</span>
               </li>
-              <li className="flex items-start cursor-pointer group" onClick={handleLogout}>
-                <span className="text-accent mr-2 mt-1 group-hover:text-white transition-colors">
+              <li className="flex items-start">
+                <span className="text-accent mr-2 mt-1">
                   <i className="fas fa-phone"></i>
                 </span>
-                <span className="text-white text-opacity-70 group-hover:text-white transition-colors">
+                <span className="text-white text-opacity-70">
                   {links.contact[1].text}
                 </span>
               </li>
