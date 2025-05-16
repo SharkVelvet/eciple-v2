@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,11 +6,28 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { AdminContext } from "@/pages/Home";
 
 import { apiRequest } from "@/lib/queryClient";
 import bobbyPersonImage from "@assets/Bobby-Person-2021-scaled.jpg";
 
 export default function Contact() {
+  // Access admin context
+  const { isAdmin, editMode, editableContent, updateContent } = useContext(AdminContext);
+  
+  // Define editable text content keys
+  const contactTitle = "contact_title";
+  const contactSubtitle = "contact_subtitle";
+  const founderTitle = "founder_title";
+  const founderText = "founder_text";
+  
+  // Helper functions to get content or default values
+  const getContactTitle = () => editableContent[contactTitle] || "Get in Touch";
+  const getContactSubtitle = () => editableContent[contactSubtitle] || 
+    "Have questions or interested in a demo? Fill out the form below.";
+  const getFounderTitle = () => editableContent[founderTitle] || "Meet the Founder";
+  const getFounderText = () => editableContent[founderText] || 
+    "Bobby Bemis brings over 25 years of ministry experience as a pastor and discipleship leader.";
 
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -81,10 +98,29 @@ export default function Contact() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold font-sans mb-6">Ready to Transform Discipleship?</h2>
-            <p className="text-lg text-white text-opacity-90 mb-8">
-              Join our pilot program and be among the first churches to experience the power of eciple's discipleship platform.
-            </p>
+            <h2 className="text-3xl md:text-4xl font-bold font-sans mb-6">
+              {editMode && isAdmin ? (
+                <Input
+                  type="text"
+                  value={getContactTitle()}
+                  onChange={(e) => updateContent(contactTitle, e.target.value)}
+                  className="text-white bg-transparent border-white/20"
+                />
+              ) : (
+                getContactTitle()
+              )}
+            </h2>
+            {editMode && isAdmin ? (
+              <Textarea
+                value={getContactSubtitle()}
+                onChange={(e) => updateContent(contactSubtitle, e.target.value)}
+                className="text-lg text-white text-opacity-90 mb-8 resize-y bg-transparent border-white/20 w-full"
+              />
+            ) : (
+              <p className="text-lg text-white text-opacity-90 mb-8">
+                {getContactSubtitle()}
+              </p>
+            )}
             
             <motion.div 
               className="bg-white bg-opacity-10 p-6 rounded-lg mb-8"

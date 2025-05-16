@@ -89,10 +89,29 @@ export default function Pricing() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-4">Business Model</h2>
-          <p className="text-lg max-w-3xl mx-auto text-foreground text-opacity-80">
-            A sustainable pricing model designed for churches of all sizes.
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-4">
+            {editMode && isAdmin ? (
+              <Input
+                type="text"
+                value={getPricingTitle()}
+                onChange={(e) => updateContent(pricingTitle, e.target.value)}
+                className="text-center"
+              />
+            ) : (
+              getPricingTitle()
+            )}
+          </h2>
+          {editMode && isAdmin ? (
+            <Textarea
+              value={getPricingSubtitle()}
+              onChange={(e) => updateContent(pricingSubtitle, e.target.value)}
+              className="text-lg max-w-3xl mx-auto text-foreground text-opacity-80 resize-y"
+            />
+          ) : (
+            <p className="text-lg max-w-3xl mx-auto text-foreground text-opacity-80">
+              {getPricingSubtitle()}
+            </p>
+          )}
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
