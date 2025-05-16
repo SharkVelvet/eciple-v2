@@ -44,7 +44,7 @@ export default function Header() {
           : 'bg-transparent py-6 md:py-6'
       }`}
     >
-      <div className="max-w-[1180px] mx-auto px-8 md:px-4">
+      <div className="max-w-[1280px] mx-auto px-8 md:px-6">
         <div className="flex items-center justify-between" style={{ minHeight: '60px' }}>
           {/* Logo - Left aligned */}
           <div className="flex-none">
