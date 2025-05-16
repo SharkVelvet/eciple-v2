@@ -134,7 +134,7 @@ export default function ContentDocumentUploader({
           onClick={handleDownloadTemplate}
           className="bg-[#15BEE2] text-white hover:bg-[#0368C1]"
         >
-          <FileDown className="h-4 w-4 mr-2" /> Download Template
+          <FileDown className="h-4 w-4 mr-2" /> Download CSV Template
         </Button>
         
         <Button 
@@ -149,14 +149,14 @@ export default function ContentDocumentUploader({
             </>
           ) : (
             <>
-              <FileUp className="h-4 w-4 mr-2" /> Upload Content Document
+              <FileUp className="h-4 w-4 mr-2" /> Upload CSV File
             </>
           )}
         </Button>
         
         <input 
           type="file" 
-          accept=".docx" 
+          accept=".csv" 
           ref={fileInputRef} 
           onChange={handleFileChange} 
           className="hidden" 
