@@ -40,11 +40,11 @@ export default function Header() {
     <header 
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-[#223349] shadow-lg py-4 md:py-4' 
-          : 'bg-transparent py-5 md:py-6'
+          ? 'bg-[#223349] shadow-lg py-5 md:py-4' 
+          : 'bg-transparent py-6 md:py-6'
       }`}
     >
-      <div className="max-w-[1180px] mx-auto px-4">
+      <div className="max-w-[1180px] mx-auto px-6 md:px-4">
         <div className="flex items-center justify-between">
           {/* Logo - Left aligned */}
           <div className="flex-none">
@@ -180,10 +180,10 @@ export default function Header() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-[#223349] w-full py-4 shadow-lg absolute overflow-hidden"
+            className="md:hidden bg-[#223349] w-full py-5 shadow-lg absolute overflow-hidden"
           >
             <motion.ul 
-              className="flex flex-col space-y-1 px-6 max-w-xs mx-auto"
+              className="flex flex-col space-y-1 px-8 max-w-lg mx-auto"
               initial="closed"
               animate="open"
               variants={{
@@ -251,16 +251,21 @@ export default function Header() {
                 }}
                 className="pt-2"
               >
-                <Button 
-                  asChild 
-                  className="w-full justify-center rounded-full mb-2" 
-                  onClick={closeMobileMenu}
+                <a 
+                  href="#contact" 
+                  onClick={(e) => {
+                    e.preventDefault();
+                    closeMobileMenu();
+                    const element = document.querySelector("#contact");
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                  className="flex items-center gap-2 py-3 px-4 text-white bg-[#15BEE2] hover:bg-[#0368C1] rounded-md transition-colors font-medium"
                 >
-                  <a href="#contact" className="flex items-center justify-center gap-1.5">
-                    <Phone className="h-4 w-4" />
-                    Contact Us
-                  </a>
-                </Button>
+                  <Phone className="h-4 w-4" />
+                  Contact Us
+                </a>
               </motion.li>
               
               <motion.li 
