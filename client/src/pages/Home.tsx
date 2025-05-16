@@ -10,7 +10,7 @@ import Market from "@/components/Market";
 import Pricing from "@/components/Pricing";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import DirectInlineEditor from "@/components/DirectInlineEditor";
+import QuickHeroEditor from "@/components/QuickHeroEditor";
 import { Button } from "@/components/ui/button";
 import { ArrowUp, LogOut, Edit, Save, X, FileDown } from "lucide-react";
 import {
@@ -359,12 +359,12 @@ export default function Home() {
       {/* Template tools panel */}
       {showTemplateTools && !editMode && (
         <div className="mt-3 pb-1 border-t border-white/20 pt-3">
-          {/* Direct inline editor for immediate content updates */}
+          {/* Quick hero editor for direct DOM updates */}
           <div className="space-y-3">
             <p className="text-white/60 text-sm">
               Edit content using the button below to make changes to your website.
             </p>
-            <DirectInlineEditor />
+            <QuickHeroEditor />
           </div>
         </div>
       )}

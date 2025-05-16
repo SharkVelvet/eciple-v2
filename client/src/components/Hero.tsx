@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Sparkles, Users, ArrowRight, Heart } from "lucide-react";
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import { AdminContext } from "@/pages/Home";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -16,31 +16,61 @@ export default function Hero() {
   const heroSubheading = "hero_subheading";
   const heroCtaText = "hero_cta_text";
   
-  // Read content directly from localStorage for immediate updates
-  const getContentFromLocalStorage = (key: string, defaultValue: string) => {
+  // Helper functions to get content values with fallback to defaults
+  const getHeroHeading = () => {
+    // Try to read directly from localStorage first
     try {
       const savedContent = localStorage.getItem('siteContent');
       if (savedContent) {
         const parsed = JSON.parse(savedContent);
-        if (parsed && parsed[key]) {
-          return parsed[key];
+        if (parsed && parsed.hero_heading) {
+          return parsed.hero_heading;
         }
       }
     } catch (e) {
-      console.error("Error reading from localStorage:", e);
+      console.error("Error reading heading from localStorage:", e);
     }
-    return defaultValue;
+    
+    // Fall back to using the admin context content
+    return editableContent[heroHeading] || "Discipleship Reimagined";
   };
   
-  // Helper functions to get content values with fallback to defaults
-  const getHeroHeading = () => 
-    getContentFromLocalStorage(heroHeading, "Discipleship Reimagined");
+  const getHeroSubheading = () => {
+    // Try to read directly from localStorage first
+    try {
+      const savedContent = localStorage.getItem('siteContent');
+      if (savedContent) {
+        const parsed = JSON.parse(savedContent);
+        if (parsed && parsed.hero_subheading) {
+          return parsed.hero_subheading;
+        }
+      }
+    } catch (e) {
+      console.error("Error reading subheading from localStorage:", e);
+    }
     
-  const getHeroSubheading = () => 
-    getContentFromLocalStorage(heroSubheading, "Revolutionizing how churches connect, disciple, and grow their communities through intentional relationships.");
+    // Fall back to using the admin context content
+    return editableContent[heroSubheading] || 
+      "Revolutionizing how churches connect, disciple, and grow their communities through intentional relationships.";
+  };
+  
+  const getHeroCtaText = () => {
+    // Try to read directly from localStorage first
+    try {
+      const savedContent = localStorage.getItem('siteContent');
+      if (savedContent) {
+        const parsed = JSON.parse(savedContent);
+        if (parsed && parsed.hero_cta_text) {
+          return parsed.hero_cta_text;
+        }
+      }
+    } catch (e) {
+      console.error("Error reading CTA text from localStorage:", e);
+    }
     
-  const getHeroCtaText = () => 
-    getContentFromLocalStorage(heroCtaText, "Learn More");
+    // Fall back to using the admin context content
+    return editableContent[heroCtaText] || "Learn More";
+  };
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -121,7 +151,7 @@ export default function Hero() {
             </motion.div>
             
             <motion.h1 
-              className="text-4xl md:text-6xl lg:text-7xl font-bold font-sans mb-6 leading-tight"
+              className="text-4xl md:text-6xl lg:text-7xl font-bold font-sans mb-6 leading-tight hero-heading"
               variants={itemVariants}
             >
               {editMode && isAdmin ? (
@@ -133,10 +163,7 @@ export default function Hero() {
                 />
               ) : (
                 <>
-                  Discipleship <br />
-                  <span className="text-white">
-                    Reimagined
-                  </span>
+                  {getHeroHeading()}
                 </>
               )}
             </motion.h1>
@@ -152,7 +179,7 @@ export default function Hero() {
                   className="text-white/90 w-full bg-transparent border-white/20 resize-y"
                 />
               ) : (
-                <p>
+                <p className="hero-subheading">
                   {getHeroSubheading()}
                 </p>
               )}
@@ -166,7 +193,7 @@ export default function Hero() {
                 size="lg" 
                 variant="default" 
                 asChild 
-                className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20"
+                className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20 hero-cta-button"
               >
                 <a 
                   href="#product" 
@@ -187,7 +214,7 @@ export default function Hero() {
                       className="w-24 text-white bg-transparent border-white/20 p-0 h-auto text-center"
                     />
                   ) : (
-                    getHeroCtaText()
+                    <span className="hero-button-text">{getHeroCtaText()}</span>
                   )}
                   <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                   <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
