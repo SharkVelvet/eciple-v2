@@ -1,6 +1,8 @@
 // Instead of using docx for Word documents, we'll create a simple text-based CSV format
 // that's much more robust and can be easily edited in Excel or any text editor
 
+import { contentDefaults, getContentValue } from './contentDefaults';
+
 export interface ContentSection {
   title: string;
   contentKeys: string[];
@@ -37,10 +39,12 @@ export const generateContentTemplate = async (
     // Add each content field
     section.contentKeys.forEach((key, index) => {
       const label = section.contentLabels[index];
-      const value = content[key] || "";
+      
+      // Get the current value with fallback to defaults
+      const currentValue = getContentValue(content, key);
       
       // Format: key,label,current value,new value
-      csvContent += `${key},${escapeCSV(label)},${escapeCSV(value)},${escapeCSV(value)}\n`;
+      csvContent += `${key},${escapeCSV(label)},${escapeCSV(currentValue)},${escapeCSV(currentValue)}\n`;
     });
     
     // Add a blank line between sections

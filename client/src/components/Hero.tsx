@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { AdminContext } from "@/pages/Home";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { getContentValue } from '@/lib/contentDefaults';
 
 export default function Hero() {
   // Access admin context
@@ -15,7 +16,7 @@ export default function Hero() {
   const heroSubheading = "hero_subheading";
   const heroCtaText = "hero_cta_text";
   
-  // Helper functions to get content or default values
+  // Helper functions to get content values with fallback to defaults
   const getHeroHeading = () => editableContent[heroHeading] || "Discipleship Reimagined";
   const getHeroSubheading = () => editableContent[heroSubheading] || 
     "Revolutionizing how churches connect, disciple, and grow their communities through intentional relationships.";

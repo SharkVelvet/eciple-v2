@@ -3,7 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { FileUp, FileDown, RefreshCw } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { ContentSection, downloadDocx, parseDocx } from '@/lib/docGenerator';
+import { downloadDocx, parseDocx } from '@/lib/docGenerator';
+import { contentDefaults, getContentSections } from '@/lib/contentDefaults';
 
 interface ContentDocumentUploaderProps {
   currentContent: Record<string, string>;
@@ -19,48 +20,16 @@ export default function ContentDocumentUploader({
   const [uploadProgress, setUploadProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Define all content sections for the document - using exact keys from our components
-  const contentSections: ContentSection[] = [
-    {
-      title: "Hero Section",
-      contentKeys: ["hero_heading", "hero_subheading", "hero_cta_text"],
-      contentLabels: ["Main Heading", "Subheading Text", "Button Text"],
-    },
-    {
-      title: "Problem Section",
-      contentKeys: ["problem_text", "bottom_line_title", "bottom_line_text", "mentorship_text", "curriculum_text", "growth_text", "metrics_text"],
-      contentLabels: ["Problem Statement", "Bottom Line Title", "Bottom Line Text", "Mentorship Point", "Curriculum Point", "Growth Point", "Metrics Point"],
-    },
-    {
-      title: "Solution Section",
-      contentKeys: ["solution_title", "solution_text", "solution_point1", "solution_point2", "solution_point3"],
-      contentLabels: ["Solution Title", "Solution Description", "Solution Point 1", "Solution Point 2", "Solution Point 3"],
-    },
-    {
-      title: "Product Section",
-      contentKeys: ["product_title", "product_text", "connect_title", "connect_text", "track_title", "track_text", "grow_title", "grow_text"],
-      contentLabels: ["Product Title", "Product Description", "Connect Feature Title", "Connect Feature Text", "Track Feature Title", "Track Feature Text", "Grow Feature Title", "Grow Feature Text"],
-    },
-    {
-      title: "Competition Section",
-      contentKeys: ["competition_title", "competition_text"],
-      contentLabels: ["Competition Title", "Competition Description"],
-    },
-    {
-      title: "Pricing Section",
-      contentKeys: ["pricing_title", "pricing_text", "starter_title", "starter_price", "starter_features", "pro_title", "pro_price", "pro_features", "enterprise_title", "enterprise_price", "enterprise_features"],
-      contentLabels: ["Pricing Title", "Pricing Description", "Starter Tier Title", "Starter Price", "Starter Features", "Pro Tier Title", "Pro Price", "Pro Features", "Enterprise Tier Title", "Enterprise Price", "Enterprise Features"],
-    },
-    {
-      title: "Contact Section",
-      contentKeys: ["contact_title", "contact_text", "email_text", "phone_text", "submit_text"],
-      contentLabels: ["Contact Title", "Contact Description", "Email Label", "Phone Label", "Submit Button Text"],
-    },
-  ];
-
   const handleDownloadTemplate = async () => {
     try {
-      await downloadDocx(currentContent, contentSections);
+      // Create a format that the docGenerator can use from our content defaults
+      const sections = Object.entries(getContentSections()).map(([sectionName, fields]) => ({
+        title: sectionName,
+        contentKeys: fields.map(field => field.key),
+        contentLabels: fields.map(field => field.label)
+      }));
+      
+      await downloadDocx(currentContent, sections);
       toast({
         title: "Template Downloaded",
         description: "Edit this document and upload it to update your website content.",
