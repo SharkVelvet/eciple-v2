@@ -70,7 +70,14 @@ export default function Competition() {
                 <TableHead className="text-white">Features</TableHead>
                 {competitors.map((competitor, index) => (
                   <TableHead key={index} className="text-center text-white">
-                    {competitor}
+                    {index === 0 ? (
+                      <span className="inline-block relative px-4 py-1">
+                        <span className="absolute inset-0 rounded-full bg-[#15BEE2]/40 animate-pulse"></span>
+                        <span className="relative z-10 font-semibold">{competitor}</span>
+                      </span>
+                    ) : (
+                      competitor
+                    )}
                   </TableHead>
                 ))}
               </TableRow>
