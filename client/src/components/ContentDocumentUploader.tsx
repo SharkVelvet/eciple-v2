@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Edit } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import ContentUpdateForm from './ContentUpdateForm';
+import SimplifiedContentEditor from './SimplifiedContentEditor';
 
 interface ContentDocumentUploaderProps {
   currentContent: Record<string, string>;
@@ -13,25 +12,7 @@ export default function ContentDocumentUploader({
   currentContent, 
   onContentUpdate 
 }: ContentDocumentUploaderProps) {
-  const { toast } = useToast();
   const [showContentForm, setShowContentForm] = useState(false);
-  
-  const handleContentUpdate = (updates: Record<string, string>) => {
-    // Merge with existing content
-    const newContent = {
-      ...currentContent,
-      ...updates
-    };
-    
-    // Save to localStorage
-    localStorage.setItem('siteContent', JSON.stringify(newContent));
-    
-    // Update state
-    onContentUpdate(newContent);
-    
-    // Force page reload to ensure changes are visible
-    window.location.reload();
-  };
 
   return (
     <div className="flex flex-col gap-3">
@@ -44,12 +25,11 @@ export default function ContentDocumentUploader({
         </Button>
       </div>
       
-      {/* Content Update Form Dialog */}
-      <ContentUpdateForm 
+      {/* Simplified Content Editor */}
+      <SimplifiedContentEditor 
         isOpen={showContentForm}
         onClose={() => setShowContentForm(false)}
-        onSave={handleContentUpdate}
-        currentContent={currentContent}
+        onSave={onContentUpdate}
       />
     </div>
   );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -31,65 +31,100 @@ export default function ContentUpdateForm({
 }: ContentUpdateFormProps) {
   const { toast } = useToast();
   
-  // Create a comprehensive form with ALL editable content
-  const [formData, setFormData] = useState({
-    // Hero Section
-    hero_heading: currentContent.hero_heading || "Discipleship Reimagined",
-    hero_subheading: currentContent.hero_subheading || 
-      "Revolutionizing how churches connect, disciple, and grow their communities through intentional relationships.",
-    hero_cta_text: currentContent.hero_cta_text || "Learn More",
-    
-    // Problem Section
-    problem_text: currentContent.problem_text || 
-      "Despite 82% of pastors saying discipleship is a priority, only 29% think their church does it effectively.",
-    bottom_line_title: currentContent.bottom_line_title || "The Bottom Line",
-    bottom_line_text: currentContent.bottom_line_text || "Churches lack an effective system to connect, track, and grow disciples.",
-    mentorship_text: currentContent.mentorship_text || "Mentorship",
-    curriculum_text: currentContent.curriculum_text || "Curriculum",
-    growth_text: currentContent.growth_text || "Growth",
-    metrics_text: currentContent.metrics_text || "Metrics",
-    
-    // Solution Section
-    solution_title: currentContent.solution_title || "The Discipleship Solution",
-    solution_text: currentContent.solution_text || "Our platform provides everything needed for effective discipleship.",
-    solution_point1: currentContent.solution_point1 || "Smart Matching",
-    solution_point2: currentContent.solution_point2 || "Progress Tracking",
-    solution_point3: currentContent.solution_point3 || "Resource Library",
-    
-    // Product Section
-    product_title: currentContent.product_title || "The Eciple Platform",
-    product_text: currentContent.product_text || "Our comprehensive solution for church discipleship.",
-    connect_title: currentContent.connect_title || "Connect",
-    connect_text: currentContent.connect_text || "Smart pairing of disciples with mentors.",
-    track_title: currentContent.track_title || "Track",
-    track_text: currentContent.track_text || "Monitor spiritual growth and progress.",
-    grow_title: currentContent.grow_title || "Grow",
-    grow_text: currentContent.grow_text || "Resources that foster spiritual maturity.",
-    
-    // Competition Section
-    competition_title: currentContent.competition_title || "The Competition",
-    competition_text: currentContent.competition_text || "How eciple stands apart from other platforms.",
-    
-    // Pricing Section
-    pricing_title: currentContent.pricing_title || "Simple Pricing",
-    pricing_text: currentContent.pricing_text || "Affordable options for churches of all sizes.",
-    starter_title: currentContent.starter_title || "Starter",
-    starter_price: currentContent.starter_price || "$199/mo",
-    starter_features: currentContent.starter_features || "Up to 200 members, Basic features, Email support",
-    pro_title: currentContent.pro_title || "Professional",
-    pro_price: currentContent.pro_price || "$399/mo",
-    pro_features: currentContent.pro_features || "Up to 1,000 members, All features, Priority support",
-    enterprise_title: currentContent.enterprise_title || "Enterprise",
-    enterprise_price: currentContent.enterprise_price || "Custom",
-    enterprise_features: currentContent.enterprise_features || "Unlimited members, Custom integrations, Dedicated support",
-    
-    // Contact Section
-    contact_title: currentContent.contact_title || "Get in Touch",
-    contact_text: currentContent.contact_text || "Have questions? Contact us today.",
-    email_text: currentContent.email_text || "Email",
-    phone_text: currentContent.phone_text || "Phone",
-    submit_text: currentContent.submit_text || "Submit"
-  });
+  // Initialize form state
+  const [formData, setFormData] = useState<Record<string, string>>({});
+  
+  // Load the form data whenever the dialog is opened
+  useEffect(() => {
+    if (isOpen) {
+      console.log("Content form opened, loading latest data");
+      
+      // Start with current content from website
+      const initialData: Record<string, string> = {
+        // Hero Section
+        hero_heading: "Discipleship Reimagined",
+        hero_subheading: "Revolutionizing how churches connect, disciple, and grow their communities through intentional relationships.",
+        hero_cta_text: "Learn More",
+        
+        // Problem Section
+        problem_text: "Despite 82% of pastors saying discipleship is a priority, only 29% think their church does it effectively.",
+        bottom_line_title: "The Bottom Line",
+        bottom_line_text: "Churches lack an effective system to connect, track, and grow disciples.",
+        mentorship_text: "Mentorship",
+        curriculum_text: "Curriculum",
+        growth_text: "Growth",
+        metrics_text: "Metrics",
+        
+        // Solution Section
+        solution_title: "The Discipleship Solution",
+        solution_text: "Our platform provides everything needed for effective discipleship.",
+        solution_point1: "Smart Matching",
+        solution_point2: "Progress Tracking",
+        solution_point3: "Resource Library",
+        
+        // Product Section
+        product_title: "The Eciple Platform",
+        product_text: "Our comprehensive solution for church discipleship.",
+        connect_title: "Connect",
+        connect_text: "Smart pairing of disciples with mentors.",
+        track_title: "Track",
+        track_text: "Monitor spiritual growth and progress.",
+        grow_title: "Grow",
+        grow_text: "Resources that foster spiritual maturity.",
+        
+        // Competition Section
+        competition_title: "The Competition",
+        competition_text: "How eciple stands apart from other platforms.",
+        
+        // Pricing Section
+        pricing_title: "Simple Pricing",
+        pricing_text: "Affordable options for churches of all sizes.",
+        starter_title: "Starter",
+        starter_price: "$199/mo",
+        starter_features: "Up to 200 members, Basic features, Email support",
+        pro_title: "Professional",
+        pro_price: "$399/mo",
+        pro_features: "Up to 1,000 members, All features, Priority support",
+        enterprise_title: "Enterprise",
+        enterprise_price: "Custom",
+        enterprise_features: "Unlimited members, Custom integrations, Dedicated support",
+        
+        // Contact Section
+        contact_title: "Get in Touch",
+        contact_text: "Have questions? Contact us today.",
+        email_text: "Email",
+        phone_text: "Phone",
+        submit_text: "Submit"
+      };
+      
+      // Then override with any saved content
+      let mergedData = { ...initialData };
+      
+      // Add current content from props
+      if (currentContent) {
+        console.log("Adding current content from props:", Object.keys(currentContent).length, "items");
+        mergedData = { ...mergedData, ...currentContent };
+      }
+      
+      // Try to get most recent content from localStorage
+      try {
+        const savedContent = localStorage.getItem('siteContent');
+        if (savedContent) {
+          const parsedContent = JSON.parse(savedContent);
+          console.log("Adding saved content from localStorage:", Object.keys(parsedContent).length, "items");
+          
+          // Merge with higher priority to localStorage content
+          mergedData = { ...mergedData, ...parsedContent };
+        }
+      } catch (error) {
+        console.error("Error loading content from localStorage:", error);
+      }
+      
+      // Set the form data
+      console.log("Form initialized with", Object.keys(mergedData).length, "items");
+      setFormData(mergedData);
+    }
+  }, [isOpen, currentContent]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
