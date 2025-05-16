@@ -269,52 +269,81 @@ export default function Home() {
 
   // Admin control bar (shown when admin is logged in)
   const adminControls = isAdmin && (
-    <div className={`fixed left-0 right-0 bottom-0 z-50 bg-[#223349] text-white p-2 flex justify-between items-center ${editMode ? 'border-t-2 border-[#15BEE2]' : ''}`}>
-      <div className="text-sm font-medium">
-        {editMode ? 'Editing Mode: Click on text to edit' : 'Admin Mode'}
+    <div 
+      className={`fixed left-0 right-0 bottom-0 z-50 bg-[#223349] text-white p-2 flex flex-col ${
+        editMode || showTemplateTools ? 'border-t-2 border-[#15BEE2]' : ''
+      }`}
+    >
+      <div className="flex justify-between items-center">
+        <div className="text-sm font-medium">
+          {editMode 
+            ? 'Editing Mode: Click on text to edit' 
+            : showTemplateTools 
+              ? 'Template Tools: Download or upload a Word document to manage content' 
+              : 'Admin Mode'
+          }
+        </div>
+        <div className="flex gap-2">
+          {editMode ? (
+            <>
+              <Button 
+                size="sm" 
+                variant="outline" 
+                onClick={toggleEditMode}
+                className="bg-transparent text-white border-white hover:bg-white/20"
+              >
+                <X className="h-4 w-4 mr-1" /> Cancel
+              </Button>
+              <Button 
+                size="sm"
+                onClick={saveContent}
+                className="bg-[#15BEE2] text-white hover:bg-[#15BEE2]/80"
+              >
+                <Save className="h-4 w-4 mr-1" /> Save Changes
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button 
+                size="sm" 
+                onClick={toggleEditMode}
+                className="bg-[#15BEE2] text-white hover:bg-[#15BEE2]/80"
+              >
+                <Edit className="h-4 w-4 mr-1" /> Edit Content
+              </Button>
+              
+              {/* Word Document Template Toggle */}
+              <Button
+                size="sm"
+                onClick={() => setShowTemplateTools(!showTemplateTools)}
+                variant="outline"
+                className="bg-transparent text-white border-white hover:bg-white/20"
+              >
+                <FileDown className="h-4 w-4 mr-1" /> 
+                {showTemplateTools ? "Hide Template Tools" : "Show Template Tools"}
+              </Button>
+            </>
+          )}
+        </div>
       </div>
-      <div className="flex gap-2">
-        {editMode ? (
-          <>
-            <Button 
-              size="sm" 
-              variant="outline" 
-              onClick={toggleEditMode}
-              className="bg-transparent text-white border-white hover:bg-white/20"
-            >
-              <X className="h-4 w-4 mr-1" /> Cancel
-            </Button>
-            <Button 
-              size="sm"
-              onClick={saveContent}
-              className="bg-[#15BEE2] text-white hover:bg-[#15BEE2]/80"
-            >
-              <Save className="h-4 w-4 mr-1" /> Save Changes
-            </Button>
-          </>
-        ) : (
-          <>
-            <Button 
-              size="sm" 
-              onClick={toggleEditMode}
-              className="bg-[#15BEE2] text-white hover:bg-[#15BEE2]/80"
-            >
-              <Edit className="h-4 w-4 mr-1" /> Edit Content
-            </Button>
-            
-            {/* Word Document Template Toggle */}
-            <Button
-              size="sm"
-              onClick={() => setShowTemplateTools(!showTemplateTools)}
-              variant="outline"
-              className="bg-transparent text-white border-white hover:bg-white/20"
-            >
-              <FileDown className="h-4 w-4 mr-1" /> 
-              {showTemplateTools ? "Hide Template Tools" : "Show Template Tools"}
-            </Button>
-          </>
-        )}
-      </div>
+      
+      {/* Template tools panel */}
+      {showTemplateTools && !editMode && (
+        <div className="mt-3 pb-1 border-t border-white/20 pt-3">
+          <ContentDocumentUploader 
+            currentContent={editableContent} 
+            onContentUpdate={(newContent) => {
+              setEditableContent(newContent);
+              // Save to localStorage
+              localStorage.setItem('siteContent', JSON.stringify(newContent));
+              toast({
+                title: "Content Updated",
+                description: "Your website content has been updated from the document.",
+              });
+            }} 
+          />
+        </div>
+      )}
     </div>
   );
 
@@ -349,9 +378,9 @@ export default function Home() {
         {showScrollTop && (
           <button
             onClick={scrollToTop}
-            className="fixed right-4 md:right-8 bottom-8 z-40 bg-[#15BEE2] text-white rounded-full p-2 shadow-lg hover:bg-[#0368C1] transition-all duration-300"
+            className="fixed right-4 md:right-8 bottom-8 z-40 text-[#15BEE2] p-2 hover:text-[#0368C1] transition-all duration-300"
             aria-label="Scroll to top"
-            style={{ bottom: isAdmin ? '60px' : '2rem' }}
+            style={{ bottom: isAdmin ? (showTemplateTools ? '95px' : '60px') : '2rem' }}
           >
             <ArrowUp className="h-6 w-6" />
           </button>
