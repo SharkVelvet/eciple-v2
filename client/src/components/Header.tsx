@@ -160,7 +160,7 @@ export default function Header() {
                 asChild 
                 variant="default" 
                 size="sm" 
-                className="bg-[#6148FF] hover:bg-[#5540d4] rounded-full px-5 flex items-center shadow-lg"
+                className="bg-[#15BEE2] hover:bg-[#0368C1] rounded-full px-5 flex items-center shadow-lg"
               >
                 <Link href="/auth" className="flex items-center gap-1.5 py-1">
                   <Lock className="h-4 w-4" />
@@ -253,7 +253,7 @@ export default function Header() {
                 <Button 
                   asChild 
                   variant="default"
-                  className="w-full justify-center rounded-full mb-2 bg-[#6148FF]" 
+                  className="w-full justify-center rounded-full mb-2 bg-[#15BEE2] hover:bg-[#0368C1]" 
                   onClick={closeMobileMenu}
                 >
                   <Link href="/auth" className="flex items-center justify-center gap-1.5">
