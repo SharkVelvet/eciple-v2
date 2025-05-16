@@ -40,12 +40,12 @@ export default function Header() {
     <header 
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-[#223349] shadow-lg py-5 md:py-4' 
-          : 'bg-transparent py-6 md:py-6'
+          ? 'bg-[#223349] shadow-lg py-6 md:py-4' 
+          : 'bg-transparent py-8 md:py-6'
       }`}
     >
-      <div className="max-w-[1180px] mx-auto px-6 md:px-4">
-        <div className="flex items-center justify-between">
+      <div className="max-w-[1180px] mx-auto px-8 md:px-4">
+        <div className="flex items-center justify-between h-full">
           {/* Logo - Left aligned */}
           <div className="flex-none">
             <a 
@@ -287,19 +287,14 @@ export default function Header() {
                 }}
                 className="pt-1"
               >
-                <div className="flex justify-center">
-                  <Button 
-                    asChild 
-                    variant="default"
-                    className="rounded-full bg-[#15BEE2] hover:bg-[#0368C1] w-auto" 
-                    onClick={closeMobileMenu}
-                  >
-                    <Link href="/auth" className="flex items-center justify-center gap-1.5">
-                      <Lock className="h-4 w-4" />
-                      Investor Portal
-                    </Link>
-                  </Button>
-                </div>
+                <Link 
+                  href="/auth" 
+                  onClick={closeMobileMenu}
+                  className="flex items-center gap-2 py-3 px-4 text-white bg-[#15BEE2] hover:bg-[#0368C1] rounded-md transition-colors font-medium"
+                >
+                  <Lock className="h-4 w-4" />
+                  Investor Portal
+                </Link>
               </motion.li>
             </motion.ul>
           </motion.div>
