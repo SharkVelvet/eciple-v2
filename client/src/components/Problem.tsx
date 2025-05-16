@@ -105,7 +105,7 @@ export default function Problem() {
                 <div className="h-8 w-8 rounded-full flex items-center justify-center bg-red-100">
                   <AlertCircle className="h-5 w-5 text-red-600" />
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold font-sans bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">The Problem</h2>
+                <h2 className="text-4xl md:text-5xl font-bold font-sans bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary problem-heading">The Problem</h2>
               </div>
               
               {editMode && isAdmin ? (
@@ -115,7 +115,7 @@ export default function Problem() {
                   className="text-xl leading-relaxed text-foreground/80 w-full min-h-[100px] resize-y"
                 />
               ) : (
-                <p className="text-xl leading-relaxed text-foreground/80 max-w-xl">
+                <p className="text-xl leading-relaxed text-foreground/80 max-w-xl problem-subheading">
                   {getProblemText().includes("82%") ? (
                     <>
                       Despite <span className="font-semibold text-primary">82% of pastors</span> saying discipleship is a priority, only <span className="font-semibold text-secondary">29% think</span> their church does it effectively.

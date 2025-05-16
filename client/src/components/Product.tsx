@@ -87,7 +87,7 @@ export default function Product() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-4 product-heading">
             {editMode && isAdmin ? (
               <Input
                 type="text"

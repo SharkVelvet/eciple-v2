@@ -58,7 +58,7 @@ export default function Solution() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-6">The Solution</h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-6 solution-heading">The Solution</h2>
             {editMode && isAdmin ? (
               <Textarea
                 value={getSolutionMainText()}
@@ -66,7 +66,7 @@ export default function Solution() {
                 className="text-lg mb-8 text-foreground w-full min-h-[80px] resize-y"
               />
             ) : (
-              <p className="text-lg mb-8 text-foreground">
+              <p className="text-lg mb-8 text-foreground solution-subheading">
                 {getSolutionMainText()}
               </p>
             )}
