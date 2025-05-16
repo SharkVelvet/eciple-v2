@@ -1,8 +1,25 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Sparkles, Users, ArrowRight, Heart } from "lucide-react";
+import { useContext } from "react";
+import { AdminContext } from "@/pages/Home";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function Hero() {
+  // Access admin context
+  const { isAdmin, editMode, editableContent, updateContent } = useContext(AdminContext);
+  
+  // Define editable text content keys
+  const heroHeading = "hero_heading";
+  const heroSubheading = "hero_subheading";
+  const heroCtaText = "hero_cta_text";
+  
+  // Helper functions to get content or default values
+  const getHeroHeading = () => editableContent[heroHeading] || "Discipleship Reimagined";
+  const getHeroSubheading = () => editableContent[heroSubheading] || 
+    "Revolutionizing how churches connect, disciple, and grow their communities through intentional relationships.";
+  const getHeroCtaText = () => editableContent[heroCtaText] || "Learn More";
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -86,18 +103,39 @@ export default function Hero() {
               className="text-4xl md:text-6xl lg:text-7xl font-bold font-sans mb-6 leading-tight"
               variants={itemVariants}
             >
-              Discipleship <br />
-              <span className="text-white">
-                Reimagined
-              </span>
+              {editMode && isAdmin ? (
+                <Input
+                  type="text"
+                  value={getHeroHeading()}
+                  onChange={(e) => updateContent(heroHeading, e.target.value)}
+                  className="text-white bg-transparent border-white/20"
+                />
+              ) : (
+                <>
+                  Discipleship <br />
+                  <span className="text-white">
+                    Reimagined
+                  </span>
+                </>
+              )}
             </motion.h1>
             
-            <motion.p 
-              className="text-xl md:text-2xl mb-8 text-white/90 leading-relaxed"
+            <motion.div 
               variants={itemVariants}
+              className="text-xl md:text-2xl mb-8 text-white/90 leading-relaxed"
             >
-              A comprehensive platform that transforms how churches create meaningful discipleship relationships.
-            </motion.p>
+              {editMode && isAdmin ? (
+                <Textarea
+                  value={getHeroSubheading()}
+                  onChange={(e) => updateContent(heroSubheading, e.target.value)}
+                  className="text-white/90 w-full bg-transparent border-white/20 resize-y"
+                />
+              ) : (
+                <p>
+                  {getHeroSubheading()}
+                </p>
+              )}
+            </motion.div>
             
             <motion.div 
               className="flex flex-col sm:flex-row gap-4"

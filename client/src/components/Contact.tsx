@@ -91,6 +91,45 @@ export default function Contact() {
   return (
     <section id="contact" className="py-16 bg-gradient-to-br from-[#15BEE2] to-[#0368C1] text-white scroll-mt-20">
       <div className="max-w-[1180px] mx-auto px-4">
+        <motion.div 
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="flex items-center justify-center mb-6">
+            <img 
+              src={bobbyPersonImage} 
+              alt="Bobby Bemis - Founder of eciple" 
+              className="w-24 h-24 rounded-full object-cover border-4 border-white" 
+            />
+          </div>
+          <h3 className="text-2xl font-bold font-sans mb-2">
+            {editMode && isAdmin ? (
+              <Input
+                type="text"
+                value={getFounderTitle()}
+                onChange={(e) => updateContent(founderTitle, e.target.value)}
+                className="text-center text-white bg-transparent border-white/20"
+              />
+            ) : (
+              getFounderTitle()
+            )}
+          </h3>
+          {editMode && isAdmin ? (
+            <Textarea
+              value={getFounderText()}
+              onChange={(e) => updateContent(founderText, e.target.value)}
+              className="text-lg text-white text-opacity-90 resize-y bg-transparent border-white/20 max-w-xl mx-auto"
+            />
+          ) : (
+            <p className="text-lg text-white text-opacity-90 max-w-xl mx-auto">
+              {getFounderText()}
+            </p>
+          )}
+        </motion.div>
+        
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
