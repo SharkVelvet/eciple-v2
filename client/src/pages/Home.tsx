@@ -10,8 +10,9 @@ import Market from "@/components/Market";
 import Pricing from "@/components/Pricing";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import ContentDocumentUploader from "@/components/ContentDocumentUploader";
 import { Button } from "@/components/ui/button";
-import { ArrowUp, LogOut, Edit, Save, X } from "lucide-react";
+import { ArrowUp, LogOut, Edit, Save, X, FileDown } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -44,6 +45,7 @@ export default function Home() {
   const [editMode, setEditMode] = useState(false);
   const [adminPassword, setAdminPassword] = useState("");
   const [showAdminDialog, setShowAdminDialog] = useState(false);
+  const [showTemplateTools, setShowTemplateTools] = useState(false);
   const [editableContent, setEditableContent] = useState<Record<string, string>>({});
   const contentSnapshot = useRef<Record<string, string>>({});
   
@@ -291,13 +293,26 @@ export default function Home() {
             </Button>
           </>
         ) : (
-          <Button 
-            size="sm" 
-            onClick={toggleEditMode}
-            className="bg-[#15BEE2] text-white hover:bg-[#15BEE2]/80"
-          >
-            <Edit className="h-4 w-4 mr-1" /> Edit Content
-          </Button>
+          <>
+            <Button 
+              size="sm" 
+              onClick={toggleEditMode}
+              className="bg-[#15BEE2] text-white hover:bg-[#15BEE2]/80"
+            >
+              <Edit className="h-4 w-4 mr-1" /> Edit Content
+            </Button>
+            
+            {/* Word Document Template Toggle */}
+            <Button
+              size="sm"
+              onClick={() => setShowTemplateTools(!showTemplateTools)}
+              variant="outline"
+              className="bg-transparent text-white border-white hover:bg-white/20"
+            >
+              <FileDown className="h-4 w-4 mr-1" /> 
+              {showTemplateTools ? "Hide Template Tools" : "Show Template Tools"}
+            </Button>
+          </>
         )}
       </div>
     </div>
