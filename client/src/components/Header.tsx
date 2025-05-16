@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Lock } from "lucide-react";
+import { Menu, X, Lock, Home, Lightbulb, Box, Trophy, DollarSign, MessageSquare, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ecipleLogo from "@assets/eciple-white.png";
 import ecipleOrangeLogo from "@assets/eciple-orange.png";
@@ -29,19 +29,19 @@ export default function Header() {
   };
 
   const navItems = [
-    { name: "Problem", href: "#problem" },
-    { name: "Solution", href: "#solution" },
-    { name: "Product", href: "#product" },
-    { name: "Competition", href: "#competition" },
-    { name: "Pricing", href: "#pricing" }
+    { name: "Problem", href: "#problem", icon: <Lightbulb className="h-4 w-4" /> },
+    { name: "Solution", href: "#solution", icon: <Lightbulb className="h-4 w-4" /> },
+    { name: "Product", href: "#product", icon: <Box className="h-4 w-4" /> },
+    { name: "Competition", href: "#competition", icon: <Trophy className="h-4 w-4" /> },
+    { name: "Pricing", href: "#pricing", icon: <DollarSign className="h-4 w-4" /> }
   ];
 
   return (
     <header 
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-[#223349] shadow-lg py-4' 
-          : 'bg-transparent py-6'
+          ? 'bg-[#223349] shadow-lg py-4 md:py-4' 
+          : 'bg-transparent py-5 md:py-6'
       }`}
     >
       <div className="max-w-[1180px] mx-auto px-4">
@@ -180,10 +180,10 @@ export default function Header() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden bg-[#223349] w-full py-3 shadow-lg absolute overflow-hidden"
+            className="md:hidden bg-[#223349] w-full py-4 shadow-lg absolute overflow-hidden"
           >
             <motion.ul 
-              className="flex flex-col space-y-1 px-4"
+              className="flex flex-col space-y-1 px-6 max-w-xs mx-auto"
               initial="closed"
               animate="open"
               variants={{
@@ -225,8 +225,9 @@ export default function Header() {
                         element.scrollIntoView({ behavior: 'smooth' });
                       }
                     }} 
-                    className="block py-2.5 px-4 text-white hover:text-white/90 hover:bg-white/10 rounded-md transition-colors font-medium"
+                    className="flex items-center gap-2 py-3 px-4 text-white hover:text-white/90 hover:bg-white/10 rounded-md transition-colors font-medium"
                   >
+                    {item.icon}
                     {item.name}
                   </a>
                 </motion.li>
@@ -252,14 +253,13 @@ export default function Header() {
               >
                 <Button 
                   asChild 
-                  variant="default"
-                  className="w-full justify-center rounded-full mb-2 bg-[#15BEE2] hover:bg-[#0368C1]" 
+                  className="w-full justify-center rounded-full mb-2" 
                   onClick={closeMobileMenu}
                 >
-                  <Link href="/auth" className="flex items-center justify-center gap-1.5">
-                    <Lock className="h-4 w-4" />
-                    Investor Portal
-                  </Link>
+                  <a href="#contact" className="flex items-center justify-center gap-1.5">
+                    <Phone className="h-4 w-4" />
+                    Contact Us
+                  </a>
                 </Button>
               </motion.li>
               
@@ -280,15 +280,21 @@ export default function Header() {
                     }
                   }
                 }}
-                className="pt-2"
+                className="pt-1"
               >
-                <Button 
-                  asChild 
-                  className="w-full justify-center rounded-full" 
-                  onClick={closeMobileMenu}
-                >
-                  <a href="#contact">Contact</a>
-                </Button>
+                <div className="flex justify-center">
+                  <Button 
+                    asChild 
+                    variant="default"
+                    className="rounded-full bg-[#15BEE2] hover:bg-[#0368C1] w-auto" 
+                    onClick={closeMobileMenu}
+                  >
+                    <Link href="/auth" className="flex items-center justify-center gap-1.5">
+                      <Lock className="h-4 w-4" />
+                      Investor Portal
+                    </Link>
+                  </Button>
+                </div>
               </motion.li>
             </motion.ul>
           </motion.div>
