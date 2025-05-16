@@ -47,7 +47,7 @@ export default function Header() {
       <div className="max-w-[1180px] mx-auto px-8 md:px-4">
         <div className="flex items-center justify-between h-full">
           {/* Logo - Left aligned */}
-          <div className="flex-none">
+          <div className="flex-none flex items-center">
             <a 
               href="#" 
               onClick={(e) => {
@@ -60,9 +60,9 @@ export default function Header() {
                 initial={{ scale: 1 }}
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                className="text-left"
+                className="text-left flex items-center"
               >
-                <div className="flex flex-col items-start">
+                <div className="flex flex-col items-start justify-center">
                   <img 
                     src={ecipleLogo} 
                     alt="eciple logo" 
@@ -137,15 +137,15 @@ export default function Header() {
           {/* Right side - Mobile menu button or Investor Portal */}
           <div className="flex items-center">
             {/* Mobile menu button - only shows on mobile */}
-            <div className="md:hidden">
+            <div className="md:hidden flex items-center justify-center">
               <Button
                 variant="ghost"
                 size="icon"
-                className="text-white"
+                className="text-white flex items-center justify-center"
                 onClick={toggleMobileMenu}
                 aria-label="Toggle menu"
               >
-                {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </Button>
             </div>
             
