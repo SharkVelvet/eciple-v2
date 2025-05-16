@@ -10,7 +10,7 @@ import Market from "@/components/Market";
 import Pricing from "@/components/Pricing";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import ContentDocumentUploader from "@/components/ContentDocumentUploader";
+import DirectHeroEditor from "@/components/DirectHeroEditor";
 import { Button } from "@/components/ui/button";
 import { ArrowUp, LogOut, Edit, Save, X, FileDown } from "lucide-react";
 import {
@@ -359,34 +359,13 @@ export default function Home() {
       {/* Template tools panel */}
       {showTemplateTools && !editMode && (
         <div className="mt-3 pb-1 border-t border-white/20 pt-3">
-          <ContentDocumentUploader 
-            currentContent={editableContent} 
-            onContentUpdate={(newContent) => {
-              console.log("Updating content in Home component:", Object.keys(newContent).length, "items");
-              
-              // Save to localStorage with timestamp to ensure it's different
-              const contentWithTimestamp = {
-                ...newContent,
-                _lastUpdated: new Date().toISOString()
-              };
-              
-              // Update state first
-              setEditableContent(contentWithTimestamp);
-              
-              // Then save to localStorage
-              localStorage.setItem('siteContent', JSON.stringify(contentWithTimestamp));
-              
-              toast({
-                title: "Content Updated",
-                description: "Content saved successfully. The page will reload to show your changes.",
-              });
-              
-              // Force reload after a brief delay to ensure state is updated
-              setTimeout(() => {
-                window.location.reload();
-              }, 1000);
-            }} 
-          />
+          {/* Direct Hero editor replaces the ContentDocumentUploader */}
+          <div className="space-y-3">
+            <p className="text-white/60 text-sm">
+              Edit content using the button below to make changes to your website.
+            </p>
+            <DirectHeroEditor />
+          </div>
         </div>
       )}
     </div>
