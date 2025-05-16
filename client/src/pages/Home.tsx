@@ -324,23 +324,14 @@ export default function Home() {
             </>
           ) : (
             <>
-              <Button 
-                size="sm" 
-                onClick={toggleEditMode}
-                className="bg-[#15BEE2] text-white hover:bg-[#15BEE2]/80"
-              >
-                <Edit className="h-4 w-4 mr-1" /> Edit Content
-              </Button>
-              
-              {/* Word Document Template Toggle */}
+              {/* Template Tools Toggle */}
               <Button
                 size="sm"
                 onClick={() => setShowTemplateTools(!showTemplateTools)}
-                variant="outline"
-                className="bg-transparent text-white border-white hover:bg-white/20"
+                className="bg-[#15BEE2] text-white hover:bg-[#15BEE2]/80"
               >
-                <FileDown className="h-4 w-4 mr-1" /> 
-                {showTemplateTools ? "Hide Template Tools" : "Show Template Tools"}
+                <Edit className="h-4 w-4 mr-1" /> 
+                {showTemplateTools ? "Hide Content Editor" : "Show Content Editor"}
               </Button>
             </>
           )}
