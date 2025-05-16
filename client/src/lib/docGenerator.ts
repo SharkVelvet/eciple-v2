@@ -14,12 +14,16 @@ export const generateContentTemplate = async (
   let csvContent = "CONTENT KEY,CONTENT LABEL,CURRENT VALUE,NEW VALUE\n";
   
   // Add instructions as commented lines
-  csvContent += "# ECIPLE CONTENT EDITOR\n";
+  csvContent += "# ECIPLE WEBSITE CONTENT EDITOR\n";
   csvContent += "# Instructions:\n";
-  csvContent += "# 1. DO NOT modify values in the first two columns (CONTENT KEY and CONTENT LABEL)\n";
-  csvContent += "# 2. Edit values in the NEW VALUE column only\n";
-  csvContent += "# 3. Save this file when you're done editing\n";
-  csvContent += "# 4. Upload the saved CSV file back to the admin panel\n";
+  csvContent += "# 1. This CSV file contains all the editable content on the website\n";
+  csvContent += "# 2. DO NOT modify values in the first two columns (CONTENT KEY and CONTENT LABEL)\n";
+  csvContent += "# 3. The CURRENT VALUE column shows what's currently on the site\n";
+  csvContent += "# 4. Edit values in the NEW VALUE column only to update content\n";
+  csvContent += "# 5. Save this file when you're done editing\n";
+  csvContent += "# 6. Upload the saved CSV file back to the admin panel\n";
+  csvContent += "#\n";
+  csvContent += "# TIP: Open this file in Excel, Google Sheets, or any spreadsheet program for best results\n";
   csvContent += "\n";
   
   // Add separator for cleaner visual organization

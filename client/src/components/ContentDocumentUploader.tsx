@@ -19,41 +19,41 @@ export default function ContentDocumentUploader({
   const [uploadProgress, setUploadProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Define all content sections for the document
+  // Define all content sections for the document - matching the exact keys used in components
   const contentSections: ContentSection[] = [
     {
       title: "Hero Section",
-      contentKeys: ["heroHeading", "heroSubheading", "heroCtaText"],
+      contentKeys: ["hero_heading", "hero_subheading", "hero_cta_text"],
       contentLabels: ["Main Heading", "Subheading Text", "Button Text"],
     },
     {
       title: "Problem Section",
-      contentKeys: ["problemTitle", "problemDescription", "problemPoint1", "problemPoint2", "problemPoint3"],
+      contentKeys: ["problem_title", "problem_description", "problem_point1", "problem_point2", "problem_point3"],
       contentLabels: ["Section Title", "Description", "Problem Point 1", "Problem Point 2", "Problem Point 3"],
     },
     {
       title: "Solution Section",
-      contentKeys: ["solutionTitle", "solutionDescription", "solutionPoint1", "solutionPoint2", "solutionPoint3"],
+      contentKeys: ["solution_title", "solution_description", "solution_point1", "solution_point2", "solution_point3"],
       contentLabels: ["Section Title", "Description", "Solution Point 1", "Solution Point 2", "Solution Point 3"],
     },
     {
       title: "Product Section",
-      contentKeys: ["productTitle", "productDescription", "productFeature1Title", "productFeature1Desc", "productFeature2Title", "productFeature2Desc", "productFeature3Title", "productFeature3Desc"],
+      contentKeys: ["product_title", "product_description", "product_feature1_title", "product_feature1_desc", "product_feature2_title", "product_feature2_desc", "product_feature3_title", "product_feature3_desc"],
       contentLabels: ["Section Title", "Description", "Feature 1 Title", "Feature 1 Description", "Feature 2 Title", "Feature 2 Description", "Feature 3 Title", "Feature 3 Description"],
     },
     {
       title: "Competition Section",
-      contentKeys: ["competitionTitle", "competitionDescription"],
+      contentKeys: ["competition_title", "competition_description"],
       contentLabels: ["Section Title", "Description"],
     },
     {
       title: "Pricing Section",
-      contentKeys: ["pricingTitle", "pricingDescription", "pricingTier1Title", "pricingTier1Price", "pricingTier1Features", "pricingTier2Title", "pricingTier2Price", "pricingTier2Features", "pricingTier3Title", "pricingTier3Price", "pricingTier3Features"],
+      contentKeys: ["pricing_title", "pricing_description", "pricing_tier1_title", "pricing_tier1_price", "pricing_tier1_features", "pricing_tier2_title", "pricing_tier2_price", "pricing_tier2_features", "pricing_tier3_title", "pricing_tier3_price", "pricing_tier3_features"],
       contentLabels: ["Section Title", "Description", "Basic Tier Title", "Basic Tier Price", "Basic Tier Features (comma-separated)", "Pro Tier Title", "Pro Tier Price", "Pro Tier Features (comma-separated)", "Enterprise Tier Title", "Enterprise Tier Price", "Enterprise Tier Features (comma-separated)"],
     },
     {
       title: "Contact Section",
-      contentKeys: ["contactTitle", "contactDescription", "contactEmailLabel", "contactPhoneLabel", "contactFormSubmitText"],
+      contentKeys: ["contact_title", "contact_description", "contact_email_label", "contact_phone_label", "contact_form_submit_text"],
       contentLabels: ["Section Title", "Description", "Email Label", "Phone Label", "Form Submit Button Text"],
     },
   ];
