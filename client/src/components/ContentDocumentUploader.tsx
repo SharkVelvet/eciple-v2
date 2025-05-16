@@ -19,7 +19,7 @@ export default function ContentDocumentUploader({
   const [uploadProgress, setUploadProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Define all content sections for the document - matching the exact keys used in components
+  // Define all content sections for the document - using exact keys from our components
   const contentSections: ContentSection[] = [
     {
       title: "Hero Section",
@@ -28,33 +28,33 @@ export default function ContentDocumentUploader({
     },
     {
       title: "Problem Section",
-      contentKeys: ["problem_title", "problem_description", "problem_point1", "problem_point2", "problem_point3"],
-      contentLabels: ["Section Title", "Description", "Problem Point 1", "Problem Point 2", "Problem Point 3"],
+      contentKeys: ["problem_text", "bottom_line_title", "bottom_line_text", "mentorship_text", "curriculum_text", "growth_text", "metrics_text"],
+      contentLabels: ["Problem Statement", "Bottom Line Title", "Bottom Line Text", "Mentorship Point", "Curriculum Point", "Growth Point", "Metrics Point"],
     },
     {
       title: "Solution Section",
-      contentKeys: ["solution_title", "solution_description", "solution_point1", "solution_point2", "solution_point3"],
-      contentLabels: ["Section Title", "Description", "Solution Point 1", "Solution Point 2", "Solution Point 3"],
+      contentKeys: ["solution_title", "solution_text", "solution_point1", "solution_point2", "solution_point3"],
+      contentLabels: ["Solution Title", "Solution Description", "Solution Point 1", "Solution Point 2", "Solution Point 3"],
     },
     {
       title: "Product Section",
-      contentKeys: ["product_title", "product_description", "product_feature1_title", "product_feature1_desc", "product_feature2_title", "product_feature2_desc", "product_feature3_title", "product_feature3_desc"],
-      contentLabels: ["Section Title", "Description", "Feature 1 Title", "Feature 1 Description", "Feature 2 Title", "Feature 2 Description", "Feature 3 Title", "Feature 3 Description"],
+      contentKeys: ["product_title", "product_text", "connect_title", "connect_text", "track_title", "track_text", "grow_title", "grow_text"],
+      contentLabels: ["Product Title", "Product Description", "Connect Feature Title", "Connect Feature Text", "Track Feature Title", "Track Feature Text", "Grow Feature Title", "Grow Feature Text"],
     },
     {
       title: "Competition Section",
-      contentKeys: ["competition_title", "competition_description"],
-      contentLabels: ["Section Title", "Description"],
+      contentKeys: ["competition_title", "competition_text"],
+      contentLabels: ["Competition Title", "Competition Description"],
     },
     {
       title: "Pricing Section",
-      contentKeys: ["pricing_title", "pricing_description", "pricing_tier1_title", "pricing_tier1_price", "pricing_tier1_features", "pricing_tier2_title", "pricing_tier2_price", "pricing_tier2_features", "pricing_tier3_title", "pricing_tier3_price", "pricing_tier3_features"],
-      contentLabels: ["Section Title", "Description", "Basic Tier Title", "Basic Tier Price", "Basic Tier Features (comma-separated)", "Pro Tier Title", "Pro Tier Price", "Pro Tier Features (comma-separated)", "Enterprise Tier Title", "Enterprise Tier Price", "Enterprise Tier Features (comma-separated)"],
+      contentKeys: ["pricing_title", "pricing_text", "starter_title", "starter_price", "starter_features", "pro_title", "pro_price", "pro_features", "enterprise_title", "enterprise_price", "enterprise_features"],
+      contentLabels: ["Pricing Title", "Pricing Description", "Starter Tier Title", "Starter Price", "Starter Features", "Pro Tier Title", "Pro Price", "Pro Features", "Enterprise Tier Title", "Enterprise Price", "Enterprise Features"],
     },
     {
       title: "Contact Section",
-      contentKeys: ["contact_title", "contact_description", "contact_email_label", "contact_phone_label", "contact_form_submit_text"],
-      contentLabels: ["Section Title", "Description", "Email Label", "Phone Label", "Form Submit Button Text"],
+      contentKeys: ["contact_title", "contact_text", "email_text", "phone_text", "submit_text"],
+      contentLabels: ["Contact Title", "Contact Description", "Email Label", "Phone Label", "Submit Button Text"],
     },
   ];
 

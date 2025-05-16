@@ -92,6 +92,9 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
         // Split into lines and process each line
         const lines = content.split('\n');
         
+        console.log("CSV parsing - total lines:", lines.length);
+        let processedLines = 0;
+        
         // Skip header and comments
         for (const line of lines) {
           // Skip empty lines, comments, and the header row
@@ -103,13 +106,22 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
           const columns = parseCSVLine(line);
           
           if (columns.length >= 4) {
-            const [key, , , newValue] = columns;
+            const [key, , currentValue, newValue] = columns;
             
-            // Only include if the key is valid and there's a new value
-            if (key && newValue && newValue.trim()) {
-              updatedContent[key] = newValue;
+            // Only include if the key is valid and there's a new value that's different from current
+            if (key && key.trim() && newValue && newValue.trim()) {
+              // Log every successful content extraction
+              console.log(`CSV parsing - content found for key: ${key}`);
+              updatedContent[key.trim()] = newValue.trim();
+              processedLines++;
             }
           }
+        }
+        
+        console.log(`CSV parsing complete - processed ${processedLines} content items`);
+        
+        if (processedLines === 0) {
+          console.warn("Warning: No valid content updates found in the uploaded CSV");
         }
         
         resolve(updatedContent);
