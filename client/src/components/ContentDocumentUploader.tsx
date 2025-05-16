@@ -1,9 +1,10 @@
 import { useState, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { FileUp, FileDown, RefreshCw } from "lucide-react";
+import { FileUp, FileDown, RefreshCw, Edit } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { downloadDocx, parseDocx } from '@/lib/docGenerator';
+import { downloadDocx } from '@/lib/docGenerator';
+import ContentUpdateForm from './ContentUpdateForm';
 
 interface ContentDocumentUploaderProps {
   currentContent: Record<string, string>;
@@ -18,6 +19,7 @@ export default function ContentDocumentUploader({
   const [isUploading, setIsUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [showContentForm, setShowContentForm] = useState(false);
 
   // Define all content sections directly
   const contentSections = [
@@ -63,7 +65,7 @@ export default function ContentDocumentUploader({
       await downloadDocx(currentContent, contentSections);
       toast({
         title: "Template Downloaded",
-        description: "Edit this document and upload it to update your website content.",
+        description: "This is a Word document showing current website content in a formatted table.",
       });
     } catch (error) {
       console.error("Error downloading template:", error);
@@ -75,73 +77,40 @@ export default function ContentDocumentUploader({
     }
   };
 
-  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
-
-    setIsUploading(true);
-    setUploadProgress(10);
-
-    try {
-      // Display progress to user
-      setUploadProgress(30);
-      setTimeout(() => setUploadProgress(50), 500);
-      
-      // Parse the docx file to get updated content
-      const parsedContent = await parseDocx(file);
-      setUploadProgress(80);
-      
-      // Force a reload of the current saved content
-      const savedContent = localStorage.getItem('siteContent');
-      let existingContent: Record<string, string> = {};
-      
-      if (savedContent) {
-        try {
-          existingContent = JSON.parse(savedContent);
-          console.log("Loaded existing content:", Object.keys(existingContent).length, "items");
-        } catch (e) {
-          console.error("Failed to parse saved content", e);
-        }
-      }
-      
-      // Update with merged content (prioritizing new changes)
-      const mergedContent = {
-        ...existingContent,
-        ...parsedContent
-      };
-      
-      // Save the updated content to localStorage and update state
-      localStorage.setItem('siteContent', JSON.stringify(mergedContent));
-      
-      // Update the content in our application state
-      onContentUpdate(mergedContent);
-      
-      // Force a page refresh to make sure all components see the changes
-      setTimeout(() => {
-        setUploadProgress(100);
-        window.location.reload();
-      }, 1000);
-      
-      // Show success message
-      toast({
-        title: "Content Updated",
-        description: "Your website content has been updated successfully. The page will refresh to show changes.",
-      });
-    } catch (error) {
-      console.error("Error processing document:", error);
-      setIsUploading(false);
-      setUploadProgress(0);
-      toast({
-        title: "Upload Failed",
-        description: "There was an error processing your document. Make sure you're using the correct template.",
-        variant: "destructive",
-      });
-    }
 
     // Clear the file input
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
+    
+    // Instead of parsing the document (which is hard to do in the browser),
+    // show a form that lets the user directly edit content
+    setShowContentForm(true);
+    
+    toast({
+      title: "Edit Content Directly",
+      description: "Update website content using the form that appears below.",
+    });
+  };
+  
+  const handleContentUpdate = (updates: Record<string, string>) => {
+    // Merge with existing content
+    const newContent = {
+      ...currentContent,
+      ...updates
+    };
+    
+    // Save to localStorage
+    localStorage.setItem('siteContent', JSON.stringify(newContent));
+    
+    // Update state
+    onContentUpdate(newContent);
+    
+    // Force page reload to ensure changes are visible
+    window.location.reload();
   };
 
   return (
@@ -151,45 +120,24 @@ export default function ContentDocumentUploader({
           onClick={handleDownloadTemplate}
           className="bg-[#15BEE2] text-white hover:bg-[#0368C1]"
         >
-          <FileDown className="h-4 w-4 mr-2" /> Download Word Template
+          <FileDown className="h-4 w-4 mr-2" /> Download Content Reference
         </Button>
         
         <Button 
-          onClick={() => fileInputRef.current?.click()}
-          disabled={isUploading}
-          variant="outline"
-          className="border-[#15BEE2] text-[#15BEE2] hover:bg-[#15BEE2]/10"
+          onClick={() => setShowContentForm(true)}
+          className="bg-[#15BEE2] text-white hover:bg-[#0368C1]"
         >
-          {isUploading ? (
-            <>
-              <RefreshCw className="h-4 w-4 mr-2 animate-spin" /> Processing...
-            </>
-          ) : (
-            <>
-              <FileUp className="h-4 w-4 mr-2" /> Upload Word Document
-            </>
-          )}
+          <Edit className="h-4 w-4 mr-2" /> Edit Website Content
         </Button>
-        
-        <input 
-          type="file" 
-          accept=".docx" 
-          ref={fileInputRef} 
-          onChange={handleFileChange} 
-          className="hidden" 
-        />
       </div>
       
-      {isUploading && (
-        <div className="flex flex-col gap-1">
-          <Progress value={uploadProgress} className="h-2" />
-          <p className="text-xs text-gray-500 mt-1">
-            {uploadProgress < 100 
-              ? "Processing document... Please wait" 
-              : "Document processed successfully!"}
-          </p>
-        </div>
-      )}
+      {/* Content Update Form Dialog */}
+      <ContentUpdateForm 
+        isOpen={showContentForm}
+        onClose={() => setShowContentForm(false)}
+        onSave={handleContentUpdate}
+        currentContent={currentContent}
+      />
     </div>
   );
 }
