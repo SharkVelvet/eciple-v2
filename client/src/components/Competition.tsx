@@ -46,10 +46,10 @@ export default function Competition() {
       <div className="max-w-[1180px] mx-auto px-4">
         <motion.div 
           className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
         >
           <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-4">The Competition</h2>
           <p className="text-lg max-w-3xl mx-auto text-foreground text-opacity-80">
@@ -59,10 +59,10 @@ export default function Competition() {
         
         <motion.div 
           className="overflow-x-auto mt-8"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2, duration: 0.6 }}
+          viewport={{ once: true, margin: "-5%" }}
+          transition={{ delay: 0.1, duration: 0.35, ease: "easeOut" }}
         >
           <Table className="min-w-full">
             <TableHeader>
@@ -102,10 +102,10 @@ export default function Competition() {
         
         <motion.div 
           className="mt-12"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4, duration: 0.6 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ delay: 0.2, duration: 0.35, ease: "easeOut" }}
         >
           <Card className="bg-gray-50">
             <CardContent className="p-6">

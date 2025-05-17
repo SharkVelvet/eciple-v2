@@ -82,10 +82,10 @@ export default function Product() {
       <div className="max-w-[1180px] mx-auto px-4">
         <motion.div 
           className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{ duration: 0.4, ease: "easeOut" }}
         >
           <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-4 product-heading">
             {editMode && isAdmin ? (
@@ -116,10 +116,10 @@ export default function Product() {
           {features.map((feature, index) => (
             <motion.div 
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+              viewport={{ once: true, margin: "-5%" }}
+              transition={{ delay: index * 0.05, duration: 0.35, ease: "easeOut" }}
             >
               <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative overflow-visible">
                 <div className="absolute top-0 right-0 -mr-6 mt-2">
