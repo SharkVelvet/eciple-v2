@@ -194,9 +194,8 @@ export default function Hero() {
               </Button>
             </motion.div>
             
-            <motion.div 
-              className="mt-12 flex items-center gap-6"
-              variants={itemVariants}
+            <div 
+              className="mt-12 flex items-center gap-6 transform translate-y-0 opacity-100"
             >
               <div className="flex -space-x-3">
                 {[1, 2, 3, 4].map((i) => (
@@ -217,7 +216,7 @@ export default function Hero() {
                   <Heart className="h-3 w-3 fill-accent" />
                 </div>
               </div>
-            </motion.div>
+            </div>
           </motion.div>
           
           <div

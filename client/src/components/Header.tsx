@@ -202,14 +202,16 @@ export default function Header() {
                       y: 0,
                       opacity: 1,
                       transition: {
-                        y: { stiffness: 1000, velocity: -100 }
+                        duration: 0.15,
+                        ease: "easeOut"
                       }
                     },
                     closed: {
-                      y: 20,
+                      y: 10,
                       opacity: 0,
                       transition: {
-                        y: { stiffness: 1000 }
+                        duration: 0.1,
+                        ease: "easeIn"
                       }
                     }
                   }}
@@ -237,14 +239,16 @@ export default function Header() {
                     y: 0,
                     opacity: 1,
                     transition: {
-                      y: { stiffness: 1000, velocity: -100 }
+                      duration: 0.15,
+                      ease: "easeOut"
                     }
                   },
                   closed: {
-                    y: 20,
+                    y: 10,
                     opacity: 0,
                     transition: {
-                      y: { stiffness: 1000 }
+                      duration: 0.1,
+                      ease: "easeIn"
                     }
                   }
                 }}
@@ -273,14 +277,16 @@ export default function Header() {
                     y: 0,
                     opacity: 1,
                     transition: {
-                      y: { stiffness: 1000, velocity: -100 }
+                      duration: 0.15,
+                      ease: "easeOut"
                     }
                   },
                   closed: {
-                    y: 20,
+                    y: 10,
                     opacity: 0,
                     transition: {
-                      y: { stiffness: 1000 }
+                      duration: 0.1,
+                      ease: "easeIn"
                     }
                   }
                 }}
