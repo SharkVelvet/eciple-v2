@@ -82,9 +82,9 @@ export default function Header() {
                 {navItems.map((item, index) => (
                   <motion.li 
                     key={index}
-                    initial={{ opacity: 0, y: -10 }}
+                    initial={{ opacity: 0, y: -5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05 + 0.1 }}
+                    transition={{ delay: index * 0.03 + 0.1, duration: 0.2, type: "tween" }}
                   >
                     <a 
                       href={item.href}
@@ -103,9 +103,9 @@ export default function Header() {
                   </motion.li>
                 ))}
                 <motion.li
-                  initial={{ opacity: 0, scale: 0.8 }}
+                  initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.5 }}
+                  transition={{ delay: 0.3, duration: 0.2, type: "tween" }}
                 >
                   <Button 
                     asChild 
@@ -178,7 +178,7 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
             className="md:hidden bg-[#223349] w-full py-5 shadow-lg absolute overflow-hidden top-full"
           >
             <motion.ul 

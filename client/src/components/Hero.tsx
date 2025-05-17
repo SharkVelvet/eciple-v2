@@ -112,6 +112,7 @@ export default function Hero() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
+            transition={{ type: "tween" }}
           >
             <motion.div 
               className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-8"
@@ -220,7 +221,7 @@ export default function Hero() {
           </motion.div>
           
           <div
-            className="relative hidden lg:block"
+            className="relative hidden lg:block transform translate-y-0 opacity-100"
           >
             <div className="relative bg-white/10 backdrop-blur-sm p-1 rounded-xl shadow-xl overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-secondary/20 opacity-50"></div>
