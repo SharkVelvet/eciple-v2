@@ -71,66 +71,37 @@ export default function Hero() {
     // Fall back to using the admin context content
     return editableContent[heroCtaText] || "Learn More";
   };
+  // Optimized animation variants for better performance
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        delayChildren: 0.3,
-        staggerChildren: 0.2
+        delayChildren: 0.2,
+        staggerChildren: 0.1
       }
     }
   };
   
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 10, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.5 }
+      transition: { 
+        duration: 0.3,
+        ease: "easeOut"
+      }
     }
   };
 
   return (
     <section className="pt-28 pb-20 bg-gradient-to-br from-[#15BEE2] via-[#15BEE2]/80 to-[#0368C1] text-white relative overflow-hidden">
-      {/* Animated background elements */}
+      {/* Animated background elements - simplified for performance */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
-          className="absolute top-1/4 -left-20 w-60 h-60 bg-[#0368C1]/30 rounded-full blur-3xl"
-          animate={{ 
-            x: [0, 40, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{
-            duration: 12,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        />
-        <motion.div 
-          className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[#FF7500]/20 rounded-full blur-3xl"
-          animate={{ 
-            x: [0, -50, 0],
-            y: [0, 40, 0],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        />
-        <motion.div 
-          className="absolute top-1/3 right-1/4 w-40 h-40 bg-[#15BEE2]/30 rounded-full blur-3xl"
-          animate={{ 
-            x: [0, 30, 0],
-            y: [0, -40, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            repeatType: "reverse"
-          }}
-        />
+        <div className="absolute top-1/4 -left-20 w-60 h-60 bg-[#0368C1]/30 rounded-full blur-3xl opacity-70"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[#0368C1]/20 rounded-full blur-3xl opacity-60"></div>
+        <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-[#15BEE2]/30 rounded-full blur-3xl opacity-70"></div>
       </div>
       
       {/* Content */}
@@ -248,10 +219,7 @@ export default function Hero() {
             </motion.div>
           </motion.div>
           
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
+          <div
             className="relative hidden lg:block"
           >
             <div className="relative bg-white/10 backdrop-blur-sm p-1 rounded-xl shadow-xl overflow-hidden">
@@ -260,14 +228,12 @@ export default function Hero() {
                 src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
                 alt="People engaged in spiritual mentorship" 
                 className="rounded-lg w-full h-auto object-cover"
+                loading="lazy"
               />
             </div>
             
-            <motion.div 
+            <div 
               className="absolute -bottom-5 -left-5 bg-white p-4 rounded-lg shadow-xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.5 }}
             >
               <div className="flex items-center gap-3">
                 <Users className="h-8 w-8 text-primary" />
@@ -276,13 +242,10 @@ export default function Hero() {
                   <p className="text-sm text-gray-500">AI-powered matching</p>
                 </div>
               </div>
-            </motion.div>
+            </div>
             
-            <motion.div 
+            <div 
               className="absolute -top-5 -right-5 bg-white p-4 rounded-lg shadow-xl"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.4, duration: 0.5 }}
             >
               <div className="flex items-center gap-3">
                 <Sparkles className="h-8 w-8 text-secondary" />
@@ -291,8 +254,8 @@ export default function Hero() {
                   <p className="text-sm text-gray-500">Measurable progress</p>
                 </div>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
