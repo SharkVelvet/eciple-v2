@@ -111,10 +111,10 @@ export default function Footer() {
       <div className="max-w-[1180px] mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
           >
             <div className="mb-4">
               <img 
@@ -136,10 +136,10 @@ export default function Footer() {
           </motion.div>
           
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1, duration: 0.5 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ delay: 0.05, duration: 0.35, ease: "easeOut" }}
           >
             <h4 className="text-lg font-semibold font-sans mb-4">Quick Links</h4>
             <ul className="space-y-2">
@@ -154,10 +154,10 @@ export default function Footer() {
           </motion.div>
           
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, duration: 0.5 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ delay: 0.1, duration: 0.35, ease: "easeOut" }}
           >
             <h4 className="text-lg font-semibold font-sans mb-4">Resources</h4>
             <ul className="space-y-2">
@@ -175,10 +175,10 @@ export default function Footer() {
           </motion.div>
           
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.5 }}
+            viewport={{ once: true, margin: "-10%" }}
+            transition={{ delay: 0.15, duration: 0.35, ease: "easeOut" }}
           >
             <h4 className="text-lg font-semibold font-sans mb-4">Contact Us</h4>
             <ul className="space-y-2">
