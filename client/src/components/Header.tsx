@@ -178,7 +178,7 @@ export default function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
+            transition={{ duration: 0.25, ease: [0.2, 0, 0.3, 1] }}
             className="md:hidden bg-[#223349] w-full py-5 shadow-lg absolute overflow-hidden top-full"
           >
             <motion.ul 
@@ -187,10 +187,10 @@ export default function Header() {
               animate="open"
               variants={{
                 open: {
-                  transition: { staggerChildren: 0.07, delayChildren: 0.1 }
+                  transition: { staggerChildren: 0.05, delayChildren: 0.05 }
                 },
                 closed: {
-                  transition: { staggerChildren: 0.05, staggerDirection: -1 }
+                  transition: { staggerChildren: 0.03, staggerDirection: -1 }
                 }
               }}
             >
