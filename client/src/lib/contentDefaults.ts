@@ -151,28 +151,28 @@ export const contentDefaults: ContentField[] = [
   
   // Competition Section
   {
-    key: "competition_title",
-    label: "Competition Title",
-    defaultValue: "Competitive Analysis",
+    key: "competition_heading",
+    label: "Competition Heading",
+    defaultValue: "The Competition",
     section: "Competition Section"
   },
   {
-    key: "competition_text",
-    label: "Competition Text",
-    defaultValue: "See how eciple stands out from other solutions in the church technology space.",
+    key: "competition_subheading",
+    label: "Competition Subheading",
+    defaultValue: "The competitive landscape consists of focused solutions targeting aspects of discipleship, creating an opportunity for eciple to become a category leader.",
     section: "Competition Section"
   },
   
   // Pricing Section
   {
-    key: "pricing_title",
-    label: "Pricing Title",
+    key: "pricing_heading",
+    label: "Pricing Heading",
     defaultValue: "Simple, Transparent Pricing",
     section: "Pricing Section"
   },
   {
-    key: "pricing_text",
-    label: "Pricing Description",
+    key: "pricing_subheading",
+    label: "Pricing Subheading",
     defaultValue: "Choose the plan that works for your church community.",
     section: "Pricing Section"
   },
@@ -233,14 +233,14 @@ export const contentDefaults: ContentField[] = [
   
   // Contact Section
   {
-    key: "contact_title",
-    label: "Contact Title",
+    key: "contact_heading",
+    label: "Contact Heading",
     defaultValue: "Get In Touch",
     section: "Contact Section"
   },
   {
-    key: "contact_text",
-    label: "Contact Description",
+    key: "contact_subheading",
+    label: "Contact Subheading",
     defaultValue: "Ready to transform your church's discipleship? Contact us today!",
     section: "Contact Section"
   },
