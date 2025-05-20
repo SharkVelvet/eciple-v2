@@ -317,7 +317,7 @@ export default function Home() {
           {editMode 
             ? 'Editing Mode: Click on text to edit' 
             : showTemplateTools 
-              ? 'Template Tools: Download or upload a Word document to manage content' 
+              ? 'Content Editor: Make changes to all sections of your website' 
               : 'Admin Mode'
           }
         </div>
