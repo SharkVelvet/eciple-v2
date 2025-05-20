@@ -36,12 +36,10 @@ export default function SideContentEditor() {
         if (savedContent) {
           const parsed = JSON.parse(savedContent);
           console.log("Loading current content from localStorage:", Object.keys(parsed).length, "items");
-          // Merge with defaults
+          // Always use the localStorage content for consistency
           setContent({ ...defaultContent, ...parsed });
         } else {
-          // If no saved content, try to extract content from the DOM
-          const extractedContent = extractContentFromDOM();
-          setContent({ ...defaultContent, ...extractedContent });
+          setContent(defaultContent);
         }
         
         setInitialLoad(false);
@@ -276,7 +274,7 @@ export default function SideContentEditor() {
   return (
     <div 
       ref={editorRef}
-      className={`fixed z-50 transition-all duration-300 ${position === 'right' ? 'right-0' : 'left-0'} top-0 h-screen ${
+      className={`fixed z-50 transition-all duration-300 ${position === 'right' ? 'right-0' : 'left-0'} bottom-0 h-[60vh] ${
         minimized 
           ? position === 'right' ? 'translate-x-[calc(100%-40px)]' : 'translate-x-[calc(-100%+40px)]' 
           : 'translate-x-0'
@@ -292,7 +290,7 @@ export default function SideContentEditor() {
         </div>
       )}
       
-      <div className={`h-full w-[400px] max-w-[95vw] bg-[#223349]/95 shadow-xl backdrop-blur-sm flex flex-col ${position === 'right' ? 'rounded-l-lg' : 'rounded-r-lg'}`}>
+      <div className={`h-full w-[480px] max-w-[95vw] bg-[#223349]/95 shadow-xl backdrop-blur-sm flex flex-col ${position === 'right' ? 'rounded-tl-lg' : 'rounded-tr-lg'}`}>
         <div className="flex items-center justify-between sticky top-0 z-10 bg-[#223349] p-3 border-b border-white/10">
           <h3 className="font-semibold text-white text-lg">Website Content Editor</h3>
           <div className="flex gap-1">
