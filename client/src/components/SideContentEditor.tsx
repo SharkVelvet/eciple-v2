@@ -56,91 +56,111 @@ export default function SideContentEditor() {
     const extracted: Record<string, string> = {};
     
     try {
-      // Get all content sections from our contentDefaults
-      contentDefaults.forEach(field => {
-        // Convert field.key (e.g., hero_heading) to CSS class (e.g., hero-heading)
-        const className = `.${field.key.replace(/_/g, '-')}`;
-        const element = document.querySelector(className);
+      // Map component keys to DOM selectors and content values
+      const mappings = [
+        // Hero section
+        { key: "hero_heading", selector: ".hero-heading" },
+        { key: "hero_subheading", selector: ".hero-subheading" },
+        { key: "hero_cta_text", selector: ".hero-button-text" },
         
-        if (element instanceof HTMLElement && element.innerText.trim()) {
-          extracted[field.key] = element.innerText.trim();
+        // Problem section
+        { key: "problem_heading", selector: ".problem-heading" },
+        { key: "problem_subheading", selector: ".problem-subheading" },
+        
+        // Solution section
+        { key: "solution_heading", selector: ".solution-heading" },
+        { key: "solution_main_text", selector: ".solution-subheading" },
+        
+        // Product section
+        { key: "product_main_title", selector: ".product-heading" },
+        { key: "product_main_text", selector: ".product-subheading" },
+        { key: "centralized_title", selector: "#product .md\\:w-1\\/2 h3.text-2xl:first-of-type" },
+        { key: "centralized_text", selector: "#product .md\\:w-1\\/2 p.text-foreground:first-of-type" },
+        { key: "mobile_title", selector: "#product .md\\:w-1\\/2 h3.text-2xl:last-of-type" },
+        { key: "mobile_text", selector: "#product .md\\:w-1\\/2 p.text-foreground:last-of-type" },
+        
+        // Competition section
+        { key: "competition_heading", selector: "#competition h2" },
+        { key: "competition_subheading", selector: "#competition p.text-lg" },
+        
+        // Pricing section
+        { key: "pricing_heading", selector: "#pricing h2" },
+        { key: "pricing_subheading", selector: "#pricing p.text-lg" },
+        
+        // Market section
+        { key: "market_heading", selector: "#market h2" },
+        { key: "market_subheading", selector: "#market p.text-lg" },
+        
+        // Contact section
+        { key: "contact_heading", selector: "#contact h2" },
+        { key: "contact_subheading", selector: "#contact p.text-lg" }
+      ];
+      
+      // Loop through the mappings and extract the content
+      mappings.forEach(mapping => {
+        try {
+          const element = document.querySelector(mapping.selector);
+          if (element instanceof HTMLElement && element.innerText.trim()) {
+            extracted[mapping.key] = element.innerText.trim();
+          }
+        } catch (err) {
+          console.log(`Error extracting ${mapping.key}:`, err);
         }
       });
       
-      // Some special cases that might not follow the pattern
-      // Hero section
+      // Fallbacks for elements that might not be found with specific selectors
+      
+      // Hero fallbacks
       if (!extracted.hero_heading) {
-        const heroHeading = document.querySelector('h1.text-4xl');
+        const heroHeading = document.querySelector('#hero h1, #hero .text-4xl');
         if (heroHeading instanceof HTMLElement) {
           extracted.hero_heading = heroHeading.innerText.trim();
         }
       }
       
       if (!extracted.hero_subheading) {
-        const heroSubheading = document.querySelector('.hero-section p.text-xl, .hero-section p.text-2xl');
+        const heroSubheading = document.querySelector('#hero p.text-xl, #hero p.text-2xl');
         if (heroSubheading instanceof HTMLElement) {
           extracted.hero_subheading = heroSubheading.innerText.trim();
         }
       }
       
-      // Solution section
-      if (!extracted.solution_heading) {
-        const solutionHeading = document.querySelector('#solution h2');
-        if (solutionHeading instanceof HTMLElement) {
-          extracted.solution_heading = solutionHeading.innerText.trim();
+      // Product fallbacks
+      if (!extracted.product_main_title) {
+        const productTitle = document.querySelector('#product h2.text-3xl');
+        if (productTitle instanceof HTMLElement) {
+          extracted.product_main_title = productTitle.innerText.trim();
         }
       }
       
-      if (!extracted.solution_subheading) {
-        const solutionSubheading = document.querySelector('#solution p.text-lg');
-        if (solutionSubheading instanceof HTMLElement) {
-          extracted.solution_subheading = solutionSubheading.innerText.trim();
+      if (!extracted.product_main_text) {
+        const productText = document.querySelector('#product p.text-lg');
+        if (productText instanceof HTMLElement) {
+          extracted.product_main_text = productText.innerText.trim();
         }
       }
       
-      // Product section
-      if (!extracted.product_heading) {
-        const productHeading = document.querySelector('#product h2');
-        if (productHeading instanceof HTMLElement) {
-          extracted.product_heading = productHeading.innerText.trim();
+      // Solution fallbacks
+      if (!extracted.solution_main_text) {
+        const solutionText = document.querySelector('#solution p.text-lg');
+        if (solutionText instanceof HTMLElement) {
+          extracted.solution_main_text = solutionText.innerText.trim();
         }
       }
       
-      if (!extracted.product_subheading) {
-        const productSubheading = document.querySelector('#product p.text-lg');
-        if (productSubheading instanceof HTMLElement) {
-          extracted.product_subheading = productSubheading.innerText.trim();
+      // Try to get content from admin context directly
+      try {
+        const adminContext = document.getElementById('admin-context-data');
+        if (adminContext && adminContext.textContent) {
+          const contextData = JSON.parse(adminContext.textContent);
+          Object.keys(contextData).forEach(key => {
+            if (!extracted[key] && contextData[key]) {
+              extracted[key] = contextData[key];
+            }
+          });
         }
-      }
-      
-      // Competition section
-      if (!extracted.competition_heading) {
-        const competitionHeading = document.querySelector('#competition h2');
-        if (competitionHeading instanceof HTMLElement) {
-          extracted.competition_heading = competitionHeading.innerText.trim();
-        }
-      }
-      
-      if (!extracted.competition_subheading) {
-        const competitionSubheading = document.querySelector('#competition p.text-lg');
-        if (competitionSubheading instanceof HTMLElement) {
-          extracted.competition_subheading = competitionSubheading.innerText.trim();
-        }
-      }
-      
-      // Pricing section
-      if (!extracted.pricing_heading) {
-        const pricingHeading = document.querySelector('#pricing h2');
-        if (pricingHeading instanceof HTMLElement) {
-          extracted.pricing_heading = pricingHeading.innerText.trim();
-        }
-      }
-      
-      if (!extracted.pricing_subheading) {
-        const pricingSubheading = document.querySelector('#pricing p.text-lg');
-        if (pricingSubheading instanceof HTMLElement) {
-          extracted.pricing_subheading = pricingSubheading.innerText.trim();
-        }
+      } catch (err) {
+        console.log("Error parsing admin context data:", err);
       }
       
       console.log("Extracted content from DOM:", Object.keys(extracted).length, "items");
