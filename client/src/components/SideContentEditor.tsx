@@ -59,10 +59,20 @@ export default function SideContentEditor() {
         if (savedContent) {
           const parsed = JSON.parse(savedContent);
           console.log("Loading current content from localStorage:", Object.keys(parsed).length, "items");
-          // Always use the localStorage content for consistency
-          setContent({ ...defaultContent, ...parsed });
+          
+          // Get any missing values directly from the DOM
+          const extractedContent = extractContentFromDOM();
+          
+          // Merge default, extracted and saved content with priority: default < extracted < saved
+          setContent({ 
+            ...defaultContent, 
+            ...extractedContent,
+            ...parsed 
+          });
         } else {
-          setContent(defaultContent);
+          // If no saved content, extract from DOM
+          const extractedContent = extractContentFromDOM();
+          setContent({ ...defaultContent, ...extractedContent });
         }
         
         setInitialLoad(false);
@@ -302,26 +312,34 @@ export default function SideContentEditor() {
         if (productSection) {
           // Update centralized title and text
           if (content.centralized_title) {
-            const titles = productSection.querySelectorAll('h3.text-2xl');
-            if (titles.length > 0) {
-              titles[0].textContent = content.centralized_title;
+            const centralizedTitles = productSection.querySelectorAll('h3.text-2xl');
+            if (centralizedTitles.length > 0) {
+              centralizedTitles[0].textContent = content.centralized_title;
             }
           }
           
           if (content.centralized_text) {
-            const paragraphs = productSection.querySelectorAll('p.text-foreground, p.text-opacity-80');
-            if (paragraphs.length > 0) {
-              paragraphs[0].textContent = content.centralized_text;
+            const centralizedParagraphs = productSection.querySelectorAll('p.text-foreground, p.text-opacity-80');
+            if (centralizedParagraphs.length > 0) {
+              centralizedParagraphs[0].textContent = content.centralized_text;
             }
           }
           
           // Update mobile title and text
-          if (content.mobile_title && titles.length > 1) {
-            titles[1].textContent = content.mobile_title;
+          // Update mobile title - get titles again to avoid reference errors
+          if (content.mobile_title) {
+            const allTitles = productSection.querySelectorAll('h3.text-2xl');
+            if (allTitles.length > 1) {
+              allTitles[1].textContent = content.mobile_title;
+            }
           }
           
-          if (content.mobile_text && paragraphs.length > 1) {
-            paragraphs[1].textContent = content.mobile_text;
+          // Update mobile text - get paragraphs again to avoid reference errors
+          if (content.mobile_text) {
+            const allParagraphs = productSection.querySelectorAll('p.text-foreground, p.text-opacity-80');
+            if (allParagraphs.length > 1) {
+              allParagraphs[1].textContent = content.mobile_text;
+            }
           }
         }
       } catch (err) {
