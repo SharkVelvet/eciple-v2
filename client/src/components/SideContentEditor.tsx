@@ -56,53 +56,91 @@ export default function SideContentEditor() {
     const extracted: Record<string, string> = {};
     
     try {
+      // Get all content sections from our contentDefaults
+      contentDefaults.forEach(field => {
+        // Convert field.key (e.g., hero_heading) to CSS class (e.g., hero-heading)
+        const className = `.${field.key.replace(/_/g, '-')}`;
+        const element = document.querySelector(className);
+        
+        if (element instanceof HTMLElement && element.innerText.trim()) {
+          extracted[field.key] = element.innerText.trim();
+        }
+      });
+      
+      // Some special cases that might not follow the pattern
       // Hero section
-      const heroHeading = document.querySelector('.hero-heading');
-      if (heroHeading instanceof HTMLElement) {
-        extracted.hero_heading = heroHeading.innerText;
+      if (!extracted.hero_heading) {
+        const heroHeading = document.querySelector('h1.text-4xl');
+        if (heroHeading instanceof HTMLElement) {
+          extracted.hero_heading = heroHeading.innerText.trim();
+        }
       }
       
-      const heroSubheading = document.querySelector('.hero-subheading');
-      if (heroSubheading instanceof HTMLElement) {
-        extracted.hero_subheading = heroSubheading.innerText;
-      }
-      
-      const heroButtonText = document.querySelector('.hero-button-text');
-      if (heroButtonText instanceof HTMLElement) {
-        extracted.hero_cta_text = heroButtonText.innerText;
-      }
-      
-      // Problem section
-      const problemHeading = document.querySelector('.problem-heading');
-      if (problemHeading instanceof HTMLElement) {
-        extracted.problem_heading = problemHeading.innerText;
-      }
-      
-      const problemSubheading = document.querySelector('.problem-subheading');
-      if (problemSubheading instanceof HTMLElement) {
-        extracted.problem_subheading = problemSubheading.innerText;
+      if (!extracted.hero_subheading) {
+        const heroSubheading = document.querySelector('.hero-section p.text-xl, .hero-section p.text-2xl');
+        if (heroSubheading instanceof HTMLElement) {
+          extracted.hero_subheading = heroSubheading.innerText.trim();
+        }
       }
       
       // Solution section
-      const solutionHeading = document.querySelector('.solution-heading');
-      if (solutionHeading instanceof HTMLElement) {
-        extracted.solution_heading = solutionHeading.innerText;
+      if (!extracted.solution_heading) {
+        const solutionHeading = document.querySelector('#solution h2');
+        if (solutionHeading instanceof HTMLElement) {
+          extracted.solution_heading = solutionHeading.innerText.trim();
+        }
       }
       
-      const solutionSubheading = document.querySelector('.solution-subheading');
-      if (solutionSubheading instanceof HTMLElement) {
-        extracted.solution_subheading = solutionSubheading.innerText;
+      if (!extracted.solution_subheading) {
+        const solutionSubheading = document.querySelector('#solution p.text-lg');
+        if (solutionSubheading instanceof HTMLElement) {
+          extracted.solution_subheading = solutionSubheading.innerText.trim();
+        }
       }
       
       // Product section
-      const productHeading = document.querySelector('.product-heading');
-      if (productHeading instanceof HTMLElement) {
-        extracted.product_heading = productHeading.innerText;
+      if (!extracted.product_heading) {
+        const productHeading = document.querySelector('#product h2');
+        if (productHeading instanceof HTMLElement) {
+          extracted.product_heading = productHeading.innerText.trim();
+        }
       }
       
-      const productSubheading = document.querySelector('.product-subheading');
-      if (productSubheading instanceof HTMLElement) {
-        extracted.product_subheading = productSubheading.innerText;
+      if (!extracted.product_subheading) {
+        const productSubheading = document.querySelector('#product p.text-lg');
+        if (productSubheading instanceof HTMLElement) {
+          extracted.product_subheading = productSubheading.innerText.trim();
+        }
+      }
+      
+      // Competition section
+      if (!extracted.competition_heading) {
+        const competitionHeading = document.querySelector('#competition h2');
+        if (competitionHeading instanceof HTMLElement) {
+          extracted.competition_heading = competitionHeading.innerText.trim();
+        }
+      }
+      
+      if (!extracted.competition_subheading) {
+        const competitionSubheading = document.querySelector('#competition p.text-lg');
+        if (competitionSubheading instanceof HTMLElement) {
+          extracted.competition_subheading = competitionSubheading.innerText.trim();
+        }
+      }
+      
+      // Pricing section
+      if (!extracted.pricing_heading) {
+        const pricingHeading = document.querySelector('#pricing h2');
+        if (pricingHeading instanceof HTMLElement) {
+          extracted.pricing_heading = pricingHeading.innerText.trim();
+        }
+      }
+      
+      if (!extracted.pricing_subheading) {
+        const pricingSubheading = document.querySelector('#pricing p.text-lg');
+        if (pricingSubheading instanceof HTMLElement) {
+          extracted.pricing_subheading = pricingSubheading.innerText.trim();
+        }
       }
       
       console.log("Extracted content from DOM:", Object.keys(extracted).length, "items");
