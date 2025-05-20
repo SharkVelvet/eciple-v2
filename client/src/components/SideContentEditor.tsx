@@ -102,9 +102,6 @@ export default function SideContentEditor() {
         // Solution section
         { key: "solution_heading", selector: "#solution h2" },
         { key: "solution_main_text", selector: "#solution p.text-lg" },
-        { key: "solution_point1", selector: "#solution .grid li:nth-child(1) p" },
-        { key: "solution_point2", selector: "#solution .grid li:nth-child(2) p" },
-        { key: "solution_point3", selector: "#solution .grid li:nth-child(3) p" },
         
         // Product section
         { key: "product_main_title", selector: "#product h2" },
@@ -197,6 +194,29 @@ export default function SideContentEditor() {
         if (solutionText instanceof HTMLElement) {
           extracted.solution_main_text = solutionText.innerText.trim();
         }
+      }
+      
+      // Try to get solution cards content
+      try {
+        // Get all the solution cards
+        const solutionCards = document.querySelectorAll('#solution .grid li');
+        if (solutionCards.length > 0) {
+          // Loop through the cards to extract titles and descriptions
+          solutionCards.forEach((card, index) => {
+            const titleEl = card.querySelector('h3');
+            const textEl = card.querySelector('p');
+            
+            if (titleEl instanceof HTMLElement) {
+              extracted[`solution_card_${index+1}_title`] = titleEl.innerText.trim();
+            }
+            
+            if (textEl instanceof HTMLElement) {
+              extracted[`solution_card_${index+1}_text`] = textEl.innerText.trim();
+            }
+          });
+        }
+      } catch (err) {
+        console.log("Error extracting solution card data:", err);
       }
       
       // Try to get product feature cards content

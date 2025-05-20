@@ -87,21 +87,39 @@ export const contentDefaults: ContentField[] = [
     section: "Solution Section"
   },
   {
-    key: "solution_point1",
-    label: "Solution Point 1",
-    defaultValue: "AI-powered matching helps connect mentors and mentees.",
+    key: "solution_card_1_title",
+    label: "Solution Card 1 Title",
+    defaultValue: "Matches mentors and mentees",
     section: "Solution Section"
   },
   {
-    key: "solution_point2",
-    label: "Solution Point 2",
-    defaultValue: "Progress tracking for both individuals and groups.",
+    key: "solution_card_1_text",
+    label: "Solution Card 1 Text",
+    defaultValue: "Connect people within churches and communities based on compatibility.",
     section: "Solution Section"
   },
   {
-    key: "solution_point3",
-    label: "Solution Point 3",
-    defaultValue: "Adaptive content to meet each person's unique spiritual journey.",
+    key: "solution_card_2_title",
+    label: "Solution Card 2 Title",
+    defaultValue: "Provides structured pathways",
+    section: "Solution Section"
+  },
+  {
+    key: "solution_card_2_text",
+    label: "Solution Card 2 Text",
+    defaultValue: "Offer robust tools and clear development paths for spiritual growth.",
+    section: "Solution Section"
+  },
+  {
+    key: "solution_card_3_title",
+    label: "Solution Card 3 Title",
+    defaultValue: "Empowers spiritual growth",
+    section: "Solution Section"
+  },
+  {
+    key: "solution_card_3_text",
+    label: "Solution Card 3 Text",
+    defaultValue: "Support the journey toward spiritual maturity with measurable progress.",
     section: "Solution Section"
   },
   
