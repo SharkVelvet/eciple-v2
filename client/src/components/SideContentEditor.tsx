@@ -12,6 +12,14 @@ export default function SideContentEditor() {
   const { toast } = useToast();
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("hero");
+  
+  // Function to scroll to the corresponding section when a tab is selected
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
   const [content, setContent] = useState<Record<string, string>>({});
   const [initialLoad, setInitialLoad] = useState(true);
   const [minimized, setMinimized] = useState(false);
@@ -326,7 +334,11 @@ export default function SideContentEditor() {
         
         <ScrollArea className="flex-1 p-4">
           <div className="space-y-4">
-            <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+            <Tabs value={activeTab} onValueChange={(value) => {
+              setActiveTab(value);
+              // Scroll to the corresponding section when tab is changed
+              scrollToSection(value);
+            }} className="w-full">
               <TabsList className="w-full bg-[#223349] mb-4 flex flex-wrap h-auto py-1 gap-1">
                 {Object.keys(contentSections).map(section => (
                   <TabsTrigger 
