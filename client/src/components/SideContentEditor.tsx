@@ -221,10 +221,42 @@ export default function SideContentEditor() {
       
       // Try to get product feature cards content
       try {
-        // Get all the product cards
-        const productCards = document.querySelectorAll('#product .grid .card');
-        if (productCards.length > 0) {
-          // Loop through the cards to extract titles and descriptions
+        const features = [
+          {
+            title: "Intelligent Assessments",
+            description: "Automated matching based on spiritual gifts, personality, and growth needs for optimal mentor/mentee pairing."
+          },
+          {
+            title: "Flexible Content Pathways",
+            description: "Structured yet customizable content journeys that adapt to individual spiritual growth needs."
+          },
+          {
+            title: "Integrated Communications",
+            description: "Built-in messaging, reminders, and scheduling tools to maintain consistent discipleship relationships."
+          },
+          {
+            title: "Centralized Analytics",
+            description: "Comprehensive dashboard for pastors with metrics on mentorship engagement, relationship duration, and content effectiveness."
+          },
+          {
+            title: "Church Management Integration",
+            description: "Seamless connection with existing church management systems for unified data and streamlined operations."
+          },
+          {
+            title: "Mobile-First Experience",
+            description: "Fully responsive design that works seamlessly across all devices for access anywhere, anytime."
+          }
+        ];
+        
+        // Map feature cards to content keys
+        features.forEach((feature, index) => {
+          extracted[`feature_card_${index+1}_title`] = feature.title;
+          extracted[`feature_card_${index+1}_text`] = feature.description;
+        });
+        
+        // Alternatively try to get them from the DOM
+        const productCards = document.querySelectorAll('#product .grid .card, #product .grid-cols-1 > div > div');
+        if (productCards && productCards.length > 0) {
           productCards.forEach((card, index) => {
             const titleEl = card.querySelector('h3');
             const textEl = card.querySelector('p');
