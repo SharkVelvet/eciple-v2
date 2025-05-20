@@ -15,9 +15,24 @@ export default function SideContentEditor() {
   
   // Function to scroll to the corresponding section when a tab is selected
   const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Map section IDs from the tab value to actual section IDs in the DOM
+    const sectionMap: Record<string, string> = {
+      'hero': 'hero',
+      'problem': 'problem',
+      'solution': 'solution',
+      'product': 'product',
+      'competition': 'competition',
+      'market': 'market',
+      'pricing': 'pricing',
+      'contact': 'contact'
+    };
+    
+    const targetId = sectionMap[sectionId.toLowerCase()];
+    if (targetId) {
+      const section = document.getElementById(targetId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     }
   };
   const [content, setContent] = useState<Record<string, string>>({});
@@ -215,34 +230,109 @@ export default function SideContentEditor() {
   // Function to update DOM elements directly
   const updateDOM = () => {
     try {
-      // Update elements for each content key
-      Object.entries(content).forEach(([key, value]) => {
-        const elements = document.querySelectorAll(`.${key.replace(/_/g, '-')}`);
-        elements.forEach(el => {
-          if (el instanceof HTMLElement) {
-            el.innerText = value;
-          }
-        });
+      // Define specific mappings for each section to ensure proper updating
+      const contentMappings = [
+        // Hero section
+        { key: 'hero_heading', selector: '.hero-heading' },
+        { key: 'hero_subheading', selector: '.hero-subheading' },
+        { key: 'hero_cta_text', selector: '.hero-button-text' },
+        
+        // Problem section
+        { key: 'problem_heading', selector: '.problem-heading' },
+        { key: 'problem_subheading', selector: '.problem-subheading' },
+        
+        // Solution section
+        { key: 'solution_heading', selector: '.solution-heading' },
+        { key: 'solution_main_text', selector: '.solution-subheading' },
+        
+        // Product section
+        { key: 'product_main_title', selector: '.product-heading' },
+        { key: 'product_main_text', selector: '.product-subheading' },
+        { key: 'centralized_title', selector: '#product .md\\:w-1\\/2 h3.text-2xl:first-of-type' },
+        { key: 'centralized_text', selector: '#product .md\\:w-1\\/2 p.text-foreground:first-of-type' },
+        { key: 'mobile_title', selector: '#product .md\\:w-1\\/2 h3.text-2xl:last-of-type' },
+        { key: 'mobile_text', selector: '#product .md\\:w-1\\/2 p.text-foreground:last-of-type' },
+        
+        // Competition section
+        { key: 'competition_heading', selector: '#competition h2' },
+        { key: 'competition_subheading', selector: '#competition p.text-lg' },
+        
+        // Market section
+        { key: 'market_heading', selector: '#market h2' },
+        { key: 'market_subheading', selector: '#market p.text-lg' },
+        
+        // Pricing section
+        { key: 'pricing_heading', selector: '#pricing h2' },
+        { key: 'pricing_subheading', selector: '#pricing p.text-lg' },
+        
+        // Contact section
+        { key: 'contact_heading', selector: '#contact h2' },
+        { key: 'contact_subheading', selector: '#contact p.text-lg' }
+      ];
+      
+      // Apply updates based on mappings
+      contentMappings.forEach(mapping => {
+        if (content[mapping.key]) {
+          const elements = document.querySelectorAll(mapping.selector);
+          elements.forEach(el => {
+            if (el instanceof HTMLElement) {
+              el.innerText = content[mapping.key];
+            }
+          });
+        }
       });
       
-      // Also update specific elements by class
-      if (content.hero_heading) {
-        document.querySelectorAll('.hero-heading').forEach(el => {
-          if (el instanceof HTMLElement) el.innerText = content.hero_heading;
-        });
+      // Fallback: try to update elements by class name pattern
+      Object.entries(content).forEach(([key, value]) => {
+        if (value && typeof value === 'string') {
+          const className = key.replace(/_/g, '-');
+          const elements = document.querySelectorAll(`.${className}`);
+          elements.forEach(el => {
+            if (el instanceof HTMLElement) {
+              el.innerText = value;
+            }
+          });
+        }
+      });
+      
+      // Update specific product fields by directly accessing components
+      try {
+        // Try to find elements by ID and update them if found
+        const productSection = document.getElementById('product');
+        if (productSection) {
+          // Update centralized title and text
+          if (content.centralized_title) {
+            const titles = productSection.querySelectorAll('h3.text-2xl');
+            if (titles.length > 0) {
+              titles[0].textContent = content.centralized_title;
+            }
+          }
+          
+          if (content.centralized_text) {
+            const paragraphs = productSection.querySelectorAll('p.text-foreground, p.text-opacity-80');
+            if (paragraphs.length > 0) {
+              paragraphs[0].textContent = content.centralized_text;
+            }
+          }
+          
+          // Update mobile title and text
+          if (content.mobile_title && titles.length > 1) {
+            titles[1].textContent = content.mobile_title;
+          }
+          
+          if (content.mobile_text && paragraphs.length > 1) {
+            paragraphs[1].textContent = content.mobile_text;
+          }
+        }
+      } catch (err) {
+        console.error("Error updating product-specific content:", err);
       }
       
-      if (content.hero_subheading) {
-        document.querySelectorAll('.hero-subheading').forEach(el => {
-          if (el instanceof HTMLElement) el.innerText = content.hero_subheading;
-        });
-      }
-      
-      if (content.hero_cta_text) {
-        document.querySelectorAll('.hero-button-text').forEach(el => {
-          if (el instanceof HTMLElement) el.innerText = content.hero_cta_text;
-        });
-      }
+      // Broadcast storage event to sync other tabs
+      window.dispatchEvent(new StorageEvent('storage', {
+        key: 'siteContent',
+        newValue: localStorage.getItem('siteContent')
+      }));
       
     } catch (error) {
       console.error("Error updating DOM:", error);
@@ -385,7 +475,7 @@ export default function SideContentEditor() {
             <Button
               variant="outline"
               onClick={() => setIsOpen(false)}
-              className="border-white/30 text-white hover:bg-white/10"
+              className="border-white/30 bg-white text-black hover:bg-white/90 hover:text-black"
             >
               <X className="h-4 w-4 mr-2" /> Cancel
             </Button>

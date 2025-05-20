@@ -380,8 +380,8 @@ export default function Home() {
           {/* Content editor with tabs for all sections */}
           <div className="space-y-3">
             <p className="text-white/60 text-sm">
-              Edit content using the editor to make changes to all sections of your website.
-              The side panel editor allows you to see the website as you edit.
+              Edit content using the side panel editor to make changes to all sections of your website.
+              This allows you to see the website as you edit.
             </p>
             <SideContentEditor />
           </div>
