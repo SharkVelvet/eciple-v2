@@ -75,15 +75,15 @@ export const contentDefaults: ContentField[] = [
   
   // Solution Section
   {
-    key: "solution_title",
-    label: "Solution Title",
-    defaultValue: "Transforming Church Communities",
+    key: "solution_heading",
+    label: "Solution Heading",
+    defaultValue: "The Solution",
     section: "Solution Section"
   },
   {
-    key: "solution_text",
-    label: "Solution Text",
-    defaultValue: "eciple provides churches with an integrated platform to facilitate intentional discipleship with measurable results.",
+    key: "solution_main_text",
+    label: "Solution Main Text",
+    defaultValue: "eciple is a comprehensive discipleship enablement platform that empowers churches to build stronger faith communities through intentional relationships.",
     section: "Solution Section"
   },
   {
@@ -107,45 +107,39 @@ export const contentDefaults: ContentField[] = [
   
   // Product Section
   {
-    key: "product_title",
-    label: "Product Title",
-    defaultValue: "Our Product",
+    key: "product_main_title",
+    label: "Product Main Title",
+    defaultValue: "Product Features",
     section: "Product Section"
   },
   {
-    key: "product_text",
-    label: "Product Description",
-    defaultValue: "A complete discipleship enablement platform built for modern churches.",
+    key: "product_main_text",
+    label: "Product Main Text",
+    defaultValue: "eciple provides a comprehensive set of tools for effective discipleship management and growth.",
     section: "Product Section"
   },
   {
-    key: "connect_title",
-    label: "Connect Feature Title",
-    defaultValue: "Connect",
+    key: "centralized_title",
+    label: "Centralized Dashboard Title",
+    defaultValue: "Centralized Dashboard",
     section: "Product Section"
   },
   {
-    key: "connect_text",
-    label: "Connect Feature Text",
-    defaultValue: "AI-powered matching helps connect mentors and mentees based on interests, goals, and spiritual maturity.",
+    key: "centralized_text",
+    label: "Centralized Dashboard Text",
+    defaultValue: "A robust backend for pastors and leaders to track discipleship relationships and growth.",
     section: "Product Section"
   },
   {
-    key: "track_title",
-    label: "Track Feature Title",
-    defaultValue: "Track",
+    key: "mobile_title",
+    label: "Mobile Experience Title",
+    defaultValue: "Mobile Experience",
     section: "Product Section"
   },
   {
-    key: "track_text",
-    label: "Track Feature Text",
-    defaultValue: "Measure progress and gain insights into the discipleship health of your church.",
-    section: "Product Section"
-  },
-  {
-    key: "grow_title",
-    label: "Grow Feature Title",
-    defaultValue: "Grow",
+    key: "mobile_text",
+    label: "Mobile Experience Text",
+    defaultValue: "A seamless mobile experience that keeps discipleship accessible wherever members are.",
     section: "Product Section"
   },
   {
