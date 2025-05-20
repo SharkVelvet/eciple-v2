@@ -21,9 +21,9 @@ export default function SideContentEditor() {
   // Get content sections
   const contentSections = getContentSections();
   
-  // Load content from localStorage on mount
+  // Load content from localStorage on mount or when editor is opened
   useEffect(() => {
-    if (initialLoad) {
+    if (initialLoad || isOpen) {
       try {
         // First, populate with defaults
         const defaultContent: Record<string, string> = {};
@@ -35,10 +35,13 @@ export default function SideContentEditor() {
         const savedContent = localStorage.getItem('siteContent');
         if (savedContent) {
           const parsed = JSON.parse(savedContent);
+          console.log("Loading current content from localStorage:", Object.keys(parsed).length, "items");
           // Merge with defaults
           setContent({ ...defaultContent, ...parsed });
         } else {
-          setContent(defaultContent);
+          // If no saved content, try to extract content from the DOM
+          const extractedContent = extractContentFromDOM();
+          setContent({ ...defaultContent, ...extractedContent });
         }
         
         setInitialLoad(false);
@@ -46,7 +49,69 @@ export default function SideContentEditor() {
         console.error("Error loading content:", error);
       }
     }
-  }, [initialLoad]);
+  }, [initialLoad, isOpen]);
+  
+  // Extract content from the DOM elements
+  const extractContentFromDOM = (): Record<string, string> => {
+    const extracted: Record<string, string> = {};
+    
+    try {
+      // Hero section
+      const heroHeading = document.querySelector('.hero-heading');
+      if (heroHeading instanceof HTMLElement) {
+        extracted.hero_heading = heroHeading.innerText;
+      }
+      
+      const heroSubheading = document.querySelector('.hero-subheading');
+      if (heroSubheading instanceof HTMLElement) {
+        extracted.hero_subheading = heroSubheading.innerText;
+      }
+      
+      const heroButtonText = document.querySelector('.hero-button-text');
+      if (heroButtonText instanceof HTMLElement) {
+        extracted.hero_cta_text = heroButtonText.innerText;
+      }
+      
+      // Problem section
+      const problemHeading = document.querySelector('.problem-heading');
+      if (problemHeading instanceof HTMLElement) {
+        extracted.problem_heading = problemHeading.innerText;
+      }
+      
+      const problemSubheading = document.querySelector('.problem-subheading');
+      if (problemSubheading instanceof HTMLElement) {
+        extracted.problem_subheading = problemSubheading.innerText;
+      }
+      
+      // Solution section
+      const solutionHeading = document.querySelector('.solution-heading');
+      if (solutionHeading instanceof HTMLElement) {
+        extracted.solution_heading = solutionHeading.innerText;
+      }
+      
+      const solutionSubheading = document.querySelector('.solution-subheading');
+      if (solutionSubheading instanceof HTMLElement) {
+        extracted.solution_subheading = solutionSubheading.innerText;
+      }
+      
+      // Product section
+      const productHeading = document.querySelector('.product-heading');
+      if (productHeading instanceof HTMLElement) {
+        extracted.product_heading = productHeading.innerText;
+      }
+      
+      const productSubheading = document.querySelector('.product-subheading');
+      if (productSubheading instanceof HTMLElement) {
+        extracted.product_subheading = productSubheading.innerText;
+      }
+      
+      console.log("Extracted content from DOM:", Object.keys(extracted).length, "items");
+    } catch (error) {
+      console.error("Error extracting content from DOM:", error);
+    }
+    
+    return extracted;
+  };
   
   // Function to handle input changes
   const handleInputChange = (key: string, value: string) => {
