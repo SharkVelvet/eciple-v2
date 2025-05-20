@@ -143,9 +143,75 @@ export const contentDefaults: ContentField[] = [
     section: "Product Section"
   },
   {
-    key: "grow_text",
-    label: "Grow Feature Text",
-    defaultValue: "Curated content and resources to foster spiritual growth at every stage.",
+    key: "feature_card_1_title",
+    label: "Feature 1 Title",
+    defaultValue: "Intelligent Assessments",
+    section: "Product Section"
+  },
+  {
+    key: "feature_card_1_text",
+    label: "Feature 1 Text",
+    defaultValue: "Automated matching based on spiritual gifts, personality, and growth needs for optimal mentor/mentee pairing.",
+    section: "Product Section"
+  },
+  {
+    key: "feature_card_2_title",
+    label: "Feature 2 Title",
+    defaultValue: "Flexible Content Pathways",
+    section: "Product Section"
+  },
+  {
+    key: "feature_card_2_text",
+    label: "Feature 2 Text",
+    defaultValue: "Structured yet customizable content journeys that adapt to individual spiritual growth needs.",
+    section: "Product Section"
+  },
+  {
+    key: "feature_card_3_title",
+    label: "Feature 3 Title",
+    defaultValue: "Integrated Communications",
+    section: "Product Section"
+  },
+  {
+    key: "feature_card_3_text",
+    label: "Feature 3 Text",
+    defaultValue: "Built-in messaging, reminders, and scheduling tools to maintain consistent discipleship relationships.",
+    section: "Product Section"
+  },
+  {
+    key: "feature_card_4_title",
+    label: "Feature 4 Title",
+    defaultValue: "Centralized Analytics",
+    section: "Product Section"
+  },
+  {
+    key: "feature_card_4_text",
+    label: "Feature 4 Text",
+    defaultValue: "Comprehensive dashboard for pastors with metrics on mentorship engagement, relationship duration, and content effectiveness.",
+    section: "Product Section"
+  },
+  {
+    key: "feature_card_5_title",
+    label: "Feature 5 Title",
+    defaultValue: "Church Management Integration",
+    section: "Product Section"
+  },
+  {
+    key: "feature_card_5_text",
+    label: "Feature 5 Text",
+    defaultValue: "Seamless connection with existing church management systems for unified data and streamlined operations.",
+    section: "Product Section"
+  },
+  {
+    key: "feature_card_6_title",
+    label: "Feature 6 Title",
+    defaultValue: "Mobile-First Experience",
+    section: "Product Section"
+  },
+  {
+    key: "feature_card_6_text",
+    label: "Feature 6 Text",
+    defaultValue: "Fully responsive design that works seamlessly across all devices for access anywhere, anytime.",
     section: "Product Section"
   },
   

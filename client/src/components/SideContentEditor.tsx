@@ -114,6 +114,20 @@ export default function SideContentEditor() {
         { key: "mobile_title", selector: "#product .md\\:w-1\\/2 h3.text-2xl:last-of-type" },
         { key: "mobile_text", selector: "#product .md\\:w-1\\/2 p.text-foreground:last-of-type" },
         
+        // Product feature cards - using more specific class-based selectors
+        { key: "feature_card_1_title", selector: "#product .grid h3:nth-of-type(1)" },
+        { key: "feature_card_1_text", selector: "#product .grid p.text-muted-foreground:nth-of-type(1)" },
+        { key: "feature_card_2_title", selector: "#product .grid h3:nth-of-type(2)" },
+        { key: "feature_card_2_text", selector: "#product .grid p.text-muted-foreground:nth-of-type(2)" },
+        { key: "feature_card_3_title", selector: "#product .grid h3:nth-of-type(3)" },
+        { key: "feature_card_3_text", selector: "#product .grid p.text-muted-foreground:nth-of-type(3)" },
+        { key: "feature_card_4_title", selector: "#product .grid h3:nth-of-type(4)" },
+        { key: "feature_card_4_text", selector: "#product .grid p.text-muted-foreground:nth-of-type(4)" },
+        { key: "feature_card_5_title", selector: "#product .grid h3:nth-of-type(5)" },
+        { key: "feature_card_5_text", selector: "#product .grid p.text-muted-foreground:nth-of-type(5)" },
+        { key: "feature_card_6_title", selector: "#product .grid h3:nth-of-type(6)" },
+        { key: "feature_card_6_text", selector: "#product .grid p.text-muted-foreground:nth-of-type(6)" },
+        
         // Competition section
         { key: "competition_heading", selector: "#competition h2" },
         { key: "competition_subheading", selector: "#competition p.text-lg" },
@@ -183,6 +197,29 @@ export default function SideContentEditor() {
         if (solutionText instanceof HTMLElement) {
           extracted.solution_main_text = solutionText.innerText.trim();
         }
+      }
+      
+      // Try to get product feature cards content
+      try {
+        // Get all the product cards
+        const productCards = document.querySelectorAll('#product .grid .card');
+        if (productCards.length > 0) {
+          // Loop through the cards to extract titles and descriptions
+          productCards.forEach((card, index) => {
+            const titleEl = card.querySelector('h3');
+            const textEl = card.querySelector('p');
+            
+            if (titleEl instanceof HTMLElement) {
+              extracted[`feature_card_${index+1}_title`] = titleEl.innerText.trim();
+            }
+            
+            if (textEl instanceof HTMLElement) {
+              extracted[`feature_card_${index+1}_text`] = textEl.innerText.trim();
+            }
+          });
+        }
+      } catch (err) {
+        console.log("Error extracting product card data:", err);
       }
       
       // Try to get content from admin context directly
