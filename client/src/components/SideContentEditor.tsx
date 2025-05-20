@@ -90,21 +90,25 @@ export default function SideContentEditor() {
       // Map component keys to DOM selectors and content values
       const mappings = [
         // Hero section
-        { key: "hero_heading", selector: ".hero-heading" },
-        { key: "hero_subheading", selector: ".hero-subheading" },
-        { key: "hero_cta_text", selector: ".hero-button-text" },
+        { key: "hero_heading", selector: "#hero h1, #hero .text-4xl" },
+        { key: "hero_subheading", selector: "#hero p.text-xl, #hero p.text-2xl" },
+        { key: "hero_cta_text", selector: "#hero .button" },
         
         // Problem section
-        { key: "problem_heading", selector: ".problem-heading" },
-        { key: "problem_subheading", selector: ".problem-subheading" },
+        { key: "problem_text", selector: "#problem .max-w-3xl p.text-lg" },
+        { key: "bottom_line_title", selector: "#problem h3.text-2xl" },
+        { key: "bottom_line_text", selector: "#problem .text-xl" },
         
         // Solution section
-        { key: "solution_heading", selector: ".solution-heading" },
-        { key: "solution_main_text", selector: ".solution-subheading" },
+        { key: "solution_heading", selector: "#solution h2" },
+        { key: "solution_main_text", selector: "#solution p.text-lg" },
+        { key: "solution_point1", selector: "#solution .grid li:nth-child(1) p" },
+        { key: "solution_point2", selector: "#solution .grid li:nth-child(2) p" },
+        { key: "solution_point3", selector: "#solution .grid li:nth-child(3) p" },
         
         // Product section
-        { key: "product_main_title", selector: ".product-heading" },
-        { key: "product_main_text", selector: ".product-subheading" },
+        { key: "product_main_title", selector: "#product h2" },
+        { key: "product_main_text", selector: "#product p.text-lg" },
         { key: "centralized_title", selector: "#product .md\\:w-1\\/2 h3.text-2xl:first-of-type" },
         { key: "centralized_text", selector: "#product .md\\:w-1\\/2 p.text-foreground:first-of-type" },
         { key: "mobile_title", selector: "#product .md\\:w-1\\/2 h3.text-2xl:last-of-type" },
@@ -117,10 +121,12 @@ export default function SideContentEditor() {
         // Pricing section
         { key: "pricing_heading", selector: "#pricing h2" },
         { key: "pricing_subheading", selector: "#pricing p.text-lg" },
-        
-        // Market section
-        { key: "market_heading", selector: "#market h2" },
-        { key: "market_subheading", selector: "#market p.text-lg" },
+        { key: "starter_title", selector: "#pricing .pricing-card:nth-child(1) h3" },
+        { key: "starter_price", selector: "#pricing .pricing-card:nth-child(1) .text-3xl" },
+        { key: "pro_title", selector: "#pricing .pricing-card:nth-child(2) h3" },
+        { key: "pro_price", selector: "#pricing .pricing-card:nth-child(2) .text-3xl" },
+        { key: "enterprise_title", selector: "#pricing .pricing-card:nth-child(3) h3" },
+        { key: "enterprise_price", selector: "#pricing .pricing-card:nth-child(3) .text-3xl" },
         
         // Contact section
         { key: "contact_heading", selector: "#contact h2" },
