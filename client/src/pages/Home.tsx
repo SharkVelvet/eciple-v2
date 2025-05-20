@@ -10,7 +10,7 @@ import Market from "@/components/Market";
 import Pricing from "@/components/Pricing";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import FullContentEditor from "@/components/FullContentEditor";
+import SideContentEditor from "@/components/SideContentEditor";
 import { Button } from "@/components/ui/button";
 import { ArrowUp, LogOut, Edit, Save, X, FileDown } from "lucide-react";
 import {
@@ -377,12 +377,13 @@ export default function Home() {
       {/* Template tools panel */}
       {showTemplateTools && !editMode && (
         <div className="mt-3 pb-1 border-t border-white/20 pt-3">
-          {/* Full content editor with tabs for all sections */}
+          {/* Content editor with tabs for all sections */}
           <div className="space-y-3">
             <p className="text-white/60 text-sm">
-              Edit content using the editor below to make changes to all sections of your website.
+              Edit content using the editor to make changes to all sections of your website.
+              The side panel editor allows you to see the website as you edit.
             </p>
-            <FullContentEditor />
+            <SideContentEditor />
           </div>
         </div>
       )}
