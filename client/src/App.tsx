@@ -7,6 +7,7 @@ import Home from "@/pages/Home";
 import AuthPage from "@/pages/auth-page";
 import InvestorDashboard from "@/pages/investor-dashboard";
 import WelcomePage from "@/pages/welcome-page";
+import ComparisonPage from "@/pages/ComparisonPage";
 import NotFound from "@/pages/not-found";
 import { AuthProvider } from "@/hooks/use-auth";
 import { ProtectedRoute } from "@/lib/protected-route";
@@ -19,6 +20,9 @@ function Router() {
       
       {/* Main site (protected by welcome page authentication) */}
       <Route path="/home" component={Home} />
+      
+      {/* Comparison page */}
+      <Route path="/comparison" component={ComparisonPage} />
       
       {/* Investor portal authentication */}
       <Route path="/auth" component={AuthPage} />
