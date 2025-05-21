@@ -58,7 +58,7 @@ export default function Solution() {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-6 solution-heading">The Solution</h2>
+            <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-6 solution-heading">The One-To-One Discipleship Enablement Platform</h2>
             {editMode && isAdmin ? (
               <Textarea
                 value={getSolutionMainText()}
