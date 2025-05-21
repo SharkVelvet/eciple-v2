@@ -26,9 +26,14 @@ export default function Pricing() {
   const getPrice = (monthlyPrice: number) => {
     if (isAnnual) {
       const annualPrice = monthlyPrice * 12 * 0.85; // 15% discount
-      return `$${Math.round(annualPrice / 12)}`;
+      return `$${Math.round(annualPrice)}`;
     }
     return `$${monthlyPrice}`;
+  };
+  
+  // Get the pricing period text
+  const getPricingPeriod = () => {
+    return isAnnual ? "/annual" : "/month";
   };
   const plans = [
     {
@@ -158,7 +163,7 @@ export default function Pricing() {
                   <CardTitle className={`text-xl font-bold ${plan.popular ? 'text-white' : 'text-primary'}`}>{plan.name}</CardTitle>
                   <div className="mt-4">
                     <span className={`text-3xl font-bold ${plan.popular ? 'text-white' : ''}`}>{getPrice(plan.monthlyPrice)}</span>
-                    <span className={`${plan.popular ? 'text-white text-opacity-90' : 'text-foreground text-opacity-70'}`}>/month</span>
+                    <span className={`${plan.popular ? 'text-white text-opacity-90' : 'text-foreground text-opacity-70'}`}>{getPricingPeriod()}</span>
                   </div>
                   <p className={`mt-2 ${plan.popular ? 'text-white text-opacity-90' : 'text-foreground text-opacity-60'}`}>{plan.description}</p>
                 </CardHeader>

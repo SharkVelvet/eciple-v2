@@ -239,7 +239,7 @@ export default function Contact() {
                   </div>
                   
                   <div className="mb-6 space-y-2">
-                    <Label htmlFor="message">What interests you most about eciple?</Label>
+                    <Label htmlFor="message">Questions/Comments - What interests you most about eciple?</Label>
                     <Textarea 
                       id="message" 
                       name="message"
