@@ -19,7 +19,7 @@ export const contentDefaults: ContentField[] = [
   {
     key: "hero_subheading",
     label: "Subheading",
-    defaultValue: "Revolutionizing how churches connect, disciple, and grow their communities through intentional relationships.",
+    defaultValue: "Finally, there's a comprehensive tech solution that easily enables any church or ministry to build and manage one-to-one discipleship programs, regardless of audience size.",
     section: "Hero Section"
   },
   {
