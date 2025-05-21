@@ -21,11 +21,11 @@ export default function Pricing() {
     "Simple, transparent pricing that scales with your church.";
   const plans = [
     {
-      name: "Starter",
+      name: "Small Churches",
       price: "$99",
-      description: "For smaller churches",
+      description: "Under 250 members",
       features: [
-        "Up to 100 active users",
+        "Complete one-to-one discipleship platform",
         "Core matching capabilities",
         "Basic analytics dashboard",
         "Standard content library",
@@ -34,11 +34,11 @@ export default function Pricing() {
       popular: false
     },
     {
-      name: "Growth",
-      price: "$249",
-      description: "For mid-sized churches",
+      name: "Medium Churches",
+      price: "$299",
+      description: "250-750 members",
       features: [
-        "Up to 500 active users",
+        "Everything in Small Churches plan",
         "Advanced matching algorithm",
         "Comprehensive analytics",
         "Full content library + customization",
@@ -48,11 +48,11 @@ export default function Pricing() {
       popular: true
     },
     {
-      name: "Enterprise",
+      name: "Large Churches",
       price: "$499",
-      description: "For large churches",
+      description: "750+ members",
       features: [
-        "Unlimited users",
+        "Everything in Medium Churches plan",
         "Premium matching & assessments",
         "Advanced analytics & reporting",
         "Custom content creation",
@@ -66,16 +66,16 @@ export default function Pricing() {
 
   const businessStats = [
     {
-      title: "3-Tiered Pricing",
-      description: "Flexible model based on church size and needs"
+      title: "Church Size Based",
+      description: "Pricing scales with your congregation size"
     },
     {
-      title: "Break-Even Point",
-      description: "291 churches needed to cover estimated $575K annual costs"
+      title: "All-Inclusive Features",
+      description: "No hidden fees or add-on costs for core features"
     },
     {
-      title: "Revenue Potential",
-      description: "$2.3M projected by Year 3"
+      title: "Annual Discounts",
+      description: "Save up to 15% with annual payment plans"
     }
   ];
 
