@@ -148,36 +148,7 @@ export default function Contact() {
                 ))}
               </ul>
               
-              {/* Founder information */}
-              <div className="mt-8 flex flex-col sm:flex-row items-center gap-4 bg-white/5 p-4 rounded-lg">
-                <div className="w-24 h-24 rounded-full overflow-hidden flex-shrink-0">
-                  <img 
-                    src={bobbyPersonImage} 
-                    alt="Bobby Bemis" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold mb-1">
-                    {editMode && isAdmin ? (
-                      <Input
-                        type="text"
-                        value={getFounderTitle()}
-                        onChange={(e) => updateContent(founderTitle, e.target.value)}
-                        className="text-white bg-transparent border-white/20"
-                      />
-                    ) : (
-                      getFounderTitle()
-                    )}
-                  </h4>
-                  <p className="text-white text-opacity-80 mb-2">
-                    Call / Text: 813.400.9384
-                  </p>
-                  <p className="text-white text-opacity-80">
-                    Email: bobby@eciple.com
-                  </p>
-                </div>
-              </div>
+
             </motion.div>
           </motion.div>
           
@@ -189,7 +160,8 @@ export default function Contact() {
           >
             <Card className="shadow-xl">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold font-sans text-primary mb-6">Request More Information</h3>
+                <h3 className="text-2xl font-semibold font-sans text-primary mb-3">Request More Information</h3>
+                <p className="text-gray-600 mb-6">For questions, comments or to stay up to date, please complete the below form.</p>
                 <form onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div className="space-y-2">
@@ -249,7 +221,7 @@ export default function Contact() {
                   </div>
                   
                   <div className="mb-4 space-y-2">
-                    <Label htmlFor="churchSize">Church Size</Label>
+                    <Label htmlFor="churchSize">Church/Organization Size</Label>
                     <Select 
                       onValueChange={handleSelectChange}
                       value={formData.churchSize}
@@ -258,10 +230,9 @@ export default function Contact() {
                         <SelectValue placeholder="Select Size" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="small">Small (Less than 100)</SelectItem>
-                        <SelectItem value="medium">Medium (100-500)</SelectItem>
-                        <SelectItem value="large">Large (500-2,000)</SelectItem>
-                        <SelectItem value="mega">Mega (2,000+)</SelectItem>
+                        <SelectItem value="small">Small (Less than 250)</SelectItem>
+                        <SelectItem value="medium">Medium (250-750)</SelectItem>
+                        <SelectItem value="large">Large (750+)</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>

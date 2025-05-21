@@ -157,7 +157,7 @@ export default function Pricing() {
                 <CardHeader className={`text-center ${plan.popular ? 'bg-primary' : 'bg-gray-50'}`}>
                   <CardTitle className={`text-xl font-bold ${plan.popular ? 'text-white' : 'text-primary'}`}>{plan.name}</CardTitle>
                   <div className="mt-4">
-                    <span className={`text-3xl font-bold ${plan.popular ? 'text-white' : ''}`}>{plan.price}</span>
+                    <span className={`text-3xl font-bold ${plan.popular ? 'text-white' : ''}`}>{getPrice(plan.monthlyPrice)}</span>
                     <span className={`${plan.popular ? 'text-white text-opacity-90' : 'text-foreground text-opacity-70'}`}>/month</span>
                   </div>
                   <p className={`mt-2 ${plan.popular ? 'text-white text-opacity-90' : 'text-foreground text-opacity-60'}`}>{plan.description}</p>
