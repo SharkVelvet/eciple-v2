@@ -2,14 +2,16 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AdminContext } from "@/pages/Home";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { Switch } from "@/components/ui/switch";
 
 export default function Pricing() {
   // Access admin context
   const { isAdmin, editMode, editableContent, updateContent } = useContext(AdminContext);
+  const [isAnnual, setIsAnnual] = useState(false);
   
   // Define editable text content keys
   const pricingTitle = "pricing_title";
@@ -19,10 +21,19 @@ export default function Pricing() {
   const getPricingTitle = () => editableContent[pricingTitle] || "Flexible Pricing Options";
   const getPricingSubtitle = () => editableContent[pricingSubtitle] || 
     "Simple, transparent pricing that scales with your church.";
+    
+  // Calculate price with annual discount
+  const getPrice = (monthlyPrice: number) => {
+    if (isAnnual) {
+      const annualPrice = monthlyPrice * 12 * 0.85; // 15% discount
+      return `$${Math.round(annualPrice / 12)}`;
+    }
+    return `$${monthlyPrice}`;
+  };
   const plans = [
     {
       name: "Small Churches",
-      price: "$99",
+      monthlyPrice: 99,
       description: "Under 250 members",
       features: [
         "Complete one-to-one discipleship platform",
@@ -35,7 +46,7 @@ export default function Pricing() {
     },
     {
       name: "Medium Churches",
-      price: "$299",
+      monthlyPrice: 299,
       description: "250-750 members",
       features: [
         "Everything in Small Churches plan",
@@ -49,7 +60,7 @@ export default function Pricing() {
     },
     {
       name: "Large Churches",
-      price: "$499",
+      monthlyPrice: 499,
       description: "750+ members",
       features: [
         "Everything in Medium Churches plan",
@@ -112,6 +123,17 @@ export default function Pricing() {
               {getPricingSubtitle()}
             </p>
           )}
+          
+          <div className="flex items-center justify-center mt-6 space-x-2">
+            <span className={`text-sm ${!isAnnual ? 'font-semibold text-primary' : 'text-foreground text-opacity-70'}`}>Monthly</span>
+            <Switch 
+              checked={isAnnual}
+              onCheckedChange={setIsAnnual}
+            />
+            <span className={`text-sm ${isAnnual ? 'font-semibold text-primary' : 'text-foreground text-opacity-70'}`}>
+              Annual <span className="ml-1 text-xs bg-accent text-white rounded-full px-2 py-0.5">Save 15%</span>
+            </span>
+          </div>
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
