@@ -230,9 +230,10 @@ export default function Contact() {
                         <SelectValue placeholder="Select Size" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="small">Small (Less than 250)</SelectItem>
-                        <SelectItem value="medium">Medium (250-750)</SelectItem>
-                        <SelectItem value="large">Large (750+)</SelectItem>
+                        <SelectItem value="small">Under 250</SelectItem>
+                        <SelectItem value="medium">250-750</SelectItem>
+                        <SelectItem value="large">Over 750</SelectItem>
+                        <SelectItem value="xlarge">Over 2000</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
