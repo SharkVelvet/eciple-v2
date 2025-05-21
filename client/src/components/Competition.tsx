@@ -101,7 +101,83 @@ export default function Competition() {
         </motion.div>
         
         <motion.div 
-          className="mt-12"
+          className="overflow-x-auto mt-16"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-5%" }}
+          transition={{ delay: 0.15, duration: 0.35, ease: "easeOut" }}
+        >
+          <h3 className="text-2xl font-semibold font-sans text-primary mb-6 text-center">Current Discipleship Providers vs. eciple Discipleship Enablement Platform</h3>
+          <Table className="min-w-full">
+            <TableHeader>
+              <TableRow className="bg-[#223349] hover:bg-[#223349]">
+                <TableHead className="text-white">Comparison Factor</TableHead>
+                <TableHead className="text-center text-white">Current Providers</TableHead>
+                <TableHead className="text-center text-white">
+                  <span className="inline-block relative px-4 py-1">
+                    <span className="absolute inset-0 rounded-full bg-[#15BEE2]/40 animate-pulse"></span>
+                    <span className="relative z-10 font-semibold">eciple Platform</span>
+                  </span>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow className="bg-gray-50">
+                <TableCell className="font-medium">Model</TableCell>
+                <TableCell>Group-Focused (Curriculum Driven Discipleship)</TableCell>
+                <TableCell className="bg-gradient-to-b from-[#15BEE2]/10 to-white">Exclusively One-to-One Focused (Relationship Driven Discipleship)</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">Purpose</TableCell>
+                <TableCell>Christian education and building a knowledge base in group settings</TableCell>
+                <TableCell className="bg-gradient-to-b from-[#15BEE2]/10 to-white">Individualized mentoring to foster spiritual growth and change</TableCell>
+              </TableRow>
+              <TableRow className="bg-gray-50">
+                <TableCell className="font-medium">Operation</TableCell>
+                <TableCell>Content disjointed from church management, manual processes</TableCell>
+                <TableCell className="bg-gradient-to-b from-[#15BEE2]/10 to-white">Platform integrated into church management, automated processes</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">Technology</TableCell>
+                <TableCell>Tech for content delivery only - Zero One-to-One Functionality</TableCell>
+                <TableCell className="bg-gradient-to-b from-[#15BEE2]/10 to-white">Purpose-Built, Comprehensive One-to-One Technology Platform</TableCell>
+              </TableRow>
+              <TableRow className="bg-gray-50">
+                <TableCell className="font-medium">Programs</TableCell>
+                <TableCell>Limited to off-the-shelf, provider-defined options</TableCell>
+                <TableCell className="bg-gradient-to-b from-[#15BEE2]/10 to-white">Easy-to-use, fully custom program creation tools</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">Pathways</TableCell>
+                <TableCell>Predefined, Locked-Down, Inflexible Pathway Steps</TableCell>
+                <TableCell className="bg-gradient-to-b from-[#15BEE2]/10 to-white">Easy pathway creation with fully custom steps and activities</TableCell>
+              </TableRow>
+              <TableRow className="bg-gray-50">
+                <TableCell className="font-medium">Learning</TableCell>
+                <TableCell>Content Overload: Searching and Vetting Burden</TableCell>
+                <TableCell className="bg-gradient-to-b from-[#15BEE2]/10 to-white">Efficient Content: Integrated authoring for custom/existing content</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">Theology</TableCell>
+                <TableCell>Theological Positions Defined and Dictated by Provider</TableCell>
+                <TableCell className="bg-gradient-to-b from-[#15BEE2]/10 to-white">Theological Positions Defined and Personalized by Ministry</TableCell>
+              </TableRow>
+              <TableRow className="bg-gray-50">
+                <TableCell className="font-medium">Control</TableCell>
+                <TableCell>3rd party providers have full control</TableCell>
+                <TableCell className="bg-gradient-to-b from-[#15BEE2]/10 to-white">Ministry has full control</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell className="font-medium">Measurement</TableCell>
+                <TableCell>Aggregated group data (attendance, etc.)</TableCell>
+                <TableCell className="bg-gradient-to-b from-[#15BEE2]/10 to-white">Individualized spiritual growth and faith journey</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </motion.div>
+
+        <motion.div 
+          className="mt-16"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
