@@ -124,7 +124,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-white text-opacity-70 mb-4">
-              Transforming discipleship through innovative technology and intentional relationships.
+              Igniting a self-replicating one-to-one discipleship movement through our purpose built technology.
             </p>
             <div className="flex space-x-4">
               {links.social.map((item, index) => (
