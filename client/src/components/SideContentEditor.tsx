@@ -4,9 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Edit, Save, X, RefreshCw, Minimize, ChevronLeft, ChevronRight } from "lucide-react";
+import { Edit, Save, X, RefreshCw, Minimize, ChevronLeft, ChevronRight, Download } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { contentDefaults, getContentSections } from '@/lib/contentDefaults';
+import { downloadDocx } from '@/lib/docGenerator';
 
 export default function SideContentEditor() {
   const { toast } = useToast();
