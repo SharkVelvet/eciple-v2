@@ -155,6 +155,123 @@ export default function ComparisonPage() {
           </div>
         </section>
 
+        {/* Problem Section */}
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-[1180px] mx-auto px-4">
+            <motion.div 
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-4">The Problem with Current Solutions</h2>
+              <p className="text-lg max-w-3xl mx-auto text-foreground text-opacity-80">
+                Traditional discipleship platforms fail to address the unique needs of one-to-one mentoring relationships
+              </p>
+            </motion.div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                <Card className="h-full hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <X className="h-6 w-6 text-red-500 mr-2" />
+                      <h3 className="text-lg font-semibold text-primary">Rigid Group-Based Systems</h3>
+                    </div>
+                    <p className="text-foreground text-opacity-80">
+                      Most existing discipleship tools are designed around inflexible, pre-packaged content intended for group settings, not adaptable one-to-one mentoring.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <Card className="h-full hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <X className="h-6 w-6 text-red-500 mr-2" />
+                      <h3 className="text-lg font-semibold text-primary">Lack of One-to-One Mentoring Support</h3>
+                    </div>
+                    <p className="text-foreground text-opacity-80">
+                      Current solutions fail to offer technology that enables and scales personalized one-to-one mentoring relationships.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                <Card className="h-full hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <X className="h-6 w-6 text-red-500 mr-2" />
+                      <h3 className="text-lg font-semibold text-primary">Outdated Technology Infrastructure</h3>
+                    </div>
+                    <p className="text-foreground text-opacity-80">
+                      Ministries are forced to use outdated and rigid platforms that do not reflect the modern effectiveness of individualized mentoring.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="md:col-span-2 lg:col-span-1"
+              >
+                <Card className="h-full hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <X className="h-6 w-6 text-red-500 mr-2" />
+                      <h3 className="text-lg font-semibold text-primary">Inability to Scale Personal Mentorship</h3>
+                    </div>
+                    <p className="text-foreground text-opacity-80">
+                      No existing tools provide the infrastructure needed to support large-scale one-to-one discipleship across diverse ministry contexts.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="md:col-span-2"
+              >
+                <Card className="h-full hover:shadow-lg transition-shadow border-2 border-accent bg-gradient-to-br from-accent/5 to-accent/10">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <Check className="h-6 w-6 text-green-500 mr-2" />
+                      <h3 className="text-lg font-semibold text-primary">eciple's Differentiated Approach</h3>
+                    </div>
+                    <p className="text-foreground text-opacity-80">
+                      eciple is a fundamentally different platform—built from the ground up to empower and scale personalized, one-to-one discipleship relationships.
+                    </p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
         {/* Comparison Chart Section */}
         <section id="comparison" className="py-16 bg-white scroll-mt-20">
           <div className="max-w-[1180px] mx-auto px-4">
