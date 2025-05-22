@@ -518,7 +518,7 @@ export default function SideContentEditor() {
 
     try {
       toast({
-        title: "Processing Document",
+        title: "🔄 Processing Document",
         description: "Reading client feedback and updating content...",
       });
 
@@ -529,18 +529,17 @@ export default function SideContentEditor() {
       const newContent = { ...content, ...updatedContent };
       setContent(newContent);
       
-      // Save to localStorage
-      localStorage.setItem('siteContent', JSON.stringify({
-        ...newContent,
-        timestamp: Date.now()
-      }));
+      // Save to localStorage without timestamp
+      localStorage.setItem('siteContent', JSON.stringify(newContent));
       
-      // Update DOM immediately
-      updateDOM();
+      // Force a page reload to ensure all changes are applied
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
       
       toast({
-        title: "Content Updated Successfully!",
-        description: `Applied ${Object.keys(updatedContent).length} content changes from client feedback.`,
+        title: "✅ Content Updated Successfully!",
+        description: `Applied ${Object.keys(updatedContent).length} content changes. Page will refresh to apply changes.`,
       });
       
       // Clear the file input
@@ -549,7 +548,7 @@ export default function SideContentEditor() {
     } catch (error) {
       console.error("Error processing document:", error);
       toast({
-        title: "Upload Failed",
+        title: "❌ Upload Failed",
         description: "There was an error processing the document. Please try again.",
         variant: "destructive",
       });
@@ -578,13 +577,15 @@ export default function SideContentEditor() {
           : 'translate-x-0'
       }`}
     >
-      {/* Minimized mode indicator */}
+      {/* Minimized mode indicator - much more visible */}
       {minimized && (
         <div 
-          className={`absolute top-1/2 ${position === 'right' ? 'left-0' : 'right-0'} -translate-y-1/2 bg-[#15BEE2] text-white p-2 ${position === 'right' ? 'rounded-l-md' : 'rounded-r-md'} cursor-pointer shadow-lg`}
+          className={`absolute top-1/2 ${position === 'right' ? 'left-0' : 'right-0'} -translate-y-1/2 bg-[#15BEE2] text-white p-3 ${position === 'right' ? 'rounded-l-lg' : 'rounded-r-lg'} cursor-pointer shadow-xl border-2 border-white/20 hover:bg-[#0368C1] transition-all duration-200 z-50`}
           onClick={toggleMinimized}
+          title="Show Content Editor"
         >
-          {position === 'right' ? <ChevronLeft className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
+          {position === 'right' ? <ChevronLeft className="h-6 w-6" /> : <ChevronRight className="h-6 w-6" />}
+          <div className="text-xs mt-1 font-medium">EDIT</div>
         </div>
       )}
       
