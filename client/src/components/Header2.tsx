@@ -30,6 +30,7 @@ export default function Header2() {
 
   const navItems = [
     { name: "Problem", href: "#problem", icon: <Lightbulb className="h-4 w-4" /> },
+    { name: "Solution", href: "#solution", icon: <CheckCircle className="h-4 w-4" /> },
     { name: "Comparison", href: "#comparison", icon: <Trophy className="h-4 w-4" /> },
     { name: "Pricing", href: "#pricing", icon: <DollarSign className="h-4 w-4" /> }
   ];
@@ -47,14 +48,19 @@ export default function Header2() {
           {/* Logo - Left aligned */}
           <div className="flex-none">
             <a href="#top" className="scroll-smooth">
-              <div className="flex items-center space-x-3 cursor-pointer">
-                <img 
-                  src={ecipleLogo} 
-                  alt="eciple logo" 
-                  className="h-8 w-auto object-contain" 
-                />
-                <span className="text-white text-lg font-medium">
-                  Discipleship Reimagined
+              <div className="flex flex-col cursor-pointer">
+                <div className="flex items-center space-x-3">
+                  <img 
+                    src={ecipleLogo} 
+                    alt="eciple logo" 
+                    className="h-8 w-auto object-contain" 
+                  />
+                  <span className="text-white text-lg font-medium">
+                    Discipleship Reimagined
+                  </span>
+                </div>
+                <span className="text-white text-opacity-70 text-xs ml-11 -mt-1">
+                  Igniting Spiritual Growth
                 </span>
               </div>
             </a>
@@ -66,7 +72,14 @@ export default function Header2() {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-white hover:text-accent transition-colors duration-200 text-sm font-medium"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.querySelector(item.href);
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }}
+                className="text-white hover:text-accent transition-colors duration-200 text-sm font-medium cursor-pointer"
               >
                 {item.name}
               </a>
@@ -130,8 +143,15 @@ export default function Header2() {
                 <a
                   key={item.name}
                   href={item.href}
-                  onClick={closeMobileMenu}
-                  className="flex items-center space-x-3 text-white hover:text-accent transition-colors duration-200 py-3 px-4 rounded-lg hover:bg-white/5"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const element = document.querySelector(item.href);
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                    closeMobileMenu();
+                  }}
+                  className="flex items-center space-x-3 text-white hover:text-accent transition-colors duration-200 py-3 px-4 rounded-lg hover:bg-white/5 cursor-pointer"
                 >
                   {item.icon}
                   <span>{item.name}</span>
