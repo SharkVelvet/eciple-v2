@@ -371,8 +371,25 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
         console.log(`Found ${lines.length} lines to process`);
         
         for (const line of lines) {
-          // Look for tab-separated or space-separated columns
-          const parts = line.split(/\t+/).map(part => part.trim()).filter(part => part.length > 0);
+          // Try multiple splitting strategies to find 3-column structure
+          let parts: string[] = [];
+          
+          // Strategy 1: Split by tabs
+          parts = line.split(/\t+/).map(part => part.trim()).filter(part => part.length > 0);
+          
+          // Strategy 2: If not enough parts, try splitting by multiple spaces
+          if (parts.length < 3) {
+            parts = line.split(/\s{3,}/).map(part => part.trim()).filter(part => part.length > 0);
+          }
+          
+          // Strategy 3: If still not enough, try looking for specific patterns
+          if (parts.length < 3 && line.includes('Main Heading')) {
+            // Look for text after "Main Heading" that might be the new content
+            const match = line.match(/Main Heading.*?([A-Za-z].*)/);
+            if (match && match[1]) {
+              parts = ['Main Heading', 'current', match[1].trim()];
+            }
+          }
           
           if (parts.length >= 3) {
             const fieldName = parts[0].toLowerCase();
