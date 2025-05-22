@@ -383,11 +383,27 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
           const thirdLine = lines[i + 2].trim();
           
           // Look for field name patterns
-          if (currentLine === 'Main Heading') {
-            // Next line is current content, third line is new content
-            if (thirdLine && thirdLine.length > 3 && thirdLine !== nextLine) {
-              updates['hero_heading'] = thirdLine;
-              console.log(`Applied hero_heading: "${thirdLine}"`);
+          if (currentLine.includes('Main Heading')) {
+            // Skip the (key: hero_heading) line and get the line after current content
+            let newContentLine = '';
+            for (let j = i + 1; j < lines.length; j++) {
+              const checkLine = lines[j].trim();
+              // Skip lines that contain keys or are too short
+              if (!checkLine.includes('(key:') && checkLine.length > 10) {
+                // This might be current content
+                const possibleNewContent = lines[j + 1] ? lines[j + 1].trim() : '';
+                if (possibleNewContent && possibleNewContent.length > 10 && 
+                    possibleNewContent !== checkLine && 
+                    !possibleNewContent.includes('(key:')) {
+                  newContentLine = possibleNewContent;
+                  break;
+                }
+              }
+            }
+            
+            if (newContentLine) {
+              updates['hero_heading'] = newContentLine;
+              console.log(`Applied hero_heading: "${newContentLine}"`);
             }
           }
           
