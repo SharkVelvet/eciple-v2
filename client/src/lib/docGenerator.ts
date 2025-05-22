@@ -379,47 +379,70 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
         // Parse your specific document format which has field names on separate lines
         for (let i = 0; i < lines.length - 2; i++) {
           const currentLine = lines[i].trim();
-          const nextLine = lines[i + 1].trim();
-          const thirdLine = lines[i + 2].trim();
           
-          // Look for field name patterns
+          // Look for field name patterns and find the corresponding content
           if (currentLine.includes('Main Heading')) {
-            // Skip the (key: hero_heading) line and get the line after current content
-            let newContentLine = '';
-            for (let j = i + 1; j < lines.length; j++) {
-              const checkLine = lines[j].trim();
-              // Skip lines that contain keys or are too short
-              if (!checkLine.includes('(key:') && checkLine.length > 10) {
-                // This might be current content
-                const possibleNewContent = lines[j + 1] ? lines[j + 1].trim() : '';
-                if (possibleNewContent && possibleNewContent.length > 10 && 
-                    possibleNewContent !== checkLine && 
-                    !possibleNewContent.includes('(key:')) {
-                  newContentLine = possibleNewContent;
-                  break;
-                }
-              }
+            const newContent = findNewContentAfterField(lines, i);
+            if (newContent) {
+              updates['hero_heading'] = newContent;
+              console.log(`Applied hero_heading: "${newContent}"`);
+            }
+          }
+          
+          if (currentLine.includes('Hero Subheading') || currentLine.includes('Subheading')) {
+            const newContent = findNewContentAfterField(lines, i);
+            if (newContent) {
+              updates['hero_subheading'] = newContent;
+              console.log(`Applied hero_subheading: "${newContent}"`);
+            }
+          }
+          
+          if (currentLine.includes('Hero CTA') || currentLine.includes('Call to Action')) {
+            const newContent = findNewContentAfterField(lines, i);
+            if (newContent) {
+              updates['hero_cta_text'] = newContent;
+              console.log(`Applied hero_cta_text: "${newContent}"`);
+            }
+          }
+          
+          if (currentLine.includes('Problem Text') || currentLine.includes('Problem Heading')) {
+            const newContent = findNewContentAfterField(lines, i);
+            if (newContent) {
+              updates['problem_text'] = newContent;
+              console.log(`Applied problem_text: "${newContent}"`);
+            }
+          }
+          
+          if (currentLine.includes('Solution Text') || currentLine.includes('Solution Heading')) {
+            const newContent = findNewContentAfterField(lines, i);
+            if (newContent) {
+              updates['solution_text'] = newContent;
+              console.log(`Applied solution_text: "${newContent}"`);
+            }
+          }
+        }
+        
+        // Helper function to find new content after a field name
+        function findNewContentAfterField(lines: string[], startIndex: number): string | null {
+          for (let j = startIndex + 1; j < lines.length && j < startIndex + 10; j++) {
+            const checkLine = lines[j].trim();
+            // Skip lines that contain keys, are too short, or are field names
+            if (checkLine.includes('(key:') || checkLine.length < 5 || 
+                checkLine.includes('Heading') || checkLine.includes('CTA') ||
+                checkLine.includes('SECTION')) {
+              continue;
             }
             
-            if (newContentLine) {
-              updates['hero_heading'] = newContentLine;
-              console.log(`Applied hero_heading: "${newContentLine}"`);
+            // Look for the line after this one as potential new content
+            const possibleNewContent = lines[j + 1] ? lines[j + 1].trim() : '';
+            if (possibleNewContent && possibleNewContent.length > 5 && 
+                possibleNewContent !== checkLine && 
+                !possibleNewContent.includes('(key:') &&
+                !possibleNewContent.includes('SECTION')) {
+              return possibleNewContent;
             }
           }
-          
-          if (currentLine === 'Hero Subheading' || currentLine.includes('Subheading')) {
-            if (thirdLine && thirdLine.length > 3 && thirdLine !== nextLine) {
-              updates['hero_subheading'] = thirdLine;
-              console.log(`Applied hero_subheading: "${thirdLine}"`);
-            }
-          }
-          
-          if (currentLine === 'Hero CTA' || currentLine.includes('Call to Action')) {
-            if (thirdLine && thirdLine.length > 3 && thirdLine !== nextLine) {
-              updates['hero_cta_text'] = thirdLine;
-              console.log(`Applied hero_cta_text: "${thirdLine}"`);
-            }
-          }
+          return null;
         }
         
         // Also try the old approach as backup
