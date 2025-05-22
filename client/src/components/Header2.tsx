@@ -32,7 +32,8 @@ export default function Header2() {
     { name: "Problem", href: "#problem", icon: <Lightbulb className="h-4 w-4" /> },
     { name: "Solution", href: "#solution", icon: <CheckCircle className="h-4 w-4" /> },
     { name: "Comparison", href: "#comparison", icon: <Trophy className="h-4 w-4" /> },
-    { name: "Pricing", href: "#pricing", icon: <DollarSign className="h-4 w-4" /> }
+    { name: "Pricing", href: "#pricing", icon: <DollarSign className="h-4 w-4" /> },
+    { name: "Contact Us", href: "/contact", icon: <MessageSquare className="h-4 w-4" /> }
   ];
 
   return (
@@ -66,39 +67,33 @@ export default function Header2() {
           {/* Desktop Navigation - Center (hidden on mobile) */}
           <nav className="hidden lg:flex items-center space-x-8 flex-1 justify-center">
             {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  const element = document.querySelector(item.href);
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                  }
-                }}
-                className="text-white hover:text-accent transition-colors duration-200 text-sm font-medium cursor-pointer"
-              >
-                {item.name}
-              </a>
+              item.href.startsWith('#') ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const element = document.querySelector(item.href);
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }}
+                  className="text-white hover:text-accent transition-colors duration-200 text-sm font-medium cursor-pointer"
+                >
+                  {item.name}
+                </a>
+              ) : (
+                <Link key={item.name} href={item.href}>
+                  <span className="text-white hover:text-accent transition-colors duration-200 text-sm font-medium cursor-pointer">
+                    {item.name}
+                  </span>
+                </Link>
+              )
             ))}
           </nav>
 
-          {/* Right Side - Contact & Investor Portal */}
+          {/* Right Side - Investor Portal */}
           <div className="flex items-center space-x-4">
-            {/* Contact Us Button - Desktop */}
-            <div className="hidden lg:block">
-              <Button 
-                variant="outline" 
-                size="sm"
-                className="border-white/30 text-white hover:bg-white hover:text-[#223349] transition-all duration-200"
-                asChild
-              >
-                <Link href="/contact">
-                  Contact Us
-                </Link>
-              </Button>
-            </div>
-
             {/* Investor Portal Button - Desktop */}
             <div className="hidden lg:block">
               <Button 
@@ -137,35 +132,36 @@ export default function Header2() {
           >
             <div className="px-4 py-4 space-y-2 max-w-xs mx-auto">
               {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const element = document.querySelector(item.href);
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                    closeMobileMenu();
-                  }}
-                  className="flex items-center space-x-3 text-white hover:text-accent transition-colors duration-200 py-3 px-4 rounded-lg hover:bg-white/5 cursor-pointer"
-                >
-                  {item.icon}
-                  <span>{item.name}</span>
-                </a>
+                item.href.startsWith('#') ? (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const element = document.querySelector(item.href);
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }
+                      closeMobileMenu();
+                    }}
+                    className="flex items-center space-x-3 text-white hover:text-accent transition-colors duration-200 py-3 px-4 rounded-lg hover:bg-white/5 cursor-pointer"
+                  >
+                    {item.icon}
+                    <span>{item.name}</span>
+                  </a>
+                ) : (
+                  <Link key={item.name} href={item.href}>
+                    <div 
+                      onClick={closeMobileMenu}
+                      className="flex items-center space-x-3 text-white hover:text-accent transition-colors duration-200 py-3 px-4 rounded-lg hover:bg-white/5"
+                    >
+                      {item.icon}
+                      <span>{item.name}</span>
+                    </div>
+                  </Link>
+                )
               ))}
               
-              {/* Contact Us - Mobile */}
-              <Link href="/contact">
-                <div 
-                  onClick={closeMobileMenu}
-                  className="flex items-center space-x-3 text-white hover:text-accent transition-colors duration-200 py-3 px-4 rounded-lg hover:bg-white/5"
-                >
-                  <MessageSquare className="h-4 w-4" />
-                  <span>Contact Us</span>
-                </div>
-              </Link>
-
               {/* Investor Portal - Mobile */}
               <Link href="/auth">
                 <div 
