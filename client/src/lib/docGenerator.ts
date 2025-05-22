@@ -305,87 +305,70 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
     try {
       const updates: Record<string, string> = {};
       
-      if (file.name.endsWith('.docx')) {
-        // Handle .docx files with proper table parsing
+      if (file.name.endsWith('.docx') || file.name.endsWith('.doc')) {
+        // Parse .docx files using the existing PizZip and Docxtemplater setup
+        console.log("Processing .docx file with table structure");
+        
         const arrayBuffer = await file.arrayBuffer();
         const zip = new PizZip(arrayBuffer);
         
-        // Extract document.xml which contains the table structure
-        const documentXml = zip.files["word/document.xml"];
-        if (!documentXml) {
-          throw new Error("Invalid docx file format");
-        }
+        // Use Docxtemplater to extract text content
+        const doc = new Docxtemplater(zip, {
+          paragraphLoop: true,
+          linebreaks: true,
+        });
         
-        const xmlContent = documentXml.asText();
-        console.log("Successfully extracted .docx content");
+        const fullText = doc.getFullText();
+        console.log("Successfully extracted .docx text content");
         
-        // Parse table rows from XML - look for <w:tr> (table row) elements
-        const tableRowRegex = /<w:tr[^>]*>(.*?)<\/w:tr>/gs;
-        const tableCellRegex = /<w:tc[^>]*>(.*?)<\/w:tc>/gs;
-        const textRegex = /<w:t[^>]*>([^<]*)<\/w:t>/g;
+        // Parse the text content looking for table structure
+        // Split by common delimiters that Word might use when extracting text
+        const lines = fullText.split(/[\n\r\t]+/).filter(line => line.trim().length > 0);
         
-        const tableRows = [];
-        let rowMatch;
-        
-        while ((rowMatch = tableRowRegex.exec(xmlContent)) !== null) {
-          const rowXml = rowMatch[1];
-          const cells = [];
-          let cellMatch;
+        // Look for 3-column table pattern in the extracted text
+        for (let i = 0; i < lines.length; i++) {
+          const line = lines[i];
           
-          while ((cellMatch = tableCellRegex.exec(rowXml)) !== null) {
-            const cellXml = cellMatch[1];
-            let cellText = '';
-            let textMatch;
+          // Try to find lines that contain multiple pieces of information
+          // This could be tab-separated or space-separated content
+          const parts = line.split(/\t+|\s{3,}/).map(part => part.trim()).filter(part => part.length > 0);
+          
+          if (parts.length >= 3) {
+            const fieldName = parts[0].toLowerCase();
+            const currentContent = parts[1];
+            const newContent = parts[2];
             
-            while ((textMatch = textRegex.exec(cellXml)) !== null) {
-              cellText += textMatch[1];
+            console.log(`Found potential table row: [${parts.join(' | ')}]`);
+            
+            // Skip headers
+            if (fieldName.includes('content section') || 
+                fieldName.includes('current content') ||
+                fieldName.includes('new content') ||
+                fieldName.includes('instructions')) {
+              continue;
             }
             
-            if (cellText.trim()) {
-              cells.push(cellText.trim());
+            // Check if new content is meaningful and different
+            if (newContent && 
+                newContent.length > 3 &&
+                newContent !== currentContent &&
+                !newContent.toLowerCase().includes('edit here')) {
+              
+              // Map to content keys
+              if (fieldName.includes('main heading') || fieldName.includes('hero heading')) {
+                updates['hero_heading'] = newContent;
+                console.log(`Found hero_heading update: "${newContent}"`);
+              } else if (fieldName.includes('hero subheading') || fieldName.includes('subheading')) {
+                updates['hero_subheading'] = newContent;
+                console.log(`Found hero_subheading update: "${newContent}"`);
+              } else if (fieldName.includes('hero cta') || fieldName.includes('call to action')) {
+                updates['hero_cta_text'] = newContent;
+                console.log(`Found hero_cta_text update: "${newContent}"`);
+              } else if (fieldName.includes('problem text')) {
+                updates['problem_text'] = newContent;
+                console.log(`Found problem_text update: "${newContent}"`);
+              }
             }
-          }
-          
-          if (cells.length >= 3) {
-            tableRows.push(cells);
-            console.log(`Found table row: [${cells.join(' | ')}]`);
-          }
-        }
-        
-        // Process table rows to find content updates
-        for (const row of tableRows) {
-          const fieldName = row[0].toLowerCase();
-          const currentContent = row[1];
-          const newContent = row[2];
-          
-          // Skip header rows
-          if (fieldName.includes('content section') || 
-              fieldName.includes('current content') ||
-              fieldName.includes('new content')) {
-            continue;
-          }
-          
-          // Only update if new content exists and is different from current
-          if (newContent && 
-              newContent.length > 3 &&
-              newContent !== currentContent &&
-              !newContent.toLowerCase().includes('edit here')) {
-            
-            // Map field names to content keys
-            if (fieldName.includes('main heading') || fieldName.includes('hero heading')) {
-              updates['hero_heading'] = newContent;
-              console.log(`Found hero_heading update: "${newContent}"`);
-            } else if (fieldName.includes('hero subheading') || fieldName.includes('subheading')) {
-              updates['hero_subheading'] = newContent;
-              console.log(`Found hero_subheading update: "${newContent}"`);
-            } else if (fieldName.includes('hero cta') || fieldName.includes('call to action')) {
-              updates['hero_cta_text'] = newContent;
-              console.log(`Found hero_cta_text update: "${newContent}"`);
-            } else if (fieldName.includes('problem text')) {
-              updates['problem_text'] = newContent;
-              console.log(`Found problem_text update: "${newContent}"`);
-            }
-            // Add more field mappings as needed
           }
         }
         

@@ -507,10 +507,10 @@ export default function SideContentEditor() {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    if (!file.name.endsWith('.docx') && !file.name.endsWith('.txt')) {
+    if (!file.name.endsWith('.docx') && !file.name.endsWith('.doc') && !file.name.endsWith('.txt')) {
       toast({
         title: "Invalid File Type",
-        description: "Please upload a .docx or .txt file.",
+        description: "Please upload a .doc, .docx, or .txt file.",
         variant: "destructive",
       });
       return;
