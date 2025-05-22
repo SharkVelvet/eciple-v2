@@ -30,9 +30,7 @@ export default function Header2() {
 
   const navItems = [
     { name: "Problem", href: "#problem", icon: <Lightbulb className="h-4 w-4" /> },
-    { name: "Solution", href: "#solution", icon: <Lightbulb className="h-4 w-4" /> },
-    { name: "Product", href: "#product", icon: <Box className="h-4 w-4" /> },
-    { name: "Competition", href: "#competition", icon: <Trophy className="h-4 w-4" /> },
+    { name: "Comparison", href: "#comparison", icon: <Trophy className="h-4 w-4" /> },
     { name: "Pricing", href: "#pricing", icon: <DollarSign className="h-4 w-4" /> }
   ];
 
@@ -48,7 +46,7 @@ export default function Header2() {
         <div className="flex items-center justify-between" style={{ minHeight: '60px' }}>
           {/* Logo - Left aligned */}
           <div className="flex-none">
-            <Link href="/home">
+            <a href="#top" className="scroll-smooth">
               <div className="flex items-center space-x-3 cursor-pointer">
                 <img 
                   src={ecipleLogo} 
@@ -59,7 +57,7 @@ export default function Header2() {
                   Discipleship Reimagined
                 </span>
               </div>
-            </Link>
+            </a>
           </div>
 
           {/* Desktop Navigation - Center (hidden on mobile) */}

@@ -109,7 +109,8 @@ export default function ComparisonPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen scroll-smooth">
+      <div id="top"></div>
       <Header2 />
       <main className="flex-grow">
         {/* Hero Section */}
@@ -235,7 +236,7 @@ export default function ComparisonPage() {
         </section>
 
         {/* Problem Section */}
-        <section className="py-16 bg-gray-50">
+        <section id="problem" className="py-16 bg-gray-50">
           <div className="max-w-[1180px] mx-auto px-4">
             <motion.div 
               className="text-center mb-12"
