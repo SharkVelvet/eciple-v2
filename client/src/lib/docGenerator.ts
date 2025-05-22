@@ -324,20 +324,25 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
       const lines = fileText.split(/[\r\n]+/).map(line => line.trim()).filter(line => line.length > 0);
       
       for (const line of lines) {
+        console.log(`Processing line: "${line}"`);
+        
         // Skip header lines and instructions
         if (line.toLowerCase().includes('instruction') || 
             line.toLowerCase().includes('content section') ||
             line.toLowerCase().includes('current content') ||
             line.toLowerCase().includes('new content')) {
+          console.log('Skipping header line');
           continue;
         }
         
         // Split by tabs (most common in table exports)
         let columns = line.split('\t');
+        console.log(`Split by tabs: ${columns.length} columns:`, columns);
         
         // If no tabs, try splitting by multiple spaces or other delimiters
         if (columns.length < 3) {
           columns = line.split(/\s{2,}|\|/);
+          console.log(`Split by spaces: ${columns.length} columns:`, columns);
         }
         
         // Need at least 3 columns for the table format
@@ -347,11 +352,13 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
           
           // Only process if new content exists and isn't empty/template text
           if (newContent && 
-              newContent.length > 5 &&
-              !newContent.toLowerCase().includes('edit') &&
-              !newContent.toLowerCase().includes('key:') &&
-              !newContent.toLowerCase().includes('(') &&
+              newContent.length > 3 &&
+              !newContent.toLowerCase().includes('edit here') &&
+              !newContent.toLowerCase().includes('content section') &&
+              !newContent.toLowerCase().includes('current content') &&
               newContent !== fieldName) {
+            
+            console.log(`Checking content: "${newContent}" for field: "${fieldName}"`);  
             
             // Match field name to our mappings
             for (const mapping of fieldMappings) {
