@@ -297,46 +297,69 @@ export const downloadDocx = async (
   }
 };
 
-// Direct content update function to demonstrate updates working
+// Parse uploaded docx file and extract content changes
 export const parseDocx = async (file: File): Promise<Record<string, string>> => {
-  return new Promise((resolve) => {
+  return new Promise(async (resolve, reject) => {
     console.log("Processing document:", file.name);
     
-    // Hard-coded demonstration content changes
-    // In a real implementation, these would come from parsing the docx file
-    const updates: Record<string, string> = {
-      "hero_heading": "Discipleship Made Easy",
-      "hero_subheading": "Your church's path to effective discipleship starts here with our comprehensive platform designed for lasting spiritual growth.",
-      "hero_cta_text": "Get Started Now",
-      "problem_text": "82% of churches prioritize discipleship, but only 29% implement it effectively. Change that today.",
-      "growth_text": "Measurable Results",
-      "solution_title": "The Complete Solution",
-      "product_title": "Eciple: The Platform",
-    };
-    
-    // Directly update the localStorage to ensure changes are visible
-    const savedContent = localStorage.getItem('siteContent');
-    let existingContent: Record<string, string> = {};
-    
     try {
-      if (savedContent) {
-        existingContent = JSON.parse(savedContent);
+      // Read the file as ArrayBuffer
+      const arrayBuffer = await file.arrayBuffer();
+      const uint8Array = new Uint8Array(arrayBuffer);
+      
+      // Use the docx library to parse the file
+      const doc = await docx.loadAsync(uint8Array);
+      
+      // Extract all paragraphs from the document
+      const paragraphs = doc.getFullText().split('\n');
+      const updates: Record<string, string> = {};
+      
+      // Look for content pairs in the format "FIELD_NAME: New Content"
+      for (const paragraph of paragraphs) {
+        const trimmed = paragraph.trim();
+        if (trimmed.includes(':')) {
+          const [key, ...valueParts] = trimmed.split(':');
+          const value = valueParts.join(':').trim();
+          
+          if (key && value) {
+            // Convert key to lowercase and replace spaces with underscores
+            const fieldKey = key.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+            updates[fieldKey] = value;
+          }
+        }
       }
       
-      // Merge with our updates
-      const updatedContent = { ...existingContent, ...updates };
+      console.log("Extracted content updates:", updates);
       
-      // Save directly to localStorage
-      localStorage.setItem('siteContent', JSON.stringify(updatedContent));
+      // If no valid updates found, try alternative parsing
+      if (Object.keys(updates).length === 0) {
+        // Look for table format or other patterns
+        const fullText = doc.getFullText();
+        console.log("Full document text:", fullText);
+        
+        // Try to match common content field patterns
+        const patterns = [
+          /hero[_\s]*heading[:\s]+(.+)/i,
+          /hero[_\s]*subheading[:\s]+(.+)/i,
+          /problem[_\s]*text[:\s]+(.+)/i,
+          /solution[_\s]*title[:\s]+(.+)/i,
+        ];
+        
+        for (const pattern of patterns) {
+          const match = fullText.match(pattern);
+          if (match) {
+            const fieldName = pattern.source.split('[')[0].toLowerCase() + '_' + 
+                            pattern.source.split('[')[1].split(']')[0].toLowerCase();
+            updates[fieldName.replace(/[^a-z0-9_]/g, '')] = match[1].trim();
+          }
+        }
+      }
       
-      console.log("Content updated directly in localStorage");
-      
-      // Resolve with just our updates
       resolve(updates);
+      
     } catch (error) {
-      console.error("Error updating content:", error);
-      // Even on error, return something so the UI doesn't break
-      resolve(updates);
+      console.error("Error parsing docx file:", error);
+      reject(new Error("Failed to parse document. Please ensure it's a valid .docx file."));
     }
   });
 };
