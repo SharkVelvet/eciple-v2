@@ -320,34 +320,51 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
         { keywords: ['product title'], key: 'product_title' },
       ];
       
-      // Split content into lines and look for your changes
-      const lines = fileText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+      // Parse the 3-column table format (Content Section | Current Content | New Content)
+      const lines = fileText.split(/[\r\n]+/).map(line => line.trim()).filter(line => line.length > 0);
       
-      for (let i = 0; i < lines.length; i++) {
-        const currentLine = lines[i].toLowerCase();
+      for (const line of lines) {
+        // Skip header lines and instructions
+        if (line.toLowerCase().includes('instruction') || 
+            line.toLowerCase().includes('content section') ||
+            line.toLowerCase().includes('current content') ||
+            line.toLowerCase().includes('new content')) {
+          continue;
+        }
         
-        // Check if this line contains a field name
-        for (const mapping of fieldMappings) {
-          const matchesField = mapping.keywords.some(keyword => 
-            currentLine.includes(keyword.toLowerCase())
-          );
+        // Split by tabs (most common in table exports)
+        let columns = line.split('\t');
+        
+        // If no tabs, try splitting by multiple spaces or other delimiters
+        if (columns.length < 3) {
+          columns = line.split(/\s{2,}|\|/);
+        }
+        
+        // Need at least 3 columns for the table format
+        if (columns.length >= 3) {
+          const fieldName = columns[0].trim().toLowerCase();
+          const newContent = columns[2].trim(); // Third column has new content
           
-          if (matchesField) {
-            // Look for content in the next few lines
-            for (let j = i + 1; j < Math.min(i + 5, lines.length); j++) {
-              const contentLine = lines[j].trim();
+          // Only process if new content exists and isn't empty/template text
+          if (newContent && 
+              newContent.length > 5 &&
+              !newContent.toLowerCase().includes('edit') &&
+              !newContent.toLowerCase().includes('key:') &&
+              !newContent.toLowerCase().includes('(') &&
+              newContent !== fieldName) {
+            
+            // Match field name to our mappings
+            for (const mapping of fieldMappings) {
+              const matchesField = mapping.keywords.some(keyword => 
+                fieldName.includes(keyword.toLowerCase())
+              );
               
-              // Skip if it's empty, too short, or looks like another field
-              if (contentLine.length > 10 && 
-                  !contentLine.toLowerCase().includes('current content') &&
-                  !fieldMappings.some(m => m.keywords.some(k => contentLine.toLowerCase().includes(k)))) {
-                
-                updates[mapping.key] = contentLine;
-                console.log(`Found content update: ${mapping.key} = ${contentLine}`);
+              if (matchesField) {
+                updates[mapping.key] = newContent;
+                console.log(`Found table update: ${mapping.key} = ${newContent}`);
                 break;
               }
             }
-            break;
           }
         }
       }
