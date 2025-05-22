@@ -4,10 +4,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Edit, Save, X, RefreshCw, Minimize, ChevronLeft, ChevronRight, Download } from "lucide-react";
+import { Edit, Save, X, RefreshCw, Minimize, ChevronLeft, ChevronRight, Download, Upload } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { contentDefaults, getContentSections } from '@/lib/contentDefaults';
-import { downloadDocx } from '@/lib/docGenerator';
+import { downloadDocx, parseDocx } from '@/lib/docGenerator';
 
 export default function SideContentEditor() {
   const { toast } = useToast();
@@ -498,6 +498,60 @@ export default function SideContentEditor() {
       });
     }
   };
+
+  // Upload and process client feedback document
+  const handleUploadDocument = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    if (!file.name.endsWith('.docx')) {
+      toast({
+        title: "Invalid File Type",
+        description: "Please upload a .docx file.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      toast({
+        title: "Processing Document",
+        description: "Reading client feedback and updating content...",
+      });
+
+      // Parse the document and extract updated content
+      const updatedContent = await parseDocx(file);
+      
+      // Merge with existing content
+      const newContent = { ...content, ...updatedContent };
+      setContent(newContent);
+      
+      // Save to localStorage
+      localStorage.setItem('siteContent', JSON.stringify({
+        ...newContent,
+        timestamp: Date.now()
+      }));
+      
+      // Update DOM immediately
+      updateDOM();
+      
+      toast({
+        title: "Content Updated Successfully!",
+        description: `Applied ${Object.keys(updatedContent).length} content changes from client feedback.`,
+      });
+      
+      // Clear the file input
+      event.target.value = '';
+      
+    } catch (error) {
+      console.error("Error processing document:", error);
+      toast({
+        title: "Upload Failed",
+        description: "There was an error processing the document. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
   
   if (!isOpen) {
     return (
@@ -542,6 +596,22 @@ export default function SideContentEditor() {
             >
               <Download className="h-3.5 w-3.5 mr-1" /> Download
             </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => document.getElementById('docx-upload')?.click()}
+              className="h-8 text-white/70 hover:text-white hover:bg-white/10"
+              title="Upload client feedback document"
+            >
+              <Upload className="h-3.5 w-3.5 mr-1" /> Upload
+            </Button>
+            <input
+              id="docx-upload"
+              type="file"
+              accept=".docx"
+              onChange={handleUploadDocument}
+              className="hidden"
+            />
             <Button
               variant="ghost"
               size="sm"
