@@ -466,22 +466,35 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
         
         // Helper function to find new content after a field name
         function findNewContentAfterField(lines: string[], startIndex: number): string | null {
-          for (let j = startIndex + 1; j < lines.length && j < startIndex + 10; j++) {
+          // Look for the pattern: Field Name -> (key: xxx) -> Current Content -> New Content
+          let foundKey = false;
+          let foundCurrentContent = false;
+          
+          for (let j = startIndex + 1; j < lines.length && j < startIndex + 6; j++) {
             const checkLine = lines[j].trim();
-            // Skip lines that contain keys, are too short, or are field names
-            if (checkLine.includes('(key:') || checkLine.length < 5 || 
-                checkLine.includes('Heading') || checkLine.includes('CTA') ||
-                checkLine.includes('SECTION')) {
+            
+            // Skip the (key: xxx) line
+            if (checkLine.includes('(key:')) {
+              foundKey = true;
               continue;
             }
             
-            // Look for the line after this one as potential new content
-            const possibleNewContent = lines[j + 1] ? lines[j + 1].trim() : '';
-            if (possibleNewContent && possibleNewContent.length > 5 && 
-                possibleNewContent !== checkLine && 
-                !possibleNewContent.includes('(key:') &&
-                !possibleNewContent.includes('SECTION')) {
-              return possibleNewContent;
+            // If we found the key line, the next non-empty line should be current content
+            if (foundKey && !foundCurrentContent && checkLine.length > 5) {
+              foundCurrentContent = true;
+              
+              // The line after current content should be new content
+              const nextLine = lines[j + 1] ? lines[j + 1].trim() : '';
+              if (nextLine && nextLine.length > 5 && 
+                  nextLine !== checkLine &&
+                  !nextLine.includes('(key:') &&
+                  !nextLine.includes('SECTION') &&
+                  !nextLine.includes('Title') &&
+                  !nextLine.includes('Label') &&
+                  !nextLine.includes('Point') &&
+                  !nextLine.includes('Features')) {
+                return nextLine;
+              }
             }
           }
           return null;
