@@ -131,7 +131,7 @@ export default function ComparisonPage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-sans leading-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-sans leading-tight">
                   The One-To-One Discipleship Enablement Platform
                 </h1>
                 
@@ -162,10 +162,11 @@ export default function ComparisonPage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                {/* Background Image Container */}
-                <div className="relative h-[450px] rounded-2xl overflow-hidden">
-                  {/* Background Image */}
-                  <div className="absolute inset-0">
+                {/* Container for Image and Floating Cards */}
+                <div className="relative h-[450px]">
+                  {/* Background Image Container - Smaller to allow badges to hang off */}
+                  <div className="absolute top-8 left-8 right-8 bottom-8 rounded-2xl overflow-hidden">
+                    {/* Background Image */}
                     <img 
                       src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
                       alt="People engaged in spiritual mentorship" 
@@ -175,11 +176,11 @@ export default function ComparisonPage() {
                     <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-secondary/20 opacity-50 rounded-2xl"></div>
                   </div>
 
-                  {/* Floating Cards Over Image */}
+                  {/* Floating Cards - Now positioned relative to full container */}
                   <div className="relative h-full">
-                    {/* Card 1 */}
+                    {/* Card 1 - Hangs off top left */}
                     <motion.div
-                      className="absolute top-8 left-6 bg-white/95 backdrop-blur-sm rounded-lg p-4 w-48 border border-white/30 shadow-lg"
+                      className="absolute top-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-4 w-48 border border-white/30 shadow-lg"
                       animate={{ y: [0, -10, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     >
@@ -192,9 +193,9 @@ export default function ComparisonPage() {
                       </div>
                     </motion.div>
 
-                    {/* Card 2 */}
+                    {/* Card 2 - Hangs off top right */}
                     <motion.div
-                      className="absolute top-20 right-6 bg-white/95 backdrop-blur-sm rounded-lg p-4 w-52 border border-white/30 shadow-lg"
+                      className="absolute top-12 right-0 bg-white/95 backdrop-blur-sm rounded-lg p-4 w-52 border border-white/30 shadow-lg"
                       animate={{ y: [0, 10, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                     >
@@ -207,9 +208,9 @@ export default function ComparisonPage() {
                       </div>
                     </motion.div>
 
-                    {/* Card 3 */}
+                    {/* Card 3 - Hangs off bottom left */}
                     <motion.div
-                      className="absolute bottom-8 left-8 bg-white/95 backdrop-blur-sm rounded-lg p-4 w-44 border border-white/30 shadow-lg"
+                      className="absolute bottom-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-4 w-44 border border-white/30 shadow-lg"
                       animate={{ y: [0, -8, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 2 }}
                     >
