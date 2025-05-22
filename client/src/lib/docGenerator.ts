@@ -303,51 +303,100 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
     console.log("Processing document:", file.name);
     
     try {
-      // Read the file content as text (simple approach for now)
-      const fileText = await file.text();
-      console.log("Raw file content:", fileText.substring(0, 200) + "...");
-      
       const updates: Record<string, string> = {};
       
-      // Look for field patterns and extract content from your document
-      const fieldMappings = [
-        { keywords: ['main heading', 'hero heading', 'headline'], key: 'hero_heading' },
-        { keywords: ['hero subheading', 'subheadline'], key: 'hero_subheading' },
-        { keywords: ['hero cta', 'call to action'], key: 'hero_cta_text' },
-        { keywords: ['problem text'], key: 'problem_text' },
-        { keywords: ['growth text'], key: 'growth_text' },
-        { keywords: ['solution title'], key: 'solution_title' },
-        { keywords: ['product title'], key: 'product_title' },
-      ];
-      
-      // Parse the vertical format where each field/key/content is on separate lines
-      const lines = fileText.split(/[\r\n]+/).map(line => line.trim()).filter(line => line.length > 0);
-      
-      for (let i = 0; i < lines.length - 2; i++) {
-        const currentLine = lines[i];
-        const keyLine = lines[i + 1];
-        const contentLine = lines[i + 2];
+      if (file.name.endsWith('.docx')) {
+        // Handle .docx files with proper table parsing
+        const arrayBuffer = await file.arrayBuffer();
+        const zip = new PizZip(arrayBuffer);
         
-        console.log(`Checking sequence: "${currentLine}" -> "${keyLine}" -> "${contentLine}"`);
+        // Extract document.xml which contains the table structure
+        const documentXml = zip.files["word/document.xml"];
+        if (!documentXml) {
+          throw new Error("Invalid docx file format");
+        }
         
-        // Look for pattern: Field Name -> (key: xxx) -> Actual Content
-        if (keyLine && keyLine.includes('(key:') && keyLine.includes(')')) {
-          const keyMatch = keyLine.match(/\(key:\s*([^)]+)\)/);
-          if (keyMatch) {
-            const key = keyMatch[1].trim();
+        const xmlContent = documentXml.asText();
+        console.log("Successfully extracted .docx content");
+        
+        // Parse table rows from XML - look for <w:tr> (table row) elements
+        const tableRowRegex = /<w:tr[^>]*>(.*?)<\/w:tr>/gs;
+        const tableCellRegex = /<w:tc[^>]*>(.*?)<\/w:tc>/gs;
+        const textRegex = /<w:t[^>]*>([^<]*)<\/w:t>/g;
+        
+        const tableRows = [];
+        let rowMatch;
+        
+        while ((rowMatch = tableRowRegex.exec(xmlContent)) !== null) {
+          const rowXml = rowMatch[1];
+          const cells = [];
+          let cellMatch;
+          
+          while ((cellMatch = tableCellRegex.exec(rowXml)) !== null) {
+            const cellXml = cellMatch[1];
+            let cellText = '';
+            let textMatch;
             
-            // Check if we have valid content on the next line
-            if (contentLine && 
-                contentLine.length > 3 &&
-                !contentLine.includes('(key:') &&
-                !contentLine.toLowerCase().includes('edit here')) {
-              
-              console.log(`Found content for ${key}: "${contentLine}"`);
-              updates[key] = contentLine;
-              i += 2; // Skip the next 2 lines since we processed them
+            while ((textMatch = textRegex.exec(cellXml)) !== null) {
+              cellText += textMatch[1];
+            }
+            
+            if (cellText.trim()) {
+              cells.push(cellText.trim());
             }
           }
+          
+          if (cells.length >= 3) {
+            tableRows.push(cells);
+            console.log(`Found table row: [${cells.join(' | ')}]`);
+          }
         }
+        
+        // Process table rows to find content updates
+        for (const row of tableRows) {
+          const fieldName = row[0].toLowerCase();
+          const currentContent = row[1];
+          const newContent = row[2];
+          
+          // Skip header rows
+          if (fieldName.includes('content section') || 
+              fieldName.includes('current content') ||
+              fieldName.includes('new content')) {
+            continue;
+          }
+          
+          // Only update if new content exists and is different from current
+          if (newContent && 
+              newContent.length > 3 &&
+              newContent !== currentContent &&
+              !newContent.toLowerCase().includes('edit here')) {
+            
+            // Map field names to content keys
+            if (fieldName.includes('main heading') || fieldName.includes('hero heading')) {
+              updates['hero_heading'] = newContent;
+              console.log(`Found hero_heading update: "${newContent}"`);
+            } else if (fieldName.includes('hero subheading') || fieldName.includes('subheading')) {
+              updates['hero_subheading'] = newContent;
+              console.log(`Found hero_subheading update: "${newContent}"`);
+            } else if (fieldName.includes('hero cta') || fieldName.includes('call to action')) {
+              updates['hero_cta_text'] = newContent;
+              console.log(`Found hero_cta_text update: "${newContent}"`);
+            } else if (fieldName.includes('problem text')) {
+              updates['problem_text'] = newContent;
+              console.log(`Found problem_text update: "${newContent}"`);
+            }
+            // Add more field mappings as needed
+          }
+        }
+        
+      } else {
+        // Handle .txt files (keep existing logic for backwards compatibility)
+        const fileText = await file.text();
+        console.log("Processing .txt file format");
+        
+        // Keep existing txt parsing logic here if needed
+        // For now, suggest using .docx format
+        throw new Error("Please use .docx format for best results with table structure");
       }
       
       console.log("Extracted updates from your document:", updates);
