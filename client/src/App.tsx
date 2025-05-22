@@ -8,6 +8,9 @@ import AuthPage from "@/pages/auth-page";
 import InvestorDashboard from "@/pages/investor-dashboard";
 import WelcomePage from "@/pages/welcome-page";
 import ComparisonPage from "@/pages/ComparisonPage";
+import CookiePolicyPage from "@/pages/cookie-policy";
+import PrivacyPolicyPage from "@/pages/privacy-policy";
+import TermsConditionsPage from "@/pages/terms-conditions";
 import NotFound from "@/pages/not-found";
 import { AuthProvider } from "@/hooks/use-auth";
 import { ProtectedRoute } from "@/lib/protected-route";
@@ -23,6 +26,11 @@ function Router() {
       
       {/* Comparison page */}
       <Route path="/comparison" component={ComparisonPage} />
+      
+      {/* Policy pages */}
+      <Route path="/cookie-policy" component={CookiePolicyPage} />
+      <Route path="/privacy-policy" component={PrivacyPolicyPage} />
+      <Route path="/terms-conditions" component={TermsConditionsPage} />
       
       {/* Investor portal authentication */}
       <Route path="/auth" component={AuthPage} />

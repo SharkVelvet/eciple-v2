@@ -53,9 +53,9 @@ export default function Footer() {
       { name: "Pricing", href: "#pricing" }
     ],
     resources: [
-      { name: "Cookie Policy", href: "#" },
-      { name: "Privacy Policy", href: "#" },
-      { name: "Terms & Conditions", href: "#" }
+      { name: "Cookie Policy", href: "/cookie-policy" },
+      { name: "Privacy Policy", href: "/privacy-policy" },
+      { name: "Terms & Conditions", href: "/terms-conditions" }
     ],
     contact: [
       { icon: "envelope", text: "info@eciple.com" }
