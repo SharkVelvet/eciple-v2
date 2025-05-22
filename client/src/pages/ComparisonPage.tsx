@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { Check, X, ArrowRight } from "lucide-react";
+import { Check, X, ArrowRight, CheckCircle } from "lucide-react";
 import Header2 from "@/components/Header2";
 import Footer from "@/components/Footer";
 
