@@ -376,26 +376,40 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
           console.log(`Line ${i + 1}: "${lines[i]}"`);
         }
         
-        for (const line of lines) {
-          // Try multiple splitting strategies to find 3-column structure
-          let parts: string[] = [];
+        // Parse your specific document format which has field names on separate lines
+        for (let i = 0; i < lines.length - 2; i++) {
+          const currentLine = lines[i].trim();
+          const nextLine = lines[i + 1].trim();
+          const thirdLine = lines[i + 2].trim();
           
-          // Strategy 1: Split by tabs
-          parts = line.split(/\t+/).map(part => part.trim()).filter(part => part.length > 0);
-          
-          // Strategy 2: If not enough parts, try splitting by multiple spaces
-          if (parts.length < 3) {
-            parts = line.split(/\s{3,}/).map(part => part.trim()).filter(part => part.length > 0);
-          }
-          
-          // Strategy 3: If still not enough, try looking for specific patterns
-          if (parts.length < 3 && line.includes('Main Heading')) {
-            // Look for text after "Main Heading" that might be the new content
-            const match = line.match(/Main Heading.*?([A-Za-z].*)/);
-            if (match && match[1]) {
-              parts = ['Main Heading', 'current', match[1].trim()];
+          // Look for field name patterns
+          if (currentLine === 'Main Heading') {
+            // Next line is current content, third line is new content
+            if (thirdLine && thirdLine.length > 3 && thirdLine !== nextLine) {
+              updates['hero_heading'] = thirdLine;
+              console.log(`Applied hero_heading: "${thirdLine}"`);
             }
           }
+          
+          if (currentLine === 'Hero Subheading' || currentLine.includes('Subheading')) {
+            if (thirdLine && thirdLine.length > 3 && thirdLine !== nextLine) {
+              updates['hero_subheading'] = thirdLine;
+              console.log(`Applied hero_subheading: "${thirdLine}"`);
+            }
+          }
+          
+          if (currentLine === 'Hero CTA' || currentLine.includes('Call to Action')) {
+            if (thirdLine && thirdLine.length > 3 && thirdLine !== nextLine) {
+              updates['hero_cta_text'] = thirdLine;
+              console.log(`Applied hero_cta_text: "${thirdLine}"`);
+            }
+          }
+        }
+        
+        // Also try the old approach as backup
+        for (const line of lines) {
+          let parts: string[] = [];
+          parts = line.split(/\t+/).map(part => part.trim()).filter(part => part.length > 0);
           
           if (parts.length >= 3) {
             const fieldName = parts[0].toLowerCase();
