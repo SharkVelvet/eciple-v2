@@ -320,57 +320,31 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
         { keywords: ['product title'], key: 'product_title' },
       ];
       
-      // Parse the 3-column table format (Content Section | Current Content | New Content)
+      // Parse the vertical format where each field/key/content is on separate lines
       const lines = fileText.split(/[\r\n]+/).map(line => line.trim()).filter(line => line.length > 0);
       
-      for (const line of lines) {
-        console.log(`Processing line: "${line}"`);
+      for (let i = 0; i < lines.length - 2; i++) {
+        const currentLine = lines[i];
+        const keyLine = lines[i + 1];
+        const contentLine = lines[i + 2];
         
-        // Skip header lines and instructions
-        if (line.toLowerCase().includes('instruction') || 
-            line.toLowerCase().includes('content section') ||
-            line.toLowerCase().includes('current content') ||
-            line.toLowerCase().includes('new content')) {
-          console.log('Skipping header line');
-          continue;
-        }
+        console.log(`Checking sequence: "${currentLine}" -> "${keyLine}" -> "${contentLine}"`);
         
-        // Split by tabs (most common in table exports)
-        let columns = line.split('\t');
-        console.log(`Split by tabs: ${columns.length} columns:`, columns);
-        
-        // If no tabs, try splitting by multiple spaces or other delimiters
-        if (columns.length < 3) {
-          columns = line.split(/\s{2,}|\|/);
-          console.log(`Split by spaces: ${columns.length} columns:`, columns);
-        }
-        
-        // Need at least 3 columns for the table format
-        if (columns.length >= 3) {
-          const fieldName = columns[0].trim().toLowerCase();
-          const newContent = columns[2].trim(); // Third column has new content
-          
-          // Only process if new content exists and isn't empty/template text
-          if (newContent && 
-              newContent.length > 3 &&
-              !newContent.toLowerCase().includes('edit here') &&
-              !newContent.toLowerCase().includes('content section') &&
-              !newContent.toLowerCase().includes('current content') &&
-              newContent !== fieldName) {
+        // Look for pattern: Field Name -> (key: xxx) -> Actual Content
+        if (keyLine && keyLine.includes('(key:') && keyLine.includes(')')) {
+          const keyMatch = keyLine.match(/\(key:\s*([^)]+)\)/);
+          if (keyMatch) {
+            const key = keyMatch[1].trim();
             
-            console.log(`Checking content: "${newContent}" for field: "${fieldName}"`);  
-            
-            // Match field name to our mappings
-            for (const mapping of fieldMappings) {
-              const matchesField = mapping.keywords.some(keyword => 
-                fieldName.includes(keyword.toLowerCase())
-              );
+            // Check if we have valid content on the next line
+            if (contentLine && 
+                contentLine.length > 3 &&
+                !contentLine.includes('(key:') &&
+                !contentLine.toLowerCase().includes('edit here')) {
               
-              if (matchesField) {
-                updates[mapping.key] = newContent;
-                console.log(`Found table update: ${mapping.key} = ${newContent}`);
-                break;
-              }
+              console.log(`Found content for ${key}: "${contentLine}"`);
+              updates[key] = contentLine;
+              i += 2; // Skip the next 2 lines since we processed them
             }
           }
         }
