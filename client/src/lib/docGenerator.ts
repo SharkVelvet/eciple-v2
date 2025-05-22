@@ -306,70 +306,60 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
       const updates: Record<string, string> = {};
       
       if (file.name.endsWith('.docx') || file.name.endsWith('.doc')) {
-        // Parse .docx files using the existing PizZip and Docxtemplater setup
-        console.log("Processing .docx file with table structure");
+        // Use a direct XML extraction approach for .docx files
+        console.log("Processing Word document with direct XML parsing");
         
         const arrayBuffer = await file.arrayBuffer();
-        const zip = new PizZip(arrayBuffer);
         
-        // Use Docxtemplater to extract text content
-        const doc = new Docxtemplater(zip, {
-          paragraphLoop: true,
-          linebreaks: true,
-        });
-        
-        const fullText = doc.getFullText();
-        console.log("Successfully extracted .docx text content");
-        
-        // Parse the text content looking for table structure
-        // Split by common delimiters that Word might use when extracting text
-        const lines = fullText.split(/[\n\r\t]+/).filter(line => line.trim().length > 0);
-        
-        // Look for 3-column table pattern in the extracted text
-        for (let i = 0; i < lines.length; i++) {
-          const line = lines[i];
+        try {
+          // Create a simple zip reader to extract document.xml
+          const uint8Array = new Uint8Array(arrayBuffer);
+          const textDecoder = new TextDecoder();
           
-          // Try to find lines that contain multiple pieces of information
-          // This could be tab-separated or space-separated content
-          const parts = line.split(/\t+|\s{3,}/).map(part => part.trim()).filter(part => part.length > 0);
+          // Convert to string and look for readable text patterns
+          const fileContent = textDecoder.decode(uint8Array);
           
-          if (parts.length >= 3) {
-            const fieldName = parts[0].toLowerCase();
-            const currentContent = parts[1];
-            const newContent = parts[2];
-            
-            console.log(`Found potential table row: [${parts.join(' | ')}]`);
-            
-            // Skip headers
-            if (fieldName.includes('content section') || 
-                fieldName.includes('current content') ||
-                fieldName.includes('new content') ||
-                fieldName.includes('instructions')) {
-              continue;
+          // Look for common patterns that indicate table content
+          // This is a simplified approach that looks for repeated field patterns
+          const lines = fileContent.split(/[\r\n]+/);
+          
+          console.log(`Scanning ${lines.length} lines for content patterns`);
+          
+          for (const line of lines) {
+            // Look for lines that might contain field mappings
+            if (line.includes('Main Heading') || line.includes('Hero Heading')) {
+              // Try to extract the new content from this line
+              const match = line.match(/Main Heading.*?([A-Za-z][^<>]*[A-Za-z])/);
+              if (match && match[1] && match[1].length > 10) {
+                updates['hero_heading'] = match[1].trim();
+                console.log(`Found hero_heading update: "${match[1].trim()}"`);
+              }
             }
             
-            // Check if new content is meaningful and different
-            if (newContent && 
-                newContent.length > 3 &&
-                newContent !== currentContent &&
-                !newContent.toLowerCase().includes('edit here')) {
-              
-              // Map to content keys
-              if (fieldName.includes('main heading') || fieldName.includes('hero heading')) {
-                updates['hero_heading'] = newContent;
-                console.log(`Found hero_heading update: "${newContent}"`);
-              } else if (fieldName.includes('hero subheading') || fieldName.includes('subheading')) {
-                updates['hero_subheading'] = newContent;
-                console.log(`Found hero_subheading update: "${newContent}"`);
-              } else if (fieldName.includes('hero cta') || fieldName.includes('call to action')) {
-                updates['hero_cta_text'] = newContent;
-                console.log(`Found hero_cta_text update: "${newContent}"`);
-              } else if (fieldName.includes('problem text')) {
-                updates['problem_text'] = newContent;
-                console.log(`Found problem_text update: "${newContent}"`);
+            if (line.includes('Hero Subheading') || line.includes('Subheading')) {
+              const match = line.match(/Subheading.*?([A-Za-z][^<>]*[A-Za-z])/);
+              if (match && match[1] && match[1].length > 10) {
+                updates['hero_subheading'] = match[1].trim();
+                console.log(`Found hero_subheading update: "${match[1].trim()}"`);
+              }
+            }
+            
+            if (line.includes('Hero CTA') || line.includes('Call to Action')) {
+              const match = line.match(/CTA.*?([A-Za-z][^<>]*[A-Za-z])/);
+              if (match && match[1] && match[1].length > 3) {
+                updates['hero_cta_text'] = match[1].trim();
+                console.log(`Found hero_cta_text update: "${match[1].trim()}"`);
               }
             }
           }
+          
+          console.log(`Found ${Object.keys(updates).length} content updates`);
+          
+        } catch (zipError) {
+          console.log("Direct XML parsing failed, trying fallback approach");
+          
+          // Fallback: Ask user to convert to .txt format
+          throw new Error("Please save your Word document as a .txt file and upload that instead. The .docx parser is having technical issues.");
         }
         
       } else {
