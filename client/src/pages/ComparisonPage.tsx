@@ -329,20 +329,43 @@ export default function ComparisonPage() {
                 </Card>
               </motion.div>
 
+
+            </div>
+          </div>
+        </section>
+
+        {/* Solution Section */}
+        <section id="solution" className="py-16 bg-gradient-to-br from-[#15BEE2]/10 to-[#0368C1]/10 scroll-mt-20">
+          <div className="max-w-[1180px] mx-auto px-4">
+            <motion.div 
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+                Our Solution
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                A fundamentally different approach to discipleship
+              </p>
+            </motion.div>
+
+            <div className="max-w-4xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="md:col-span-2"
+                transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <Card className="h-full hover:shadow-lg transition-shadow border-2 border-accent bg-gradient-to-br from-accent/5 to-accent/10">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <Check className="h-6 w-6 text-green-500 mr-2" />
-                      <h3 className="text-lg font-semibold text-primary">eciple's Differentiated Approach</h3>
+                <Card className="hover:shadow-lg transition-shadow border-2 border-accent bg-gradient-to-br from-accent/5 to-accent/10">
+                  <CardContent className="p-8">
+                    <div className="flex items-center mb-6">
+                      <CheckCircle className="h-8 w-8 text-green-500 mr-3" />
+                      <h3 className="text-2xl font-semibold text-primary">eciple's Differentiated Approach</h3>
                     </div>
-                    <p className="text-foreground text-opacity-80">
+                    <p className="text-lg text-foreground text-opacity-80 leading-relaxed">
                       eciple is a fundamentally different platform—built from the ground up to empower and scale personalized, one-to-one discipleship relationships.
                     </p>
                   </CardContent>

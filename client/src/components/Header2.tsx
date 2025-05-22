@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Lock, Home, Lightbulb, Box, Trophy, DollarSign, MessageSquare, Phone } from "lucide-react";
+import { Menu, X, Lock, Home, Lightbulb, Box, Trophy, DollarSign, MessageSquare, Phone, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ecipleLogo from "@assets/eciple-white.png";
 import ecipleOrangeLogo from "@assets/eciple-orange.png";
@@ -49,19 +49,16 @@ export default function Header2() {
           <div className="flex-none">
             <a href="#top" className="scroll-smooth">
               <div className="flex flex-col cursor-pointer">
-                <div className="flex items-center space-x-3">
+                <div className="flex flex-col">
                   <img 
                     src={ecipleLogo} 
                     alt="eciple logo" 
                     className="h-8 w-auto object-contain" 
                   />
-                  <span className="text-white text-lg font-medium">
-                    Discipleship Reimagined
+                  <span className="text-white text-opacity-70 text-xs mt-1">
+                    Igniting Spiritual Growth
                   </span>
                 </div>
-                <span className="text-white text-opacity-70 text-xs ml-11 -mt-1">
-                  Igniting Spiritual Growth
-                </span>
               </div>
             </a>
           </div>
