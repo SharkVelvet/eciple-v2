@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Edit, Save, X, RefreshCw, Minimize, ChevronLeft, ChevronRight, Download, Upload } from "lucide-react";
+import { Edit, Save, X, RefreshCw, Minimize, ChevronLeft, ChevronRight, Download, Upload, Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { contentDefaults, getContentSections } from '@/lib/contentDefaults';
 import { downloadDocx, parseDocx } from '@/lib/docGenerator';
@@ -40,6 +40,7 @@ export default function SideContentEditor() {
   const [initialLoad, setInitialLoad] = useState(true);
   const [minimized, setMinimized] = useState(false);
   const [position, setPosition] = useState<'left'|'right'>('right');
+  const [isUploading, setIsUploading] = useState(false);
   const editorRef = useRef<HTMLDivElement>(null);
   
   // Get content sections
@@ -513,6 +514,8 @@ export default function SideContentEditor() {
       return;
     }
 
+    setIsUploading(true);
+
     try {
       toast({
         title: "Processing Document",
@@ -550,6 +553,8 @@ export default function SideContentEditor() {
         description: "There was an error processing the document. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsUploading(false);
     }
   };
   
@@ -602,8 +607,17 @@ export default function SideContentEditor() {
               onClick={() => document.getElementById('docx-upload')?.click()}
               className="h-8 text-white/70 hover:text-white hover:bg-white/10"
               title="Upload client feedback document"
+              disabled={isUploading}
             >
-              <Upload className="h-3.5 w-3.5 mr-1" /> Upload
+              {isUploading ? (
+                <>
+                  <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> Processing...
+                </>
+              ) : (
+                <>
+                  <Upload className="h-3.5 w-3.5 mr-1" /> Upload
+                </>
+              )}
             </Button>
             <input
               id="docx-upload"

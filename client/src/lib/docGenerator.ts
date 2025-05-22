@@ -302,14 +302,11 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
   return new Promise((resolve) => {
     console.log("Processing document:", file.name);
     
-    // Create timestamp for visible proof of update
-    const timestamp = new Date().toLocaleTimeString();
-    
     // Hard-coded demonstration content changes
     // In a real implementation, these would come from parsing the docx file
     const updates: Record<string, string> = {
-      "hero_heading": "Discipleship Made Easy (" + timestamp + ")",
-      "hero_subheading": "Your church's path to effective discipleship starts here. Updated: " + timestamp,
+      "hero_heading": "Discipleship Made Easy",
+      "hero_subheading": "Your church's path to effective discipleship starts here with our comprehensive platform designed for lasting spiritual growth.",
       "hero_cta_text": "Get Started Now",
       "problem_text": "82% of churches prioritize discipleship, but only 29% implement it effectively. Change that today.",
       "growth_text": "Measurable Results",
