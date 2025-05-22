@@ -380,44 +380,86 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
         for (let i = 0; i < lines.length - 2; i++) {
           const currentLine = lines[i].trim();
           
-          // Look for field name patterns and find the corresponding content
-          if (currentLine.includes('Main Heading')) {
-            const newContent = findNewContentAfterField(lines, i);
-            if (newContent) {
-              updates['hero_heading'] = newContent;
-              console.log(`Applied hero_heading: "${newContent}"`);
-            }
-          }
+          // Map all possible field labels to their keys
+          const fieldMappings = [
+            // Hero Section
+            { labels: ['Main Heading'], key: 'hero_heading' },
+            { labels: ['Subheading', 'Hero Subheading'], key: 'hero_subheading' },
+            { labels: ['Button Text', 'Hero CTA'], key: 'hero_cta_text' },
+            
+            // Problem Section
+            { labels: ['Problem Statement'], key: 'problem_text' },
+            { labels: ['Bottom Line Title'], key: 'bottom_line_title' },
+            { labels: ['Bottom Line Text'], key: 'bottom_line_text' },
+            { labels: ['Mentorship Point'], key: 'mentorship_text' },
+            { labels: ['Curriculum Point'], key: 'curriculum_text' },
+            { labels: ['Growth Point'], key: 'growth_text' },
+            { labels: ['Metrics Point'], key: 'metrics_text' },
+            
+            // Solution Section
+            { labels: ['Solution Heading'], key: 'solution_heading' },
+            { labels: ['Solution Main Text'], key: 'solution_main_text' },
+            { labels: ['Solution Card 1 Title'], key: 'solution_card_1_title' },
+            { labels: ['Solution Card 1 Text'], key: 'solution_card_1_text' },
+            { labels: ['Solution Card 2 Title'], key: 'solution_card_2_title' },
+            { labels: ['Solution Card 2 Text'], key: 'solution_card_2_text' },
+            { labels: ['Solution Card 3 Title'], key: 'solution_card_3_title' },
+            { labels: ['Solution Card 3 Text'], key: 'solution_card_3_text' },
+            
+            // Product Section
+            { labels: ['Product Main Title'], key: 'product_main_title' },
+            { labels: ['Product Main Text'], key: 'product_main_text' },
+            { labels: ['Centralized Dashboard Title'], key: 'centralized_title' },
+            { labels: ['Centralized Dashboard Text'], key: 'centralized_text' },
+            { labels: ['Mobile Experience Title'], key: 'mobile_title' },
+            { labels: ['Mobile Experience Text'], key: 'mobile_text' },
+            { labels: ['Feature 1 Title'], key: 'feature_card_1_title' },
+            { labels: ['Feature 1 Text'], key: 'feature_card_1_text' },
+            { labels: ['Feature 2 Title'], key: 'feature_card_2_title' },
+            { labels: ['Feature 2 Text'], key: 'feature_card_2_text' },
+            { labels: ['Feature 3 Title'], key: 'feature_card_3_title' },
+            { labels: ['Feature 3 Text'], key: 'feature_card_3_text' },
+            { labels: ['Feature 4 Title'], key: 'feature_card_4_title' },
+            { labels: ['Feature 4 Text'], key: 'feature_card_4_text' },
+            { labels: ['Feature 5 Title'], key: 'feature_card_5_title' },
+            { labels: ['Feature 5 Text'], key: 'feature_card_5_text' },
+            { labels: ['Feature 6 Title'], key: 'feature_card_6_title' },
+            { labels: ['Feature 6 Text'], key: 'feature_card_6_text' },
+            
+            // Competition Section
+            { labels: ['Competition Heading'], key: 'competition_heading' },
+            { labels: ['Competition Subheading'], key: 'competition_subheading' },
+            
+            // Pricing Section
+            { labels: ['Pricing Heading'], key: 'pricing_heading' },
+            { labels: ['Pricing Subheading'], key: 'pricing_subheading' },
+            { labels: ['Starter Tier Title'], key: 'starter_title' },
+            { labels: ['Starter Price'], key: 'starter_price' },
+            { labels: ['Starter Features'], key: 'starter_features' },
+            { labels: ['Pro Tier Title'], key: 'pro_title' },
+            { labels: ['Pro Price'], key: 'pro_price' },
+            { labels: ['Pro Features'], key: 'pro_features' },
+            { labels: ['Enterprise Tier Title'], key: 'enterprise_title' },
+            { labels: ['Enterprise Price'], key: 'enterprise_price' },
+            { labels: ['Enterprise Features'], key: 'enterprise_features' },
+            
+            // Contact Section
+            { labels: ['Contact Heading'], key: 'contact_heading' },
+            { labels: ['Contact Subheading'], key: 'contact_subheading' },
+            { labels: ['Email Label'], key: 'email_text' },
+            { labels: ['Phone Label'], key: 'phone_text' },
+            { labels: ['Submit Button Text'], key: 'submit_text' }
+          ];
           
-          if (currentLine.includes('Hero Subheading') || currentLine.includes('Subheading')) {
-            const newContent = findNewContentAfterField(lines, i);
-            if (newContent) {
-              updates['hero_subheading'] = newContent;
-              console.log(`Applied hero_subheading: "${newContent}"`);
-            }
-          }
-          
-          if (currentLine.includes('Hero CTA') || currentLine.includes('Call to Action')) {
-            const newContent = findNewContentAfterField(lines, i);
-            if (newContent) {
-              updates['hero_cta_text'] = newContent;
-              console.log(`Applied hero_cta_text: "${newContent}"`);
-            }
-          }
-          
-          if (currentLine.includes('Problem Text') || currentLine.includes('Problem Heading')) {
-            const newContent = findNewContentAfterField(lines, i);
-            if (newContent) {
-              updates['problem_text'] = newContent;
-              console.log(`Applied problem_text: "${newContent}"`);
-            }
-          }
-          
-          if (currentLine.includes('Solution Text') || currentLine.includes('Solution Heading')) {
-            const newContent = findNewContentAfterField(lines, i);
-            if (newContent) {
-              updates['solution_text'] = newContent;
-              console.log(`Applied solution_text: "${newContent}"`);
+          // Check if current line matches any field label
+          for (const mapping of fieldMappings) {
+            if (mapping.labels.some(label => currentLine.includes(label))) {
+              const newContent = findNewContentAfterField(lines, i);
+              if (newContent) {
+                updates[mapping.key] = newContent;
+                console.log(`Applied ${mapping.key}: "${newContent}"`);
+              }
+              break;
             }
           }
         }
