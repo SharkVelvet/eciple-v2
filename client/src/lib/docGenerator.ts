@@ -363,13 +363,58 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
         }
         
       } else {
-        // Handle .txt files (keep existing logic for backwards compatibility)
+        // Handle .txt files - parse 3-column table structure
         const fileText = await file.text();
         console.log("Processing .txt file format");
         
-        // Keep existing txt parsing logic here if needed
-        // For now, suggest using .docx format
-        throw new Error("Please use .docx format for best results with table structure");
+        const lines = fileText.split(/[\r\n]+/).filter(line => line.trim().length > 0);
+        console.log(`Found ${lines.length} lines to process`);
+        
+        for (const line of lines) {
+          // Look for tab-separated or space-separated columns
+          const parts = line.split(/\t+/).map(part => part.trim()).filter(part => part.length > 0);
+          
+          if (parts.length >= 3) {
+            const fieldName = parts[0].toLowerCase();
+            const currentContent = parts[1];
+            const newContent = parts[2];
+            
+            console.log(`Found table row: [${parts.join(' | ')}]`);
+            
+            // Skip header rows
+            if (fieldName.includes('content section') || 
+                fieldName.includes('current content') ||
+                fieldName.includes('new content') ||
+                fieldName.includes('field name')) {
+              continue;
+            }
+            
+            // Only update if new content exists and is meaningful
+            if (newContent && 
+                newContent.length > 3 &&
+                newContent !== currentContent &&
+                !newContent.toLowerCase().includes('edit here') &&
+                !newContent.toLowerCase().includes('new content here')) {
+              
+              // Map field names to content keys
+              if (fieldName.includes('main heading') || fieldName.includes('hero heading')) {
+                updates['hero_heading'] = newContent;
+                console.log(`Applied hero_heading: "${newContent}"`);
+              } else if (fieldName.includes('hero subheading') || fieldName.includes('subheading')) {
+                updates['hero_subheading'] = newContent;
+                console.log(`Applied hero_subheading: "${newContent}"`);
+              } else if (fieldName.includes('hero cta') || fieldName.includes('call to action')) {
+                updates['hero_cta_text'] = newContent;
+                console.log(`Applied hero_cta_text: "${newContent}"`);
+              } else if (fieldName.includes('problem text')) {
+                updates['problem_text'] = newContent;
+                console.log(`Applied problem_text: "${newContent}"`);
+              }
+            }
+          }
+        }
+        
+        console.log(`Applied ${Object.keys(updates).length} content updates from .txt file`);
       }
       
       console.log("Extracted updates from your document:", updates);
