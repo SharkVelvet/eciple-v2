@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Edit, Save, X, RefreshCw, Minimize, ChevronLeft, ChevronRight, Download, Upload, Loader2 } from "lucide-react";
+import { Progress } from "@/components/ui/progress";
 import { useToast } from "@/hooks/use-toast";
 import { contentDefaults, getContentSections } from '@/lib/contentDefaults';
 import { downloadDocx, parseDocx } from '@/lib/docGenerator';
@@ -41,6 +42,7 @@ export default function SideContentEditor() {
   const [minimized, setMinimized] = useState(false);
   const [position, setPosition] = useState<'left'|'right'>('right');
   const [isUploading, setIsUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const editorRef = useRef<HTMLDivElement>(null);
   
   // Get content sections
@@ -515,31 +517,32 @@ export default function SideContentEditor() {
     }
 
     setIsUploading(true);
+    setUploadProgress(0);
 
     try {
+      // Step 1: Start processing
+      setUploadProgress(20);
       toast({
         title: "🔄 Processing Document",
         description: "Reading client feedback and updating content...",
       });
 
-      // Parse the document and extract updated content
+      // Step 2: Parse document
+      setUploadProgress(50);
       const updatedContent = await parseDocx(file);
       
-      // Merge with existing content
+      // Step 3: Merge content
+      setUploadProgress(80);
       const newContent = { ...content, ...updatedContent };
       setContent(newContent);
       
-      // Save to localStorage without timestamp
+      // Step 4: Save changes
+      setUploadProgress(100);
       localStorage.setItem('siteContent', JSON.stringify(newContent));
       
-      // Force a page reload to ensure all changes are applied
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-      
       toast({
-        title: "✅ Content Updated Successfully!",
-        description: `Applied ${Object.keys(updatedContent).length} content changes. Page will refresh to apply changes.`,
+        title: "✅ Document Uploaded Successfully!",
+        description: `Ready to apply ${Object.keys(updatedContent).length} content changes. Click "Apply Changes" to update the website.`,
       });
       
       // Clear the file input
@@ -553,7 +556,10 @@ export default function SideContentEditor() {
         variant: "destructive",
       });
     } finally {
-      setIsUploading(false);
+      setTimeout(() => {
+        setIsUploading(false);
+        setUploadProgress(0);
+      }, 2000);
     }
   };
   
@@ -602,24 +608,32 @@ export default function SideContentEditor() {
             >
               <Download className="h-3.5 w-3.5 mr-1" /> Download
             </Button>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => document.getElementById('docx-upload')?.click()}
-              className="h-8 text-white/70 hover:text-white hover:bg-white/10"
-              title="Upload client feedback document"
-              disabled={isUploading}
-            >
-              {isUploading ? (
-                <>
-                  <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> Processing...
-                </>
-              ) : (
-                <>
-                  <Upload className="h-3.5 w-3.5 mr-1" /> Upload
-                </>
+            <div className="flex flex-col gap-1">
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => document.getElementById('docx-upload')?.click()}
+                className="h-8 text-white/70 hover:text-white hover:bg-white/10"
+                title="Upload client feedback document"
+                disabled={isUploading}
+              >
+                {isUploading ? (
+                  <>
+                    <Loader2 className="h-3.5 w-3.5 mr-1 animate-spin" /> Processing...
+                  </>
+                ) : (
+                  <>
+                    <Upload className="h-3.5 w-3.5 mr-1" /> Upload
+                  </>
+                )}
+              </Button>
+              {isUploading && (
+                <div className="w-20">
+                  <Progress value={uploadProgress} className="h-1" />
+                  <div className="text-xs text-white/60 text-center mt-1">{uploadProgress}%</div>
+                </div>
               )}
-            </Button>
+            </div>
             <input
               id="docx-upload"
               type="file"
