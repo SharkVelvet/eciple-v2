@@ -110,7 +110,7 @@ export default function ComparisonPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header />
+      <Header2 />
       <main className="flex-grow">
         {/* Hero Section */}
         <section className="pt-28 pb-32 bg-gradient-to-br from-[#15BEE2] via-[#15BEE2]/80 to-[#0368C1] text-white relative overflow-hidden min-h-[600px]">

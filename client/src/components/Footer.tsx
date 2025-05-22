@@ -49,7 +49,6 @@ export default function Footer() {
       { name: "Our Solution", href: "#solution" },
       { name: "Product Features", href: "#product" },
       { name: "Competitive Analysis", href: "#competition" },
-      { name: "Market Opportunity", href: "#market" },
       { name: "Pricing", href: "#pricing" }
     ],
     resources: [
