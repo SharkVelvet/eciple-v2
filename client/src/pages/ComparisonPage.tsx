@@ -123,35 +123,99 @@ export default function ComparisonPage() {
           
           {/* Content */}
           <div className="max-w-[1180px] mx-auto px-4 md:px-6 relative z-10">
-            <motion.div 
-              className="max-w-4xl mx-auto text-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-sans mb-6 leading-tight">
-                The One-To-One Discipleship Enablement Platform
-              </h1>
-              
-              <p className="text-xl md:text-2xl mb-8 text-white/90 leading-relaxed">
-                Existing discipleship solutions are overwhelmingly designed for group content delivery, offering no technology to address the unique needs of one-to-one mentoring at scale. The eciple One-To-One Discipleship Enablement Platform provides a fundamentally different approach:
-              </p>
-              
-              <div className="flex justify-center mt-8">
-                <Button 
-                  size="lg" 
-                  className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20"
-                >
-                  <a 
-                    href="#comparison" 
-                    className="flex items-center gap-2"
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Left Column - Content */}
+              <motion.div 
+                className="space-y-6"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold font-sans leading-tight">
+                  The One-To-One Discipleship Enablement Platform
+                </h1>
+                
+                <p className="text-lg md:text-xl text-white/90 leading-relaxed">
+                  Existing discipleship solutions are overwhelmingly designed for group content delivery, offering no technology to address the unique needs of one-to-one mentoring at scale. The eciple platform provides a fundamentally different approach.
+                </p>
+                
+                <div className="flex justify-start mt-8">
+                  <Button 
+                    size="lg" 
+                    className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20"
                   >
-                    View Comparison
-                    <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-                  </a>
-                </Button>
-              </div>
-            </motion.div>
+                    <a 
+                      href="#comparison" 
+                      className="flex items-center gap-2"
+                    >
+                      View Comparison
+                      <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                    </a>
+                  </Button>
+                </div>
+              </motion.div>
+
+              {/* Right Column - Visual Elements */}
+              <motion.div 
+                className="relative hidden lg:block"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                {/* Floating Cards */}
+                <div className="relative h-96">
+                  {/* Card 1 */}
+                  <motion.div
+                    className="absolute top-0 left-0 bg-white/10 backdrop-blur-sm rounded-lg p-4 w-48 border border-white/20"
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <div className="flex items-center space-x-2 mb-2">
+                      <div className="w-3 h-3 bg-green-400 rounded-full"></div>
+                      <span className="text-sm font-medium">One-to-One Matching</span>
+                    </div>
+                    <div className="text-xs text-white/80">
+                      AI-powered mentor-disciple pairing
+                    </div>
+                  </motion.div>
+
+                  {/* Card 2 */}
+                  <motion.div
+                    className="absolute top-16 right-0 bg-white/10 backdrop-blur-sm rounded-lg p-4 w-52 border border-white/20"
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  >
+                    <div className="flex items-center space-x-2 mb-2">
+                      <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
+                      <span className="text-sm font-medium">Personalized Growth</span>
+                    </div>
+                    <div className="text-xs text-white/80">
+                      Adaptive content for individual journeys
+                    </div>
+                  </motion.div>
+
+                  {/* Card 3 */}
+                  <motion.div
+                    className="absolute bottom-16 left-8 bg-white/10 backdrop-blur-sm rounded-lg p-4 w-44 border border-white/20"
+                    animate={{ y: [0, -8, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                  >
+                    <div className="flex items-center space-x-2 mb-2">
+                      <div className="w-3 h-3 bg-purple-400 rounded-full"></div>
+                      <span className="text-sm font-medium">Scalable Platform</span>
+                    </div>
+                    <div className="text-xs text-white/80">
+                      Technology-enabled discipleship
+                    </div>
+                  </motion.div>
+
+                  {/* Central connecting lines */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-32 h-32 rounded-full border-2 border-white/30 border-dashed animate-spin-slow"></div>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </section>
 
