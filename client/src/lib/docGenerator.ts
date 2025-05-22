@@ -311,7 +311,7 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
       
       // Look for field patterns and extract content from your document
       const fieldMappings = [
-        { keywords: ['hero heading', 'headline'], key: 'hero_heading' },
+        { keywords: ['main heading', 'hero heading', 'headline'], key: 'hero_heading' },
         { keywords: ['hero subheading', 'subheadline'], key: 'hero_subheading' },
         { keywords: ['hero cta', 'call to action'], key: 'hero_cta_text' },
         { keywords: ['problem text'], key: 'problem_text' },
