@@ -57,8 +57,7 @@ export default function Footer() {
       { name: "Terms of Service", href: "#" }
     ],
     contact: [
-      { icon: "envelope", text: "bobby@eciple.com" },
-      { icon: "phone", text: "Call / Text: 813.400.9384" }
+      { icon: "envelope", text: "info@eciple.com" }
     ],
     social: [
       { icon: "facebook-f", href: "#" },
@@ -187,14 +186,6 @@ export default function Footer() {
                   <i className="fas fa-envelope"></i>
                 </span>
                 <span className="text-white text-opacity-70">{links.contact[0].text}</span>
-              </li>
-              <li className="flex items-start">
-                <span className="text-accent mr-2 mt-1">
-                  <i className="fas fa-phone"></i>
-                </span>
-                <span className="text-white text-opacity-70">
-                  {links.contact[1].text}
-                </span>
               </li>
             </ul>
           </motion.div>
