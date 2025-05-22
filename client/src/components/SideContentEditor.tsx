@@ -471,6 +471,33 @@ export default function SideContentEditor() {
       description: "Content changes have been previewed on the page.",
     });
   };
+
+  // Download client feedback document
+  const handleDownloadDocument = async () => {
+    try {
+      // Prepare content sections for the document
+      const sections = Object.entries(contentSections).map(([sectionName, fields]) => ({
+        title: sectionName,
+        contentKeys: fields.map(field => field.key),
+        contentLabels: fields.map(field => field.label)
+      }));
+
+      // Generate and download the document
+      await downloadDocx(content, sections);
+      
+      toast({
+        title: "Document Downloaded",
+        description: "Client feedback document has been generated successfully!",
+      });
+    } catch (error) {
+      console.error("Error generating document:", error);
+      toast({
+        title: "Download Failed",
+        description: "There was an error generating the document. Please try again.",
+        variant: "destructive",
+      });
+    }
+  };
   
   if (!isOpen) {
     return (
@@ -506,6 +533,15 @@ export default function SideContentEditor() {
         <div className="flex items-center justify-between sticky top-0 z-10 bg-[#223349] p-3 border-b border-white/10">
           <h3 className="font-semibold text-white text-lg">Website Content Editor</h3>
           <div className="flex gap-1">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleDownloadDocument}
+              className="h-8 text-white/70 hover:text-white hover:bg-white/10"
+              title="Download as .doc document"
+            >
+              <Download className="h-3.5 w-3.5 mr-1" /> Download
+            </Button>
             <Button
               variant="ghost"
               size="sm"
