@@ -370,6 +370,12 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
         const lines = fileText.split(/[\r\n]+/).filter(line => line.trim().length > 0);
         console.log(`Found ${lines.length} lines to process`);
         
+        // Debug: Show first 10 lines to understand the format
+        console.log("Sample lines from your document:");
+        for (let i = 0; i < Math.min(10, lines.length); i++) {
+          console.log(`Line ${i + 1}: "${lines[i]}"`);
+        }
+        
         for (const line of lines) {
           // Try multiple splitting strategies to find 3-column structure
           let parts: string[] = [];
