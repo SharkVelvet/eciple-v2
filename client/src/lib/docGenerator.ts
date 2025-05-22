@@ -297,7 +297,7 @@ export const downloadDocx = async (
   }
 };
 
-// Parse uploaded docx file and extract content changes
+// Parse uploaded docx file and extract content changes from rightmost table column
 export const parseDocx = async (file: File): Promise<Record<string, string>> => {
   return new Promise(async (resolve, reject) => {
     console.log("Processing document:", file.name);
@@ -305,56 +305,74 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
     try {
       // Read the file as ArrayBuffer
       const arrayBuffer = await file.arrayBuffer();
-      const uint8Array = new Uint8Array(arrayBuffer);
+      const zip = new PizZip(arrayBuffer);
       
-      // Use the docx library to parse the file
-      const doc = await docx.loadAsync(uint8Array);
+      // Extract document.xml which contains the text content
+      const documentXml = zip.files["word/document.xml"];
+      if (!documentXml) {
+        throw new Error("Invalid docx file format");
+      }
       
-      // Extract all paragraphs from the document
-      const paragraphs = doc.getFullText().split('\n');
+      const xmlContent = documentXml.asText();
+      console.log("Document XML extracted successfully");
+      
+      // Simple text extraction - find all text content
+      const textMatches = xmlContent.match(/<w:t[^>]*>([^<]*)<\/w:t>/g) || [];
+      const allText = textMatches.map(match => {
+        const content = match.replace(/<[^>]*>/g, '');
+        return content;
+      }).join(' ');
+      
+      console.log("Extracted text:", allText);
+      
       const updates: Record<string, string> = {};
       
-      // Look for content pairs in the format "FIELD_NAME: New Content"
-      for (const paragraph of paragraphs) {
-        const trimmed = paragraph.trim();
-        if (trimmed.includes(':')) {
-          const [key, ...valueParts] = trimmed.split(':');
-          const value = valueParts.join(':').trim();
-          
-          if (key && value) {
-            // Convert key to lowercase and replace spaces with underscores
-            const fieldKey = key.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
-            updates[fieldKey] = value;
+      // Define field patterns that match your document structure
+      const fieldPatterns = [
+        { pattern: /hero.*heading/i, key: 'hero_heading' },
+        { pattern: /hero.*subheading/i, key: 'hero_subheading' },
+        { pattern: /hero.*cta.*text/i, key: 'hero_cta_text' },
+        { pattern: /problem.*text/i, key: 'problem_text' },
+        { pattern: /growth.*text/i, key: 'growth_text' },
+        { pattern: /solution.*title/i, key: 'solution_title' },
+        { pattern: /product.*title/i, key: 'product_title' },
+        { pattern: /market.*size/i, key: 'market_size' },
+        { pattern: /pricing.*title/i, key: 'pricing_title' },
+        { pattern: /contact.*title/i, key: 'contact_title' },
+      ];
+      
+      // Split by common separators and look for table structure
+      const lines = allText.split(/[\n\r\t]+/).filter(line => line.trim().length > 0);
+      
+      // Process each line looking for field name followed by new content
+      for (let i = 0; i < lines.length - 1; i++) {
+        const currentLine = lines[i].trim();
+        
+        // Check if this line matches a field pattern
+        for (const { pattern, key } of fieldPatterns) {
+          if (pattern.test(currentLine)) {
+            // Look for content in subsequent lines (table right column)
+            for (let j = i + 1; j < Math.min(i + 4, lines.length); j++) {
+              const potentialContent = lines[j].trim();
+              
+              // Skip if it's another field name or empty/short content
+              const isAnotherField = fieldPatterns.some(fp => fp.pattern.test(potentialContent));
+              const hasValidContent = potentialContent.length > 5 && 
+                                    !potentialContent.toLowerCase().includes('current content') &&
+                                    !isAnotherField;
+              
+              if (hasValidContent) {
+                updates[key] = potentialContent;
+                console.log(`Found update: ${key} = ${potentialContent}`);
+                break;
+              }
+            }
+            break;
           }
         }
       }
       
-      console.log("Extracted content updates:", updates);
-      
-      // If no valid updates found, try alternative parsing
-      if (Object.keys(updates).length === 0) {
-        // Look for table format or other patterns
-        const fullText = doc.getFullText();
-        console.log("Full document text:", fullText);
-        
-        // Try to match common content field patterns
-        const patterns = [
-          /hero[_\s]*heading[:\s]+(.+)/i,
-          /hero[_\s]*subheading[:\s]+(.+)/i,
-          /problem[_\s]*text[:\s]+(.+)/i,
-          /solution[_\s]*title[:\s]+(.+)/i,
-        ];
-        
-        for (const pattern of patterns) {
-          const match = fullText.match(pattern);
-          if (match) {
-            const fieldName = pattern.source.split('[')[0].toLowerCase() + '_' + 
-                            pattern.source.split('[')[1].split(']')[0].toLowerCase();
-            updates[fieldName.replace(/[^a-z0-9_]/g, '')] = match[1].trim();
-          }
-        }
-      }
-      
+      console.log("Final extracted updates:", updates);
       resolve(updates);
       
     } catch (error) {
