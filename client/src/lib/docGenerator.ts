@@ -303,14 +303,56 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
     console.log("Processing document:", file.name);
     
     try {
-      // For now, create a simple demo that shows the upload is working
-      // and apply a test change to verify the system works
-      const updates: Record<string, string> = {
-        "hero_heading": "Updated Headline from Your Document!",
-        "hero_subheading": "This text was changed via document upload to show the system is working.",
-      };
+      // Read the file content as text (simple approach for now)
+      const fileText = await file.text();
+      console.log("Raw file content:", fileText.substring(0, 200) + "...");
       
-      console.log("Applied test updates to demonstrate upload functionality:", updates);
+      const updates: Record<string, string> = {};
+      
+      // Look for field patterns and extract content from your document
+      const fieldMappings = [
+        { keywords: ['hero heading', 'headline'], key: 'hero_heading' },
+        { keywords: ['hero subheading', 'subheadline'], key: 'hero_subheading' },
+        { keywords: ['hero cta', 'call to action'], key: 'hero_cta_text' },
+        { keywords: ['problem text'], key: 'problem_text' },
+        { keywords: ['growth text'], key: 'growth_text' },
+        { keywords: ['solution title'], key: 'solution_title' },
+        { keywords: ['product title'], key: 'product_title' },
+      ];
+      
+      // Split content into lines and look for your changes
+      const lines = fileText.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+      
+      for (let i = 0; i < lines.length; i++) {
+        const currentLine = lines[i].toLowerCase();
+        
+        // Check if this line contains a field name
+        for (const mapping of fieldMappings) {
+          const matchesField = mapping.keywords.some(keyword => 
+            currentLine.includes(keyword.toLowerCase())
+          );
+          
+          if (matchesField) {
+            // Look for content in the next few lines
+            for (let j = i + 1; j < Math.min(i + 5, lines.length); j++) {
+              const contentLine = lines[j].trim();
+              
+              // Skip if it's empty, too short, or looks like another field
+              if (contentLine.length > 10 && 
+                  !contentLine.toLowerCase().includes('current content') &&
+                  !fieldMappings.some(m => m.keywords.some(k => contentLine.toLowerCase().includes(k)))) {
+                
+                updates[mapping.key] = contentLine;
+                console.log(`Found content update: ${mapping.key} = ${contentLine}`);
+                break;
+              }
+            }
+            break;
+          }
+        }
+      }
+      
+      console.log("Extracted updates from your document:", updates);
       
       // Add a small delay to show the progress bar working
       await new Promise(resolve => setTimeout(resolve, 500));
