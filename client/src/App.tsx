@@ -24,8 +24,8 @@ function Router() {
       {/* Main site (protected by welcome page authentication) */}
       <Route path="/home" component={Home} />
       
-      {/* Comparison page */}
-      <Route path="/comparison" component={ComparisonPage} />
+      {/* Comparison page - renamed to home2 */}
+      <Route path="/home2" component={ComparisonPage} />
       
       {/* Policy pages */}
       <Route path="/cookie-policy" component={CookiePolicyPage} />
