@@ -8,6 +8,7 @@ import { Check, X, ArrowRight, CheckCircle } from "lucide-react";
 import Header2 from "@/components/Header2";
 import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
+import Product from "@/components/Product";
 
 export default function ComparisonPage() {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -559,6 +560,7 @@ export default function ComparisonPage() {
           </div>
         </section>
       </main>
+      <Product />
       <Contact />
       <Footer />
     </div>
