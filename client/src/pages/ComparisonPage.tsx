@@ -263,49 +263,9 @@ export default function ComparisonPage() {
                     <h2 className="text-4xl md:text-5xl font-bold font-sans bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">The Problem</h2>
                   </div>
                   
-                  <p className="text-xl leading-relaxed text-foreground/80 max-w-xl">
+                  <p className="text-xl leading-relaxed text-foreground/80 max-w-xl mb-8">
                     Despite <span className="font-semibold text-primary">82% of pastors</span> saying discipleship is a priority, only <span className="font-semibold text-secondary">29% think</span> their church does it effectively.
                   </p>
-                </motion.div>
-                
-                <motion.div 
-                  className="relative mt-12 p-8 rounded-xl bg-gradient-to-br from-white to-blue-50 border border-primary/10 shadow-xl"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4, duration: 0.6 }}
-                >
-                  <div className="absolute -top-4 -right-4 bg-gradient-to-br from-secondary to-primary text-white text-sm font-medium px-4 py-1 rounded-full shadow-lg">
-                    Key Finding
-                  </div>
-                  <h3 className="text-xl font-bold mb-4">The Bottom Line</h3>
-                  <p className="text-foreground/80 mb-4">Churches struggle to create meaningful relationships that lead to spiritual growth.</p>
-                  <ul className="space-y-3">
-                    <li className="flex items-center gap-2">
-                      <div className="h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center">
-                        <ArrowRight className="h-3 w-3 text-secondary" />
-                      </div>
-                      <span>Connected Mentorship</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center">
-                        <ArrowRight className="h-3 w-3 text-secondary" />
-                      </div>
-                      <span>Engaging Curriculum</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center">
-                        <ArrowRight className="h-3 w-3 text-secondary" />
-                      </div>
-                      <span>Spiritual Growth</span>
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <div className="h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center">
-                        <ArrowRight className="h-3 w-3 text-secondary" />
-                      </div>
-                      <span>Measurable Progress</span>
-                    </li>
-                  </ul>
                   
                   <div className="mt-6">
                     <Button asChild variant="outline" className="gap-1 rounded-full">
