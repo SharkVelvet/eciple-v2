@@ -442,6 +442,8 @@ export default function ComparisonPage() {
           </div>
         </section>
 
+        <Product />
+
         {/* Comparison Chart Section */}
         <section id="comparison" className="py-16 bg-white scroll-mt-20">
           <div className="max-w-[1180px] mx-auto px-4">
