@@ -593,7 +593,6 @@ export default function ComparisonPage() {
           </div>
         </section>
       </main>
-      <Product />
       <Contact />
       <Footer />
     </div>
