@@ -94,6 +94,43 @@ export default function Problem() {
       
       <div className="max-w-[1180px] mx-auto px-4 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <motion.div 
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            {stats.map((stat, index) => (
+              <motion.div 
+                key={index}
+                variants={item}
+                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+              >
+                <Card className="overflow-hidden border-primary/5 shadow-md hover:shadow-xl transition-all duration-300 h-full">
+                  <div className={`h-2 ${stat.color.split(' ')[0]}`}></div>
+                  <CardContent className="p-6 pt-5">
+                    <div className="flex items-start gap-4">
+                      <div className={`rounded-full p-2.5 ${stat.color}`}>
+                        <stat.icon className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <div className="flex items-baseline gap-1.5">
+                          <div className="text-3xl font-bold font-sans text-primary">{stat.percentage}</div>
+                          <div className="text-xs font-medium text-secondary rounded-full px-2 py-0.5 bg-secondary/10">
+                            {getContentValue(editableContent, 'issue_badge_text')}
+                          </div>
+                        </div>
+                        <p className="text-foreground mt-1 font-medium">{stat.description}</p>
+                        <p className="text-sm text-muted-foreground mt-2">{stat.source}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+          
           <div>
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
@@ -235,43 +272,6 @@ export default function Problem() {
               </div>
             </motion.div>
           </div>
-          
-          <motion.div 
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-          >
-            {stats.map((stat, index) => (
-              <motion.div 
-                key={index}
-                variants={item}
-                whileHover={{ y: -8, transition: { duration: 0.2 } }}
-              >
-                <Card className="overflow-hidden border-primary/5 shadow-md hover:shadow-xl transition-all duration-300 h-full">
-                  <div className={`h-2 ${stat.color.split(' ')[0]}`}></div>
-                  <CardContent className="p-6 pt-5">
-                    <div className="flex items-start gap-4">
-                      <div className={`rounded-full p-2.5 ${stat.color}`}>
-                        <stat.icon className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <div className="flex items-baseline gap-1.5">
-                          <div className="text-3xl font-bold font-sans text-primary">{stat.percentage}</div>
-                          <div className="text-xs font-medium text-secondary rounded-full px-2 py-0.5 bg-secondary/10">
-                            {getContentValue(editableContent, 'issue_badge_text')}
-                          </div>
-                        </div>
-                        <p className="text-foreground mt-1 font-medium">{stat.description}</p>
-                        <p className="text-sm text-muted-foreground mt-2">{stat.source}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
       </div>
     </section>
