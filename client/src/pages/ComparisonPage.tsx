@@ -353,10 +353,13 @@ export default function ComparisonPage() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="md:col-span-2 lg:col-span-1"
               >
-                <Card className="h-full hover:shadow-lg transition-shadow">
+                <Card className="h-full hover:shadow-lg transition-shadow overflow-hidden border-primary/5 shadow-md hover:shadow-xl transition-all duration-300">
+                  <div className="h-2 bg-gradient-to-r from-indigo-400 to-indigo-600"></div>
                   <CardContent className="p-6">
                     <div className="flex items-center mb-4">
-                      <X className="h-6 w-6 text-red-500 mr-2" />
+                      <div className="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
+                        <StopCircle className="h-5 w-5 text-indigo-600" />
+                      </div>
                       <h3 className="text-lg font-semibold text-primary">Inability to Scale Personal Mentorship</h3>
                     </div>
                     <p className="text-foreground text-opacity-80">
