@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { Check, X, ArrowRight, CheckCircle } from "lucide-react";
+import { Check, X, ArrowRight, CheckCircle, AlertCircle } from "lucide-react";
 import Header2 from "@/components/Header2";
 import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
@@ -238,22 +238,88 @@ export default function ComparisonPage() {
         </section>
 
         {/* Problem Section */}
-        <section id="problem" className="py-16 bg-gray-50">
-          <div className="max-w-[1180px] mx-auto px-4">
-            <motion.div 
-              className="text-center mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-4">The Problem with Current Solutions</h2>
-              <p className="text-lg max-w-3xl mx-auto text-foreground text-opacity-80">
-                Traditional discipleship platforms fail to address the unique needs of one-to-one mentoring relationships
-              </p>
-            </motion.div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <section id="problem" className="py-24 bg-gradient-to-b from-white to-blue-50 scroll-mt-20 relative overflow-hidden">
+          {/* Decorative elements */}
+          <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-primary/5 to-transparent"></div>
+          <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+          <div className="absolute -top-20 -right-20 w-80 h-80 bg-secondary/5 rounded-full blur-3xl"></div>
+          <div className="absolute -bottom-40 -left-20 w-80 h-80 bg-accent/5 rounded-full blur-3xl"></div>
+          
+          <div className="max-w-[1180px] mx-auto px-4 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              {/* Left Side - Problem Content from Page 1 */}
+              <div>
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="mb-10"
+                >
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="h-8 w-8 rounded-full flex items-center justify-center bg-red-100">
+                      <AlertCircle className="h-5 w-5 text-red-600" />
+                    </div>
+                    <h2 className="text-4xl md:text-5xl font-bold font-sans bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">The Problem</h2>
+                  </div>
+                  
+                  <p className="text-xl leading-relaxed text-foreground/80 max-w-xl">
+                    Despite <span className="font-semibold text-primary">82% of pastors</span> saying discipleship is a priority, only <span className="font-semibold text-secondary">29% think</span> their church does it effectively.
+                  </p>
+                </motion.div>
+                
+                <motion.div 
+                  className="relative mt-12 p-8 rounded-xl bg-gradient-to-br from-white to-blue-50 border border-primary/10 shadow-xl"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4, duration: 0.6 }}
+                >
+                  <div className="absolute -top-4 -right-4 bg-gradient-to-br from-secondary to-primary text-white text-sm font-medium px-4 py-1 rounded-full shadow-lg">
+                    Key Finding
+                  </div>
+                  <h3 className="text-xl font-bold mb-4">The Bottom Line</h3>
+                  <p className="text-foreground/80 mb-4">Churches struggle to create meaningful relationships that lead to spiritual growth.</p>
+                  <ul className="space-y-3">
+                    <li className="flex items-center gap-2">
+                      <div className="h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center">
+                        <ArrowRight className="h-3 w-3 text-secondary" />
+                      </div>
+                      <span>Connected Mentorship</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center">
+                        <ArrowRight className="h-3 w-3 text-secondary" />
+                      </div>
+                      <span>Engaging Curriculum</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center">
+                        <ArrowRight className="h-3 w-3 text-secondary" />
+                      </div>
+                      <span>Spiritual Growth</span>
+                    </li>
+                    <li className="flex items-center gap-2">
+                      <div className="h-6 w-6 rounded-full bg-secondary/10 flex items-center justify-center">
+                        <ArrowRight className="h-3 w-3 text-secondary" />
+                      </div>
+                      <span>Measurable Progress</span>
+                    </li>
+                  </ul>
+                  
+                  <div className="mt-6">
+                    <Button asChild variant="outline" className="gap-1 rounded-full">
+                      <a href="#solution">
+                        See Our Solution
+                        <ArrowRight className="h-4 w-4" />
+                      </a>
+                    </Button>
+                  </div>
+                </motion.div>
+              </div>
+              
+              {/* Right Side - Problem Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -330,8 +396,7 @@ export default function ComparisonPage() {
                   </CardContent>
                 </Card>
               </motion.div>
-
-
+              </div>
             </div>
           </div>
         </section>
