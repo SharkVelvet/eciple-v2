@@ -456,7 +456,14 @@ export default function ComparisonPage() {
                       <TableRow>
                         <TableHead className="font-bold text-primary w-1/4">Factor</TableHead>
                         <TableHead className="font-bold text-gray-600 w-[37.5%]">Traditional Discipleship Providers</TableHead>
-                        <TableHead className="font-bold text-primary w-[37.5%]">eciple Platform</TableHead>
+                        <TableHead className="font-bold text-white w-[37.5%] bg-gradient-to-r from-accent to-primary relative">
+                          <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-primary/20 animate-pulse"></div>
+                          <span className="relative z-10 flex items-center justify-center gap-2">
+                            <span className="text-lg">✨</span>
+                            eciple Platform
+                            <span className="text-lg">✨</span>
+                          </span>
+                        </TableHead>
                       </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -469,10 +476,13 @@ export default function ComparisonPage() {
                               <span>{item.traditional}</span>
                             </div>
                           </TableCell>
-                          <TableCell>
-                            <div className="flex items-start gap-2">
-                              <Check className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                              <span>{item.eciple}</span>
+                          <TableCell className="bg-gradient-to-br from-accent/5 to-primary/5 border-l-4 border-accent relative">
+                            <div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-transparent opacity-50"></div>
+                            <div className="flex items-start gap-2 relative z-10">
+                              <div className="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5 flex-shrink-0">
+                                <Check className="h-4 w-4 text-green-600" />
+                              </div>
+                              <span className="font-semibold text-primary">{item.eciple}</span>
                             </div>
                           </TableCell>
                         </TableRow>
