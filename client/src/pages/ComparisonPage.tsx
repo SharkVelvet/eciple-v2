@@ -373,7 +373,55 @@ export default function ComparisonPage() {
           </div>
         </section>
 
+        {/* Solution Section - Simple and Clean */}
+        <section id="solution" className="py-16 bg-gradient-to-br from-[#15BEE2]/10 to-[#0368C1]/10 scroll-mt-20">
+          <div className="max-w-[1180px] mx-auto px-4">
+            <motion.div 
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
+                Our Solution
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                A fundamentally different approach to discipleship
+              </p>
+            </motion.div>
 
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="text-center">
+                <div className="h-16 w-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="h-8 w-8 text-green-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-3">One-to-One Focus</h3>
+                <p className="text-gray-600">Built specifically for personalized mentoring relationships, not group-based content delivery</p>
+              </div>
+              <div className="text-center">
+                <div className="h-16 w-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="h-8 w-8 text-blue-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-3">Adaptive Technology</h3>
+                <p className="text-gray-600">Dynamic content creation that adapts to each unique spiritual journey and relationship</p>
+              </div>
+              <div className="text-center">
+                <div className="h-16 w-16 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle className="h-8 w-8 text-purple-600" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-3">Scalable Infrastructure</h3>
+                <p className="text-gray-600">Modern platform designed to support large-scale discipleship across diverse ministry contexts</p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
 
         <Product />
 
