@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { useContext, useState } from "react";
 import { AdminContext } from "@/pages/Home";
 import { Textarea } from "@/components/ui/textarea";
+import { getContentValue } from "@/lib/contentDefaults";
 
 export default function Problem() {
   // Access the admin context
