@@ -7,6 +7,7 @@ import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@
 import { Check, X, ArrowRight, CheckCircle } from "lucide-react";
 import Header2 from "@/components/Header2";
 import Footer from "@/components/Footer";
+import Contact from "@/components/Contact";
 
 export default function ComparisonPage() {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -558,6 +559,7 @@ export default function ComparisonPage() {
           </div>
         </section>
       </main>
+      <Contact />
       <Footer />
     </div>
   );
