@@ -118,11 +118,20 @@ export default function Footer() {
             transition={{ duration: 0.35, ease: "easeOut" }}
           >
             <div className="mb-4">
-              <img 
-                src={ecipleLogo} 
-                alt="eciple logo" 
-                className="h-10 w-auto object-contain" 
-              />
+              <a 
+                href="#" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="block hover:opacity-80 transition-opacity cursor-pointer"
+              >
+                <img 
+                  src={ecipleLogo} 
+                  alt="eciple logo" 
+                  className="h-10 w-auto object-contain" 
+                />
+              </a>
             </div>
             <p className="text-white text-opacity-70 mb-4">
               Igniting a self-replicating one-to-one discipleship movement through our purpose built technology.
@@ -146,9 +155,25 @@ export default function Footer() {
             <ul className="space-y-2">
               {links.quickLinks.map((link, index) => (
                 <li key={index}>
-                  <a href={link.href} className="text-white text-opacity-70 hover:text-white transition-colors">
-                    {link.name}
-                  </a>
+                  {link.href.startsWith('#') ? (
+                    <a 
+                      href={link.href} 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const element = document.querySelector(link.href);
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                      }}
+                      className="text-white text-opacity-70 hover:text-white transition-colors cursor-pointer"
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <a href={link.href} className="text-white text-opacity-70 hover:text-white transition-colors">
+                      {link.name}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
