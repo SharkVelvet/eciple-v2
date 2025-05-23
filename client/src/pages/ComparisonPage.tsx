@@ -374,41 +374,90 @@ export default function ComparisonPage() {
         </section>
 
         {/* Solution Section */}
-        <section id="solution" className="py-16 bg-gradient-to-br from-[#15BEE2]/10 to-[#0368C1]/10 scroll-mt-20">
+        <section id="solution" className="py-24 bg-gradient-to-br from-[#15BEE2]/10 to-[#0368C1]/10 scroll-mt-20">
           <div className="max-w-[1180px] mx-auto px-4">
-            <motion.div 
-              className="text-center mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-                Our Solution
-              </h2>
-              <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-                A fundamentally different approach to discipleship
-              </p>
-            </motion.div>
-
-            <div className="max-w-4xl mx-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              {/* Left Side - Large Logo */}
+              <motion.div 
+                className="flex justify-center lg:justify-start"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
+                transition={{ duration: 0.8 }}
               >
-                <Card className="hover:shadow-lg transition-shadow border-2 border-accent bg-gradient-to-br from-accent/5 to-accent/10">
-                  <CardContent className="p-8">
-                    <div className="flex items-center mb-6">
-                      <CheckCircle className="h-8 w-8 text-green-500 mr-3" />
-                      <h3 className="text-2xl font-semibold text-primary">eciple's Differentiated Approach</h3>
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-primary/20 rounded-full blur-3xl"></div>
+                  <img 
+                    src="/attached_assets/eciple-blue.png" 
+                    alt="eciple" 
+                    className="relative z-10 w-80 h-80 object-contain drop-shadow-2xl"
+                  />
+                </div>
+              </motion.div>
+
+              {/* Right Side - Solution Details */}
+              <motion.div 
+                className="space-y-8"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <div>
+                  <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent mb-6">
+                    Our Solution
+                  </h2>
+                  <p className="text-xl text-muted-foreground mb-8">
+                    A fundamentally different approach to discipleship
+                  </p>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0 mt-1">
+                      <CheckCircle className="h-5 w-5 text-green-600" />
                     </div>
-                    <p className="text-lg text-foreground text-opacity-80 leading-relaxed">
-                      eciple is a fundamentally different platform—built from the ground up to empower and scale personalized, one-to-one discipleship relationships.
-                    </p>
-                  </CardContent>
-                </Card>
+                    <div>
+                      <h3 className="text-xl font-semibold text-primary mb-2">One-to-One Focus</h3>
+                      <p className="text-foreground/80 leading-relaxed">
+                        Built specifically for personalized mentoring relationships, not group-based content delivery.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0 mt-1">
+                      <CheckCircle className="h-5 w-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-primary mb-2">Adaptive Technology</h3>
+                      <p className="text-foreground/80 leading-relaxed">
+                        Dynamic content creation that adapts to each unique spiritual journey and relationship.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0 mt-1">
+                      <CheckCircle className="h-5 w-5 text-purple-600" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-primary mb-2">Scalable Infrastructure</h3>
+                      <p className="text-foreground/80 leading-relaxed">
+                        Modern platform designed to support large-scale discipleship across diverse ministry contexts.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="pt-4">
+                  <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20">
+                    <a href="#product" className="flex items-center gap-2">
+                      Explore Features
+                      <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                    </a>
+                  </Button>
+                </div>
               </motion.div>
             </div>
           </div>
