@@ -238,7 +238,7 @@ export default function ComparisonPage() {
         </section>
 
         {/* Problem Section */}
-        <section id="problem" className="py-24 bg-gradient-to-b from-white to-blue-50 scroll-mt-64 relative overflow-hidden">
+        <section id="problem" className="py-24 bg-gradient-to-b from-white to-blue-50 scroll-mt-20 relative overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-primary/5 to-transparent"></div>
           <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
