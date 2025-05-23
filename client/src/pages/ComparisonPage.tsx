@@ -268,10 +268,10 @@ export default function ComparisonPage() {
                   </p>
                   
                   <div className="mt-6">
-                    <Button asChild className="gap-1 rounded-full bg-primary text-white hover:bg-primary/90">
-                      <a href="#solution">
+                    <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20">
+                      <a href="#solution" className="flex items-center gap-2">
                         See Our Solution
-                        <ArrowRight className="h-4 w-4" />
+                        <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                       </a>
                     </Button>
                   </div>
@@ -539,8 +539,11 @@ export default function ComparisonPage() {
                         ))}
                       </ul>
                       <div className="mt-6">
-                        <Button asChild className="w-full justify-center">
-                          <a href="/contact">Get Started</a>
+                        <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20 w-full justify-center">
+                          <a href="/contact" className="flex items-center gap-2">
+                            Get Started
+                            <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                          </a>
                         </Button>
                       </div>
                     </CardContent>
@@ -597,11 +600,11 @@ export default function ComparisonPage() {
             </p>
             <Button 
               size="lg"
-              className="bg-white text-primary hover:bg-white/90 px-8 rounded-full"
+              className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20"
             >
               <a href="/contact" className="flex items-center gap-2">
                 Contact Us Today
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
               </a>
             </Button>
           </motion.div>
