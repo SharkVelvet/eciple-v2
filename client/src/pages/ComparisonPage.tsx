@@ -577,27 +577,7 @@ export default function ComparisonPage() {
               ))}
             </div>
             
-            {/* Additional Pricing Information */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="bg-white p-8 rounded-lg shadow-md"
-            >
-              <h3 className="text-2xl font-semibold font-sans text-primary mb-4">Additional Information</h3>
-              <div className="space-y-4 text-foreground text-opacity-80">
-                <p>
-                  Churches will have the flexibility to choose between monthly or annually discounted payments, both requiring an initial one-year commitment. Following the first year, customers can opt for a month-to-month arrangement, renew for another annual term at a discounted rate, or explore potential multi-year commitments with further pricing advantages.
-                </p>
-                <p>
-                  For the parachurch (enterprise) market, pricing will be negotiated on a deal-by-deal basis, typically involving multi-year contracts. Based on our analysis, we anticipate significant contract values, particularly with larger parachurch organizations.
-                </p>
-                <p>
-                  To drive early adoption in both segments, we will utilize promotional offers such as free trials for pilot churches and discounts for beta testers, as well as volume discounts for larger networks and parachurch partnerships.
-                </p>
-              </div>
-            </motion.div>
+
           </div>
         </section>
 
