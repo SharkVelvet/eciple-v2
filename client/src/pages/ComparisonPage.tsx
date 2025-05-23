@@ -476,7 +476,7 @@ export default function ComparisonPage() {
                               <span>{item.traditional}</span>
                             </div>
                           </TableCell>
-                          <TableCell className="bg-gradient-to-br from-accent/5 to-primary/5 border-l-4 border-accent relative">
+                          <TableCell className="bg-gradient-to-br from-accent/5 to-primary/5 relative">
                             <div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-transparent opacity-50"></div>
                             <div className="flex items-start gap-2 relative z-10">
                               <div className="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5 flex-shrink-0">
