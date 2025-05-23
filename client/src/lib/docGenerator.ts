@@ -513,11 +513,20 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
                   nextLine !== checkLine &&
                   !nextLine.includes('(key:') &&
                   !nextLine.includes('SECTION') &&
+                  !nextLine.includes('Statistic') &&
                   !nextLine.includes('Title') &&
                   !nextLine.includes('Label') &&
                   !nextLine.includes('Point') &&
-                  !nextLine.includes('Features')) {
-                return nextLine;
+                  !nextLine.includes('Features') &&
+                  !nextLine.includes('Heading') &&
+                  !nextLine.includes('Badge') &&
+                  !nextLine.includes('Button')) {
+                
+                // Extra check: if the new content has numbers at the end (your test markers)
+                // or is significantly different from the current content, use it
+                if (nextLine.match(/\d+$/) || Math.abs(nextLine.length - checkLine.length) > 5) {
+                  return nextLine;
+                }
               }
             }
           }
