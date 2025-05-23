@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { Check, X, ArrowRight, CheckCircle, AlertCircle } from "lucide-react";
+import { Check, X, ArrowRight, CheckCircle, AlertCircle, AlertTriangle, XCircle, Ban, StopCircle } from "lucide-react";
 import Header2 from "@/components/Header2";
 import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
@@ -286,10 +286,13 @@ export default function ComparisonPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
               >
-                <Card className="h-full hover:shadow-lg transition-shadow">
+                <Card className="h-full hover:shadow-lg transition-shadow overflow-hidden border-primary/5 shadow-md hover:shadow-xl transition-all duration-300">
+                  <div className="h-2 bg-gradient-to-r from-red-400 to-red-600"></div>
                   <CardContent className="p-6">
                     <div className="flex items-center mb-4">
-                      <X className="h-6 w-6 text-red-500 mr-2" />
+                      <div className="h-8 w-8 rounded-full bg-red-100 flex items-center justify-center mr-3">
+                        <AlertTriangle className="h-5 w-5 text-red-600" />
+                      </div>
                       <h3 className="text-lg font-semibold text-primary">Rigid Group-Based Systems</h3>
                     </div>
                     <p className="text-foreground text-opacity-80">
@@ -305,10 +308,13 @@ export default function ComparisonPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <Card className="h-full hover:shadow-lg transition-shadow">
+                <Card className="h-full hover:shadow-lg transition-shadow overflow-hidden border-primary/5 shadow-md hover:shadow-xl transition-all duration-300">
+                  <div className="h-2 bg-gradient-to-r from-orange-400 to-orange-600"></div>
                   <CardContent className="p-6">
                     <div className="flex items-center mb-4">
-                      <X className="h-6 w-6 text-red-500 mr-2" />
+                      <div className="h-8 w-8 rounded-full bg-orange-100 flex items-center justify-center mr-3">
+                        <XCircle className="h-5 w-5 text-orange-600" />
+                      </div>
                       <h3 className="text-lg font-semibold text-primary">Lack of One-to-One Mentoring Support</h3>
                     </div>
                     <p className="text-foreground text-opacity-80">
@@ -324,10 +330,13 @@ export default function ComparisonPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <Card className="h-full hover:shadow-lg transition-shadow">
+                <Card className="h-full hover:shadow-lg transition-shadow overflow-hidden border-primary/5 shadow-md hover:shadow-xl transition-all duration-300">
+                  <div className="h-2 bg-gradient-to-r from-purple-400 to-purple-600"></div>
                   <CardContent className="p-6">
                     <div className="flex items-center mb-4">
-                      <X className="h-6 w-6 text-red-500 mr-2" />
+                      <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                        <Ban className="h-5 w-5 text-purple-600" />
+                      </div>
                       <h3 className="text-lg font-semibold text-primary">Outdated Technology Infrastructure</h3>
                     </div>
                     <p className="text-foreground text-opacity-80">
