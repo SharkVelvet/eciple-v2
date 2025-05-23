@@ -32,37 +32,37 @@ export default function Problem() {
   
   const stats = [
     { 
-      percentage: "55%", 
-      description: "cite lack of personal discipleship programs", 
-      source: "Barna, 2021",
+      percentage: getContentValue(editableContent, 'stat_1_percentage'), 
+      description: getContentValue(editableContent, 'stat_1_description'), 
+      source: getContentValue(editableContent, 'stat_1_source'),
       icon: Users,
       color: "bg-red-100 text-red-600"
     },
     { 
-      percentage: "45%", 
-      description: "say identifying and training mentors is a challenge", 
-      source: "Outreach Magazine, 2022",
+      percentage: getContentValue(editableContent, 'stat_2_percentage'), 
+      description: getContentValue(editableContent, 'stat_2_description'), 
+      source: getContentValue(editableContent, 'stat_2_source'),
       icon: Users,
       color: "bg-orange-100 text-orange-600"
     },
     { 
-      percentage: "38%", 
-      description: "want improved spiritual assessment tools", 
-      source: "Lifeway, 2020",
+      percentage: getContentValue(editableContent, 'stat_3_percentage'), 
+      description: getContentValue(editableContent, 'stat_3_description'), 
+      source: getContentValue(editableContent, 'stat_3_source'),
       icon: Gauge,
       color: "bg-amber-100 text-amber-600"
     },
     { 
-      percentage: "32%", 
-      description: "lack centralized systems and metrics for tracking", 
-      source: "Barna, 2021",
+      percentage: getContentValue(editableContent, 'stat_4_percentage'), 
+      description: getContentValue(editableContent, 'stat_4_description'), 
+      source: getContentValue(editableContent, 'stat_4_source'),
       icon: LineChart,
       color: "bg-emerald-100 text-emerald-600"
     },
     { 
-      percentage: "29%", 
-      description: "need more customizable curriculum", 
-      source: "Outreach Magazine, 2022",
+      percentage: getContentValue(editableContent, 'stat_5_percentage'), 
+      description: getContentValue(editableContent, 'stat_5_description'), 
+      source: getContentValue(editableContent, 'stat_5_source'),
       icon: FileText,
       color: "bg-blue-100 text-blue-600"
     }
@@ -106,7 +106,7 @@ export default function Problem() {
                 <div className="h-8 w-8 rounded-full flex items-center justify-center bg-red-100">
                   <AlertCircle className="h-5 w-5 text-red-600" />
                 </div>
-                <h2 className="text-4xl md:text-5xl font-bold font-sans bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary problem-heading">The Problem</h2>
+                <h2 className="text-4xl md:text-5xl font-bold font-sans bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary problem-heading">{getContentValue(editableContent, 'problem_section_heading')}</h2>
               </div>
               
               {editMode && isAdmin ? (
@@ -136,7 +136,7 @@ export default function Problem() {
               transition={{ delay: 0.4, duration: 0.6 }}
             >
               <div className="absolute -top-4 -right-4 bg-gradient-to-br from-secondary to-primary text-white text-sm font-medium px-4 py-1 rounded-full shadow-lg">
-                Key Finding
+                {getContentValue(editableContent, 'key_finding_badge')}
               </div>
               <h3 className="text-xl font-bold mb-4">
                 {editMode && isAdmin ? (
@@ -228,7 +228,7 @@ export default function Problem() {
               <div className="mt-6">
                 <Button asChild variant="outline" className="gap-1 rounded-full">
                   <a href="#solution">
-                    See Our Solution
+                    {getContentValue(editableContent, 'see_solution_button')}
                     <ArrowRight className="h-4 w-4" />
                   </a>
                 </Button>
@@ -260,7 +260,7 @@ export default function Problem() {
                         <div className="flex items-baseline gap-1.5">
                           <div className="text-3xl font-bold font-sans text-primary">{stat.percentage}</div>
                           <div className="text-xs font-medium text-secondary rounded-full px-2 py-0.5 bg-secondary/10">
-                            Issue
+                            {getContentValue(editableContent, 'issue_badge_text')}
                           </div>
                         </div>
                         <p className="text-foreground mt-1 font-medium">{stat.description}</p>
