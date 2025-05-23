@@ -448,7 +448,31 @@ export const parseDocx = async (file: File): Promise<Record<string, string>> => 
             { labels: ['Contact Subheading'], key: 'contact_subheading' },
             { labels: ['Email Label'], key: 'email_text' },
             { labels: ['Phone Label'], key: 'phone_text' },
-            { labels: ['Submit Button Text'], key: 'submit_text' }
+            { labels: ['Submit Button Text'], key: 'submit_text' },
+            
+            // Additional Hero Section
+            { labels: ['Hero Badge Text'], key: 'hero_badge_text' },
+            
+            // Statistics and Sources
+            { labels: ['Statistic 1 Percentage'], key: 'stat_1_percentage' },
+            { labels: ['Statistic 1 Description'], key: 'stat_1_description' },
+            { labels: ['Statistic 1 Source'], key: 'stat_1_source' },
+            { labels: ['Statistic 2 Percentage'], key: 'stat_2_percentage' },
+            { labels: ['Statistic 2 Description'], key: 'stat_2_description' },
+            { labels: ['Statistic 2 Source'], key: 'stat_2_source' },
+            { labels: ['Statistic 3 Percentage'], key: 'stat_3_percentage' },
+            { labels: ['Statistic 3 Description'], key: 'stat_3_description' },
+            { labels: ['Statistic 3 Source'], key: 'stat_3_source' },
+            { labels: ['Statistic 4 Percentage'], key: 'stat_4_percentage' },
+            { labels: ['Statistic 4 Description'], key: 'stat_4_description' },
+            { labels: ['Statistic 4 Source'], key: 'stat_4_source' },
+            { labels: ['Statistic 5 Percentage'], key: 'stat_5_percentage' },
+            { labels: ['Statistic 5 Description'], key: 'stat_5_description' },
+            { labels: ['Statistic 5 Source'], key: 'stat_5_source' },
+            { labels: ['Problem Section Heading'], key: 'problem_section_heading' },
+            { labels: ['Key Finding Badge Text'], key: 'key_finding_badge' },
+            { labels: ['Issue Badge Text'], key: 'issue_badge_text' },
+            { labels: ['See Solution Button Text'], key: 'see_solution_button' }
           ];
           
           // Check if current line matches any field label

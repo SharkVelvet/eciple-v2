@@ -345,6 +345,130 @@ export const contentDefaults: ContentField[] = [
     label: "Submit Button Text",
     defaultValue: "Send Message",
     section: "Contact Section"
+  },
+
+  // Hero Section - Additional Elements
+  {
+    key: "hero_badge_text",
+    label: "Hero Badge Text",
+    defaultValue: "Transforming Church Communities",
+    section: "Hero Section"
+  },
+
+  // Problem Section - Statistics and Sources
+  {
+    key: "stat_1_percentage",
+    label: "Statistic 1 Percentage",
+    defaultValue: "55%",
+    section: "Problem Section"
+  },
+  {
+    key: "stat_1_description",
+    label: "Statistic 1 Description", 
+    defaultValue: "cite lack of personal discipleship programs",
+    section: "Problem Section"
+  },
+  {
+    key: "stat_1_source",
+    label: "Statistic 1 Source",
+    defaultValue: "Barna, 2021",
+    section: "Problem Section"
+  },
+  {
+    key: "stat_2_percentage",
+    label: "Statistic 2 Percentage",
+    defaultValue: "45%",
+    section: "Problem Section"
+  },
+  {
+    key: "stat_2_description",
+    label: "Statistic 2 Description",
+    defaultValue: "say identifying and training mentors is a challenge",
+    section: "Problem Section"
+  },
+  {
+    key: "stat_2_source",
+    label: "Statistic 2 Source",
+    defaultValue: "Outreach Magazine, 2022",
+    section: "Problem Section"
+  },
+  {
+    key: "stat_3_percentage",
+    label: "Statistic 3 Percentage",
+    defaultValue: "38%",
+    section: "Problem Section"
+  },
+  {
+    key: "stat_3_description",
+    label: "Statistic 3 Description",
+    defaultValue: "want improved spiritual assessment tools",
+    section: "Problem Section"
+  },
+  {
+    key: "stat_3_source",
+    label: "Statistic 3 Source",
+    defaultValue: "Lifeway, 2020",
+    section: "Problem Section"
+  },
+  {
+    key: "stat_4_percentage",
+    label: "Statistic 4 Percentage",
+    defaultValue: "32%",
+    section: "Problem Section"
+  },
+  {
+    key: "stat_4_description",
+    label: "Statistic 4 Description",
+    defaultValue: "lack centralized systems and metrics for tracking",
+    section: "Problem Section"
+  },
+  {
+    key: "stat_4_source",
+    label: "Statistic 4 Source",
+    defaultValue: "Barna, 2021",
+    section: "Problem Section"
+  },
+  {
+    key: "stat_5_percentage",
+    label: "Statistic 5 Percentage",
+    defaultValue: "29%",
+    section: "Problem Section"
+  },
+  {
+    key: "stat_5_description",
+    label: "Statistic 5 Description",
+    defaultValue: "need more customizable curriculum",
+    section: "Problem Section"
+  },
+  {
+    key: "stat_5_source",
+    label: "Statistic 5 Source",
+    defaultValue: "Outreach Magazine, 2022",
+    section: "Problem Section"
+  },
+  {
+    key: "problem_section_heading",
+    label: "Problem Section Heading",
+    defaultValue: "The Problem",
+    section: "Problem Section"
+  },
+  {
+    key: "key_finding_badge",
+    label: "Key Finding Badge Text",
+    defaultValue: "Key Finding",
+    section: "Problem Section"
+  },
+  {
+    key: "issue_badge_text",
+    label: "Issue Badge Text",
+    defaultValue: "Issue",
+    section: "Problem Section"
+  },
+  {
+    key: "see_solution_button",
+    label: "See Solution Button Text",
+    defaultValue: "See Our Solution",
+    section: "Problem Section"
   }
 ];
 
