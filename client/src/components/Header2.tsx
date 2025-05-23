@@ -33,7 +33,7 @@ export default function Header2() {
     { name: "Solution", href: "#solution", icon: <CheckCircle className="h-4 w-4" /> },
     { name: "Comparison", href: "#comparison", icon: <Trophy className="h-4 w-4" /> },
     { name: "Pricing", href: "#pricing", icon: <DollarSign className="h-4 w-4" /> },
-    { name: "Contact Us", href: "/contact", icon: <MessageSquare className="h-4 w-4" /> }
+    { name: "Contact Us", href: "#contact", icon: <MessageSquare className="h-4 w-4" /> }
   ];
 
   return (
@@ -48,20 +48,23 @@ export default function Header2() {
         <div className="flex items-center justify-between" style={{ minHeight: '60px' }}>
           {/* Logo - Left aligned */}
           <div className="flex-none">
-            <a href="#top" className="scroll-smooth">
-              <div className="flex flex-col cursor-pointer">
-                <div className="flex flex-col">
-                  <img 
-                    src={ecipleLogo} 
-                    alt="eciple logo" 
-                    className="h-8 w-auto object-contain" 
-                  />
-                  <span className="text-white text-opacity-70 text-xs mt-1">
-                    Igniting Spiritual Growth
-                  </span>
-                </div>
+            <div 
+              className="flex flex-col cursor-pointer"
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <div className="flex flex-col">
+                <img 
+                  src={ecipleLogo} 
+                  alt="eciple logo" 
+                  className="h-8 w-auto object-contain" 
+                />
+                <span className="text-white text-opacity-70 text-xs mt-1">
+                  Igniting Spiritual Growth
+                </span>
               </div>
-            </a>
+            </div>
           </div>
 
           {/* Desktop Navigation - Center (hidden on mobile) */}
