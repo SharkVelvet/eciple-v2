@@ -533,6 +533,32 @@ export default function ComparisonPage() {
             </motion.div>
           </div>
         </section>
+
+        {/* Pricing Features Highlight */}
+        <section className="py-12 bg-gray-100">
+          <div className="max-w-[1180px] mx-auto px-4">
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="text-center">
+                <h3 className="text-xl font-bold text-gray-800 mb-3">Church Size Based</h3>
+                <p className="text-gray-600">Pricing scales with your congregation size</p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-xl font-bold text-gray-800 mb-3">All-Inclusive Features</h3>
+                <p className="text-gray-600">No hidden fees or add-on costs for core features</p>
+              </div>
+              <div className="text-center">
+                <h3 className="text-xl font-bold text-gray-800 mb-3">Annual Discounts</h3>
+                <p className="text-gray-600">Save up to 15% with annual payment plans</p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
         
         {/* Call to Action */}
         <section className="py-16 bg-gradient-to-br from-[#15BEE2] to-[#0368C1] text-white">
