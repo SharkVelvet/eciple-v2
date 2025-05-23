@@ -116,7 +116,7 @@ export default function ComparisonPage() {
       <Header2 />
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="pt-28 pb-32 bg-gradient-to-br from-[#15BEE2] via-[#15BEE2]/80 to-[#0368C1] text-white relative overflow-hidden min-h-[600px]">
+        <section className="pt-32 pb-40 bg-gradient-to-br from-[#15BEE2] via-[#15BEE2]/80 to-[#0368C1] text-white relative overflow-hidden min-h-[750px]">
           {/* Background Elements */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-1/4 -left-20 w-60 h-60 bg-[#0368C1]/30 rounded-full blur-3xl opacity-70"></div>
@@ -125,8 +125,8 @@ export default function ComparisonPage() {
           </div>
           
           {/* Content */}
-          <div className="max-w-[1180px] mx-auto px-4 md:px-6 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[500px]">
+          <div className="max-w-[1300px] mx-auto px-4 md:px-6 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[600px]">
               {/* Left Column - Content */}
               <motion.div 
                 className="space-y-6"
