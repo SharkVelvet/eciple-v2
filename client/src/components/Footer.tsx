@@ -70,7 +70,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#223349] text-white py-12">
+    <footer className="bg-[#1a2a3d] text-white py-12">
       {/* Admin Login Dialog */}
       <Dialog open={showAdminDialog} onOpenChange={setShowAdminDialog}>
         <DialogContent className="sm:max-w-md">
