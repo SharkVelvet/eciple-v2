@@ -48,23 +48,31 @@ export default function Header2() {
         <div className="flex items-center justify-between" style={{ minHeight: '60px' }}>
           {/* Logo - Left aligned */}
           <div className="flex-none">
-            <div 
-              className="flex flex-col cursor-pointer"
-              onClick={() => {
+            <a 
+              href="#" 
+              onClick={(e) => {
+                e.preventDefault();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
+              className="block"
             >
-              <div className="flex flex-col">
-                <img 
-                  src={ecipleLogo} 
-                  alt="eciple logo" 
-                  className="h-8 w-auto object-contain" 
-                />
-                <span className="text-white text-opacity-70 text-xs mt-1">
-                  Igniting Spiritual Growth
-                </span>
-              </div>
-            </div>
+              <motion.div
+                initial={{ scale: 1 }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <div className="flex flex-col items-start">
+                  <img 
+                    src={ecipleLogo} 
+                    alt="eciple logo" 
+                    className="h-8 w-auto object-contain" 
+                  />
+                  <span className="text-white text-opacity-70 text-xs mt-1">
+                    Igniting Spiritual Growth
+                  </span>
+                </div>
+              </motion.div>
+            </a>
           </div>
 
           {/* Desktop Navigation - Center (hidden on mobile) */}
