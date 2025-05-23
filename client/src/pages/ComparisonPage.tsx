@@ -268,7 +268,7 @@ export default function ComparisonPage() {
                   </p>
                   
                   <div className="mt-6">
-                    <Button asChild variant="outline" className="gap-1 rounded-full">
+                    <Button asChild className="gap-1 rounded-full bg-primary text-white hover:bg-primary/90">
                       <a href="#solution">
                         See Our Solution
                         <ArrowRight className="h-4 w-4" />
