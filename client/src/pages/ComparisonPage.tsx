@@ -293,7 +293,7 @@ export default function ComparisonPage() {
                       <div className="h-8 w-8 rounded-full bg-red-100 flex items-center justify-center mr-3">
                         <AlertTriangle className="h-5 w-5 text-red-600" />
                       </div>
-                      <h3 className="text-lg font-semibold text-primary">Rigid Group-Based Systems</h3>
+                      <h3 className="text-lg font-semibold text-primary">40%</h3>
                     </div>
                     <p className="text-foreground text-opacity-80">
                       Of evangelicals hold the entire Bible as the "actual word of God," 51% say only parts of the Bible are the "inspired word of God."
