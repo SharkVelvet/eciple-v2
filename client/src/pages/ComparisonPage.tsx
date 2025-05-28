@@ -304,6 +304,9 @@ export default function ComparisonPage() {
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
                 <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-3xl">
+                  {/* Decorative color elements */}
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-slate-400 rounded-full opacity-60"></div>
+                  <div className="absolute top-4 -left-1 w-3 h-3 bg-slate-300 rounded-full opacity-40"></div>
                   <CardContent className="p-6">
                     
                     <div className="mb-4">
@@ -324,6 +327,9 @@ export default function ComparisonPage() {
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-3xl">
+                  {/* Decorative color elements */}
+                  <div className="absolute -top-1 -right-3 w-4 h-4 bg-orange-400 rounded-full opacity-50"></div>
+                  <div className="absolute bottom-3 -left-2 w-5 h-5 bg-orange-300 rounded-full opacity-30"></div>
                   <CardContent className="p-6">
                     
                     <div className="mb-4">
@@ -344,6 +350,9 @@ export default function ComparisonPage() {
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
                 <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-3xl">
+                  {/* Decorative color elements */}
+                  <div className="absolute top-2 -right-1 w-5 h-5 bg-purple-400 rounded-full opacity-45"></div>
+                  <div className="absolute -bottom-1 left-3 w-4 h-4 bg-purple-300 rounded-full opacity-35"></div>
                   <CardContent className="p-6">
                     
                     <div className="mb-4">
@@ -365,6 +374,9 @@ export default function ComparisonPage() {
                 className="md:col-span-2 lg:col-span-1"
               >
                 <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-3xl">
+                  {/* Decorative color elements */}
+                  <div className="absolute -top-2 left-4 w-6 h-6 bg-indigo-400 rounded-full opacity-55"></div>
+                  <div className="absolute bottom-2 -right-2 w-4 h-4 bg-indigo-300 rounded-full opacity-40"></div>
                   <CardContent className="p-6">
                     
                     <div className="mb-4">
