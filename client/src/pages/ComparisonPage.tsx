@@ -360,7 +360,7 @@ export default function ComparisonPage() {
                       <div className="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
                         <StopCircle className="h-5 w-5 text-indigo-600" />
                       </div>
-                      <h3 className="text-lg font-semibold text-primary">Inability to Scale Personal Mentorship</h3>
+                      <h3 className="text-lg font-semibold text-primary">40 Million</h3>
                     </div>
                     <p className="text-foreground text-opacity-80">
                       Million adult Christians left the church in the last 25 years (largest & fastest religious shift in U.S. history).
