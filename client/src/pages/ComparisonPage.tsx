@@ -160,15 +160,15 @@ export default function ComparisonPage() {
 
               {/* Right Column - Visual Elements with Background Image */}
               <motion.div 
-                className="relative hidden lg:block"
+                className="relative mt-8 lg:mt-0"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 {/* Container for Image and Floating Cards */}
-                <div className="relative h-[450px]">
+                <div className="relative h-[300px] md:h-[450px]">
                   {/* Background Image Container - Smaller to allow badges to hang off */}
-                  <div className="absolute top-8 left-8 right-8 bottom-8 rounded-2xl overflow-hidden">
+                  <div className="absolute top-4 left-4 right-4 bottom-4 md:top-8 md:left-8 md:right-8 md:bottom-8 rounded-2xl overflow-hidden">
                     {/* Background Image */}
                     <img 
                       src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
@@ -183,7 +183,7 @@ export default function ComparisonPage() {
                   <div className="relative h-full">
                     {/* Card 1 - Hangs off top left */}
                     <motion.div
-                      className="absolute top-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-4 w-36 md:w-48 border border-white/30 shadow-lg"
+                      className="absolute top-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-2 md:p-4 w-32 md:w-48 border border-white/30 shadow-lg text-xs md:text-sm"
                       animate={{ y: [0, -10, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     >
@@ -198,7 +198,7 @@ export default function ComparisonPage() {
 
                     {/* Card 2 - Hangs off top right */}
                     <motion.div
-                      className="absolute top-12 right-0 bg-white/95 backdrop-blur-sm rounded-lg p-4 w-40 md:w-52 border border-white/30 shadow-lg"
+                      className="absolute top-8 md:top-12 right-0 bg-white/95 backdrop-blur-sm rounded-lg p-2 md:p-4 w-36 md:w-52 border border-white/30 shadow-lg text-xs md:text-sm"
                       animate={{ y: [0, 10, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                     >
@@ -213,7 +213,7 @@ export default function ComparisonPage() {
 
                     {/* Card 3 - Hangs off bottom left */}
                     <motion.div
-                      className="absolute bottom-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-4 w-32 md:w-44 border border-white/30 shadow-lg"
+                      className="absolute bottom-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-2 md:p-4 w-28 md:w-44 border border-white/30 shadow-lg text-xs md:text-sm"
                       animate={{ y: [0, -8, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 2 }}
                     >
