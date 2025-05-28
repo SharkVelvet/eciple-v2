@@ -89,14 +89,16 @@ export default function Header2() {
                       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                   }}
-                  className="text-white hover:text-accent transition-colors duration-200 text-sm font-medium cursor-pointer"
+                  className="text-white hover:text-white transition-all duration-200 text-sm font-medium cursor-pointer relative group"
                 >
                   {item.name}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-200 group-hover:w-full"></span>
                 </a>
               ) : (
                 <Link key={item.name} href={item.href}>
-                  <span className="text-white hover:text-accent transition-colors duration-200 text-sm font-medium cursor-pointer">
+                  <span className="text-white hover:text-white transition-all duration-200 text-sm font-medium cursor-pointer relative group">
                     {item.name}
+                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-200 group-hover:w-full"></span>
                   </span>
                 </Link>
               )
