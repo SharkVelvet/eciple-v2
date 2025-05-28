@@ -256,8 +256,8 @@ export default function ComparisonPage() {
                   transition={{ duration: 0.6 }}
                   className="mb-10"
                 >
-                  <div className="mb-12">
-                    <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">The Problem</h2>
+                  <div className="mb-6">
+                    <h2 className="text-3xl md:text-4xl font-bold text-primary mb-2">The Problem</h2>
                   </div>
                   
                   <p className="text-xl leading-relaxed text-foreground/80 max-w-xl mb-8">
