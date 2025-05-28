@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { Check, X, ArrowRight, CheckCircle, AlertCircle, AlertTriangle, XCircle, Ban, StopCircle } from "lucide-react";
+import { Check, X, ArrowRight, CheckCircle, AlertCircle, AlertTriangle, XCircle, Ban, StopCircle, ChevronUp } from "lucide-react";
 import Header2 from "@/components/Header2";
 import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
@@ -13,6 +13,26 @@ import eCipleDashImage from "@assets/eciple-dash.jpg";
 
 export default function ComparisonPage() {
   const [isAnnual, setIsAnnual] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  // Show/hide scroll to top button based on scroll position
+  const handleScroll = () => {
+    setShowScrollTop(window.scrollY > 300);
+  };
+
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  // Add scroll event listener
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
   // Calculate price with annual discount
   const getPrice = (monthlyPrice: number) => {
@@ -713,6 +733,21 @@ export default function ComparisonPage() {
       </section>
       
       <Footer />
+
+      {/* Floating Scroll to Top Button */}
+      {showScrollTop && (
+        <motion.button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 w-12 h-12 bg-gradient-to-br from-secondary to-blue-400 hover:from-blue-400 hover:to-secondary text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center z-50"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <ChevronUp className="h-6 w-6" />
+        </motion.button>
+      )}
     </div>
   );
 }
