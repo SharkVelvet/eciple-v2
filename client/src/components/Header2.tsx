@@ -163,7 +163,7 @@ export default function Header2() {
             transition={{ duration: 0.3 }}
             className="lg:hidden bg-[#223349] border-t border-white/10 overflow-hidden"
           >
-            <div className="px-4 py-4 space-y-2 max-w-xs mx-auto">
+            <div className="px-4 py-4 space-y-2">
               {navItems.map((item) => (
                 item.href.startsWith('#') ? (
                   <a
@@ -195,11 +195,14 @@ export default function Header2() {
                 )
               ))}
               
+              {/* Extra spacing before Investor Portal */}
+              <div className="pt-4"></div>
+              
               {/* Investor Portal - Mobile */}
               <Link href="/auth">
                 <div 
                   onClick={closeMobileMenu}
-                  className="flex items-center space-x-3 text-accent hover:text-white transition-colors duration-200 py-3 px-4 rounded-lg bg-accent/10 hover:bg-accent/20"
+                  className="flex items-center space-x-3 text-white hover:text-white transition-colors duration-200 py-3 px-4 rounded-lg bg-accent hover:bg-accent/90"
                 >
                   <Lock className="h-4 w-4" />
                   <span>Investor Portal</span>
