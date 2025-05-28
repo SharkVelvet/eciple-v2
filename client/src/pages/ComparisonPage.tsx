@@ -312,7 +312,7 @@ export default function ComparisonPage() {
                     </div>
                     
                     <p className="text-slate-500 text-sm leading-relaxed">
-                      Of evangelicals hold the entire Bible as the "actual word of God," 51% say only parts are inspired
+                      40% of evangelicals hold the entire Bible as the "actual word of God," 51% say only parts of the Bible are the "inspired word of God."
                     </p>
                   </CardContent>
                 </Card>
