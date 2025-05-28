@@ -285,15 +285,15 @@ export default function ComparisonPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-3xl h-44">
-                  <CardContent className="p-6 h-full flex flex-col justify-between relative">
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-3xl">
+                  <CardContent className="p-6">
                     
-                    <div>
+                    <div className="mb-4">
                       <div className="text-5xl font-bold text-slate-700 mb-2">40<span className="text-3xl">%</span></div>
                       <div className="text-slate-600 text-lg font-medium">Bible Authority</div>
                     </div>
                     
-                    <p className="text-slate-500 text-sm leading-relaxed mb-8">
+                    <p className="text-slate-500 text-sm leading-relaxed">
                       Of evangelicals hold the entire Bible as the "actual word of God," 51% say only parts are inspired
                     </p>
                   </CardContent>
