@@ -293,7 +293,7 @@ export default function ComparisonPage() {
                       <div className="text-slate-600 text-lg font-medium">Bible Authority</div>
                     </div>
                     
-                    <p className="text-slate-500 text-sm leading-relaxed mb-4">
+                    <p className="text-slate-500 text-sm leading-relaxed mb-8">
                       Of evangelicals hold the entire Bible as the "actual word of God," 51% say only parts are inspired
                     </p>
                   </CardContent>
@@ -313,7 +313,7 @@ export default function ComparisonPage() {
                       <div className="text-orange-600 text-lg font-medium">Fall Away</div>
                     </div>
                     
-                    <p className="text-orange-400 text-sm leading-relaxed mb-4">
+                    <p className="text-orange-400 text-sm leading-relaxed mb-8">
                       80% of people who make a decision for Christ typically fall away from the faith within the first year
                     </p>
                   </CardContent>
@@ -333,7 +333,7 @@ export default function ComparisonPage() {
                       <div className="text-purple-600 text-lg font-medium">Young Adults</div>
                     </div>
                     
-                    <p className="text-purple-400 text-sm leading-relaxed mb-4">
+                    <p className="text-purple-400 text-sm leading-relaxed mb-8">
                       Of young adults leave the Christian faith as they enter adulthood (equating to over 1M per year)
                     </p>
                   </CardContent>
@@ -354,7 +354,7 @@ export default function ComparisonPage() {
                       <div className="text-indigo-600 text-lg font-medium">Church Exodus</div>
                     </div>
                     
-                    <p className="text-indigo-400 text-sm leading-relaxed">
+                    <p className="text-indigo-400 text-sm leading-relaxed mb-8">
                       Million adult Christians left the church in the last 25 years (largest & fastest religious shift in U.S. history)
                     </p>
                   </CardContent>
