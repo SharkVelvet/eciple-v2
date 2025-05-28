@@ -417,8 +417,8 @@ export default function ComparisonPage() {
               >
                 <div className="relative">
                   <img 
-                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
-                    alt="Digital discipleship dashboard interface" 
+                    src="/attached_assets/eciple-dash.jpg" 
+                    alt="eciple discipleship dashboard interface" 
                     className="rounded-2xl shadow-2xl w-full h-auto object-cover"
                     loading="lazy"
                   />
