@@ -267,6 +267,24 @@ export default function ComparisonPage() {
                     Despite <span className="font-semibold text-primary">82% of pastors</span> saying discipleship is a priority, only <span className="font-semibold text-secondary">29% think</span> their church does it effectively.
                   </p>
                   
+                  <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl p-6 mb-8">
+                    <h3 className="text-2xl font-bold text-primary mb-4">The Bottom Line:</h3>
+                    <ul className="space-y-3 text-foreground/80">
+                      <li className="flex items-start gap-3">
+                        <div className="h-2 w-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                        <span>The dominant discipleship model isn't working and is having a disastrous impact</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <div className="h-2 w-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                        <span>The most effective, desired model isn't available due to the absence of enabling technology…</span>
+                      </li>
+                      <li className="flex items-start gap-3">
+                        <div className="h-2 w-2 rounded-full bg-accent mt-2 flex-shrink-0"></div>
+                        <span className="font-semibold">Until now, with our launch of the eciple 1:1 Discipleship Enablement Platform</span>
+                      </li>
+                    </ul>
+                  </div>
+                  
                   <div className="mt-6">
                     <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20">
                       <a href="#solution" className="flex items-center gap-2">
