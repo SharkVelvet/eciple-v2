@@ -303,18 +303,17 @@ export default function ComparisonPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-3xl">
-                  {/* Decorative color elements */}
-                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-slate-400 rounded-full opacity-60"></div>
-                  <div className="absolute top-4 -left-1 w-3 h-3 bg-slate-300 rounded-full opacity-40"></div>
-                  <CardContent className="p-6">
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-r-3xl rounded-l-none">
+                  {/* Gradient left border */}
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#15BEE2] to-[#0EA5E9]"></div>
+                  <CardContent className="p-6 pl-8">
                     
                     <div className="mb-4">
-                      <div className="text-5xl font-bold text-slate-700 mb-2">40<span className="text-3xl">%</span></div>
-                      <div className="text-slate-600 text-lg font-medium">Bible Authority</div>
+                      <div className="text-5xl font-bold text-gray-800 mb-2">40<span className="text-3xl">%</span></div>
+                      <div className="text-gray-700 text-lg font-medium">Bible Authority</div>
                     </div>
                     
-                    <p className="text-slate-500 text-sm leading-relaxed">
+                    <p className="text-gray-600 text-sm leading-relaxed">
                       40% of evangelicals hold the entire Bible as the "actual word of God," 51% say only parts of the Bible are the "inspired word of God."
                     </p>
                   </CardContent>
@@ -326,18 +325,17 @@ export default function ComparisonPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-3xl">
-                  {/* Decorative color elements */}
-                  <div className="absolute -top-1 -right-3 w-4 h-4 bg-orange-400 rounded-full opacity-50"></div>
-                  <div className="absolute bottom-3 -left-2 w-5 h-5 bg-orange-300 rounded-full opacity-30"></div>
-                  <CardContent className="p-6">
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-r-3xl rounded-l-none">
+                  {/* Gradient left border */}
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#15BEE2] to-[#0EA5E9]"></div>
+                  <CardContent className="p-6 pl-8">
                     
                     <div className="mb-4">
-                      <div className="text-5xl font-bold text-orange-500 mb-2">80<span className="text-3xl">%</span></div>
-                      <div className="text-orange-600 text-lg font-medium">Fall Away</div>
+                      <div className="text-5xl font-bold text-gray-800 mb-2">80<span className="text-3xl">%</span></div>
+                      <div className="text-gray-700 text-lg font-medium">Fall Away</div>
                     </div>
                     
-                    <p className="text-orange-400 text-sm leading-relaxed">
+                    <p className="text-gray-600 text-sm leading-relaxed">
                       80% of people who make a decision for Christ typically fall away from the faith within the first year
                     </p>
                   </CardContent>
@@ -349,18 +347,17 @@ export default function ComparisonPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-3xl">
-                  {/* Decorative color elements */}
-                  <div className="absolute top-2 -right-1 w-5 h-5 bg-purple-400 rounded-full opacity-45"></div>
-                  <div className="absolute -bottom-1 left-3 w-4 h-4 bg-purple-300 rounded-full opacity-35"></div>
-                  <CardContent className="p-6">
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-r-3xl rounded-l-none">
+                  {/* Gradient left border */}
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#15BEE2] to-[#0EA5E9]"></div>
+                  <CardContent className="p-6 pl-8">
                     
                     <div className="mb-4">
-                      <div className="text-5xl font-bold text-purple-500 mb-2">64<span className="text-3xl">%</span></div>
-                      <div className="text-purple-600 text-lg font-medium">Young Adults</div>
+                      <div className="text-5xl font-bold text-gray-800 mb-2">64<span className="text-3xl">%</span></div>
+                      <div className="text-gray-700 text-lg font-medium">Young Adults</div>
                     </div>
                     
-                    <p className="text-purple-400 text-sm leading-relaxed">
+                    <p className="text-gray-600 text-sm leading-relaxed">
                       64% of young adults leave the Christian faith as they enter adulthood (equating to over 1M per year)
                     </p>
                   </CardContent>
@@ -373,18 +370,17 @@ export default function ComparisonPage() {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="md:col-span-2 lg:col-span-1"
               >
-                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-3xl">
-                  {/* Decorative color elements */}
-                  <div className="absolute -top-2 left-4 w-6 h-6 bg-indigo-400 rounded-full opacity-55"></div>
-                  <div className="absolute bottom-2 -right-2 w-4 h-4 bg-indigo-300 rounded-full opacity-40"></div>
-                  <CardContent className="p-6">
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-r-3xl rounded-l-none">
+                  {/* Gradient left border */}
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#15BEE2] to-[#0EA5E9]"></div>
+                  <CardContent className="p-6 pl-8">
                     
                     <div className="mb-4">
-                      <div className="text-5xl font-bold text-indigo-500 mb-2">40M</div>
-                      <div className="text-indigo-600 text-lg font-medium">Church Exodus</div>
+                      <div className="text-5xl font-bold text-gray-800 mb-2">40M</div>
+                      <div className="text-gray-700 text-lg font-medium">Church Exodus</div>
                     </div>
                     
-                    <p className="text-indigo-400 text-sm leading-relaxed">
+                    <p className="text-gray-600 text-sm leading-relaxed">
                       40 Million adult Christians left the church in the last 25 years (largest & fastest religious shift in U.S. history)
                     </p>
                   </CardContent>
