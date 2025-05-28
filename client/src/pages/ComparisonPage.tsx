@@ -352,7 +352,7 @@ export default function ComparisonPage() {
                     </div>
                     
                     <p className="text-purple-400 text-sm leading-relaxed">
-                      Of young adults leave the Christian faith as they enter adulthood (equating to over 1M per year)
+                      64% of young adults leave the Christian faith as they enter adulthood (equating to over 1M per year)
                     </p>
                   </CardContent>
                 </Card>
@@ -373,7 +373,7 @@ export default function ComparisonPage() {
                     </div>
                     
                     <p className="text-indigo-400 text-sm leading-relaxed">
-                      Million adult Christians left the church in the last 25 years (largest & fastest religious shift in U.S. history)
+                      40 Million adult Christians left the church in the last 25 years (largest & fastest religious shift in U.S. history)
                     </p>
                   </CardContent>
                 </Card>
