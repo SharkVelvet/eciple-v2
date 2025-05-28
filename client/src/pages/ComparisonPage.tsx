@@ -296,7 +296,7 @@ export default function ComparisonPage() {
                       <h3 className="text-lg font-semibold text-primary">Rigid Group-Based Systems</h3>
                     </div>
                     <p className="text-foreground text-opacity-80">
-                      Most existing discipleship tools are designed around inflexible, pre-packaged content intended for group settings, not adaptable one-to-one mentoring.
+                      Of evangelicals hold the entire Bible as the "actual word of God," 51% say only parts of the Bible are the "inspired word of God."
                     </p>
                   </CardContent>
                 </Card>
