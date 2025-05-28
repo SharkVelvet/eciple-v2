@@ -183,7 +183,7 @@ export default function ComparisonPage() {
                   <div className="relative h-full">
                     {/* Card 1 - Hangs off top left */}
                     <motion.div
-                      className="absolute top-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-2 md:p-4 w-32 md:w-48 border border-white/30 shadow-lg text-xs md:text-sm"
+                      className="absolute top-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-2 md:p-4 w-40 md:w-48 border border-white/30 shadow-lg text-xs md:text-sm"
                       animate={{ y: [0, -10, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     >
@@ -198,7 +198,7 @@ export default function ComparisonPage() {
 
                     {/* Card 2 - Hangs off top right */}
                     <motion.div
-                      className="absolute top-8 md:top-12 right-0 bg-white/95 backdrop-blur-sm rounded-lg p-2 md:p-4 w-36 md:w-52 border border-white/30 shadow-lg text-xs md:text-sm"
+                      className="absolute top-8 md:top-12 right-0 bg-white/95 backdrop-blur-sm rounded-lg p-2 md:p-4 w-44 md:w-52 border border-white/30 shadow-lg text-xs md:text-sm"
                       animate={{ y: [0, 10, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                     >
@@ -213,7 +213,7 @@ export default function ComparisonPage() {
 
                     {/* Card 3 - Hangs off bottom left */}
                     <motion.div
-                      className="absolute bottom-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-2 md:p-4 w-28 md:w-44 border border-white/30 shadow-lg text-xs md:text-sm"
+                      className="absolute bottom-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-2 md:p-4 w-36 md:w-44 border border-white/30 shadow-lg text-xs md:text-sm"
                       animate={{ y: [0, -8, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 2 }}
                     >
