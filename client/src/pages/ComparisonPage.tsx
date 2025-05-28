@@ -406,35 +406,65 @@ export default function ComparisonPage() {
               </p>
             </motion.div>
 
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="text-center">
-                <div className="h-16 w-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle className="h-8 w-8 text-green-600" />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Left side - Dashboard Image */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="order-2 lg:order-1"
+              >
+                <div className="relative">
+                  <img 
+                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
+                    alt="Digital discipleship dashboard interface" 
+                    className="rounded-2xl shadow-2xl w-full h-auto object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10 rounded-2xl"></div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">One-to-One Focus</h3>
-                <p className="text-gray-600">Built specifically for personalized mentoring relationships, not group-based content delivery</p>
-              </div>
-              <div className="text-center">
-                <div className="h-16 w-16 rounded-full bg-blue-100 flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle className="h-8 w-8 text-blue-600" />
+              </motion.div>
+
+              {/* Right side - Three bullet points */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="order-1 lg:order-2 space-y-8"
+              >
+                <div className="flex items-start gap-4">
+                  <div className="h-12 w-12 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="h-6 w-6 text-green-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">One-to-One Focus</h3>
+                    <p className="text-gray-600">Built specifically for personalized mentoring relationships, not group-based content delivery</p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Adaptive Technology</h3>
-                <p className="text-gray-600">Dynamic content creation that adapts to each unique spiritual journey and relationship</p>
-              </div>
-              <div className="text-center">
-                <div className="h-16 w-16 rounded-full bg-purple-100 flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle className="h-8 w-8 text-purple-600" />
+                
+                <div className="flex items-start gap-4">
+                  <div className="h-12 w-12 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">Adaptive Technology</h3>
+                    <p className="text-gray-600">Dynamic content creation that adapts to each unique spiritual journey and relationship</p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Scalable Infrastructure</h3>
-                <p className="text-gray-600">Modern platform designed to support large-scale discipleship across diverse ministry contexts</p>
-              </div>
-            </motion.div>
+                
+                <div className="flex items-start gap-4">
+                  <div className="h-12 w-12 rounded-full bg-purple-100 flex items-center justify-center flex-shrink-0">
+                    <CheckCircle className="h-6 w-6 text-purple-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">Scalable Infrastructure</h3>
+                    <p className="text-gray-600">Modern platform designed to support large-scale discipleship across diverse ministry contexts</p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
           </div>
         </section>
 
