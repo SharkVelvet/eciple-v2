@@ -280,100 +280,81 @@ export default function ComparisonPage() {
               
               {/* Right Side - Problem Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <motion.div
+              <motion.div 
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.1 }}
-                whileHover={{ scale: 1.02, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <Card className="h-full overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-white via-red-50/30 to-red-100/20 group">
-                  <div className="h-3 bg-gradient-to-r from-red-400 via-red-500 to-red-600"></div>
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-red-500/10 rounded-full -translate-y-12 translate-x-12 group-hover:scale-150 transition-transform duration-700"></div>
-                  <CardContent className="p-8 relative z-10">
-                    <div className="text-center mb-6">
-                      <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-red-500 to-red-600 shadow-lg mb-4 group-hover:scale-110 transition-transform duration-300">
-                        <span className="text-3xl font-bold text-white">40</span>
-                        <span className="text-lg font-bold text-white">%</span>
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-white to-red-50/30 hover:shadow-xl transition-all duration-300 border-l-4 border-l-red-500">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="h-8 w-8 rounded-full bg-red-100 flex items-center justify-center mr-3">
+                        <AlertTriangle className="h-5 w-5 text-red-600" />
                       </div>
-                      <div className="h-1 w-16 bg-gradient-to-r from-red-500 to-red-600 rounded-full mx-auto opacity-60"></div>
+                      <h3 className="text-lg font-semibold text-primary">40%</h3>
                     </div>
-                    <p className="text-foreground text-opacity-80 text-center leading-relaxed text-sm">
+                    <p className="text-foreground text-opacity-80">
                       Of evangelicals hold the entire Bible as the "actual word of God," 51% say only parts of the Bible are the "inspired word of God."
                     </p>
                   </CardContent>
                 </Card>
               </motion.div>
 
-              <motion.div
+              <motion.div 
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                whileHover={{ scale: 1.02, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Card className="h-full overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-white via-orange-50/30 to-orange-100/20 group">
-                  <div className="h-3 bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600"></div>
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-orange-500/10 rounded-full -translate-y-12 translate-x-12 group-hover:scale-150 transition-transform duration-700"></div>
-                  <CardContent className="p-8 relative z-10">
-                    <div className="text-center mb-6">
-                      <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 shadow-lg mb-4 group-hover:scale-110 transition-transform duration-300">
-                        <span className="text-3xl font-bold text-white">80</span>
-                        <span className="text-lg font-bold text-white">%</span>
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-white to-orange-50/30 hover:shadow-xl transition-all duration-300 border-l-4 border-l-orange-500">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="h-8 w-8 rounded-full bg-orange-100 flex items-center justify-center mr-3">
+                        <XCircle className="h-5 w-5 text-orange-600" />
                       </div>
-                      <div className="h-1 w-16 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full mx-auto opacity-60"></div>
+                      <h3 className="text-lg font-semibold text-primary">80%</h3>
                     </div>
-                    <p className="text-foreground text-opacity-80 text-center leading-relaxed text-sm">
+                    <p className="text-foreground text-opacity-80">
                       Of people who make a decision for Christ typically fall away from the faith within the first year.
                     </p>
                   </CardContent>
                 </Card>
               </motion.div>
 
-              <motion.div
+              <motion.div 
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                whileHover={{ scale: 1.02, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <Card className="h-full overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-white via-purple-50/30 to-purple-100/20 group">
-                  <div className="h-3 bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600"></div>
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-purple-500/10 rounded-full -translate-y-12 translate-x-12 group-hover:scale-150 transition-transform duration-700"></div>
-                  <CardContent className="p-8 relative z-10">
-                    <div className="text-center mb-6">
-                      <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-purple-500 to-purple-600 shadow-lg mb-4 group-hover:scale-110 transition-transform duration-300">
-                        <span className="text-3xl font-bold text-white">64</span>
-                        <span className="text-lg font-bold text-white">%</span>
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-white to-purple-50/30 hover:shadow-xl transition-all duration-300 border-l-4 border-l-purple-500">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center mr-3">
+                        <Ban className="h-5 w-5 text-purple-600" />
                       </div>
-                      <div className="h-1 w-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full mx-auto opacity-60"></div>
+                      <h3 className="text-lg font-semibold text-primary">64%</h3>
                     </div>
-                    <p className="text-foreground text-opacity-80 text-center leading-relaxed text-sm">
+                    <p className="text-foreground text-opacity-80">
                       Of young adults leave the Christian faith as they enter adulthood (equating to over 1M per year).
                     </p>
                   </CardContent>
                 </Card>
               </motion.div>
 
-              <motion.div
+              <motion.div 
                 initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                whileHover={{ scale: 1.02, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
                 className="md:col-span-2 lg:col-span-1"
               >
-                <Card className="h-full overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500 bg-gradient-to-br from-white via-indigo-50/30 to-indigo-100/20 group">
-                  <div className="h-3 bg-gradient-to-r from-indigo-400 via-indigo-500 to-indigo-600"></div>
-                  <div className="absolute top-0 right-0 w-24 h-24 bg-indigo-500/10 rounded-full -translate-y-12 translate-x-12 group-hover:scale-150 transition-transform duration-700"></div>
-                  <CardContent className="p-8 relative z-10">
-                    <div className="text-center mb-6">
-                      <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-lg mb-4 group-hover:scale-110 transition-transform duration-300">
-                        <span className="text-2xl font-bold text-white">40M</span>
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-white to-indigo-50/30 hover:shadow-xl transition-all duration-300 border-l-4 border-l-indigo-500">
+                  <CardContent className="p-6">
+                    <div className="flex items-center mb-4">
+                      <div className="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
+                        <StopCircle className="h-5 w-5 text-indigo-600" />
                       </div>
-                      <div className="h-1 w-16 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full mx-auto opacity-60"></div>
+                      <h3 className="text-lg font-semibold text-primary">40 Million</h3>
                     </div>
-                    <p className="text-foreground text-opacity-80 text-center leading-relaxed text-sm">
+                    <p className="text-foreground text-opacity-80">
                       Million adult Christians left the church in the last 25 years (largest & fastest religious shift in U.S. history).
                     </p>
                   </CardContent>
