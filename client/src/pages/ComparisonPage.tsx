@@ -314,7 +314,7 @@ export default function ComparisonPage() {
                     </div>
                     
                     <p className="text-orange-400 text-sm leading-relaxed mb-4">
-                      Of people who make a decision for Christ typically fall away from the faith within the first year
+                      80% of people who make a decision for Christ typically fall away from the faith within the first year
                     </p>
                   </CardContent>
                 </Card>
