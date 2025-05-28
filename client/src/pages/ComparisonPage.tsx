@@ -238,7 +238,7 @@ export default function ComparisonPage() {
         </section>
 
         {/* Problem Section */}
-        <section id="problem" className="pt-40 pb-24 bg-gradient-to-b from-white to-blue-50 scroll-mt-40 relative overflow-hidden">
+        <section id="problem" className="pt-40 pb-24 bg-white scroll-mt-40 relative overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-primary/5 to-transparent"></div>
           <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
@@ -384,7 +384,7 @@ export default function ComparisonPage() {
         </section>
 
         {/* Solution Section - Simple and Clean */}
-        <section id="solution" className="py-16 bg-gradient-to-br from-[#15BEE2]/10 to-[#0368C1]/10 scroll-mt-20">
+        <section id="solution" className="py-16 bg-blue-50 scroll-mt-20">
           <div className="max-w-[1180px] mx-auto px-4">
             <motion.div 
               className="text-center mb-12"
@@ -586,7 +586,7 @@ export default function ComparisonPage() {
         </section>
 
         {/* Pricing Features Highlight */}
-        <section className="py-12 bg-gray-100">
+        <section className="py-12 bg-white">
           <div className="max-w-[1180px] mx-auto px-4">
             <motion.div
               className="grid grid-cols-1 md:grid-cols-3 gap-8"
@@ -615,7 +615,7 @@ export default function ComparisonPage() {
       <Contact />
       
       {/* Call to Action */}
-      <section className="py-16 bg-[#223349] text-white">
+      <section className="py-16 bg-blue-50">
         <div className="max-w-[1180px] mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
