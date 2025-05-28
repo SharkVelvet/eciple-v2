@@ -333,7 +333,7 @@ export default function ComparisonPage() {
                       <div className="text-purple-600 text-lg font-medium">Young Adults</div>
                     </div>
                     
-                    <p className="text-purple-400 text-sm leading-relaxed">
+                    <p className="text-purple-400 text-sm leading-relaxed mb-4">
                       Of young adults leave the Christian faith as they enter adulthood (equating to over 1M per year)
                     </p>
                   </CardContent>
