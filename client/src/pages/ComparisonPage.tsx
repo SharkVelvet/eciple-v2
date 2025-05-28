@@ -551,8 +551,8 @@ export default function ComparisonPage() {
                     plan.popular ? 'border-2 border-[#15BEE2] shadow-lg scale-105 relative' : ''
                   }`}>
                     {plan.popular && (
-                      <div className="absolute top-0 right-0">
-                        <div className="bg-accent text-white text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
+                      <div className="absolute top-4 -right-2">
+                        <div className="bg-accent text-white text-xs font-bold px-3 py-1 rounded-lg shadow-lg transform rotate-3">POPULAR</div>
                       </div>
                     )}
                     <div className={`text-center p-6 ${plan.popular ? 'bg-gradient-to-br from-[#15BEE2] to-[#0EA5E9]' : 'bg-gray-50'}`}>
