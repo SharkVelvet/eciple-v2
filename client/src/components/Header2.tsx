@@ -29,8 +29,8 @@ export default function Header2() {
   };
 
   const navItems = [
-    { name: "Problem", href: "#problem", icon: <Lightbulb className="h-4 w-4" /> },
-    { name: "Solution", href: "#solution", icon: <CheckCircle className="h-4 w-4" /> },
+    { name: "The Problem", href: "#problem", icon: <Lightbulb className="h-4 w-4" /> },
+    { name: "Our Solution", href: "#solution", icon: <CheckCircle className="h-4 w-4" /> },
     { name: "Comparison", href: "#comparison", icon: <Trophy className="h-4 w-4" /> },
     { name: "Pricing", href: "#pricing", icon: <DollarSign className="h-4 w-4" /> },
     { name: "Contact Us", href: "#contact", icon: <MessageSquare className="h-4 w-4" /> }
@@ -92,13 +92,13 @@ export default function Header2() {
                   className="text-white hover:text-white transition-all duration-200 text-sm font-medium cursor-pointer relative group"
                 >
                   {item.name}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-200 group-hover:w-full"></span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-200 group-hover:w-full"></span>
                 </a>
               ) : (
                 <Link key={item.name} href={item.href}>
                   <span className="text-white hover:text-white transition-all duration-200 text-sm font-medium cursor-pointer relative group">
                     {item.name}
-                    <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-200 group-hover:w-full"></span>
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-200 group-hover:w-full"></span>
                   </span>
                 </Link>
               )
