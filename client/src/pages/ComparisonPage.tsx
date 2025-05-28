@@ -183,7 +183,7 @@ export default function ComparisonPage() {
                   <div className="relative h-full">
                     {/* Card 1 - Hangs off top left */}
                     <motion.div
-                      className="absolute top-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-4 w-48 border border-white/30 shadow-lg"
+                      className="absolute top-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-4 w-36 md:w-48 border border-white/30 shadow-lg"
                       animate={{ y: [0, -10, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                     >
@@ -198,7 +198,7 @@ export default function ComparisonPage() {
 
                     {/* Card 2 - Hangs off top right */}
                     <motion.div
-                      className="absolute top-12 right-0 bg-white/95 backdrop-blur-sm rounded-lg p-4 w-52 border border-white/30 shadow-lg"
+                      className="absolute top-12 right-0 bg-white/95 backdrop-blur-sm rounded-lg p-4 w-40 md:w-52 border border-white/30 shadow-lg"
                       animate={{ y: [0, 10, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                     >
@@ -213,7 +213,7 @@ export default function ComparisonPage() {
 
                     {/* Card 3 - Hangs off bottom left */}
                     <motion.div
-                      className="absolute bottom-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-4 w-44 border border-white/30 shadow-lg"
+                      className="absolute bottom-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-4 w-32 md:w-44 border border-white/30 shadow-lg"
                       animate={{ y: [0, -8, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 2 }}
                     >
@@ -464,46 +464,81 @@ export default function ComparisonPage() {
               className="mb-16"
             >
               <Card className="shadow-lg border-0">
-                <CardContent className="p-0 overflow-auto">
-                  <h3 className="text-2xl font-semibold font-sans text-primary mb-6 text-center py-6">Current Discipleship Providers vs. eciple Discipleship Enablement Platform</h3>
-                  <Table>
-                    <TableHeader className="bg-gray-50">
-                      <TableRow>
-                        <TableHead className="font-bold text-primary w-1/4">Factor</TableHead>
-                        <TableHead className="font-bold text-gray-600 w-[37.5%]">Traditional Discipleship Providers</TableHead>
-                        <TableHead className="font-bold text-white w-[37.5%] bg-gradient-to-br from-[#15BEE2] to-[#0EA5E9] relative">
-                          <div className="absolute inset-0 bg-gradient-to-r from-[#15BEE2]/20 to-[#0EA5E9]/20 animate-pulse"></div>
-                          <span className="relative z-10 flex items-center justify-center gap-2">
-                            <span className="text-lg text-white">★</span>
+                <CardContent className="p-0">
+                  <h3 className="text-xl md:text-2xl font-semibold font-sans text-primary mb-6 text-center py-6 px-4">Current Discipleship Providers vs. eciple Discipleship Enablement Platform</h3>
+                  
+                  {/* Mobile-first responsive layout */}
+                  <div className="block md:hidden px-4 pb-6">
+                    {comparisonFactors.map((item, index) => (
+                      <div key={index} className="mb-6 border-b border-gray-200 pb-4">
+                        <h4 className="font-bold text-primary mb-3">{item.factor}</h4>
+                        
+                        <div className="mb-4">
+                          <div className="font-semibold text-gray-600 mb-2 text-sm">Traditional Providers:</div>
+                          <div className="flex items-start gap-2">
+                            <X className="h-4 w-4 text-red-500 mt-0.5 flex-shrink-0" />
+                            <span className="text-sm">{item.traditional}</span>
+                          </div>
+                        </div>
+                        
+                        <div>
+                          <div className="font-semibold text-white mb-2 text-sm bg-gradient-to-r from-[#15BEE2] to-[#0EA5E9] px-3 py-1 rounded-lg inline-flex items-center gap-1">
+                            <span className="text-sm">★</span>
                             eciple Platform
-                            <span className="text-lg text-white">★</span>
-                          </span>
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {comparisonFactors.map((item, index) => (
-                        <TableRow key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                          <TableCell className="font-bold text-primary">{item.factor}</TableCell>
-                          <TableCell>
-                            <div className="flex items-start gap-2">
-                              <X className="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" />
-                              <span>{item.traditional}</span>
+                            <span className="text-sm">★</span>
+                          </div>
+                          <div className="flex items-start gap-2 mt-2">
+                            <div className="h-5 w-5 rounded-full bg-green-100 flex items-center justify-center mt-0.5 flex-shrink-0">
+                              <Check className="h-3 w-3 text-green-600" />
                             </div>
-                          </TableCell>
-                          <TableCell className="bg-gradient-to-br from-accent/5 to-primary/5 relative">
-                            <div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-transparent opacity-50"></div>
-                            <div className="flex items-start gap-2 relative z-10">
-                              <div className="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5 flex-shrink-0">
-                                <Check className="h-4 w-4 text-green-600" />
-                              </div>
-                              <span className="font-semibold text-primary">{item.eciple}</span>
-                            </div>
-                          </TableCell>
+                            <span className="font-semibold text-primary text-sm">{item.eciple}</span>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  {/* Desktop table layout */}
+                  <div className="hidden md:block overflow-auto">
+                    <Table>
+                      <TableHeader className="bg-gray-50">
+                        <TableRow>
+                          <TableHead className="font-bold text-primary w-1/4">Factor</TableHead>
+                          <TableHead className="font-bold text-gray-600 w-[37.5%]">Traditional Discipleship Providers</TableHead>
+                          <TableHead className="font-bold text-white w-[37.5%] bg-gradient-to-br from-[#15BEE2] to-[#0EA5E9] relative">
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#15BEE2]/20 to-[#0EA5E9]/20 animate-pulse"></div>
+                            <span className="relative z-10 flex items-center justify-center gap-2">
+                              <span className="text-lg text-white">★</span>
+                              eciple Platform
+                              <span className="text-lg text-white">★</span>
+                            </span>
+                          </TableHead>
                         </TableRow>
-                      ))}
-                    </TableBody>
-                  </Table>
+                      </TableHeader>
+                        <TableBody>
+                        {comparisonFactors.map((item, index) => (
+                          <TableRow key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
+                            <TableCell className="font-bold text-primary">{item.factor}</TableCell>
+                            <TableCell>
+                              <div className="flex items-start gap-2">
+                                <X className="h-5 w-5 text-red-500 mt-0.5 flex-shrink-0" />
+                                <span>{item.traditional}</span>
+                              </div>
+                            </TableCell>
+                            <TableCell className="bg-gradient-to-br from-accent/5 to-primary/5 relative">
+                              <div className="absolute inset-0 bg-gradient-to-r from-accent/5 to-transparent opacity-50"></div>
+                              <div className="flex items-start gap-2 relative z-10">
+                                <div className="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center mt-0.5 flex-shrink-0">
+                                  <Check className="h-4 w-4 text-green-600" />
+                                </div>
+                                <span className="font-semibold text-primary">{item.eciple}</span>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
                 </CardContent>
               </Card>
             </motion.div>
