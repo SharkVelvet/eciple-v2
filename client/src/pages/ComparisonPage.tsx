@@ -337,7 +337,7 @@ export default function ComparisonPage() {
                       <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center mr-3">
                         <Ban className="h-5 w-5 text-purple-600" />
                       </div>
-                      <h3 className="text-lg font-semibold text-primary">Outdated Technology Infrastructure</h3>
+                      <h3 className="text-lg font-semibold text-primary">40</h3>
                     </div>
                     <p className="text-foreground text-opacity-80">
                       Of young adults leave the Christian faith as they enter adulthood (equating to over 1M per year).
