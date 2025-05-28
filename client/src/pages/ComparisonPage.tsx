@@ -474,9 +474,9 @@ export default function ComparisonPage() {
                         <TableHead className="font-bold text-white w-[37.5%] bg-gradient-to-br from-[#15BEE2] to-[#0EA5E9] relative">
                           <div className="absolute inset-0 bg-gradient-to-r from-[#15BEE2]/20 to-[#0EA5E9]/20 animate-pulse"></div>
                           <span className="relative z-10 flex items-center justify-center gap-2">
-                            <span className="text-lg text-white">⭐</span>
+                            <span className="text-lg text-white">★</span>
                             eciple Platform
-                            <span className="text-lg text-white">⭐</span>
+                            <span className="text-lg text-white">★</span>
                           </span>
                         </TableHead>
                       </TableRow>
