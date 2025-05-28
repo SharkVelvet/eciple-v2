@@ -392,7 +392,7 @@ export default function ComparisonPage() {
         </section>
 
         {/* Solution Section - Simple and Clean */}
-        <section id="solution" className="py-16 bg-blue-50 scroll-mt-20">
+        <section id="solution" className="py-16 bg-gray-50 scroll-mt-20">
           <div className="max-w-[1180px] mx-auto px-4">
             <motion.div 
               className="text-center mb-12"
