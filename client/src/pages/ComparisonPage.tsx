@@ -340,7 +340,7 @@ export default function ComparisonPage() {
                       <h3 className="text-lg font-semibold text-primary">Outdated Technology Infrastructure</h3>
                     </div>
                     <p className="text-foreground text-opacity-80">
-                      Ministries are forced to use outdated and rigid platforms that do not reflect the modern effectiveness of individualized mentoring.
+                      Of young adults leave the Christian faith as they enter adulthood (equating to over 1M per year).
                     </p>
                   </CardContent>
                 </Card>
