@@ -9,6 +9,7 @@ import Header2 from "@/components/Header2";
 import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
 import Product from "@/components/Product";
+import eCipleDashImage from "@assets/eciple-dash.jpg";
 
 export default function ComparisonPage() {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -417,7 +418,7 @@ export default function ComparisonPage() {
               >
                 <div className="relative">
                   <img 
-                    src="/attached_assets/eciple-dash.jpg" 
+                    src={eCipleDashImage} 
                     alt="eciple discipleship dashboard interface" 
                     className="rounded-2xl shadow-2xl w-full h-auto object-cover"
                     loading="lazy"
