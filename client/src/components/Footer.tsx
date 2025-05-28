@@ -47,9 +47,9 @@ export default function Footer() {
     quickLinks: [
       { name: "The Problem", href: "#problem" },
       { name: "Our Solution", href: "#solution" },
-      { name: "Product Features", href: "#product" },
-      { name: "Competitive Analysis", href: "#competition" },
-      { name: "Pricing", href: "#pricing" }
+      { name: "Comparison", href: "#comparison" },
+      { name: "Pricing", href: "#pricing" },
+      { name: "Contact Us", href: "#contact" }
     ],
     resources: [
       { name: "Cookie Policy", href: "/cookie-policy" },
