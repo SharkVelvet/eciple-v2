@@ -543,14 +543,14 @@ export default function ComparisonPage() {
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                 >
                   <Card className={`h-full transition-all duration-300 hover:shadow-lg hover:scale-105 ${
-                    plan.popular ? 'border-2 border-primary shadow-lg scale-105 relative' : ''
+                    plan.popular ? 'border-2 border-[#15BEE2] shadow-lg scale-105 relative' : ''
                   }`}>
                     {plan.popular && (
                       <div className="absolute top-0 right-0">
                         <div className="bg-accent text-white text-xs font-bold px-3 py-1 rounded-bl-lg">POPULAR</div>
                       </div>
                     )}
-                    <div className={`text-center p-6 ${plan.popular ? 'bg-primary' : 'bg-gray-50'}`}>
+                    <div className={`text-center p-6 ${plan.popular ? 'bg-gradient-to-br from-[#15BEE2] to-[#0EA5E9]' : 'bg-gray-50'}`}>
                       <h3 className={`text-xl font-bold ${plan.popular ? 'text-white' : 'text-primary'}`}>{plan.name}</h3>
                       <div className="mt-4">
                         <span className={`text-3xl font-bold ${plan.popular ? 'text-white' : ''}`}>{getPrice(plan.monthlyPrice)}</span>
