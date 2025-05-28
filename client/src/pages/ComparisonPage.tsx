@@ -246,7 +246,7 @@ export default function ComparisonPage() {
           <div className="absolute -bottom-40 -left-20 w-80 h-80 bg-accent/5 rounded-full blur-3xl"></div>
           
           <div className="max-w-[1180px] mx-auto px-4 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-[60%_40%] gap-8 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
               {/* Left Side - Problem Content from Page 1 */}
               <div>
                 <motion.div 
