@@ -238,7 +238,7 @@ export default function ComparisonPage() {
         </section>
 
         {/* Problem Section */}
-        <section id="problem" className="py-16 bg-white scroll-mt-20 relative overflow-hidden">
+        <section id="problem" className="pt-20 pb-16 bg-white scroll-mt-20 relative overflow-hidden">
           {/* Decorative elements */}
           <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-primary/5 to-transparent"></div>
           <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
@@ -256,11 +256,11 @@ export default function ComparisonPage() {
                   transition={{ duration: 0.6 }}
                   className="mb-10"
                 >
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="h-8 w-8 rounded-full flex items-center justify-center bg-red-100">
-                      <AlertCircle className="h-5 w-5 text-red-600" />
-                    </div>
-                    <h2 className="text-4xl md:text-5xl font-bold font-sans bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">The Problem</h2>
+                  <div className="text-center mb-12">
+                    <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">The Problem</h2>
+                    <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+                      Understanding the discipleship crisis facing the church today
+                    </p>
                   </div>
                   
                   <p className="text-xl leading-relaxed text-foreground/80 max-w-xl mb-8">
