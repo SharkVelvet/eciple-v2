@@ -350,7 +350,7 @@ export default function ComparisonPage() {
                   <CardContent className="p-6">
                     
                     <div className="mb-4">
-                      <div className="text-4xl font-bold text-indigo-500 mb-2">40M</div>
+                      <div className="text-5xl font-bold text-indigo-500 mb-2">40M</div>
                       <div className="text-indigo-600 text-lg font-medium">Church Exodus</div>
                     </div>
                     
