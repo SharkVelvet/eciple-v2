@@ -285,16 +285,23 @@ export default function ComparisonPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-white to-red-50/30 hover:shadow-xl transition-all duration-300 border-l-4 border-l-red-500">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="h-8 w-8 rounded-full bg-red-100 flex items-center justify-center mr-3">
-                        <AlertTriangle className="h-5 w-5 text-red-600" />
-                      </div>
-                      <h3 className="text-lg font-semibold text-primary">40%</h3>
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-slate-700 to-slate-800 hover:shadow-xl transition-all duration-300 rounded-3xl h-44">
+                  <CardContent className="p-6 h-full flex flex-col justify-between relative">
+                    {/* Decorative Element */}
+                    <div className="absolute top-4 right-4 opacity-20">
+                      <svg width="60" height="60" viewBox="0 0 60 60" fill="none" className="text-white">
+                        <path d="M10 30 C 10 10, 30 10, 30 30 S 50 50, 30 50 S 10 50, 10 30" stroke="currentColor" strokeWidth="2" fill="none"/>
+                        <path d="M15 25 C 20 20, 25 20, 30 25 S 40 30, 35 35 S 25 40, 20 35 S 15 30, 15 25" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                      </svg>
                     </div>
-                    <p className="text-foreground text-opacity-80">
-                      Of evangelicals hold the entire Bible as the "actual word of God," 51% say only parts of the Bible are the "inspired word of God."
+                    
+                    <div>
+                      <div className="text-5xl font-bold text-white mb-2">40<span className="text-3xl">%</span></div>
+                      <div className="text-white/90 text-lg font-medium">Bible Authority</div>
+                    </div>
+                    
+                    <p className="text-white/70 text-sm leading-relaxed">
+                      Of evangelicals hold the entire Bible as the "actual word of God," 51% say only parts are inspired
                     </p>
                   </CardContent>
                 </Card>
@@ -305,16 +312,23 @@ export default function ComparisonPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-white to-orange-50/30 hover:shadow-xl transition-all duration-300 border-l-4 border-l-orange-500">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="h-8 w-8 rounded-full bg-orange-100 flex items-center justify-center mr-3">
-                        <XCircle className="h-5 w-5 text-orange-600" />
-                      </div>
-                      <h3 className="text-lg font-semibold text-primary">80%</h3>
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-orange-400 to-orange-500 hover:shadow-xl transition-all duration-300 rounded-3xl h-44">
+                  <CardContent className="p-6 h-full flex flex-col justify-between relative">
+                    {/* Decorative Element */}
+                    <div className="absolute top-4 right-4 opacity-20">
+                      <svg width="60" height="60" viewBox="0 0 60 60" fill="none" className="text-white">
+                        <path d="M15 15 Q 30 5, 45 15 Q 50 30, 45 45 Q 30 55, 15 45 Q 10 30, 15 15" stroke="currentColor" strokeWidth="2" fill="none"/>
+                        <circle cx="30" cy="30" r="8" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                      </svg>
                     </div>
-                    <p className="text-foreground text-opacity-80">
-                      Of people who make a decision for Christ typically fall away from the faith within the first year.
+                    
+                    <div>
+                      <div className="text-5xl font-bold text-white mb-2">80<span className="text-3xl">%</span></div>
+                      <div className="text-white/90 text-lg font-medium">Fall Away</div>
+                    </div>
+                    
+                    <p className="text-white/70 text-sm leading-relaxed">
+                      Of people who make a decision for Christ typically fall away from the faith within the first year
                     </p>
                   </CardContent>
                 </Card>
@@ -325,16 +339,23 @@ export default function ComparisonPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-white to-purple-50/30 hover:shadow-xl transition-all duration-300 border-l-4 border-l-purple-500">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center mr-3">
-                        <Ban className="h-5 w-5 text-purple-600" />
-                      </div>
-                      <h3 className="text-lg font-semibold text-primary">64%</h3>
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-purple-500 to-purple-600 hover:shadow-xl transition-all duration-300 rounded-3xl h-44">
+                  <CardContent className="p-6 h-full flex flex-col justify-between relative">
+                    {/* Decorative Element */}
+                    <div className="absolute top-4 right-4 opacity-20">
+                      <svg width="60" height="60" viewBox="0 0 60 60" fill="none" className="text-white">
+                        <circle cx="30" cy="30" r="20" stroke="currentColor" strokeWidth="2" fill="none"/>
+                        <path d="M20 20 Q 30 10, 40 20 Q 50 30, 40 40 Q 30 50, 20 40 Q 10 30, 20 20" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                      </svg>
                     </div>
-                    <p className="text-foreground text-opacity-80">
-                      Of young adults leave the Christian faith as they enter adulthood (equating to over 1M per year).
+                    
+                    <div>
+                      <div className="text-5xl font-bold text-white mb-2">64<span className="text-3xl">%</span></div>
+                      <div className="text-white/90 text-lg font-medium">Young Adults</div>
+                    </div>
+                    
+                    <p className="text-white/70 text-sm leading-relaxed">
+                      Of young adults leave the Christian faith as they enter adulthood (equating to over 1M per year)
                     </p>
                   </CardContent>
                 </Card>
@@ -346,16 +367,23 @@ export default function ComparisonPage() {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="md:col-span-2 lg:col-span-1"
               >
-                <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-white to-indigo-50/30 hover:shadow-xl transition-all duration-300 border-l-4 border-l-indigo-500">
-                  <CardContent className="p-6">
-                    <div className="flex items-center mb-4">
-                      <div className="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
-                        <StopCircle className="h-5 w-5 text-indigo-600" />
-                      </div>
-                      <h3 className="text-lg font-semibold text-primary">40 Million</h3>
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-gradient-to-br from-indigo-500 to-indigo-600 hover:shadow-xl transition-all duration-300 rounded-3xl h-44">
+                  <CardContent className="p-6 h-full flex flex-col justify-between relative">
+                    {/* Decorative Element */}
+                    <div className="absolute top-4 right-4 opacity-20">
+                      <svg width="60" height="60" viewBox="0 0 60 60" fill="none" className="text-white">
+                        <path d="M10 30 Q 30 10, 50 30 Q 30 50, 10 30" stroke="currentColor" strokeWidth="2" fill="none"/>
+                        <path d="M20 30 Q 30 20, 40 30 Q 30 40, 20 30" stroke="currentColor" strokeWidth="1.5" fill="none"/>
+                      </svg>
                     </div>
-                    <p className="text-foreground text-opacity-80">
-                      Million adult Christians left the church in the last 25 years (largest & fastest religious shift in U.S. history).
+                    
+                    <div>
+                      <div className="text-4xl font-bold text-white mb-2">40M</div>
+                      <div className="text-white/90 text-lg font-medium">Church Exodus</div>
+                    </div>
+                    
+                    <p className="text-white/70 text-sm leading-relaxed">
+                      Million adult Christians left the church in the last 25 years (largest & fastest religious shift in U.S. history)
                     </p>
                   </CardContent>
                 </Card>
