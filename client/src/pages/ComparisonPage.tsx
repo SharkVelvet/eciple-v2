@@ -363,7 +363,7 @@ export default function ComparisonPage() {
                       <h3 className="text-lg font-semibold text-primary">Inability to Scale Personal Mentorship</h3>
                     </div>
                     <p className="text-foreground text-opacity-80">
-                      No existing tools provide the infrastructure needed to support large-scale one-to-one discipleship across diverse ministry contexts.
+                      Million adult Christians left the church in the last 25 years (largest & fastest religious shift in U.S. history).
                     </p>
                   </CardContent>
                 </Card>
