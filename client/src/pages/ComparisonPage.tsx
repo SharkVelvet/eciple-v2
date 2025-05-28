@@ -325,15 +325,15 @@ export default function ComparisonPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-3xl h-44">
-                  <CardContent className="p-6 h-full flex flex-col justify-between relative">
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-3xl">
+                  <CardContent className="p-6">
                     
-                    <div>
+                    <div className="mb-4">
                       <div className="text-5xl font-bold text-purple-500 mb-2">64<span className="text-3xl">%</span></div>
                       <div className="text-purple-600 text-lg font-medium">Young Adults</div>
                     </div>
                     
-                    <p className="text-purple-400 text-sm leading-relaxed mb-8">
+                    <p className="text-purple-400 text-sm leading-relaxed">
                       Of young adults leave the Christian faith as they enter adulthood (equating to over 1M per year)
                     </p>
                   </CardContent>
@@ -346,15 +346,15 @@ export default function ComparisonPage() {
                 transition={{ duration: 0.5, delay: 0.4 }}
                 className="md:col-span-2 lg:col-span-1"
               >
-                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-3xl h-44">
-                  <CardContent className="p-6 h-full flex flex-col justify-between relative">
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-3xl">
+                  <CardContent className="p-6">
                     
-                    <div>
+                    <div className="mb-4">
                       <div className="text-4xl font-bold text-indigo-500 mb-2">40M</div>
                       <div className="text-indigo-600 text-lg font-medium">Church Exodus</div>
                     </div>
                     
-                    <p className="text-indigo-400 text-sm leading-relaxed mb-8">
+                    <p className="text-indigo-400 text-sm leading-relaxed">
                       Million adult Christians left the church in the last 25 years (largest & fastest religious shift in U.S. history)
                     </p>
                   </CardContent>
