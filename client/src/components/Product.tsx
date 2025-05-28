@@ -123,10 +123,10 @@ export default function Product() {
             >
               <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative">
                 <CardContent className="p-8">
-                  <div className="text-4xl mb-4 bg-gradient-to-r from-[#15BEE2] to-[#0EA5E9] bg-clip-text text-transparent">
+                  <div className="text-foreground text-4xl mb-4">
                     <i className={`fas fa-${feature.icon}`}></i>
                   </div>
-                  <h3 className="text-xl font-semibold font-sans mb-3 bg-gradient-to-r from-[#15BEE2] to-[#0EA5E9] bg-clip-text text-transparent">{feature.title}</h3>
+                  <h3 className="text-xl font-semibold font-sans mb-3">{feature.title}</h3>
                   <p className="text-muted-foreground">
                     {feature.description}
                   </p>
