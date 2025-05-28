@@ -650,7 +650,7 @@ export default function ComparisonPage() {
       <Contact />
       
       {/* Call to Action */}
-      <section className="py-16 bg-blue-50">
+      <section className="py-16 bg-gray-50">
         <div className="max-w-[1180px] mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -665,11 +665,17 @@ export default function ComparisonPage() {
             <Button 
               size="lg"
               className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20"
+              onClick={() => {
+                const element = document.querySelector('#contact');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }}
             >
-              <a href="/contact" className="flex items-center gap-2">
+              <span className="flex items-center gap-2">
                 Contact Us Today
                 <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-              </a>
+              </span>
             </Button>
           </motion.div>
         </div>
