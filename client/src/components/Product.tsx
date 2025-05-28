@@ -121,14 +121,7 @@ export default function Product() {
               viewport={{ once: true, margin: "-5%" }}
               transition={{ delay: index * 0.05, duration: 0.35, ease: "easeOut" }}
             >
-              <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative overflow-visible">
-                <div className="absolute top-0 right-0 -mr-6 mt-2">
-                  <img 
-                    src={ecipleWings} 
-                    alt="eciple wings" 
-                    className="h-16 w-auto object-contain opacity-90"
-                  />
-                </div>
+              <Card className="h-full transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative">
                 <CardContent className="p-8">
                   <div className="text-foreground text-4xl mb-4">
                     <i className={`fas fa-${feature.icon}`}></i>
