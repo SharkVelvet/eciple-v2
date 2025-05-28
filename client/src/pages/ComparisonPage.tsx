@@ -315,7 +315,7 @@ export default function ComparisonPage() {
                       <div className="h-8 w-8 rounded-full bg-orange-100 flex items-center justify-center mr-3">
                         <XCircle className="h-5 w-5 text-orange-600" />
                       </div>
-                      <h3 className="text-lg font-semibold text-primary">Lack of One-to-One Mentoring Support</h3>
+                      <h3 className="text-lg font-semibold text-primary">80%</h3>
                     </div>
                     <p className="text-foreground text-opacity-80">
                       Of people who make a decision for Christ typically fall away from the faith within the first year.
