@@ -9,11 +9,27 @@ import ecipleOrangeLogo from "@assets/eciple-orange.png";
 export default function Header2() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
   const [location] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+      
+      // Check which section is currently in view
+      const sections = ['problem', 'solution', 'comparison', 'pricing', 'contact'];
+      const scrollPosition = window.scrollY + 100; // Offset for header
+      
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -29,11 +45,11 @@ export default function Header2() {
   };
 
   const navItems = [
-    { name: "The Problem", href: "#problem", icon: <Lightbulb className="h-4 w-4" /> },
-    { name: "Our Solution", href: "#solution", icon: <CheckCircle className="h-4 w-4" /> },
-    { name: "Comparison", href: "#comparison", icon: <Trophy className="h-4 w-4" /> },
-    { name: "Pricing", href: "#pricing", icon: <DollarSign className="h-4 w-4" /> },
-    { name: "Contact Us", href: "#contact", icon: <MessageSquare className="h-4 w-4" /> }
+    { name: "The Problem", href: "#problem", id: "problem", icon: <Lightbulb className="h-4 w-4" /> },
+    { name: "Our Solution", href: "#solution", id: "solution", icon: <CheckCircle className="h-4 w-4" /> },
+    { name: "Comparison", href: "#comparison", id: "comparison", icon: <Trophy className="h-4 w-4" /> },
+    { name: "Pricing", href: "#pricing", id: "pricing", icon: <DollarSign className="h-4 w-4" /> },
+    { name: "Contact Us", href: "#contact", id: "contact", icon: <MessageSquare className="h-4 w-4" /> }
   ];
 
   return (
@@ -92,13 +108,17 @@ export default function Header2() {
                   className="text-white hover:text-white transition-all duration-200 text-sm font-medium cursor-pointer relative group"
                 >
                   {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-200 group-hover:w-full"></span>
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-white transition-all duration-200 ${
+                    activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}></span>
                 </a>
               ) : (
                 <Link key={item.name} href={item.href}>
                   <span className="text-white hover:text-white transition-all duration-200 text-sm font-medium cursor-pointer relative group">
                     {item.name}
-                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-white transition-all duration-200 group-hover:w-full"></span>
+                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-white transition-all duration-200 ${
+                      activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full'
+                    }`}></span>
                   </span>
                 </Link>
               )
