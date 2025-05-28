@@ -318,7 +318,7 @@ export default function ComparisonPage() {
                       <h3 className="text-lg font-semibold text-primary">Lack of One-to-One Mentoring Support</h3>
                     </div>
                     <p className="text-foreground text-opacity-80">
-                      Current solutions fail to offer technology that enables and scales personalized one-to-one mentoring relationships.
+                      Of people who make a decision for Christ typically fall away from the faith within the first year.
                     </p>
                   </CardContent>
                 </Card>
