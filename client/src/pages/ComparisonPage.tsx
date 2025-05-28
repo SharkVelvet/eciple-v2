@@ -581,33 +581,28 @@ export default function ComparisonPage() {
               ))}
             </div>
             
-
-          </div>
-        </section>
-
-        {/* Pricing Features Highlight */}
-        <section className="py-12 bg-white">
-          <div className="max-w-[1180px] mx-auto px-4">
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            {/* Pricing Features Card */}
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-3 gap-8 bg-gray-50 p-8 rounded-lg shadow-md"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
             >
               <div className="text-center">
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Church Size Based</h3>
-                <p className="text-gray-600">Pricing scales with your congregation size</p>
+                <h3 className="text-xl font-semibold font-sans text-primary mb-2">Church Size Based</h3>
+                <p className="text-foreground text-opacity-80">Pricing scales with your congregation size</p>
               </div>
               <div className="text-center">
-                <h3 className="text-xl font-bold text-gray-800 mb-3">All-Inclusive Features</h3>
-                <p className="text-gray-600">No hidden fees or add-on costs for core features</p>
+                <h3 className="text-xl font-semibold font-sans text-primary mb-2">All-Inclusive Features</h3>
+                <p className="text-foreground text-opacity-80">No hidden fees or add-on costs for core features</p>
               </div>
               <div className="text-center">
-                <h3 className="text-xl font-bold text-gray-800 mb-3">Annual Discounts</h3>
-                <p className="text-gray-600">Save up to 15% with annual payment plans</p>
+                <h3 className="text-xl font-semibold font-sans text-primary mb-2">Annual Discounts</h3>
+                <p className="text-foreground text-opacity-80">Save up to 15% with annual payment plans</p>
               </div>
             </motion.div>
+
           </div>
         </section>
         
