@@ -340,11 +340,12 @@ export default function ComparisonPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
+                className="h-full"
               >
-                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-r-3xl rounded-l-none">
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-r-3xl rounded-l-none h-full">
                   {/* Gradient left border */}
                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#15BEE2] to-[#0EA5E9]"></div>
-                  <CardContent className="p-6 pl-8">
+                  <CardContent className="p-6 pl-8 h-full flex flex-col justify-between min-h-[180px]">
                     
                     <div className="mb-4">
                       <div className="text-5xl font-bold text-gray-800 mb-2">40<span className="text-3xl">%</span></div>
@@ -490,8 +491,8 @@ export default function ComparisonPage() {
                     <CheckCircle className="h-6 w-6 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">Adaptive Technology</h3>
-                    <p className="text-gray-600">Dynamic content creation that adapts to each unique spiritual journey and relationship</p>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">Enabling Technology</h3>
+                    <p className="text-gray-600">Intuitive functionality providing full control over all program facets including topics, pathway steps and content</p>
                   </div>
                 </div>
                 
