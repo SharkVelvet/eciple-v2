@@ -22,9 +22,9 @@ export default function Contact() {
   const founderText = "founder_text";
   
   // Helper functions to get content or default values
-  const getContactTitle = () => editableContent[contactTitle] || "Get in Touch";
+  const getContactTitle = () => editableContent[contactTitle] || "Ready to Transform Your Discipleship Strategy?";
   const getContactSubtitle = () => editableContent[contactSubtitle] || 
-    "Have questions or interested in a demo? Fill out the form below.";
+    "Join the growing community of churches and ministries revolutionizing their discipleship approach with eciple's platform.";
   const getFounderTitle = () => editableContent[founderTitle] || "Meet the Founder";
   const getFounderText = () => editableContent[founderText] || 
     "Bobby Bemis brings over 25 years of ministry experience as a pastor and discipleship leader.";
@@ -121,35 +121,6 @@ export default function Contact() {
                 {getContactSubtitle()}
               </p>
             )}
-            
-            <motion.div 
-              className="bg-white bg-opacity-10 p-6 rounded-lg mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-            >
-              <h3 className="text-xl font-semibold font-sans mb-4">Why Join Our Pilot?</h3>
-              <ul className="space-y-3">
-                {pilotBenefits.map((benefit, index) => (
-                  <motion.li 
-                    key={index} 
-                    className="flex items-start"
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 + index * 0.1, duration: 0.3 }}
-                  >
-                    <span className="text-accent mr-2">
-                      <i className="fas fa-star"></i>
-                    </span>
-                    <span>{benefit}</span>
-                  </motion.li>
-                ))}
-              </ul>
-              
-
-            </motion.div>
           </motion.div>
           
           <motion.div
