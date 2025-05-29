@@ -750,38 +750,6 @@ export default function ComparisonPage() {
       </main>
       <Contact />
       
-      {/* Call to Action */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-[1180px] mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-bold font-sans mb-6">Ready to Transform Your Discipleship Strategy?</h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Join the growing community of churches and ministries revolutionizing their discipleship approach with eciple's platform.
-            </p>
-            <Button 
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20"
-              onClick={() => {
-                const element = document.querySelector('#contact');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-              }}
-            >
-              <span className="flex items-center gap-2">
-                Contact Us Today
-                <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-              </span>
-            </Button>
-          </motion.div>
-        </div>
-      </section>
-      
       <Footer />
 
       {/* Floating Scroll to Top Button */}
