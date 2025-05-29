@@ -212,7 +212,6 @@ export default function Footer() {
           <div className="flex flex-col items-center justify-center gap-2">
             <div className="text-white text-opacity-60">
               <p>&copy; {currentYear} eciple. All rights reserved.</p>
-              <p>Igniting Spiritual Growth, One Relationship at a Time</p>
             </div>
             <p className="text-white text-opacity-60 text-xs flex items-center justify-center">
               Built by <a href="https://www.fotype.com" className="text-[#15BEE2] hover:text-white mx-1" target="_blank" rel="noopener noreferrer">FOTYPE</a>
