@@ -54,13 +54,18 @@ export default function ComparisonPage() {
       monthlyPrice: 99,
       description: "Under 250 members",
       features: [
-        "Complete one-to-one discipleship platform",
-        "Core matching capabilities",
-        "Basic analytics dashboard",
-        "Standard content library",
-        "Email support"
+        { label: "One-Time Setup Fee", value: "$250" },
+        { label: "Free Trial", value: "30 Day" },
+        { label: "Monthly Active Users", value: "Up to 50" },
+        { label: "Media Storage", value: "5 GB" },
+        { label: "All Inclusive Platform", value: "✓" },
+        { label: "Unlimited System Admins", value: "✓" },
+        { label: "Unlimited Program Creation", value: "✓" },
+        { label: "Custom Content Creation", value: "✓" },
+        { label: "Dedicated Training & Support", value: "✓" }
       ],
-      popular: false
+      popular: false,
+      isLeftRight: true
     },
     {
       name: "Medium Churches",
@@ -668,14 +673,25 @@ export default function ComparisonPage() {
                       <p className={`mt-2 ${plan.popular ? 'text-white text-opacity-90' : 'text-foreground text-opacity-60'}`}>{plan.description}</p>
                     </div>
                     <CardContent className="p-6">
-                      <ul className="space-y-3">
-                        {plan.features.map((feature, featureIndex) => (
-                          <li key={featureIndex} className="flex items-start">
-                            <Check className="h-5 w-5 text-success mr-2 flex-shrink-0" />
-                            <span>{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
+                      {plan.isLeftRight ? (
+                        <div className="space-y-3">
+                          {plan.features.map((feature, featureIndex) => (
+                            <div key={featureIndex} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
+                              <span className="text-sm font-medium text-gray-700">{(feature as any).label}</span>
+                              <span className="text-sm font-semibold text-primary">{(feature as any).value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <ul className="space-y-3">
+                          {plan.features.map((feature, featureIndex) => (
+                            <li key={featureIndex} className="flex items-start">
+                              <Check className="h-5 w-5 text-success mr-2 flex-shrink-0" />
+                              <span>{typeof feature === 'string' ? feature : feature.label}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
                       <div className="mt-6">
                         <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20 w-full justify-center">
                           <a href="/contact" className="flex items-center gap-2">
