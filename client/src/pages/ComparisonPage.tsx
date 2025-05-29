@@ -363,11 +363,12 @@ export default function ComparisonPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
+                className="h-full"
               >
-                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-r-3xl rounded-l-none">
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-r-3xl rounded-l-none h-full">
                   {/* Gradient left border */}
                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#15BEE2] to-[#0EA5E9]"></div>
-                  <CardContent className="p-6 pl-8">
+                  <CardContent className="p-6 pl-8 h-full flex flex-col justify-between min-h-[180px]">
                     
                     <div className="mb-4">
                       <div className="text-5xl font-bold text-gray-800 mb-2">80<span className="text-3xl">%</span></div>
@@ -385,11 +386,12 @@ export default function ComparisonPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
+                className="h-full"
               >
-                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-r-3xl rounded-l-none">
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-r-3xl rounded-l-none h-full">
                   {/* Gradient left border */}
                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#15BEE2] to-[#0EA5E9]"></div>
-                  <CardContent className="p-6 pl-8">
+                  <CardContent className="p-6 pl-8 h-full flex flex-col justify-between min-h-[180px]">
                     
                     <div className="mb-4">
                       <div className="text-5xl font-bold text-gray-800 mb-2">64<span className="text-3xl">%</span></div>
@@ -407,12 +409,12 @@ export default function ComparisonPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="md:col-span-2 lg:col-span-1"
+                className="md:col-span-2 lg:col-span-1 h-full"
               >
-                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-r-3xl rounded-l-none">
+                <Card className="relative overflow-hidden border-0 shadow-lg bg-white hover:shadow-xl transition-all duration-300 rounded-r-3xl rounded-l-none h-full">
                   {/* Gradient left border */}
                   <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#15BEE2] to-[#0EA5E9]"></div>
-                  <CardContent className="p-6 pl-8">
+                  <CardContent className="p-6 pl-8 h-full flex flex-col justify-between min-h-[180px]">
                     
                     <div className="mb-4">
                       <div className="text-5xl font-bold text-gray-800 mb-2">40M</div>
