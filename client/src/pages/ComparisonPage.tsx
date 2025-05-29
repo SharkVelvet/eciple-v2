@@ -687,8 +687,8 @@ export default function ComparisonPage() {
                               <span className="text-sm font-medium text-gray-700">{(feature as any).label}</span>
                               <span className="text-sm font-semibold text-primary">
                                 {(feature as any).value === "✓" ? (
-                                  <div className="h-5 w-5 rounded-full bg-green-500 flex items-center justify-center">
-                                    <Check className="h-3 w-3 text-white" />
+                                  <div className="h-5 w-5 rounded-full border-2 border-green-500 flex items-center justify-center">
+                                    <Check className="h-3 w-3 text-green-500" />
                                   </div>
                                 ) : (
                                   (feature as any).value
