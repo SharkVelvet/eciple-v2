@@ -674,11 +674,19 @@ export default function ComparisonPage() {
                     </div>
                     <CardContent className="p-6">
                       {plan.isLeftRight ? (
-                        <div className="space-y-3">
+                        <div className="space-y-1">
                           {plan.features.map((feature, featureIndex) => (
-                            <div key={featureIndex} className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0">
+                            <div key={featureIndex} className="flex justify-between items-center py-1 border-b border-gray-100 last:border-b-0">
                               <span className="text-sm font-medium text-gray-700">{(feature as any).label}</span>
-                              <span className="text-sm font-semibold text-primary">{(feature as any).value}</span>
+                              <span className="text-sm font-semibold text-primary">
+                                {(feature as any).value === "✓" ? (
+                                  <div className="h-5 w-5 rounded-full bg-green-500 flex items-center justify-center">
+                                    <Check className="h-3 w-3 text-white" />
+                                  </div>
+                                ) : (
+                                  (feature as any).value
+                                )}
+                              </span>
                             </div>
                           ))}
                         </div>
