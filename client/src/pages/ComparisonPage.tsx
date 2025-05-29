@@ -681,7 +681,7 @@ export default function ComparisonPage() {
                     </div>
                     <CardContent className="p-6">
                       {plan.isLeftRight ? (
-                        <div className="space-y-1">
+                        <div className="space-y-1 max-w-md mx-auto">
                           {plan.features.map((feature, featureIndex) => (
                             <div key={featureIndex} className="flex justify-between items-center py-1 border-b border-gray-100 last:border-b-0 relative">
                               <span className="text-sm font-medium text-gray-700">{(feature as any).label}</span>
