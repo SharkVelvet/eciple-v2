@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
 import Product from "@/components/Product";
 import eCipleDashImage from "@assets/eciple-dash.jpg";
+import mentoringImage from "@assets/eciple-Two-guys-mentoring.jpg";
 
 export default function ComparisonPage() {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -209,7 +210,7 @@ export default function ComparisonPage() {
                   <div className="absolute top-4 left-4 right-4 bottom-4 md:top-8 md:left-8 md:right-8 md:bottom-8 rounded-2xl overflow-hidden">
                     {/* Background Image */}
                     <img 
-                      src="https://images.unsplash.com/photo-1529070538774-1843cb3265df?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
+                      src={mentoringImage} 
                       alt="People engaged in spiritual mentorship" 
                       className="rounded-2xl w-full h-full object-cover"
                       loading="lazy"
