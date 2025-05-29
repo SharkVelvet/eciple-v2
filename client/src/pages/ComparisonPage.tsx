@@ -683,8 +683,9 @@ export default function ComparisonPage() {
                       {plan.isLeftRight ? (
                         <div className="space-y-1">
                           {plan.features.map((feature, featureIndex) => (
-                            <div key={featureIndex} className="flex justify-between items-center py-1 border-b border-gray-100 last:border-b-0">
+                            <div key={featureIndex} className="flex justify-between items-center py-1 border-b border-gray-100 last:border-b-0 relative">
                               <span className="text-sm font-medium text-gray-700">{(feature as any).label}</span>
+                              <div className="flex-1 mx-3 border-b border-dotted border-gray-300"></div>
                               <span className="text-sm font-semibold text-primary">
                                 {(feature as any).value === "✓" ? (
                                   <div className="h-5 w-5 rounded-full border border-green-500 flex items-center justify-center">
