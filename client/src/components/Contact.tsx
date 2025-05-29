@@ -187,7 +187,7 @@ export default function Contact() {
                   </div>
                   
                   <div className="mb-4 space-y-2">
-                    <Label htmlFor="churchName">Church Name</Label>
+                    <Label htmlFor="churchName">Church/Organization Name</Label>
                     <Input 
                       id="churchName" 
                       name="churchName"
