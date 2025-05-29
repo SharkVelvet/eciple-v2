@@ -72,7 +72,6 @@ export default function ComparisonPage() {
       monthlyPrice: 299,
       description: "250-750 members",
       features: [
-        { label: "Monthly Subscription", value: "$299/Month" },
         { label: "One-Time Setup Fee", value: "$500" },
         { label: "Free Trial", value: "30 Day" },
         { label: "Monthly Active Users", value: "Up to 200" },
@@ -91,15 +90,18 @@ export default function ComparisonPage() {
       monthlyPrice: 499,
       description: "750+ members",
       features: [
-        "Everything in Medium Churches plan",
-        "Premium matching & assessments",
-        "Advanced analytics & reporting",
-        "Custom content creation",
-        "Dedicated support manager",
-        "API access & custom integrations",
-        "Multi-campus support"
+        { label: "One-Time Setup Fee", value: "$500" },
+        { label: "Free Trial", value: "30 Day" },
+        { label: "Monthly Active Users", value: "Up to 200" },
+        { label: "Media Storage", value: "25 GB" },
+        { label: "All Inclusive Platform", value: "✓" },
+        { label: "Unlimited System Admins", value: "✓" },
+        { label: "Unlimited Program Creation", value: "✓" },
+        { label: "Custom Content Creation", value: "✓" },
+        { label: "Dedicated Training & Support", value: "✓" }
       ],
-      popular: false
+      popular: false,
+      isLeftRight: true
     }
   ];
 
