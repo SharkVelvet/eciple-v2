@@ -156,11 +156,11 @@ export default function ComparisonPage() {
                 transition={{ duration: 0.6 }}
               >
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-sans leading-tight">
-                  The One-To-One Discipleship Enablement Platform
+                  The Technology Platform for One-To-One Discipleship
                 </h1>
                 
                 <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-                  Existing discipleship solutions are overwhelmingly designed for group content delivery, offering no technology to address the unique needs of one-to-one mentoring at scale. The eciple platform provides a fundamentally different approach.
+                  Finally - an all-in-one platform that opens up the most effective and desired discipleship model for everyone: One-To-One Discipleship
                 </p>
                 
                 <div className="flex justify-start mt-8">
@@ -172,7 +172,7 @@ export default function ComparisonPage() {
                       href="#comparison" 
                       className="flex items-center gap-2"
                     >
-                      View Comparison
+                      Learn More
                       <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                     </a>
                   </Button>

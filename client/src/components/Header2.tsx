@@ -83,9 +83,6 @@ export default function Header2() {
                     alt="eciple logo" 
                     className="h-8 w-auto object-contain" 
                   />
-                  <span className="text-white text-opacity-70 text-xs mt-1">
-                    Igniting Spiritual Growth
-                  </span>
                 </div>
               </motion.div>
             </a>
