@@ -165,13 +165,13 @@ export default function ComparisonPage() {
                 transition={{ duration: 0.6 }}
               >
                 <motion.div 
-                  className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-8"
+                  className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-8 w-full sm:w-auto max-w-[70%] sm:max-w-none"
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
-                  <Sparkles className="h-4 w-4 mr-2 text-secondary" />
-                  <span>Igniting Spiritual Growth, One Relationship at a Time</span>
+                  <Sparkles className="h-4 w-4 mr-2 text-secondary flex-shrink-0" />
+                  <span className="text-center sm:text-left">Igniting Spiritual Growth, One Relationship at a Time</span>
                 </motion.div>
                 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-sans leading-tight">
