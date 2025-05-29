@@ -11,6 +11,7 @@ import Contact from "@/components/Contact";
 import Product from "@/components/Product";
 import eCipleDashImage from "@assets/eciple-dash.jpg";
 import mentoringImage from "@assets/eciple-Two-guys-mentoring.jpg";
+import newDashboardImage from "@assets/eciple-dashboard.png";
 
 export default function ComparisonPage() {
   const [isAnnual, setIsAnnual] = useState(false);
@@ -469,7 +470,7 @@ export default function ComparisonPage() {
               >
                 <div className="relative">
                   <img 
-                    src={eCipleDashImage} 
+                    src={newDashboardImage} 
                     alt="eciple discipleship dashboard interface" 
                     className="rounded-2xl shadow-2xl w-full h-auto object-cover"
                     loading="lazy"
