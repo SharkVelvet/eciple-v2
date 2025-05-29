@@ -37,8 +37,8 @@ export default function Product() {
     },
     {
       icon: "map-signs",
-      title: "Flexible Content Pathways",
-      description: "Structured yet customizable content journeys that adapt to individual spiritual growth needs."
+      title: "Flexible Program Design",
+      description: "Templated, stepped workflows enable easy custom program creation aligning to theological positions and audience needs"
     },
     {
       icon: "comments",
