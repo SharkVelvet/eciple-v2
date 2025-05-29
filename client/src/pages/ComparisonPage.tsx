@@ -300,15 +300,15 @@ export default function ComparisonPage() {
                     <ul className="space-y-3 text-foreground/80">
                       <li className="flex items-start gap-3">
                         <div className="h-2 w-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
-                        <span>The dominant discipleship model isn't working and is having a disastrous impact</span>
+                        <span><strong>Discipleship Today:</strong> Content-centric, group "discipleship" (90% of efforts) is effective for knowledge but not personal growth & change</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <div className="h-2 w-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
-                        <span>The most effective, desired model isn't available due to the absence of enabling technology…</span>
+                        <span><strong>The Answer:</strong> 77% of pastors and majority of Christians affirm 1:1 mentoring as the most effective, desired model for spiritual growth & change</span>
                       </li>
                       <li className="flex items-start gap-3">
                         <div className="h-2 w-2 rounded-full bg-accent mt-2 flex-shrink-0"></div>
-                        <span className="font-semibold">Until now, with our launch of the eciple 1:1 Discipleship Enablement Platform</span>
+                        <span><strong>The Failure:</strong> Despite proven effectiveness, 83% of Christians have never participated in 1:1 discipleship due to absence of enabling technology</span>
                       </li>
                     </ul>
                   </div>
