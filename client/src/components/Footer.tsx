@@ -24,7 +24,7 @@ export default function Footer() {
   
   // Handle admin login
   const handleAdminLogin = () => {
-    if (adminPassword === "bobby") {
+    if (adminPassword === "BobbyNuno@5150") {
       localStorage.setItem("isAdmin", "true");
       setShowAdminDialog(false);
       setAdminPassword(""); // Clear password
