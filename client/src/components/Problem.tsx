@@ -170,7 +170,7 @@ export default function Problem() {
               <div className="absolute -top-4 -right-4 bg-gradient-to-br from-secondary to-primary text-white text-sm font-medium px-4 py-1 rounded-full shadow-lg">
                 {getContentValue(editableContent, 'key_finding_badge')}
               </div>
-              <div className="absolute -top-4 -right-20 bg-gradient-to-br from-red-500 to-red-600 text-white text-xs font-medium px-3 py-1 rounded-full shadow-lg">
+              <div className="absolute -top-4 -right-36 bg-gradient-to-br from-red-500 to-red-600 text-white text-xs font-medium px-3 py-1 rounded-full shadow-lg z-10">
                 {getContentValue(editableContent, 'issue_badge_text')}
               </div>
               <h3 className="text-xl font-bold mb-4">

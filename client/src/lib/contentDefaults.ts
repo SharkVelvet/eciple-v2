@@ -461,7 +461,7 @@ export const contentDefaults: ContentField[] = [
   {
     key: "issue_badge_text",
     label: "Issue Badge Text",
-    defaultValue: "Issue",
+    defaultValue: "The Discipleship Crisis",
     section: "Problem Section"
   },
   {
