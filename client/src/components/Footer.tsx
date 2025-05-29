@@ -134,15 +134,8 @@ export default function Footer() {
               </a>
             </div>
             <p className="text-white text-opacity-70 mb-4">
-              Igniting a self-replicating one-to-one discipleship movement through our purpose built technology.
+              Igniting Spiritual Growth, One Relationship at a Time
             </p>
-            <div className="flex space-x-4">
-              {links.social.map((item, index) => (
-                <a key={index} href={item.href} className="text-white text-opacity-80 hover:text-white transition-colors">
-                  <i className={`fab fa-${item.icon}`}></i>
-                </a>
-              ))}
-            </div>
           </motion.div>
           
           <motion.div
