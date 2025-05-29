@@ -133,9 +133,6 @@ export default function Footer() {
                 />
               </a>
             </div>
-            <p className="text-white text-opacity-70 mb-4">
-              Igniting Spiritual Growth, One Relationship at a Time
-            </p>
           </motion.div>
           
           <motion.div
