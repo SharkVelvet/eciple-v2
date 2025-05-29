@@ -296,7 +296,7 @@ export default function ComparisonPage() {
                   </p>
                   
                   <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl p-6 mb-8">
-                    <h3 className="text-2xl font-bold text-primary mb-4">The Bottom Line:</h3>
+                    <h3 className="text-2xl font-bold text-primary mb-4">What's Really Going On:</h3>
                     <ul className="space-y-3 text-foreground/80">
                       <li className="flex items-start gap-3">
                         <div className="h-2 w-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
