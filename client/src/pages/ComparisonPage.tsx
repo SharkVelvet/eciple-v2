@@ -11,7 +11,7 @@ import Contact from "@/components/Contact";
 import Product from "@/components/Product";
 import eCipleDashImage from "@assets/eciple-dash.jpg";
 import mentoringImage from "@assets/eciple-Two-guys-mentoring.jpg";
-import newDashboardImage from "@assets/eciple-dashboard.png";
+import newDashboardImage from "@assets/eciple-dashboard-trim.jpg";
 
 export default function ComparisonPage() {
   const [isAnnual, setIsAnnual] = useState(false);
