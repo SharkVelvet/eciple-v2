@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from "@/components/ui/table";
-import { Check, X, ArrowRight, CheckCircle, AlertCircle, AlertTriangle, XCircle, Ban, StopCircle, ChevronUp } from "lucide-react";
+import { Check, X, ArrowRight, CheckCircle, AlertCircle, AlertTriangle, XCircle, Ban, StopCircle, ChevronUp, Sparkles } from "lucide-react";
 import Header2 from "@/components/Header2";
 import Footer from "@/components/Footer";
 import Contact from "@/components/Contact";
@@ -155,6 +155,16 @@ export default function ComparisonPage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
               >
+                <motion.div 
+                  className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-8"
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  <Sparkles className="h-4 w-4 mr-2 text-secondary" />
+                  <span>Transforming Church Communities</span>
+                </motion.div>
+                
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-sans leading-tight">
                   The Technology Platform for One-To-One Discipleship
                 </h1>
