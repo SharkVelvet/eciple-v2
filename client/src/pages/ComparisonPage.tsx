@@ -162,7 +162,7 @@ export default function ComparisonPage() {
                   transition={{ duration: 0.6, delay: 0.2 }}
                 >
                   <Sparkles className="h-4 w-4 mr-2 text-secondary" />
-                  <span>Transforming Church Communities</span>
+                  <span>Igniting Spiritual Growth, One Relationship at a Time</span>
                 </motion.div>
                 
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-sans leading-tight">
