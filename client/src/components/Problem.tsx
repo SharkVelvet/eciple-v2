@@ -115,12 +115,7 @@ export default function Problem() {
                         <stat.icon className="h-5 w-5" />
                       </div>
                       <div>
-                        <div className="flex items-baseline gap-1.5">
-                          <div className="text-3xl font-bold font-sans text-primary">{stat.percentage}</div>
-                          <div className="text-xs font-medium text-secondary rounded-full px-2 py-0.5 bg-secondary/10">
-                            {getContentValue(editableContent, 'issue_badge_text')}
-                          </div>
-                        </div>
+                        <div className="text-3xl font-bold font-sans text-primary">{stat.percentage}</div>
                         <p className="text-foreground mt-1 font-medium">{stat.description}</p>
                         <p className="text-sm text-muted-foreground mt-2">{stat.source}</p>
                       </div>
@@ -174,6 +169,9 @@ export default function Problem() {
             >
               <div className="absolute -top-4 -right-4 bg-gradient-to-br from-secondary to-primary text-white text-sm font-medium px-4 py-1 rounded-full shadow-lg">
                 {getContentValue(editableContent, 'key_finding_badge')}
+              </div>
+              <div className="absolute -top-4 -right-20 bg-gradient-to-br from-red-500 to-red-600 text-white text-xs font-medium px-3 py-1 rounded-full shadow-lg">
+                {getContentValue(editableContent, 'issue_badge_text')}
               </div>
               <h3 className="text-xl font-bold mb-4">
                 {editMode && isAdmin ? (
