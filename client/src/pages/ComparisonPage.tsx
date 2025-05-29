@@ -72,14 +72,19 @@ export default function ComparisonPage() {
       monthlyPrice: 299,
       description: "250-750 members",
       features: [
-        "Everything in Small Churches plan",
-        "Advanced matching algorithm",
-        "Comprehensive analytics",
-        "Full content library + customization",
-        "Priority email & phone support",
-        "ChMS integration"
+        { label: "Monthly Subscription", value: "$299/Month" },
+        { label: "One-Time Setup Fee", value: "$500" },
+        { label: "Free Trial", value: "30 Day" },
+        { label: "Monthly Active Users", value: "Up to 200" },
+        { label: "Media Storage", value: "25 GB" },
+        { label: "All Inclusive Platform", value: "✓" },
+        { label: "Unlimited System Admins", value: "✓" },
+        { label: "Unlimited Program Creation", value: "✓" },
+        { label: "Custom Content Creation", value: "✓" },
+        { label: "Dedicated Training & Support", value: "✓" }
       ],
-      popular: true
+      popular: true,
+      isLeftRight: true
     },
     {
       name: "Large Churches",
