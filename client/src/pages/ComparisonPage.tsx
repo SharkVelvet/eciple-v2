@@ -123,11 +123,6 @@ export default function ComparisonPage() {
       factor: "Metrics",
       traditional: "Basic attendance and completion statistics",
       eciple: "In-depth relationship analytics and growth indicators"
-    },
-    {
-      factor: "Integration",
-      traditional: "Limited connection to church systems",
-      eciple: "Seamless integration with existing church tech"
     }
   ];
 

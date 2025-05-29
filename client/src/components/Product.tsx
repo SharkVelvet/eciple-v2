@@ -25,7 +25,7 @@ export default function Product() {
     "eciple provides a comprehensive set of tools for effective discipleship management and growth.";
   const getCentralizedTitle = () => editableContent[centralizedTitle] || "Centralized Dashboard";
   const getCentralizedText = () => editableContent[centralizedText] || 
-    "A robust backend for pastors and leaders to track discipleship relationships and growth.";
+    "Comprehensive, intuitive dashboards provide leaders with the actionable insights needed for continuous improvement and impact.";
   const getMobileTitle = () => editableContent[mobileTitle] || "Mobile Experience";
   const getMobileText = () => editableContent[mobileText] || 
     "A seamless mobile experience that keeps discipleship accessible wherever members are.";
@@ -63,11 +63,11 @@ export default function Product() {
   ];
 
   const analyticsFeatures = [
-    "Number of active mentors in the congregation",
+    "Number of certified mentors available for engagement",
     "Average duration of discipleship relationships",
     "Meeting frequency between mentors and mentees",
     "Content engagement and completion rates",
-    "Spiritual growth progress indicators"
+    "Lifelong spiritual growth progress via ChMS integration"
   ];
 
   const mobileFeatures = [
