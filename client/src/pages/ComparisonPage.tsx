@@ -624,9 +624,9 @@ export default function ComparisonPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-4">Pricing and Business Models</h2>
+              <h2 className="text-3xl md:text-4xl font-bold font-sans text-primary mb-4">Ministry-First Pricing</h2>
               <p className="text-lg max-w-3xl mx-auto text-foreground text-opacity-80">
-                eciple employs a tiered subscription model designed for accessibility across organizations of varying sizes.
+                Our goal is to empower life-changing discipleship above all, which is why we provide right-sized, transparent pricing that grows with your ministry and includes all core features with no hidden fees.
               </p>
               
               <div className="flex items-center justify-center mt-6 space-x-2">
