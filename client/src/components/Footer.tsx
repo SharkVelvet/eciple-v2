@@ -62,6 +62,9 @@ export default function Footer() {
                   className="h-10 w-auto object-contain" 
                 />
               </a>
+              <p className="text-white/70 text-sm mt-3">
+                Igniting Spiritual Growth, One Relationship at a Time
+              </p>
             </div>
           </motion.div>
           
