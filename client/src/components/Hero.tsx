@@ -166,7 +166,7 @@ export default function Hero() {
                 size="lg" 
                 variant="default" 
                 asChild 
-                className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20 hero-cta-button"
+                className="bg-[#223349] hover:bg-[#223349]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#223349]/20 hero-cta-button"
               >
                 <a 
                   href="#product" 
