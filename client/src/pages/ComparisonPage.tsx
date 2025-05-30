@@ -212,7 +212,7 @@ export default function ComparisonPage() {
                 </h1>
                 
                 <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-                  <span className="font-bold text-white">Finally</span> - an all-in-one platform that opens up the most effective and desired discipleship model for everyone: One-To-One Discipleship
+                  <span className="font-bold text-white">Finally</span> - an all-in-one platform that opens up the most effective and desired discipleship model for everyone: 1:1 Discipleship
                 </p>
                 
                 <div className="flex justify-start mt-8">
