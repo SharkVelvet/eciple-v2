@@ -261,12 +261,19 @@ export default function Problem() {
               </ul>
               
               <div className="mt-6">
-                <Button asChild className="gap-1 rounded-full bg-[#223349] hover:bg-[#223349]/90 text-white">
-                  <a href="#solution">
-                    {getContentValue(editableContent, 'see_solution_button')}
-                    <ArrowRight className="h-4 w-4" />
-                  </a>
-                </Button>
+                <div 
+                  style={{ backgroundColor: '#223349' }}
+                  className="inline-flex items-center gap-2 text-white px-6 py-3 rounded-full cursor-pointer hover:shadow-lg transition-all duration-300"
+                  onClick={() => {
+                    const element = document.querySelector('#solution');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    }
+                  }}
+                >
+                  <span>{getContentValue(editableContent, 'see_solution_button')}</span>
+                  <ArrowRight className="h-4 w-4" />
+                </div>
               </div>
             </motion.div>
           </div>

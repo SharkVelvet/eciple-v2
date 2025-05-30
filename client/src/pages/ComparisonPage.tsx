@@ -734,12 +734,14 @@ export default function ComparisonPage() {
                         </ul>
                       )}
                       <div className="mt-6">
-                        <Button asChild size="lg" className="bg-[#223349] hover:bg-[#223349]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#223349]/20 w-full justify-center">
-                          <a href="/contact" className="flex items-center gap-2">
-                            Get Started
-                            <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-                          </a>
-                        </Button>
+                        <div 
+                          style={{ backgroundColor: '#223349' }}
+                          className="inline-flex items-center justify-center gap-2 text-white px-8 py-4 rounded-full cursor-pointer hover:shadow-xl transition-all duration-300 w-full"
+                          onClick={() => window.location.href = '/contact'}
+                        >
+                          <span>Get Started</span>
+                          <ArrowRight className="h-4 w-4" />
+                        </div>
                       </div>
                     </CardContent>
                   </Card>
