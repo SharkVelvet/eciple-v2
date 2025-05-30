@@ -41,8 +41,8 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-24 bg-gradient-to-br from-[#15BEE2] to-[#1E88E5]">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-4 max-w-6xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           <div>
             <motion.div
               initial={{ opacity: 0, x: -50 }}
