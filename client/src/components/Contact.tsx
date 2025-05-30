@@ -1,27 +1,15 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { AdminContext } from "@/pages/ComparisonPage";
-import bobbyPersonImage from "@assets/Bobby-Person-2021-scaled.jpg";
 
 export default function Contact() {
-  const { isAdmin, editMode, editableContent, updateContent } = useContext(AdminContext);
   
-  const contactTitle = "contact_title";
-  const contactSubtitle = "contact_subtitle";
-  const founderTitle = "founder_title";
-  const founderText = "founder_text";
-  
-  const getContactTitle = () => editableContent[contactTitle] || "Ready to Transform Your Discipleship Strategy?";
-  const getContactSubtitle = () => editableContent[contactSubtitle] || 
-    "Join the growing community of churches and ministries revolutionizing their discipleship approach with eciple's platform.";
-  const getFounderTitle = () => editableContent[founderTitle] || "Meet the Founder";
-  const getFounderText = () => editableContent[founderText] || 
-    "Bobby Bemis brings over 25 years of ministry experience as a pastor and discipleship leader.";
+  const getContactTitle = () => "Ready to Transform Your Discipleship Strategy?";
+  const getContactSubtitle = () => "Join the growing community of churches and ministries revolutionizing their discipleship approach with eciple's platform.";
 
   const [loading, setLoading] = useState(false);
 
@@ -33,7 +21,7 @@ export default function Contact() {
     const formData = new FormData(form);
     
     try {
-      const response = await fetch('https://formspree.io/f/xqabzakl', {
+      const response = await fetch('https://formspree.io/f/xdkznzer', {
         method: 'POST',
         body: formData,
         headers: {
@@ -94,7 +82,7 @@ export default function Contact() {
                 <CardContent className="p-8">
                   <h3 className="text-2xl font-semibold font-sans text-[#223349] mb-3">Request More Information</h3>
                   <p className="text-gray-600 mb-6">For questions, comments or to stay up to date, please complete the below form.</p>
-                  <form action="https://formspree.io/f/xqabzakl" method="POST" onSubmit={handleSubmit}>
+                  <form action="https://formspree.io/f/xdkznzer" method="POST" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <div className="space-y-2">
                         <Label htmlFor="firstName" className="text-sm font-medium text-gray-700">First Name</Label>
