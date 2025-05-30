@@ -108,6 +108,29 @@ export default function Contact() {
                   <p className="text-gray-600 mb-6">
                     {getFounderText()}
                   </p>
+
+                </CardContent>
+              </Card>
+            </motion.div>
+            
+            {/* Pilot Benefits Card */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <Card className="shadow-xl">
+                <CardContent className="p-8">
+                  <h3 className="text-2xl font-semibold font-sans text-primary mb-6">Pilot Benefits</h3>
+                  <ul className="space-y-3">
+                    {pilotBenefits.map((benefit, index) => (
+                      <li key={index} className="flex items-start">
+                        <div className="w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                        <span className="text-gray-700">{benefit}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </CardContent>
               </Card>
             </motion.div>
