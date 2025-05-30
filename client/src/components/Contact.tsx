@@ -1,15 +1,9 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { AdminContext } from "@/pages/ComparisonPage";
-
-import { apiRequest } from "@/lib/queryClient";
 import bobbyPersonImage from "@assets/Bobby-Person-2021-scaled.jpg";
+import ContactForm from "./ContactForm";
 
 export default function Contact() {
   // Access admin context
@@ -104,112 +98,7 @@ export default function Contact() {
             )}
           </motion.div>
           
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <Card className="shadow-xl">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-semibold font-sans text-primary mb-3">Request More Information</h3>
-                <p className="text-gray-600 mb-6">For questions, comments or to stay up to date, please complete the below form.</p>
-                <form action="https://formspree.io/f/xqabzakl" method="POST" onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="firstName">First Name</Label>
-                      <Input 
-                        id="firstName" 
-                        name="firstName"
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="lastName">Last Name</Label>
-                      <Input 
-                        id="lastName" 
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                        required 
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="mb-4 space-y-2">
-                    <Label htmlFor="churchName">Church/Organization Name</Label>
-                    <Input 
-                      id="churchName" 
-                      name="churchName"
-                      value={formData.churchName}
-                      onChange={handleInputChange}
-                      required 
-                    />
-                  </div>
-                  
-                  <div className="mb-4 space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input 
-                      type="email" 
-                      id="email" 
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required 
-                    />
-                  </div>
-                  
-                  <div className="mb-4 space-y-2">
-                    <Label htmlFor="phone">Phone</Label>
-                    <Input 
-                      type="tel" 
-                      id="phone" 
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange} 
-                    />
-                  </div>
-                  
-                  <div className="mb-4 space-y-2">
-                    <Label htmlFor="churchSize">Church/Organization Size</Label>
-                    <Select 
-                      onValueChange={handleSelectChange}
-                      value={formData.churchSize}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select Size" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="small">Under 250</SelectItem>
-                        <SelectItem value="medium">250-750</SelectItem>
-                        <SelectItem value="large">Over 750</SelectItem>
-                        <SelectItem value="xlarge">Over 2000</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  
-                  <div className="mb-6 space-y-2">
-                    <Label htmlFor="message">Questions/Comments - What interests you most about eciple?</Label>
-                    <Textarea 
-                      id="message" 
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      rows={4} 
-                    />
-                  </div>
-                  
-                  <Button
-                    type="submit"
-                    className="w-full"
-                    disabled={loading}
-                  >
-                    {loading ? "Submitting..." : "Request More Information"}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </motion.div>
+          <ContactForm />
         </div>
       </div>
     </section>
