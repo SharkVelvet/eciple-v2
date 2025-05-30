@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Sparkles, Users, ArrowRight, Heart } from "lucide-react";
 import { useContext, useState, useEffect } from "react";
-import { AdminContext } from "@/pages/Home";
+import { AdminContext } from "@/pages/ComparisonPage";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { getContentValue } from '@/lib/contentDefaults';
