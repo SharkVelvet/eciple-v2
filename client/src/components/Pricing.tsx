@@ -176,10 +176,10 @@ export default function Pricing() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-6">
+                  <div className="mt-6 flex justify-center">
                     <div 
                       style={{ backgroundColor: '#223349' }}
-                      className="inline-flex items-center gap-2 text-white px-6 py-3 rounded-full group relative overflow-hidden shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl mx-auto"
+                      className="inline-flex items-center gap-2 text-white px-6 py-3 rounded-full group relative overflow-hidden shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl hero-cta-button"
                       onClick={() => {
                         const element = document.querySelector('#contact');
                         if (element) {
@@ -187,7 +187,7 @@ export default function Pricing() {
                         }
                       }}
                     >
-                      <span className="font-medium text-sm leading-none">Get Started</span>
+                      <span className="hero-button-text font-medium text-sm">Get Started</span>
                       <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                     </div>
                   </div>
