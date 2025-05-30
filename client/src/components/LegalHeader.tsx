@@ -44,37 +44,35 @@ export default function LegalHeader() {
             </a>
           </div>
           
-          {/* Navigation - Center aligned */}
-          <div className="hidden md:flex flex-1 justify-center">
-            <nav>
-              <ul className="flex items-center gap-6">
-                <motion.li
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.1, duration: 0.2, type: "tween" }}
-                >
-                  <Button 
-                    asChild 
-                    variant="default" 
-                    size="sm" 
-                    className="rounded-full px-5 shadow-lg shadow-accent/20 group relative overflow-hidden"
-                  >
-                    <a 
-                      href="/" 
-                      className="flex items-center gap-1"
-                    >
-                      <Home className="h-4 w-4" />
-                      Back to Main Site
-                      <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
-                    </a>
-                  </Button>
-                </motion.li>
-              </ul>
-            </nav>
-          </div>
+          {/* Spacer */}
+          <div className="flex-1"></div>
           
-          {/* Right side - Mobile menu button */}
-          <div className="flex items-center">
+          {/* Right side - Back button and Mobile menu button */}
+          <div className="flex items-center gap-4">
+            {/* Back to Main Site button - only shows on desktop */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.1, duration: 0.2, type: "tween" }}
+              className="hidden md:block"
+            >
+              <Button 
+                asChild 
+                variant="default" 
+                size="sm" 
+                className="rounded-full px-5 shadow-lg shadow-accent/20 group relative overflow-hidden"
+              >
+                <a 
+                  href="/" 
+                  className="flex items-center gap-1"
+                >
+                  <Home className="h-4 w-4" />
+                  Back to Main Site
+                  <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
+                </a>
+              </Button>
+            </motion.div>
+            
             {/* Mobile menu button - only shows on mobile */}
             <div className="md:hidden flex items-center justify-center">
               <Button
