@@ -177,9 +177,19 @@ export default function Pricing() {
                     ))}
                   </ul>
                   <div className="mt-6">
-                    <Button asChild className="w-full justify-center">
-                      <a href="#contact">Get Started</a>
-                    </Button>
+                    <div 
+                      style={{ backgroundColor: '#223349' }}
+                      className="inline-flex items-center gap-2 text-white px-8 py-4 rounded-full group relative overflow-hidden shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl w-full justify-center"
+                      onClick={() => {
+                        const element = document.querySelector('#contact');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                    >
+                      <span className="font-medium">Get Started</span>
+                      <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
+                    </div>
                   </div>
                 </CardContent>
               </Card>
