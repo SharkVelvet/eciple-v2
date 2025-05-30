@@ -372,7 +372,7 @@ export default function ComparisonPage() {
                   >
                     <div 
                       style={{ backgroundColor: '#223349' }}
-                      className="inline-flex items-center gap-2 text-white px-8 py-4 rounded-full group relative overflow-hidden shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl"
+                      className="inline-flex items-center gap-2 text-white px-8 py-4 rounded-full group relative overflow-hidden shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl hero-cta-button"
                       onClick={() => {
                         const element = document.querySelector('#solution');
                         if (element) {
@@ -380,7 +380,7 @@ export default function ComparisonPage() {
                         }
                       }}
                     >
-                      <span className="font-medium">See Our Solution</span>
+                      <span className="hero-button-text font-medium">See Our Solution</span>
                       <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                       <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                     </div>
