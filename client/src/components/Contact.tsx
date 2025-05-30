@@ -64,143 +64,95 @@ export default function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-24 bg-white">
+    <section id="contact" className="py-24 bg-gradient-to-br from-[#15BEE2] to-[#1E88E5]">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl font-bold font-sans text-primary mb-4">
-            {getContactTitle()}
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            {getContactSubtitle()}
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-          <div className="lg:col-span-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div>
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <Card className="shadow-xl mb-8">
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-semibold font-sans text-primary mb-6">
-                    {getFounderTitle()}
-                  </h3>
-                  <div className="flex items-center mb-4">
-                    <img 
-                      src={bobbyPersonImage} 
-                      alt="Bobby Bemis" 
-                      className="w-16 h-16 rounded-full mr-4 object-cover"
-                    />
-                    <div>
-                      <h4 className="text-lg font-semibold text-primary">Bobby Bemis</h4>
-                      <p className="text-gray-600">Founder & CEO</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-600 mb-6">
-                    {getFounderText()}
-                  </p>
-
-                </CardContent>
-              </Card>
-            </motion.div>
-            
-            {/* Pilot Benefits Card */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <Card className="shadow-xl">
-                <CardContent className="p-8">
-                  <h3 className="text-2xl font-semibold font-sans text-primary mb-6">Pilot Benefits</h3>
-                  <ul className="space-y-3">
-                    {pilotBenefits.map((benefit, index) => (
-                      <li key={index} className="flex items-start">
-                        <div className="w-2 h-2 bg-secondary rounded-full mt-2 mr-3 flex-shrink-0"></div>
-                        <span className="text-gray-700">{benefit}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+              <h2 className="text-4xl font-bold font-sans text-white mb-4">
+                {getContactTitle()}
+              </h2>
+              <p className="text-xl text-white/90 mb-8">
+                {getContactSubtitle()}
+              </p>
             </motion.div>
           </div>
 
-          <div className="lg:col-span-3">
+          <div>
             <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <Card className="shadow-xl">
+              <Card className="shadow-xl bg-white">
                 <CardContent className="p-8">
-                  <h3 className="text-2xl font-semibold font-sans text-primary mb-3">Request More Information</h3>
+                  <h3 className="text-2xl font-semibold font-sans text-[#223349] mb-3">Request More Information</h3>
                   <p className="text-gray-600 mb-6">For questions, comments or to stay up to date, please complete the below form.</p>
                   <form action="https://formspree.io/f/xqabzakl" method="POST" onSubmit={handleSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                       <div className="space-y-2">
-                        <Label htmlFor="firstName">First Name</Label>
+                        <Label htmlFor="firstName" className="text-sm font-medium text-gray-700">First Name</Label>
                         <Input 
                           id="firstName" 
                           name="firstName"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#15BEE2]"
                           required
                         />
                       </div>
                       <div className="space-y-2">
-                        <Label htmlFor="lastName">Last Name</Label>
+                        <Label htmlFor="lastName" className="text-sm font-medium text-gray-700">Last Name</Label>
                         <Input 
                           id="lastName" 
                           name="lastName"
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#15BEE2]"
                           required 
                         />
                       </div>
                     </div>
                     
                     <div className="mb-4 space-y-2">
-                      <Label htmlFor="churchName">Church/Organization Name</Label>
+                      <Label htmlFor="churchName" className="text-sm font-medium text-gray-700">Church/Organization Name</Label>
                       <Input 
                         id="churchName" 
                         name="churchName"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#15BEE2]"
                         required 
                       />
                     </div>
                     
                     <div className="mb-4 space-y-2">
-                      <Label htmlFor="email">Email</Label>
+                      <Label htmlFor="email" className="text-sm font-medium text-gray-700">Email</Label>
                       <Input 
                         type="email" 
                         id="email" 
                         name="email"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#15BEE2]"
                         required 
                       />
                     </div>
                     
                     <div className="mb-4 space-y-2">
-                      <Label htmlFor="phone">Phone</Label>
+                      <Label htmlFor="phone" className="text-sm font-medium text-gray-700">Phone</Label>
                       <Input 
                         type="tel" 
                         id="phone" 
                         name="phone"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#15BEE2]"
                       />
                     </div>
                     
                     <div className="mb-4 space-y-2">
-                      <Label htmlFor="churchSize">Church/Organization Size</Label>
+                      <Label htmlFor="churchSize" className="text-sm font-medium text-gray-700">Church/Organization Size</Label>
                       <select 
                         id="churchSize" 
                         name="churchSize"
-                        className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#15BEE2] bg-white"
                       >
                         <option value="">Select Size</option>
                         <option value="Under 250">Under 250</option>
@@ -211,17 +163,18 @@ export default function Contact() {
                     </div>
                     
                     <div className="mb-6 space-y-2">
-                      <Label htmlFor="message">Questions/Comments - What interests you most about eciple?</Label>
+                      <Label htmlFor="message" className="text-sm font-medium text-gray-700">Questions/Comments - What interests you most about eciple?</Label>
                       <Textarea 
                         id="message" 
                         name="message"
-                        rows={4} 
+                        rows={4}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#15BEE2] resize-none"
                       />
                     </div>
                     
                     <Button
                       type="submit"
-                      className="w-full"
+                      className="w-full bg-[#223349] hover:bg-[#223349]/90 text-white py-3 px-4 rounded-md font-medium transition-colors"
                       disabled={loading}
                     >
                       {loading ? "Submitting..." : "Request More Information"}
