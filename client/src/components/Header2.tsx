@@ -122,10 +122,10 @@ export default function Header2() {
             ))}
           </nav>
 
-          {/* Right Side - Investor Portal */}
+          {/* Right Side - Mobile Menu Only */}
           <div className="flex items-center space-x-4">
-            {/* Investor Portal Button - Desktop */}
-            <div className="hidden lg:block">
+            {/* Investor Portal Button - Desktop (Hidden) */}
+            {/* <div className="hidden lg:block">
               <Button 
                 size="sm"
                 className="bg-accent hover:bg-accent/90 text-white rounded-full px-4 flex items-center gap-2"
@@ -136,7 +136,7 @@ export default function Header2() {
                   Investor Portal
                 </Link>
               </Button>
-            </div>
+            </div> */}
 
             {/* Mobile menu button */}
             <button
@@ -192,10 +192,9 @@ export default function Header2() {
                 )
               ))}
               
-              {/* Extra spacing before Investor Portal */}
-              <div className="pt-4"></div>
+              {/* Investor Portal - Mobile (Hidden) */}
+              {/* <div className="pt-4"></div>
               
-              {/* Investor Portal - Mobile */}
               <Link href="/auth">
                 <div 
                   onClick={closeMobileMenu}
@@ -204,7 +203,7 @@ export default function Header2() {
                   <Lock className="h-4 w-4" />
                   <span>Investor Portal</span>
                 </div>
-              </Link>
+              </Link> */}
             </div>
           </motion.div>
         )}

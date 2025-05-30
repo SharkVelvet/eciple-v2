@@ -17,10 +17,10 @@ import { ProtectedRoute } from "@/lib/protected-route";
 function Router() {
   return (
     <Switch>
-      {/* Initial welcome page with password protection */}
-      <Route path="/" component={WelcomePage} />
+      {/* Main site - now the home page */}
+      <Route path="/" component={ComparisonPage} />
       
-      {/* Main site (protected by welcome page authentication) */}
+      {/* Main site alternate route */}
       <Route path="/home" component={ComparisonPage} />
       
       {/* Policy pages */}
