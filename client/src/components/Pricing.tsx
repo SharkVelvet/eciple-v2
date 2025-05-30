@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import { useContext, useState } from "react";
 import { AdminContext } from "@/pages/ComparisonPage";
 import { Input } from "@/components/ui/input";
