@@ -207,12 +207,12 @@ export default function ComparisonPage() {
                   <span className="text-center sm:text-left">Igniting Spiritual Growth, One Relationship at a Time</span>
                 </motion.div>
                 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-sans" style={{ lineHeight: '1.28' }}>
-                  The Technology Platform for One-To-One Discipleship
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-sans" style={{ lineHeight: '1.28', textWrap: 'balance', widows: '2', orphans: '2' }}>
+                  The Technology Platform for One-To-One&nbsp;Discipleship
                 </h1>
                 
-                <p className="text-lg md:text-xl text-white/90 leading-relaxed">
-                  <span className="font-bold text-white">Finally</span> - an all-in-one platform that opens up the most effective and desired discipleship model for everyone: 1:1 Discipleship
+                <p className="text-lg md:text-xl text-white/90 leading-relaxed" style={{ textWrap: 'balance', widows: '2', orphans: '2' }}>
+                  <span className="font-bold text-white">Finally</span> - an all-in-one platform that opens up the most effective and desired discipleship model for everyone: 1:1&nbsp;Discipleship
                 </p>
                 
                 <div className="flex justify-start mt-8">
@@ -340,8 +340,8 @@ export default function ComparisonPage() {
                     </motion.div>
                   </div>
                   
-                  <p className="text-xl leading-relaxed text-foreground/80 max-w-xl mb-8">
-                    Despite <span className="font-semibold text-primary">82% of pastors</span> saying discipleship is a priority, only <span className="font-semibold text-secondary">29% think</span> their church does it effectively.
+                  <p className="text-xl leading-relaxed text-foreground/80 max-w-xl mb-8" style={{ textWrap: 'balance', widows: '2', orphans: '2' }}>
+                    Despite <span className="font-semibold text-primary">82% of&nbsp;pastors</span> saying discipleship is a priority, only <span className="font-semibold text-secondary">29%&nbsp;think</span> their church does it&nbsp;effectively.
                   </p>
                   
                   <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl p-6 mb-8">

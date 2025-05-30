@@ -50,11 +50,11 @@ export default function Contact() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-4xl font-bold font-sans text-white mb-4">
-                Ready to Transform Your Discipleship Strategy?
+              <h2 className="text-4xl font-bold font-sans text-white mb-4" style={{ textWrap: 'balance', widows: '2', orphans: '2' }}>
+                Ready to Transform Your Discipleship&nbsp;Strategy?
               </h2>
-              <p className="text-xl text-white/90 mb-8">
-                Join the growing community of churches and ministries revolutionizing their discipleship approach with eciple's platform.
+              <p className="text-xl text-white/90 mb-8" style={{ textWrap: 'balance', widows: '2', orphans: '2' }}>
+                Join the growing community of churches and ministries revolutionizing their discipleship approach with eciple's&nbsp;platform.
               </p>
             </motion.div>
           </div>
