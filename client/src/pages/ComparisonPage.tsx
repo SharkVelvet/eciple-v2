@@ -362,14 +362,7 @@ export default function ComparisonPage() {
                     </ul>
                   </div>
                   
-                  <div className="mt-6">
-                    <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20">
-                      <a href="#solution" className="flex items-center gap-2">
-                        See Our Solution
-                        <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-                      </a>
-                    </Button>
-                  </div>
+
                 </motion.div>
               </div>
               
