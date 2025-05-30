@@ -162,37 +162,30 @@ export default function Hero() {
               className="flex flex-col sm:flex-row gap-4"
               variants={itemVariants}
             >
-              <Button 
-                size="lg" 
-                asChild 
+              <div 
                 style={{ backgroundColor: '#223349' }}
-                className="hover:!bg-[#223349]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#223349]/20 hero-cta-button"
+                className="inline-flex items-center gap-2 text-white px-8 py-4 rounded-full group relative overflow-hidden shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl hero-cta-button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const element = document.querySelector('#product');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
               >
-                <a 
-                  href="#product" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    const element = document.querySelector('#product');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                  className="flex items-center gap-2"
-                >
-                  {editMode && isAdmin ? (
-                    <Input
-                      type="text"
-                      value={getHeroCtaText()}
-                      onChange={(e) => updateContent(heroCtaText, e.target.value)}
-                      className="w-24 text-white bg-transparent border-white/20 p-0 h-auto text-center"
-                    />
-                  ) : (
-                    <span className="hero-button-text">{getHeroCtaText()}</span>
-                  )}
-                  <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-                  <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
-                </a>
-              </Button>
+                {editMode && isAdmin ? (
+                  <Input
+                    type="text"
+                    value={getHeroCtaText()}
+                    onChange={(e) => updateContent(heroCtaText, e.target.value)}
+                    className="w-24 text-white bg-transparent border-white/20 p-0 h-auto text-center"
+                  />
+                ) : (
+                  <span className="hero-button-text font-medium">{getHeroCtaText()}</span>
+                )}
+                <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
+              </div>
             </motion.div>
             
             <div 
