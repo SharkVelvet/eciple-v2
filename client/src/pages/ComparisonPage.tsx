@@ -734,7 +734,7 @@ export default function ComparisonPage() {
                         </ul>
                       )}
                       <div className="mt-6">
-                        <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20 w-full justify-center">
+                        <Button asChild size="lg" className="bg-[#223349] hover:bg-[#223349]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#223349]/20 w-full justify-center">
                           <a href="/contact" className="flex items-center gap-2">
                             Get Started
                             <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />

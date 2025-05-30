@@ -261,7 +261,7 @@ export default function Problem() {
               </ul>
               
               <div className="mt-6">
-                <Button asChild variant="outline" className="gap-1 rounded-full">
+                <Button asChild className="gap-1 rounded-full bg-[#223349] hover:bg-[#223349]/90 text-white">
                   <a href="#solution">
                     {getContentValue(editableContent, 'see_solution_button')}
                     <ArrowRight className="h-4 w-4" />

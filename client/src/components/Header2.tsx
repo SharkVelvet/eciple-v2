@@ -128,7 +128,7 @@ export default function Header2() {
             {/* <div className="hidden lg:block">
               <Button 
                 size="sm"
-                className="bg-accent hover:bg-accent/90 text-white rounded-full px-4 flex items-center gap-2"
+                className="bg-[#223349] hover:bg-[#223349]/90 text-white rounded-full px-4 flex items-center gap-2"
                 asChild
               >
                 <Link href="/auth">
@@ -198,7 +198,7 @@ export default function Header2() {
               <Link href="/auth">
                 <div 
                   onClick={closeMobileMenu}
-                  className="flex items-center space-x-3 text-white hover:text-white transition-colors duration-200 py-3 px-4 rounded-lg bg-accent hover:bg-accent/90"
+                  className="flex items-center space-x-3 text-white hover:text-white transition-colors duration-200 py-3 px-4 rounded-lg bg-[#223349] hover:bg-[#223349]/90"
                 >
                   <Lock className="h-4 w-4" />
                   <span>Investor Portal</span>
