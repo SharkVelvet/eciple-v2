@@ -16,8 +16,8 @@ import newDashboardImage from "@assets/eciple-dashboard-trim.jpg";
 export const AdminContext = createContext({
   isAdmin: false,
   editMode: false,
-  editableContent: {},
-  updateContent: () => {}
+  editableContent: {} as Record<string, string>,
+  updateContent: (key: string, value: string) => {}
 });
 
 export default function ComparisonPage() {
@@ -25,7 +25,7 @@ export default function ComparisonPage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [editableContent, setEditableContent] = useState({});
+  const [editableContent, setEditableContent] = useState<Record<string, string>>({});
 
   // Load admin state and content from localStorage
   useEffect(() => {
