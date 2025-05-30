@@ -218,7 +218,7 @@ export default function ComparisonPage() {
                 <div className="flex justify-start mt-8">
                   <Button 
                     size="lg" 
-                    className="bg-accent hover:bg-accent/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-accent/20"
+                    className="bg-[#223349] hover:bg-[#223349]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#223349]/20"
                   >
                     <a 
                       href="#comparison" 
@@ -673,7 +673,7 @@ export default function ComparisonPage() {
                   onCheckedChange={setIsAnnual}
                 />
                 <span className={`text-sm ${isAnnual ? 'font-semibold text-primary' : 'text-foreground text-opacity-70'}`}>
-                  Annual <span className="ml-1 text-xs bg-accent text-white rounded-full px-2 py-0.5">Save 15%</span>
+                  Annual <span className="ml-1 text-xs bg-[#223349] text-white rounded-full px-2 py-0.5">Save 15%</span>
                 </span>
               </div>
             </motion.div>
@@ -693,7 +693,7 @@ export default function ComparisonPage() {
                   }`}>
                     {plan.popular && (
                       <div className="absolute top-4 -right-2">
-                        <div className="bg-accent text-white text-xs font-bold px-3 py-1 rounded-lg shadow-lg transform rotate-3">POPULAR</div>
+                        <div className="bg-[#223349] text-white text-xs font-bold px-3 py-1 rounded-lg shadow-lg transform rotate-3">POPULAR</div>
                       </div>
                     )}
                     <div className={`text-center p-6 ${plan.popular ? 'bg-gradient-to-br from-[#15BEE2] to-[#0EA5E9]' : 'bg-gray-50'}`}>
