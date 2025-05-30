@@ -179,7 +179,7 @@ export default function Pricing() {
                   <div className="mt-6">
                     <div 
                       style={{ backgroundColor: '#223349' }}
-                      className="inline-flex items-center gap-2 text-white px-8 py-4 rounded-full group relative overflow-hidden shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl w-full justify-center"
+                      className="inline-flex items-center gap-2 text-white px-6 py-3 rounded-full group relative overflow-hidden shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl w-full justify-center"
                       onClick={() => {
                         const element = document.querySelector('#contact');
                         if (element) {

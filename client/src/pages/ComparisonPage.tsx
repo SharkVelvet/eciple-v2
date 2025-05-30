@@ -372,7 +372,7 @@ export default function ComparisonPage() {
                   >
                     <div 
                       style={{ backgroundColor: '#223349' }}
-                      className="inline-flex items-center gap-2 text-white px-8 py-4 rounded-full group relative overflow-hidden shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl hero-cta-button"
+                      className="inline-flex items-center gap-2 text-white px-6 py-3 rounded-full group relative overflow-hidden shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl hero-cta-button"
                       onClick={() => {
                         const element = document.querySelector('#solution');
                         if (element) {
