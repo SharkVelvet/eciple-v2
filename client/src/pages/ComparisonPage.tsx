@@ -207,7 +207,7 @@ export default function ComparisonPage() {
                   <span className="text-center sm:text-left">Igniting Spiritual Growth, One Relationship at a Time</span>
                 </motion.div>
                 
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-sans leading-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-sans leading-relaxed">
                   The Technology Platform for One-To-One Discipleship
                 </h1>
                 
