@@ -299,10 +299,7 @@ export default function ComparisonPage() {
                       </div>
                     </motion.div>
 
-                    {/* Central connecting element */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-24 h-24 rounded-full border-2 border-white/50 border-dashed animate-spin-slow"></div>
-                    </div>
+
                   </div>
                 </div>
               </motion.div>
