@@ -286,7 +286,7 @@ export default function ComparisonPage() {
 
                     {/* Card 3 - Hangs off bottom left */}
                     <motion.div
-                      className="absolute bottom-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-2 md:p-4 w-36 md:w-44 border border-white/30 shadow-lg text-xs md:text-sm"
+                      className="absolute bottom-0 left-0 bg-white/95 backdrop-blur-sm rounded-lg p-2 md:p-4 w-48 md:w-56 border border-white/30 shadow-lg text-xs md:text-sm"
                       animate={{ y: [0, -8, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 2 }}
                     >
