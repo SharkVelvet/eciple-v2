@@ -362,6 +362,28 @@ export default function ComparisonPage() {
                     </ul>
                   </div>
                   
+                  {/* Our Solution Button */}
+                  <motion.div 
+                    className="mt-6"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.5, duration: 0.6 }}
+                  >
+                    <div 
+                      style={{ backgroundColor: '#223349' }}
+                      className="inline-flex items-center gap-2 text-white px-8 py-4 rounded-full cursor-pointer hover:shadow-xl transition-all duration-300 font-medium"
+                      onClick={() => {
+                        const element = document.querySelector('#solution');
+                        if (element) {
+                          element.scrollIntoView({ behavior: 'smooth' });
+                        }
+                      }}
+                    >
+                      <span>See Our Solution</span>
+                      <ArrowRight className="h-5 w-5" />
+                    </div>
+                  </motion.div>
 
                 </motion.div>
               </div>
