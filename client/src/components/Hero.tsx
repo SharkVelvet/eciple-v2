@@ -164,9 +164,8 @@ export default function Hero() {
             >
               <Button 
                 size="lg" 
-                variant="default" 
                 asChild 
-                className="bg-[#223349] hover:bg-[#223349]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#223349]/20 hero-cta-button"
+                className="!bg-[#223349] hover:!bg-[#223349]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#223349]/20 hero-cta-button"
               >
                 <a 
                   href="#product" 
