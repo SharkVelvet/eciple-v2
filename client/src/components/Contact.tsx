@@ -54,27 +54,48 @@ export default function Contact() {
     
     // Validate form
     if (!formData.firstName || !formData.lastName || !formData.email || !formData.churchName) {
-      // Form validation without toast
+      alert("Please fill in all required fields.");
       return;
     }
 
     setLoading(true);
     
     try {
-      await apiRequest("POST", "/api/contact", formData);
-      
-      // Reset form without toast notification
-      setFormData({
-        firstName: "",
-        lastName: "",
-        churchName: "",
-        email: "",
-        phone: "",
-        churchSize: "",
-        message: ""
+      // Submit to Formspree
+      const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: `${formData.firstName} ${formData.lastName}`,
+          email: formData.email,
+          church: formData.churchName,
+          phone: formData.phone,
+          size: formData.churchSize,
+          message: formData.message
+        })
       });
+
+      if (response.ok) {
+        alert("Thank you! Your message has been sent successfully.");
+        // Reset form
+        setFormData({
+          firstName: "",
+          lastName: "",
+          churchName: "",
+          email: "",
+          phone: "",
+          churchSize: "",
+          message: ""
+        });
+      } else {
+        throw new Error("Form submission failed");
+      }
     } catch (error) {
       console.error("Form submission error:", error);
+      alert("Sorry, there was an error sending your message. Please try again.");
     } finally {
       setLoading(false);
     }
