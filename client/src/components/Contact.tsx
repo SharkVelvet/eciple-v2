@@ -30,72 +30,32 @@ export default function Contact() {
     "Bobby Bemis brings over 25 years of ministry experience as a pastor and discipleship leader.";
 
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    churchName: "",
-    email: "",
-    phone: "",
-    churchSize: "",
-    message: ""
-  });
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSelectChange = (value: string) => {
-    setFormData(prev => ({ ...prev, churchSize: value }));
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Validate form
-    if (!formData.firstName || !formData.lastName || !formData.email || !formData.churchName) {
-      alert("Please fill in all required fields.");
-      return;
-    }
-
     setLoading(true);
     
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+    
     try {
-      // Submit to Formspree
-      const response = await fetch("https://formspree.io/f/xqabzakl", {
-        method: "POST",
+      const response = await fetch('https://formspree.io/f/xqabzakl', {
+        method: 'POST',
+        body: formData,
         headers: {
-          "Accept": "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          name: `${formData.firstName} ${formData.lastName}`,
-          email: formData.email,
-          church: formData.churchName,
-          phone: formData.phone,
-          size: formData.churchSize,
-          message: formData.message
-        })
+          'Accept': 'application/json'
+        }
       });
-
+      
       if (response.ok) {
-        alert("Thank you! Your message has been sent successfully.");
-        // Reset form
-        setFormData({
-          firstName: "",
-          lastName: "",
-          churchName: "",
-          email: "",
-          phone: "",
-          churchSize: "",
-          message: ""
-        });
+        alert('Thank you for your interest! We will be in touch soon.');
+        form.reset();
       } else {
-        throw new Error("Form submission failed");
+        alert('There was an error submitting the form. Please try again.');
       }
     } catch (error) {
-      console.error("Form submission error:", error);
-      alert("Sorry, there was an error sending your message. Please try again.");
+      console.error('Error:', error);
+      alert('There was an error submitting the form. Please try again.');
     } finally {
       setLoading(false);
     }
@@ -154,15 +114,13 @@ export default function Contact() {
               <CardContent className="p-8">
                 <h3 className="text-2xl font-semibold font-sans text-primary mb-3">Request More Information</h3>
                 <p className="text-gray-600 mb-6">For questions, comments or to stay up to date, please complete the below form.</p>
-                <form onSubmit={handleSubmit}>
+                <form action="https://formspree.io/f/xqabzakl" method="POST" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                     <div className="space-y-2">
                       <Label htmlFor="firstName">First Name</Label>
                       <Input 
                         id="firstName" 
                         name="firstName"
-                        value={formData.firstName}
-                        onChange={handleInputChange} 
                         required
                       />
                     </div>
