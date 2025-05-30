@@ -158,29 +158,6 @@ export default function Problem() {
                   )}
                 </p>
               )}
-              
-              {/* Our Solution Button */}
-              <motion.div 
-                className="mt-8"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3, duration: 0.6 }}
-              >
-                <div 
-                  style={{ backgroundColor: '#223349' }}
-                  className="inline-flex items-center gap-2 text-white px-8 py-4 rounded-full cursor-pointer hover:shadow-xl transition-all duration-300 font-medium"
-                  onClick={() => {
-                    const element = document.querySelector('#solution');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                >
-                  <span>See Our Solution</span>
-                  <ArrowRight className="h-5 w-5" />
-                </div>
-              </motion.div>
             </motion.div>
             
             <motion.div 
@@ -283,20 +260,28 @@ export default function Problem() {
                 </li>
               </ul>
               
-              <div className="mt-6">
-                <div 
-                  style={{ backgroundColor: '#223349' }}
-                  className="inline-flex items-center gap-2 text-white px-6 py-3 rounded-full cursor-pointer hover:shadow-lg transition-all duration-300"
-                  onClick={() => {
-                    const element = document.querySelector('#solution');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth' });
-                    }
-                  }}
-                >
-                  <span>{getContentValue(editableContent, 'see_solution_button')}</span>
-                  <ArrowRight className="h-4 w-4" />
-                </div>
+            </motion.div>
+            
+            {/* Our Solution Button - Outside the gradient box */}
+            <motion.div 
+              className="mt-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+            >
+              <div 
+                style={{ backgroundColor: '#223349' }}
+                className="inline-flex items-center gap-2 text-white px-8 py-4 rounded-full cursor-pointer hover:shadow-xl transition-all duration-300 font-medium"
+                onClick={() => {
+                  const element = document.querySelector('#solution');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+              >
+                <span>See Our Solution</span>
+                <ArrowRight className="h-5 w-5" />
               </div>
             </motion.div>
           </div>
