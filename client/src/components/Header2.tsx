@@ -81,7 +81,7 @@ export default function Header2() {
                   <img 
                     src={ecipleLogo} 
                     alt="eciple logo" 
-                    className="h-8 w-auto object-contain" 
+                    className="h-10 w-auto object-contain" 
                   />
                 </div>
               </motion.div>
