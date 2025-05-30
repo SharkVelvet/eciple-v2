@@ -187,7 +187,7 @@ export default function Pricing() {
                         }
                       }}
                     >
-                      <span className="font-medium text-sm">Get Started</span>
+                      <span className="font-medium text-sm leading-none">Get Started</span>
                       <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                     </div>
                   </div>
