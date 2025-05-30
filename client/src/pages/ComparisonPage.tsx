@@ -271,7 +271,7 @@ export default function ComparisonPage() {
 
                     {/* Card 2 - Hangs off top right */}
                     <motion.div
-                      className="absolute top-[60%] right-0 bg-white/95 backdrop-blur-sm rounded-lg p-2 md:p-4 w-44 md:w-52 border border-white/30 shadow-lg text-xs md:text-sm"
+                      className="absolute top-[60%] right-0 bg-white/95 backdrop-blur-sm rounded-lg p-2 md:p-4 w-48 md:w-60 border border-white/30 shadow-lg text-xs md:text-sm"
                       animate={{ y: [0, 10, 0] }}
                       transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                     >
@@ -279,8 +279,8 @@ export default function ComparisonPage() {
                         <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
                         <span className="text-sm font-medium text-primary">Simplified Admin</span>
                       </div>
-                      <div className="text-xs text-gray-600">
-                        Smart matching, auto processes, templated workflows
+                      <div className="text-xs text-gray-600 leading-relaxed">
+                        Smart matching, auto processes,<br />templated workflows
                       </div>
                     </motion.div>
 
