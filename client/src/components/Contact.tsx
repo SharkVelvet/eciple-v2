@@ -23,37 +23,7 @@ export default function Contact() {
   const getFounderText = () => editableContent[founderText] || 
     "Bobby Bemis brings over 25 years of ministry experience as a pastor and discipleship leader.";
 
-  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
-    
-    try {
-      const response = await fetch('https://formspree.io/f/xqabzakl', {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
-      
-      if (response.ok) {
-        alert('Thank you for your interest! We will be in touch soon.');
-        form.reset();
-      } else {
-        alert('There was an error submitting the form. Please try again.');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('There was an error submitting the form. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const pilotBenefits = [
     "Early access to innovative features",
