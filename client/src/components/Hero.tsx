@@ -181,7 +181,7 @@ export default function Hero() {
                     className="w-24 text-white bg-transparent border-white/20 p-0 h-auto text-center"
                   />
                 ) : (
-                  <span className="hero-button-text font-medium">{getHeroCtaText()}</span>
+                  <span className="hero-button-text font-medium text-sm">{getHeroCtaText()}</span>
                 )}
                 <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                 <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
