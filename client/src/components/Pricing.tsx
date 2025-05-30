@@ -191,6 +191,24 @@ export default function Pricing() {
                       <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
                     </div>
                   </div>
+                  {index === 0 && (
+                    <div className="mt-4 flex justify-center">
+                      <div 
+                        style={{ backgroundColor: '#223349' }}
+                        className="inline-flex items-center gap-2 text-white px-6 py-3 rounded-full group relative overflow-hidden shadow-lg cursor-pointer transition-all duration-300 hover:shadow-xl hero-cta-button"
+                        onClick={() => {
+                          const element = document.querySelector('#product');
+                          if (element) {
+                            element.scrollIntoView({ behavior: 'smooth' });
+                          }
+                        }}
+                      >
+                        <span className="hero-button-text font-medium text-sm">Learn More</span>
+                        <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                        <span className="absolute inset-0 w-full h-full bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-300"></span>
+                      </div>
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </motion.div>
