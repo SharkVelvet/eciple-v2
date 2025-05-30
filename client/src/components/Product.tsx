@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
 import ecipleWings from "@assets/eciple-wing-blue-grad.png";
 import { useContext } from "react";
-import { AdminContext } from "@/pages/Home";
+import { AdminContext } from "@/pages/ComparisonPage";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 

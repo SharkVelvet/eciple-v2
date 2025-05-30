@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,9 +13,41 @@ import eCipleDashImage from "@assets/eciple-dash.jpg";
 import mentoringImage from "@assets/eciple-Two-guys-mentoring.jpg";
 import newDashboardImage from "@assets/eciple-dashboard-trim.jpg";
 
+export const AdminContext = createContext({
+  isAdmin: false,
+  editMode: false,
+  editableContent: {},
+  updateContent: () => {}
+});
+
 export default function ComparisonPage() {
   const [isAnnual, setIsAnnual] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [editableContent, setEditableContent] = useState({});
+
+  // Load admin state and content from localStorage
+  useEffect(() => {
+    const adminState = localStorage.getItem("isAdmin");
+    setIsAdmin(adminState === "true");
+    
+    const savedContent = localStorage.getItem("editableContent");
+    if (savedContent) {
+      try {
+        setEditableContent(JSON.parse(savedContent));
+      } catch (error) {
+        console.error("Error loading content:", error);
+      }
+    }
+  }, []);
+
+  // Update content function
+  const updateContent = (key: string, value: string) => {
+    const newContent = { ...editableContent, [key]: value };
+    setEditableContent(newContent);
+    localStorage.setItem("editableContent", JSON.stringify(newContent));
+  };
 
   // Show/hide scroll to top button based on scroll position
   const handleScroll = () => {
@@ -141,7 +173,8 @@ export default function ComparisonPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen scroll-smooth">
+    <AdminContext.Provider value={{ isAdmin, editMode, editableContent, updateContent }}>
+      <div className="flex flex-col min-h-screen scroll-smooth">
       <div id="top"></div>
       <Header2 />
       <main className="flex-grow">
@@ -768,6 +801,7 @@ export default function ComparisonPage() {
           <ChevronUp className="h-6 w-6" />
         </motion.button>
       )}
-    </div>
+      </div>
+    </AdminContext.Provider>
   );
 }

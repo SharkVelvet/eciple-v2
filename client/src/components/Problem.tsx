@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle, Users, LineChart, Gauge, FileText, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useContext, useState } from "react";
-import { AdminContext } from "@/pages/Home";
+import { AdminContext } from "@/pages/ComparisonPage";
 import { Textarea } from "@/components/ui/textarea";
 import { getContentValue } from "@/lib/contentDefaults";
 
