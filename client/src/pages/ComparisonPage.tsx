@@ -760,9 +760,14 @@ export default function ComparisonPage() {
                         <div 
                           style={{ backgroundColor: '#223349' }}
                           className="inline-flex items-center justify-center gap-2 text-white px-8 py-4 rounded-full cursor-pointer hover:shadow-xl transition-all duration-300 w-full"
-                          onClick={() => window.location.href = '/contact'}
+                          onClick={() => {
+                            const element = document.querySelector('#contact');
+                            if (element) {
+                              element.scrollIntoView({ behavior: 'smooth' });
+                            }
+                          }}
                         >
-                          <span>Get Started</span>
+                          <span>Contact Us</span>
                           <ArrowRight className="h-4 w-4" />
                         </div>
                       </div>
