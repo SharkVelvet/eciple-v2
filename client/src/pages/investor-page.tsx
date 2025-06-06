@@ -724,12 +724,15 @@ export default function InvestorPage() {
             transition={{ duration: 0.6 }}
             className="space-y-8"
           >
-            <div className="flex justify-center">
+            <div className="flex flex-col items-center space-y-4">
               <img 
                 src={ecipleLogo} 
                 alt="eciple logo" 
-                className="h-16 w-auto object-contain" 
+                className="h-12 w-auto object-contain" 
               />
+              <p className="text-white/80 text-sm">
+                Transforming discipleship through technology
+              </p>
             </div>
             
             <div>
