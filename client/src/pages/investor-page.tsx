@@ -335,12 +335,116 @@ export default function InvestorPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
-                <TrendingUp className="h-16 w-16 text-green-500 mb-4" />
-                <h3 className="text-2xl font-bold mb-4 text-[#223349]">Market Growth</h3>
-                <p className="text-gray-600">
-                  A stylized infographic-style photo showing an upward-pointing arrow on a digital dashboard, combined with a church steeple or cross in the corner.
-                </p>
+              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200 relative overflow-hidden">
+                {/* Animated Background Graph */}
+                <div className="absolute inset-0 opacity-10">
+                  <svg className="w-full h-full" viewBox="0 0 400 200" preserveAspectRatio="none">
+                    <motion.path
+                      d="M0,180 Q100,160 200,120 T400,60"
+                      stroke="#15BEE2"
+                      strokeWidth="3"
+                      fill="none"
+                      initial={{ pathLength: 0 }}
+                      whileInView={{ pathLength: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 2, delay: 0.5, ease: "easeInOut" }}
+                    />
+                    <motion.path
+                      d="M0,180 Q100,160 200,120 T400,60 L400,200 L0,200 Z"
+                      fill="url(#gradient)"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      whileInView={{ pathLength: 1, opacity: 0.3 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 2, delay: 0.8, ease: "easeInOut" }}
+                    />
+                    <defs>
+                      <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#15BEE2" stopOpacity="0.8"/>
+                        <stop offset="100%" stopColor="#15BEE2" stopOpacity="0.1"/>
+                      </linearGradient>
+                    </defs>
+                  </svg>
+                </div>
+                
+                <div className="relative z-10">
+                  <div className="flex items-center justify-between mb-6">
+                    <TrendingUp className="h-16 w-16 text-green-500" />
+                    {/* Animated Church Icon */}
+                    <motion.div
+                      initial={{ scale: 0, rotate: -45 }}
+                      whileInView={{ scale: 1, rotate: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.8, delay: 1.2, type: "spring", bounce: 0.4 }}
+                      className="text-[#223349] opacity-60"
+                    >
+                      <svg className="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2l4 4v2h2v2h2v12H4V10h2V8h2V6l4-4zm0 2.83L9 7.83V9H7v2H5v10h14V11h-2V9h-2V7.83L12 4.83zM11 12v6h2v-6h-2zm-2 2v4h2v-4H9zm6 0v4h2v-4h-2z"/>
+                      </svg>
+                    </motion.div>
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold mb-4 text-[#223349]">Market Growth</h3>
+                  
+                  {/* Animated Statistics */}
+                  <div className="space-y-3">
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 1.5 }}
+                      className="flex items-center justify-between bg-gradient-to-r from-green-50 to-transparent p-3 rounded-lg"
+                    >
+                      <span className="text-sm font-medium text-gray-700">Church Software Market</span>
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 1.8 }}
+                        className="text-lg font-bold text-green-600"
+                      >
+                        $1.3B
+                      </motion.span>
+                    </motion.div>
+                    
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 1.7 }}
+                      className="flex items-center justify-between bg-gradient-to-r from-blue-50 to-transparent p-3 rounded-lg"
+                    >
+                      <span className="text-sm font-medium text-gray-700">Available Churches</span>
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 2.0 }}
+                        className="text-lg font-bold text-[#15BEE2]"
+                      >
+                        384K
+                      </motion.span>
+                    </motion.div>
+                    
+                    <motion.div
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 1.9 }}
+                      className="flex items-center justify-between bg-gradient-to-r from-purple-50 to-transparent p-3 rounded-lg"
+                    >
+                      <span className="text-sm font-medium text-gray-700">Growth Opportunity</span>
+                      <motion.span
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 2.2 }}
+                        className="text-lg font-bold text-[#223349]"
+                      >
+                        $700M+
+                      </motion.span>
+                    </motion.div>
+                  </div>
+                </div>
               </div>
             </motion.div>
             <motion.div
