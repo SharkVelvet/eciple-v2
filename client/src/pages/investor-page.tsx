@@ -727,10 +727,14 @@ export default function InvestorPage() {
             <div>
               <Button 
                 asChild
-                className="bg-[#15BEE2] hover:bg-[#15BEE2]/90 text-white px-8 py-3 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-lg"
+                size="lg" 
+                className="bg-[#15BEE2] hover:bg-[#15BEE2]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#15BEE2]/20"
               >
                 <a href="/">
-                  Visit Homepage
+                  <span className="flex items-center gap-2">
+                    Visit Homepage
+                    <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                  </span>
                 </a>
               </Button>
             </div>
