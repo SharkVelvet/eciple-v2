@@ -75,11 +75,21 @@ export default function InvestorPage() {
 
       {/* Hero Section */}
       <section className="pt-32 pb-28 bg-gradient-to-br from-[#15BEE2] via-[#15BEE2]/80 to-[#0368C1] text-white relative overflow-hidden min-h-[600px]">
+        {/* Background Photo */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+            style={{ backgroundImage: `url(${mentoringImage})` }}
+          ></div>
+          {/* Fade overlay - strong at top, transparent at bottom */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#15BEE2]/60 via-[#15BEE2]/30 to-transparent"></div>
+        </div>
+        
         {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 -left-20 w-60 h-60 bg-[#0368C1]/30 rounded-full blur-3xl opacity-70"></div>
-          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[#0368C1]/20 rounded-full blur-3xl opacity-60"></div>
-          <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-[#15BEE2]/30 rounded-full blur-3xl opacity-70"></div>
+          <div className="absolute top-1/4 -left-20 w-60 h-60 bg-[#0368C1]/20 rounded-full blur-3xl opacity-50"></div>
+          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[#0368C1]/15 rounded-full blur-3xl opacity-40"></div>
+          <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-[#15BEE2]/20 rounded-full blur-3xl opacity-50"></div>
         </div>
         
         {/* Content */}
