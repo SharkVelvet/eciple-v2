@@ -179,6 +179,64 @@ export default function InvestorPage() {
                 </div>
               </motion.div>
             </div>
+            
+            {/* Right side with image */}
+            <div className="lg:pl-8">
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="relative"
+              >
+                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                  <img 
+                    src={mentoringImage} 
+                    alt="One-to-one discipleship mentoring" 
+                    className="w-full h-auto object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+                </div>
+                
+                {/* Floating stats card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.6 }}
+                  className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-lg p-4 border border-gray-100"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="h-12 w-12 bg-primary/10 rounded-lg flex items-center justify-center">
+                      <Users className="h-6 w-6 text-primary" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Current Model</p>
+                      <p className="text-lg font-bold text-primary">90% Group Based</p>
+                    </div>
+                  </div>
+                </motion.div>
+                
+                {/* Floating effectiveness card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.8 }}
+                  className="absolute -top-6 -right-6 bg-white rounded-xl shadow-lg p-4 border border-gray-100"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="h-12 w-12 bg-secondary/10 rounded-lg flex items-center justify-center">
+                      <Target className="h-6 w-6 text-secondary" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-gray-600">Most Effective</p>
+                      <p className="text-lg font-bold text-secondary">One-to-One</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
