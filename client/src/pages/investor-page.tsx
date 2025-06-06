@@ -58,7 +58,6 @@ export default function InvestorPage() {
                   initial={{ scale: 1 }}
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
-                  className="bg-[#223349] rounded-full p-4 shadow-lg"
                 >
                   <div className="flex flex-col items-center">
                     <img 
