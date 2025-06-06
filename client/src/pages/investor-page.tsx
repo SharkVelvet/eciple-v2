@@ -9,6 +9,7 @@ import mentoringImage from "@assets/eciple-Two-guys-mentoring.jpg";
 import whiteboardImage from "@assets/eciple-whiteboard_1749234969691.jpg";
 import womenMentoringImage from "@assets/eciple-women-mentoring_1749235548005.jpg";
 import prayerImage from "@assets/eciple-prayer_1749237169487.jpg";
+import investmentImage from "@assets/eciple-investment_1749240889384.jpg";
 import Footer from "@/components/Footer";
 
 export default function InvestorPage() {
@@ -575,13 +576,15 @@ export default function InvestorPage() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="lg:pr-8"
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-                <Handshake className="h-16 w-16 text-white mb-4" />
-                <h3 className="text-2xl font-bold mb-4">Investment Impact</h3>
-                <p className="text-white/90">
-                  A hand extended with a glowing light or seed in the palm, representing investment, impact, and potential.
-                </p>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img 
+                  src={investmentImage} 
+                  alt="Investment analysis charts showing growth and financial projections" 
+                  className="w-full h-auto object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent"></div>
               </div>
             </motion.div>
             <motion.div
