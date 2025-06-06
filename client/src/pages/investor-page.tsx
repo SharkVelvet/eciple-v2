@@ -87,13 +87,14 @@ export default function InvestorPage() {
           <div className="flex items-center justify-center min-h-[480px]">
             {/* Centered Content */}
             <motion.div 
-              className="text-center space-y-6 max-w-5xl"
+              className="text-center space-y-6 max-w-6xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-sans" style={{ lineHeight: '1.28', textWrap: 'balance', widows: '2', orphans: '2' }}>
-                The discipleship crisis is real: Join eciple in transforming the future of spiritual&nbsp;growth.
+                <span className="text-[#223349]">The discipleship crisis is real:</span><br />
+                Join eciple in transforming the future of spiritual&nbsp;growth.
               </h1>
               
               <p className="text-lg md:text-xl text-white/90 leading-relaxed" style={{ textWrap: 'balance', widows: '2', orphans: '2' }}>
