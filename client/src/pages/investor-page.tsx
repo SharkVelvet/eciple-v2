@@ -7,6 +7,7 @@ import ecipleLogo from "@assets/eciple-white.png";
 import eCipleDashImage from "@assets/eciple-dashboard-trim.jpg";
 import mentoringImage from "@assets/eciple-Two-guys-mentoring.jpg";
 import whiteboardImage from "@assets/eciple-whiteboard_1749234969691.jpg";
+import womenMentoringImage from "@assets/eciple-women-mentoring_1749235548005.jpg";
 import Footer from "@/components/Footer";
 
 export default function InvestorPage() {
@@ -192,50 +193,12 @@ export default function InvestorPage() {
               >
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                   <img 
-                    src={mentoringImage} 
-                    alt="One-to-one discipleship mentoring" 
+                    src={womenMentoringImage} 
+                    alt="Women engaged in one-to-one mentoring and discipleship" 
                     className="w-full h-auto object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
                 </div>
-                
-                {/* Floating stats card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-lg p-4 border border-gray-100"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="h-12 w-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                      <Users className="h-6 w-6 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Current Model</p>
-                      <p className="text-lg font-bold text-primary">90% Group Based</p>
-                    </div>
-                  </div>
-                </motion.div>
-                
-                {/* Floating effectiveness card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.8 }}
-                  className="absolute -top-6 -right-6 bg-white rounded-xl shadow-lg p-4 border border-gray-100"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="h-12 w-12 bg-secondary/10 rounded-lg flex items-center justify-center">
-                      <Target className="h-6 w-6 text-secondary" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Most Effective</p>
-                      <p className="text-lg font-bold text-secondary">One-to-One</p>
-                    </div>
-                  </div>
-                </motion.div>
               </motion.div>
             </div>
           </div>
