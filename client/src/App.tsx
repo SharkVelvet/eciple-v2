@@ -5,6 +5,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import AuthPage from "@/pages/auth-page";
 import InvestorDashboard from "@/pages/investor-dashboard";
+import InvestorPage from "@/pages/investor-page";
 import WelcomePage from "@/pages/welcome-page";
 import ComparisonPage from "@/pages/ComparisonPage";
 import CookiePolicyPage from "@/pages/cookie-policy";
@@ -33,6 +34,9 @@ function Router() {
       
       {/* Investor dashboard (protected by investor authentication) */}
       <Route path="/investor-dashboard" component={InvestorDashboard} />
+      
+      {/* Investor page (separate, not linked from main site) */}
+      <Route path="/investor" component={InvestorPage} />
       
       {/* 404 page */}
       <Route component={NotFound} />
