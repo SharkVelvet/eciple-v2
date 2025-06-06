@@ -581,19 +581,24 @@ export default function InvestorPage() {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button 
                 onClick={handleRequestDeck}
-                className="bg-[#223349] hover:bg-[#223349]/90 text-white px-8 py-4 text-lg font-semibold"
                 size="lg"
+                className="bg-[#223349] hover:bg-[#223349]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#223349]/20"
               >
-                Request Investor Deck
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <span className="flex items-center gap-2">
+                  Request Investor Deck
+                  <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                </span>
               </Button>
               <Button 
                 onClick={handleScheduleCall}
                 variant="outline"
-                className="border-[#223349] text-[#223349] hover:bg-[#223349] hover:text-white px-8 py-4 text-lg font-semibold"
                 size="lg"
+                className="border-[#223349] text-[#223349] hover:bg-[#223349] hover:text-white px-8 rounded-full group relative overflow-hidden"
               >
-                Schedule a Call
+                <span className="flex items-center gap-2">
+                  Schedule a Call
+                  <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                </span>
               </Button>
             </div>
           </motion.div>
@@ -694,10 +699,13 @@ export default function InvestorPage() {
                   
                   <Button 
                     type="submit"
-                    className="w-full bg-[#223349] hover:bg-[#223349]/90 text-white py-3 text-lg font-semibold"
+                    size="lg"
+                    className="w-full bg-[#223349] hover:bg-[#223349]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#223349]/20"
                   >
-                    Send Message
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <span className="flex items-center gap-2 justify-center">
+                      Send Message
+                      <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                    </span>
                   </Button>
                 </form>
               </CardContent>
