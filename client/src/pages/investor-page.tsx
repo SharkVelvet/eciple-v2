@@ -87,7 +87,7 @@ export default function InvestorPage() {
           <div className="flex items-center justify-center min-h-[480px]">
             {/* Centered Content */}
             <motion.div 
-              className="text-center space-y-6 max-w-4xl"
+              className="text-center space-y-6 max-w-5xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
