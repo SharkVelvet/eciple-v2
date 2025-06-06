@@ -63,7 +63,7 @@ export default function InvestorPage() {
                     <img 
                       src={ecipleLogo} 
                       alt="eciple logo" 
-                      className="h-12 w-auto object-contain" 
+                      className="h-10 w-auto object-contain" 
                     />
                   </div>
                 </motion.div>
@@ -74,7 +74,7 @@ export default function InvestorPage() {
       </div>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-br from-[#15BEE2] via-[#15BEE2]/80 to-[#0368C1] text-white relative overflow-hidden min-h-[500px]">
+      <section className="pt-32 pb-28 bg-gradient-to-br from-[#15BEE2] via-[#15BEE2]/80 to-[#0368C1] text-white relative overflow-hidden min-h-[600px]">
         {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 -left-20 w-60 h-60 bg-[#0368C1]/30 rounded-full blur-3xl opacity-70"></div>
@@ -84,7 +84,7 @@ export default function InvestorPage() {
         
         {/* Content */}
         <div className="max-w-[1300px] mx-auto px-4 md:px-6 relative z-10">
-          <div className="flex items-center justify-center min-h-[400px]">
+          <div className="flex items-center justify-center min-h-[480px]">
             {/* Centered Content */}
             <motion.div 
               className="text-center space-y-6 max-w-4xl"
