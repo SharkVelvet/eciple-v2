@@ -494,25 +494,6 @@ export default function InvestorPage() {
                   className="w-full h-auto object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#223349]/30 to-transparent"></div>
-                
-                {/* Floating info card */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.6 }}
-                  className="absolute -bottom-6 -right-6 bg-white rounded-xl shadow-lg p-4 border border-gray-100"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="h-12 w-12 bg-[#223349]/10 rounded-lg flex items-center justify-center">
-                      <Code className="h-6 w-6 text-[#223349]" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-gray-600">Development Status</p>
-                      <p className="text-lg font-bold text-[#223349]">Platform Complete</p>
-                    </div>
-                  </div>
-                </motion.div>
               </div>
             </motion.div>
           </div>
