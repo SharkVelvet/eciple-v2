@@ -76,7 +76,7 @@ export default function InvestorPage() {
       </header>
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-[#15BEE2] via-[#15BEE2]/80 to-[#0368C1] text-white relative overflow-hidden">
+      <section className="pt-32 pb-40 bg-gradient-to-br from-[#15BEE2] via-[#15BEE2]/80 to-[#0368C1] text-white relative overflow-hidden min-h-[750px]">
         {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 -left-20 w-60 h-60 bg-[#0368C1]/30 rounded-full blur-3xl opacity-70"></div>
@@ -84,54 +84,67 @@ export default function InvestorPage() {
           <div className="absolute top-1/3 right-1/4 w-40 h-40 bg-[#15BEE2]/30 rounded-full blur-3xl opacity-70"></div>
         </div>
         
-        <div className="max-w-[1180px] mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
+        {/* Content */}
+        <div className="max-w-[1300px] mx-auto px-4 md:px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[600px]">
+            {/* Left Column - Content */}
+            <motion.div 
+              className="space-y-6"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
-                The discipleship crisis is real: Join eciple in transforming the future of spiritual growth.
+              <motion.div 
+                className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-8 w-full sm:w-auto max-w-[70%] sm:max-w-none"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                <Sparkles className="h-4 w-4 mr-2 text-secondary flex-shrink-0" />
+                <span className="text-center sm:text-left">Investment Opportunity</span>
+              </motion.div>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-sans" style={{ lineHeight: '1.28', textWrap: 'balance', widows: '2', orphans: '2' }}>
+                The discipleship crisis is real: Join eciple in transforming the future of spiritual&nbsp;growth.
               </h1>
-              <p className="text-xl mb-8 text-white/90">
-                Your investment in eciple will revolutionize discipleship, empowering believers globally and forever changing the face of the Church.
+              
+              <p className="text-lg md:text-xl text-white/90 leading-relaxed" style={{ textWrap: 'balance', widows: '2', orphans: '2' }}>
+                <span className="font-bold text-white">Your investment</span> in eciple will revolutionize discipleship, empowering believers globally and forever changing the face of the&nbsp;Church.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex justify-start mt-8">
                 <Button 
                   onClick={handleRequestDeck}
-                  className="bg-white text-[#223349] hover:bg-gray-100 px-8 py-3 text-lg font-semibold"
+                  size="lg" 
+                  className="bg-[#223349] hover:bg-[#223349]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#223349]/20"
                 >
-                  Request Investor Deck
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-                <Button 
-                  onClick={handleScheduleCall}
-                  variant="outline" 
-                  className="border-white text-white hover:bg-white hover:text-[#223349] px-8 py-3 text-lg font-semibold"
-                >
-                  Schedule a Call
+                  <span className="flex items-center gap-2">
+                    Request Investor Deck
+                    <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
+                  </span>
                 </Button>
               </div>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
+            {/* Right Column - Visual Elements with Background Image */}
+            <motion.div 
+              className="relative mt-8 lg:mt-0"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="relative"
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
-                <img 
-                  src={mentoringImage} 
-                  alt="Discipleship mentoring" 
-                  className="w-full h-64 object-cover"
-                />
-                <div className="p-6">
-                  <Users className="h-12 w-12 text-white mb-3" />
-                  <h3 className="text-xl font-bold text-white mb-2">Global Impact</h3>
-                  <p className="text-white/90 text-sm">
-                    Transforming discipleship through one-to-one relationships that create lasting spiritual growth across diverse communities.
-                  </p>
+              {/* Container for Image and Floating Cards */}
+              <div className="relative h-[300px] md:h-[450px]">
+                {/* Background Image Container - Smaller to allow badges to hang off */}
+                <div className="absolute top-4 left-4 right-4 bottom-4 md:top-8 md:left-8 md:right-8 md:bottom-8 rounded-2xl overflow-hidden">
+                  {/* Background Image */}
+                  <img 
+                    src={mentoringImage} 
+                    alt="People engaged in spiritual mentorship" 
+                    className="rounded-2xl w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  
+                  {/* Image Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-black/40 rounded-2xl"></div>
                 </div>
               </div>
             </motion.div>
@@ -140,108 +153,119 @@ export default function InvestorPage() {
       </section>
 
       {/* Discipleship Crisis Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-[1180px] mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative"
-            >
-              <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200">
-                <div className="h-64 bg-gradient-to-br from-red-50 to-orange-50 flex items-center justify-center relative">
-                  <div className="absolute inset-0 bg-pattern opacity-10"></div>
-                  <Target className="h-20 w-20 text-red-500 relative z-10" />
+      <section className="pt-20 pb-16 bg-white relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-primary/5 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+        <div className="absolute -top-20 -right-20 w-80 h-80 bg-secondary/5 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-20 w-80 h-80 bg-accent/5 rounded-full blur-3xl"></div>
+        
+        <div className="max-w-[1180px] mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <div>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="mb-10"
+              >
+                <div className="mb-6">
+                  <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Addressing The Discipleship Crisis</h2>
+                  <motion.div 
+                    className="inline-flex items-center px-4 py-2 bg-gray-100 rounded-full text-sm font-medium"
+                    initial={{ opacity: 0, y: -10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                  >
+                    <Sparkles className="h-4 w-4 mr-2 text-gray-500" />
+                    <span className="text-gray-700">The Market Opportunity</span>
+                  </motion.div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold mb-3 text-gray-800">The Crisis</h3>
-                  <p className="text-gray-600 text-sm">
-                    Visualizing the discipleship gap: empty sanctuaries represent the disconnect between traditional methods and effective spiritual growth outcomes.
-                  </p>
+                
+                <p className="text-xl leading-relaxed text-foreground/80 max-w-xl mb-8" style={{ textWrap: 'balance', widows: '2', orphans: '2' }}>
+                  eciple was founded to address the most urgent and impactful challenge facing the Church today: the pervasive problem of ineffective discipleship&nbsp;models.
+                </p>
+                
+                <div className="bg-gradient-to-r from-primary/5 to-secondary/5 rounded-2xl p-6 mb-8">
+                  <h3 className="text-2xl font-bold text-primary mb-4">The Reality:</h3>
+                  <ul className="space-y-3 text-foreground/80">
+                    <li className="flex items-start gap-3">
+                      <div className="h-2 w-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                      <span>Content-heavy, group discipleship, (90% of all efforts), is ineffective and a primary driver of alarming deterioration across The Church.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="h-2 w-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                      <span>The most effective model (80% Pastors) —relationship-driven, one-to-one mentoring—is inaccessible due to the absence of technology.</span>
+                    </li>
+                  </ul>
                 </div>
-              </div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-[#223349] mb-6">
-                Addressing The Discipleship Crisis
-              </h2>
-              <div className="space-y-4 text-gray-700">
-                <p className="text-lg">
-                  eciple was founded to address the most urgent and impactful challenge facing the Church today: the pervasive problem of ineffective discipleship models.
-                </p>
-                <p>
-                  Content-heavy, group discipleship, (90% of all efforts), is ineffective and a primary driver of alarming deterioration across The Church.
-                </p>
-                <p>
-                  The most effective model (80% Pastors) —relationship-driven, one-to-one mentoring—is inaccessible due to the absence of technology.
-                </p>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Innovative Solution Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-[1180px] mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-[#223349] mb-6">
-                The Innovative Solution
-              </h2>
-              <p className="text-lg text-gray-700 mb-6">
-                eciple is the first comprehensive platform designed exclusively to enable large-scale one-to-one discipleship programs.
-              </p>
-              <p className="text-gray-600 mb-8">
-                Launched in April/May 2025 after extensive research and nearly $200,000 in founder investments since early 2024.
-              </p>
-              
-              <div className="space-y-4">
-                <h3 className="text-xl font-bold text-[#223349] mb-4">Core Functionalities:</h3>
-                <ul className="space-y-3 text-gray-700">
-                  <li className="flex items-start">
-                    <ArrowRight className="h-5 w-5 text-[#15BEE2] mr-2 flex-shrink-0 mt-0.5" />
-                    <span><strong>Automated Mentor/Mentee Matching:</strong> Leverages AI algorithms for compatible pairings.</span>
-                  </li>
-                  <li className="flex items-start">
-                    <ArrowRight className="h-5 w-5 text-[#15BEE2] mr-2 flex-shrink-0 mt-0.5" />
-                    <span><strong>Customizable Discipleship Pathways:</strong> Churches can easily create unique, step-by-step programs tailored to specific needs and theological stances.</span>
-                  </li>
-                  <li className="flex items-start">
-                    <ArrowRight className="h-5 w-5 text-[#15BEE2] mr-2 flex-shrink-0 mt-0.5" />
-                    <span><strong>CHMS Integration:</strong> Seamlessly integrates with Church Management Software for unified member data and reduced administrative burden.</span>
-                  </li>
-                  <li className="flex items-start">
-                    <ArrowRight className="h-5 w-5 text-[#15BEE2] mr-2 flex-shrink-0 mt-0.5" />
-                    <span><strong>Intuitive Curriculum Authoring & Central Content Marketplace:</strong> Enables creation of custom materials or use of templated, modular content from various sources, moving beyond rigid, content-first approaches.</span>
-                  </li>
-                  <li className="flex items-start">
-                    <ArrowRight className="h-5 w-5 text-[#15BEE2] mr-2 flex-shrink-0 mt-0.5" />
-                    <span><strong>Integrated Communication & Scheduling:</strong> Facilitates interaction directly within the platform.</span>
-                  </li>
-                  <li className="flex items-start">
-                    <ArrowRight className="h-5 w-5 text-[#15BEE2] mr-2 flex-shrink-0 mt-0.5" />
-                    <span><strong>Robust Reporting & Analytics:</strong> Provides real-time visibility and data-driven insights into program effectiveness and individual growth.</span>
-                  </li>
-                  <li className="flex items-start">
-                    <ArrowRight className="h-5 w-5 text-[#15BEE2] mr-2 flex-shrink-0 mt-0.5" />
-                    <span><strong>"Relationship-First" Enablement Philosophy:</strong> Radically departs from content-dictated approaches, empowering churches with flexibility and control.</span>
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
+      <section className="pt-20 pb-16 bg-gray-50 relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-secondary/5 to-transparent"></div>
+        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-secondary/20 to-transparent"></div>
+        <div className="absolute -top-20 -left-20 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -right-20 w-80 h-80 bg-accent/5 rounded-full blur-3xl"></div>
+        
+        <div className="max-w-[1180px] mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            <div>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+                className="mb-10"
+              >
+                <div className="mb-6">
+                  <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">The Innovative Solution</h2>
+                  <motion.div 
+                    className="inline-flex items-center px-4 py-2 bg-gray-100 rounded-full text-sm font-medium"
+                    initial={{ opacity: 0, y: -10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
+                  >
+                    <Sparkles className="h-4 w-4 mr-2 text-gray-500" />
+                    <span className="text-gray-700">Technology Platform</span>
+                  </motion.div>
+                </div>
+                
+                <p className="text-xl leading-relaxed text-foreground/80 max-w-xl mb-8" style={{ textWrap: 'balance', widows: '2', orphans: '2' }}>
+                  eciple is the first comprehensive platform designed exclusively to enable large-scale one-to-one discipleship&nbsp;programs.
+                </p>
+                
+                <div className="bg-gradient-to-r from-secondary/5 to-primary/5 rounded-2xl p-6 mb-8">
+                  <h3 className="text-2xl font-bold text-primary mb-4">Core Functionalities:</h3>
+                  <ul className="space-y-3 text-foreground/80">
+                    <li className="flex items-start gap-3">
+                      <div className="h-2 w-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                      <span><strong>Automated Mentor/Mentee Matching:</strong> Leverages AI algorithms for compatible pairings.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="h-2 w-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                      <span><strong>Customizable Discipleship Pathways:</strong> Churches can easily create unique, step-by-step programs tailored to specific needs and theological stances.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="h-2 w-2 rounded-full bg-accent mt-2 flex-shrink-0"></div>
+                      <span><strong>CHMS Integration:</strong> Seamlessly integrates with Church Management Software for unified member data and reduced administrative burden.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <div className="h-2 w-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                      <span><strong>"Relationship-First" Enablement Philosophy:</strong> Radically departs from content-dictated approaches, empowering churches with flexibility and control.</span>
+                    </li>
+                  </ul>
+                </div>
+              </motion.div>
+            </div>
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
