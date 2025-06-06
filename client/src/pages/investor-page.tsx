@@ -706,7 +706,37 @@ export default function InvestorPage() {
         </div>
       </section>
 
-      <Footer />
+      {/* Custom Footer Section */}
+      <section className="py-16 bg-[#223349]">
+        <div className="max-w-[1300px] mx-auto px-4 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
+          >
+            <div className="flex justify-center">
+              <img 
+                src={ecipleLogo} 
+                alt="eciple logo" 
+                className="h-16 w-auto object-contain" 
+              />
+            </div>
+            
+            <div>
+              <Button 
+                asChild
+                className="bg-[#15BEE2] hover:bg-[#15BEE2]/90 text-white px-8 py-3 text-lg font-semibold rounded-lg transition-all duration-300 hover:shadow-lg"
+              >
+                <a href="/">
+                  Visit Homepage
+                </a>
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Scroll to Top Button */}
       {showScrollTop && (
