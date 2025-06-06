@@ -8,6 +8,7 @@ import eCipleDashImage from "@assets/eciple-dashboard-trim.jpg";
 import mentoringImage from "@assets/eciple-Two-guys-mentoring.jpg";
 import whiteboardImage from "@assets/eciple-whiteboard_1749234969691.jpg";
 import womenMentoringImage from "@assets/eciple-women-mentoring_1749235548005.jpg";
+import prayerImage from "@assets/eciple-prayer_1749237169487.jpg";
 import Footer from "@/components/Footer";
 
 export default function InvestorPage() {
@@ -472,13 +473,15 @@ export default function InvestorPage() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="lg:pr-8"
             >
-              <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-200">
-                <Users className="h-16 w-16 text-[#15BEE2] mb-4" />
-                <h3 className="text-2xl font-bold mb-4 text-[#223349]">Leadership Excellence</h3>
-                <p className="text-gray-600">
-                  A clean, well-lit team photo (or individual founder headshots) in a circular collage, with brief descriptors like "25+ Years SaaS," "Church Leadership," "Faith Tech."
-                </p>
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                <img 
+                  src={prayerImage} 
+                  alt="People studying and praying together with open Bibles" 
+                  className="w-full h-auto object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#223349]/30 to-transparent"></div>
               </div>
             </motion.div>
             <motion.div
