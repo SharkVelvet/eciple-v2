@@ -367,20 +367,8 @@ export default function InvestorPage() {
                 </div>
                 
                 <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-6">
+                  <div className="mb-6">
                     <TrendingUp className="h-16 w-16 text-green-500" />
-                    {/* Animated Church Icon */}
-                    <motion.div
-                      initial={{ scale: 0, rotate: -45 }}
-                      whileInView={{ scale: 1, rotate: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.8, delay: 1.2, type: "spring", bounce: 0.4 }}
-                      className="text-[#223349] opacity-60"
-                    >
-                      <svg className="h-12 w-12" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 2l4 4v2h2v2h2v12H4V10h2V8h2V6l4-4zm0 2.83L9 7.83V9H7v2H5v10h14V11h-2V9h-2V7.83L12 4.83zM11 12v6h2v-6h-2zm-2 2v4h2v-4H9zm6 0v4h2v-4h-2z"/>
-                      </svg>
-                    </motion.div>
                   </div>
                   
                   <h3 className="text-2xl font-bold mb-4 text-[#223349]">Market Growth</h3>
