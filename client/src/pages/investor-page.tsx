@@ -42,34 +42,47 @@ export default function InvestorPage() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="bg-[#223349] py-6 shadow-lg">
-        <div className="max-w-[1180px] mx-auto px-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <motion.div
-                initial={{ scale: 1 }}
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+        <div className="max-w-[1380px] mx-auto px-8 md:px-6">
+          <div className="flex items-center justify-between" style={{ minHeight: '60px' }}>
+            {/* Logo - Left aligned */}
+            <div className="flex-none">
+              <a 
+                href="#" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="block"
               >
-                <div className="flex flex-col items-start">
-                  <img 
-                    src={ecipleLogo} 
-                    alt="eciple logo" 
-                    className="h-8 w-auto object-contain" 
-                  />
-                  <span className="text-white text-opacity-70 text-xs mt-1">
-                    Igniting Spiritual Growth
-                  </span>
-                </div>
-              </motion.div>
+                <motion.div
+                  initial={{ scale: 1 }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  <div className="flex flex-col items-start">
+                    <img 
+                      src={ecipleLogo} 
+                      alt="eciple logo" 
+                      className="h-10 w-auto object-contain" 
+                    />
+                  </div>
+                </motion.div>
+              </a>
             </div>
-            <motion.div 
-              className="inline-flex items-center px-4 py-2 bg-white/10 rounded-full text-sm font-medium"
+            
+            {/* Request Investor Deck Button - Right aligned */}
+            <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <Sparkles className="h-4 w-4 mr-2 text-[#15BEE2]" />
-              <span className="text-white/90">Investor Overview</span>
+              <Button
+                onClick={handleRequestDeck}
+                className="bg-[#15BEE2] hover:bg-[#15BEE2]/90 text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300"
+              >
+                Request Investor Deck
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
             </motion.div>
           </div>
         </div>
