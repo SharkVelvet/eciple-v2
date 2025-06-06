@@ -731,7 +731,7 @@ export default function InvestorPage() {
                 className="h-12 w-auto object-contain" 
               />
               <p className="text-white/80 text-sm">
-                Transforming discipleship through technology
+                Igniting Spiritual Growth, One Relationship at a Time
               </p>
             </div>
             
