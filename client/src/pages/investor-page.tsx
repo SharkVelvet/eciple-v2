@@ -41,19 +41,36 @@ export default function InvestorPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-[#223349] py-6">
+      <header className="bg-[#223349] py-6 shadow-lg">
         <div className="max-w-[1180px] mx-auto px-4">
-          <div className="flex items-center">
-            <img 
-              src={ecipleLogo} 
-              alt="eciple logo" 
-              className="h-8 w-auto object-contain" 
-            />
-            <div className="ml-3">
-              <span className="text-white text-opacity-70 text-xs">
-                Igniting Spiritual Growth
-              </span>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <motion.div
+                initial={{ scale: 1 }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <div className="flex flex-col items-start">
+                  <img 
+                    src={ecipleLogo} 
+                    alt="eciple logo" 
+                    className="h-8 w-auto object-contain" 
+                  />
+                  <span className="text-white text-opacity-70 text-xs mt-1">
+                    Igniting Spiritual Growth
+                  </span>
+                </div>
+              </motion.div>
             </div>
+            <motion.div 
+              className="inline-flex items-center px-4 py-2 bg-white/10 rounded-full text-sm font-medium"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <Sparkles className="h-4 w-4 mr-2 text-[#15BEE2]" />
+              <span className="text-white/90">Investor Overview</span>
+            </motion.div>
           </div>
         </div>
       </header>
@@ -96,12 +113,19 @@ export default function InvestorPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="relative"
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
-                <Users className="h-16 w-16 text-white mb-4" />
-                <h3 className="text-2xl font-bold mb-4">Global Impact</h3>
-                <p className="text-white/90">
-                  A wide-angle shot of a diverse group of people praying or worshiping together in a modern church setting—with subtle light shining through, symbolizing spiritual growth and hope.
-                </p>
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
+                <img 
+                  src={mentoringImage} 
+                  alt="Discipleship mentoring" 
+                  className="w-full h-64 object-cover"
+                />
+                <div className="p-6">
+                  <Users className="h-12 w-12 text-white mb-3" />
+                  <h3 className="text-xl font-bold text-white mb-2">Global Impact</h3>
+                  <p className="text-white/90 text-sm">
+                    Transforming discipleship through one-to-one relationships that create lasting spiritual growth across diverse communities.
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -117,13 +141,19 @@ export default function InvestorPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="relative"
             >
-              <div className="bg-white/50 backdrop-blur-sm rounded-2xl p-8 border border-gray-200">
-                <Target className="h-16 w-16 text-red-500 mb-4" />
-                <h3 className="text-2xl font-bold mb-4 text-gray-800">The Crisis</h3>
-                <p className="text-gray-600">
-                  An empty church sanctuary with scattered open Bibles on the seats, or a person sitting alone with a Bible and a lost expression.
-                </p>
+              <div className="bg-white rounded-2xl overflow-hidden shadow-lg border border-gray-200">
+                <div className="h-64 bg-gradient-to-br from-red-50 to-orange-50 flex items-center justify-center relative">
+                  <div className="absolute inset-0 bg-pattern opacity-10"></div>
+                  <Target className="h-20 w-20 text-red-500 relative z-10" />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-xl font-bold mb-3 text-gray-800">The Crisis</h3>
+                  <p className="text-gray-600 text-sm">
+                    Visualizing the discipleship gap: empty sanctuaries represent the disconnect between traditional methods and effective spiritual growth outcomes.
+                  </p>
+                </div>
               </div>
             </motion.div>
             <motion.div
@@ -211,12 +241,19 @@ export default function InvestorPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="bg-gradient-to-br from-[#15BEE2]/10 to-[#223349]/10 rounded-2xl p-8 border border-[#15BEE2]/20">
-                <Code className="h-16 w-16 text-[#15BEE2] mb-4" />
-                <h3 className="text-2xl font-bold mb-4 text-[#223349]">Tech-Enabled Mentoring</h3>
-                <p className="text-gray-600">
-                  A mentor and mentee sitting across from each other in deep conversation—with a subtle overlay of digital icons (like chat bubbles, pathways, or nodes) implying tech enablement.
-                </p>
+              <div className="bg-gradient-to-br from-[#15BEE2]/10 to-[#223349]/10 rounded-2xl overflow-hidden border border-[#15BEE2]/20 shadow-lg">
+                <img 
+                  src={eCipleDashImage} 
+                  alt="eciple platform dashboard" 
+                  className="w-full h-64 object-cover"
+                />
+                <div className="p-6">
+                  <Code className="h-12 w-12 text-[#15BEE2] mb-3" />
+                  <h3 className="text-xl font-bold mb-2 text-[#223349]">Tech-Enabled Mentoring</h3>
+                  <p className="text-gray-600 text-sm">
+                    Advanced platform technology facilitating meaningful one-to-one discipleship relationships with AI-powered matching and integrated communication tools.
+                  </p>
+                </div>
               </div>
             </motion.div>
           </div>
@@ -598,6 +635,21 @@ export default function InvestorPage() {
       </section>
 
       <Footer />
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.8 }}
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 z-50 bg-[#15BEE2] hover:bg-[#15BEE2]/90 text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:shadow-xl"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+        >
+          <ChevronUp className="h-6 w-6" />
+        </motion.button>
+      )}
     </div>
   );
 }
