@@ -41,9 +41,9 @@ export default function InvestorPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="bg-[#223349] py-6 shadow-lg">
+      <div className="absolute top-6 left-0 right-0 z-50">
         <div className="max-w-[1380px] mx-auto px-8 md:px-6">
-          <div className="flex items-center justify-between" style={{ minHeight: '60px' }}>
+          <div className="flex items-center justify-between">
             {/* Logo - Left aligned */}
             <div className="flex-none">
               <a 
@@ -78,7 +78,7 @@ export default function InvestorPage() {
             >
               <Button
                 onClick={handleRequestDeck}
-                className="bg-[#15BEE2] hover:bg-[#15BEE2]/90 text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300"
+                className="bg-[#223349] hover:bg-[#223349]/90 text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300"
               >
                 Request Investor Deck
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -86,7 +86,7 @@ export default function InvestorPage() {
             </motion.div>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* Hero Section */}
       <section className="pt-32 pb-40 bg-gradient-to-br from-[#15BEE2] via-[#15BEE2]/80 to-[#0368C1] text-white relative overflow-hidden min-h-[750px]">
@@ -99,24 +99,14 @@ export default function InvestorPage() {
         
         {/* Content */}
         <div className="max-w-[1300px] mx-auto px-4 md:px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-[600px]">
-            {/* Left Column - Content */}
+          <div className="flex items-center justify-center min-h-[600px]">
+            {/* Centered Content */}
             <motion.div 
-              className="space-y-6"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
+              className="text-center space-y-6 max-w-4xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <motion.div 
-                className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-8 w-full sm:w-auto max-w-[70%] sm:max-w-none"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <Sparkles className="h-4 w-4 mr-2 text-secondary flex-shrink-0" />
-                <span className="text-center sm:text-left">Investment Opportunity</span>
-              </motion.div>
-              
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-sans" style={{ lineHeight: '1.28', textWrap: 'balance', widows: '2', orphans: '2' }}>
                 The discipleship crisis is real: Join eciple in transforming the future of spiritual&nbsp;growth.
               </h1>
@@ -124,7 +114,8 @@ export default function InvestorPage() {
               <p className="text-lg md:text-xl text-white/90 leading-relaxed" style={{ textWrap: 'balance', widows: '2', orphans: '2' }}>
                 <span className="font-bold text-white">Your investment</span> in eciple will revolutionize discipleship, empowering believers globally and forever changing the face of the&nbsp;Church.
               </p>
-              <div className="flex justify-start mt-8">
+              
+              <div className="flex justify-center mt-8">
                 <Button 
                   onClick={handleRequestDeck}
                   size="lg" 
@@ -135,30 +126,6 @@ export default function InvestorPage() {
                     <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                   </span>
                 </Button>
-              </div>
-            </motion.div>
-            {/* Right Column - Visual Elements with Background Image */}
-            <motion.div 
-              className="relative mt-8 lg:mt-0"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              {/* Container for Image and Floating Cards */}
-              <div className="relative h-[300px] md:h-[450px]">
-                {/* Background Image Container - Smaller to allow badges to hang off */}
-                <div className="absolute top-4 left-4 right-4 bottom-4 md:top-8 md:left-8 md:right-8 md:bottom-8 rounded-2xl overflow-hidden">
-                  {/* Background Image */}
-                  <img 
-                    src={mentoringImage} 
-                    alt="People engaged in spiritual mentorship" 
-                    className="rounded-2xl w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                  
-                  {/* Image Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-black/20 via-transparent to-black/40 rounded-2xl"></div>
-                </div>
               </div>
             </motion.div>
           </div>
