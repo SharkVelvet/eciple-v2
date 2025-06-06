@@ -43,8 +43,8 @@ export default function InvestorPage() {
       {/* Header */}
       <div className="absolute top-6 left-0 right-0 z-50">
         <div className="max-w-[1380px] mx-auto px-8 md:px-6">
-          <div className="flex items-center justify-between">
-            {/* Logo - Left aligned */}
+          <div className="flex justify-center">
+            {/* Logo - Centered */}
             <div className="flex-none">
               <a 
                 href="#" 
@@ -58,32 +58,18 @@ export default function InvestorPage() {
                   initial={{ scale: 1 }}
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  className="bg-[#223349] rounded-full p-4 shadow-lg"
                 >
-                  <div className="flex flex-col items-start">
+                  <div className="flex flex-col items-center">
                     <img 
                       src={ecipleLogo} 
                       alt="eciple logo" 
-                      className="h-10 w-auto object-contain" 
+                      className="h-12 w-auto object-contain" 
                     />
                   </div>
                 </motion.div>
               </a>
             </div>
-            
-            {/* Request Investor Deck Button - Right aligned */}
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <Button
-                onClick={handleRequestDeck}
-                className="bg-[#223349] hover:bg-[#223349]/90 text-white px-6 py-2 rounded-full text-sm font-medium transition-all duration-300"
-              >
-                Request Investor Deck
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </motion.div>
           </div>
         </div>
       </div>
