@@ -130,6 +130,27 @@ export default function InvestorPage() {
                   </span>
                 </Button>
               </div>
+
+              {/* Achievement Highlights */}
+              <motion.div 
+                className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                <div className="flex items-center justify-center gap-3 text-white/90">
+                  <Sparkles className="h-5 w-5 text-yellow-300 flex-shrink-0" />
+                  <span className="text-sm font-medium">$200,000 Founder investments made</span>
+                </div>
+                <div className="flex items-center justify-center gap-3 text-white/90">
+                  <Sparkles className="h-5 w-5 text-yellow-300 flex-shrink-0" />
+                  <span className="text-sm font-medium">Live, fully functional product launched</span>
+                </div>
+                <div className="flex items-center justify-center gap-3 text-white/90">
+                  <Sparkles className="h-5 w-5 text-yellow-300 flex-shrink-0" />
+                  <span className="text-sm font-medium">Multiple, active pilot programs running</span>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
