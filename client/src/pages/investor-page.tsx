@@ -592,7 +592,7 @@ export default function InvestorPage() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                The Ask: Investment Opportunity
+                Investment Opportunity
               </h2>
               <div className="space-y-4 text-white/90">
                 <p className="text-lg">
