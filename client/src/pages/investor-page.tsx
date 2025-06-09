@@ -668,9 +668,7 @@ export default function InvestorPage() {
                   With high demand & established networks revenue generation is projected in Q4 2025 and sustained profitability within 18 months.
                 </p>
 
-                <p className="font-semibold">
-                  Pricing Model: Tiered subscription based on church size ($99-$499/month).
-                </p>
+
               </div>
             </motion.div>
             <motion.div
@@ -684,11 +682,15 @@ export default function InvestorPage() {
                 <h3 className="text-2xl font-bold mb-4 text-[#223349]">Financial forecasts:</h3>
                 <div className="space-y-4 text-gray-700">
                   <div className="flex items-center gap-3">
-                    <DollarSign className="h-6 w-6 text-green-500 flex-shrink-0" />
+                    <div className="h-8 w-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                      <DollarSign className="h-5 w-5 text-white" />
+                    </div>
                     <p className="text-lg font-semibold">$4M ARR with $1.5M EBIT by 2028</p>
                   </div>
                   <div className="flex items-center gap-3">
-                    <DollarSign className="h-6 w-6 text-green-500 flex-shrink-0" />
+                    <div className="h-8 w-8 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                      <DollarSign className="h-5 w-5 text-white" />
+                    </div>
                     <p className="text-lg font-semibold">$5-8M ARR with 30-40% EBIT margin by Year 5 and ongoing</p>
                   </div>
                   <div className="mt-6 pt-4 border-t border-gray-200">
