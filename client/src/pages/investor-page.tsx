@@ -131,48 +131,30 @@ export default function InvestorPage() {
                 </Button>
               </div>
 
-
+              {/* Achievement Highlights */}
+              <motion.div 
+                className="mt-20 grid grid-cols-1 lg:grid-cols-3 gap-2 max-w-5xl mx-auto"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                <div className="flex items-center justify-center gap-2 text-white/90">
+                  <Sparkles className="h-4 w-4 text-yellow-300 flex-shrink-0" />
+                  <span className="text-xs font-medium whitespace-nowrap">$200,000 Founder investments made</span>
+                </div>
+                <div className="flex items-center justify-center gap-2 text-white/90">
+                  <Sparkles className="h-4 w-4 text-yellow-300 flex-shrink-0" />
+                  <span className="text-xs font-medium whitespace-nowrap">Live, fully functional product launched</span>
+                </div>
+                <div className="flex items-center justify-center gap-2 text-white/90">
+                  <Sparkles className="h-4 w-4 text-yellow-300 flex-shrink-0" />
+                  <span className="text-xs font-medium whitespace-nowrap">Multiple, active pilot programs running</span>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
       </section>
-
-      {/* Achievement Badges - Overlay between sections */}
-      <div className="relative z-10 -mt-10 mb-10">
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto px-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-        >
-          <motion.div 
-            className="bg-white/95 backdrop-blur-sm rounded-full border border-[#15BEE2]/20 shadow-lg px-4 py-3 flex items-center justify-center gap-2"
-            whileHover={{ scale: 1.05, y: -2 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="w-2 h-2 bg-yellow-400 rounded-full flex-shrink-0"></div>
-            <span className="text-sm font-semibold text-[#223349] whitespace-nowrap">$200K Founder Investment</span>
-          </motion.div>
-          
-          <motion.div 
-            className="bg-white/95 backdrop-blur-sm rounded-full border border-[#15BEE2]/20 shadow-lg px-4 py-3 flex items-center justify-center gap-2"
-            whileHover={{ scale: 1.05, y: -2 }}
-            transition={{ duration: 0.2, delay: 0.1 }}
-          >
-            <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
-            <span className="text-sm font-semibold text-[#223349] whitespace-nowrap">Live Product Ready</span>
-          </motion.div>
-          
-          <motion.div 
-            className="bg-white/95 backdrop-blur-sm rounded-full border border-[#15BEE2]/20 shadow-lg px-4 py-3 flex items-center justify-center gap-2"
-            whileHover={{ scale: 1.05, y: -2 }}
-            transition={{ duration: 0.2, delay: 0.2 }}
-          >
-            <div className="w-2 h-2 bg-[#15BEE2] rounded-full flex-shrink-0"></div>
-            <span className="text-sm font-semibold text-[#223349] whitespace-nowrap">3 Active Pilot Programs</span>
-          </motion.div>
-        </motion.div>
-      </div>
 
       {/* Discipleship Crisis Section */}
       <section className="pt-20 pb-16 bg-white relative overflow-hidden">
