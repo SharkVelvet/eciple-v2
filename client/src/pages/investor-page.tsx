@@ -255,7 +255,7 @@ export default function InvestorPage() {
                       <span><strong>Customizable Discipleship Pathways:</strong> Churches can easily create unique, step-by-step programs tailored to specific needs and theological stances.</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="h-2 w-2 rounded-full bg-accent mt-2 flex-shrink-0"></div>
+                      <div className="h-2 w-2 rounded-full bg-[#223349] mt-2 flex-shrink-0"></div>
                       <span><strong>CHMS Integration:</strong> Seamlessly integrates with Church Management Software for unified member data and reduced administrative burden.</span>
                     </li>
                     <li className="flex items-start gap-3">
