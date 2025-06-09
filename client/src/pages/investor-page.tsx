@@ -682,9 +682,15 @@ export default function InvestorPage() {
               <div className="bg-gradient-to-br from-green-100 to-[#15BEE2]/20 rounded-2xl p-8 border border-green-200">
                 <TrendingUp className="h-16 w-16 text-green-500 mb-4" />
                 <h3 className="text-2xl font-bold mb-4 text-[#223349]">Financial forecasts:</h3>
-                <div className="space-y-3 text-gray-700">
-                  <p className="font-medium">$4M ARR with $1.5M EBIT by 2028</p>
-                  <p className="font-medium">$5-8M ARR with 30-40% EBIT margin by Year 5 and ongoing</p>
+                <div className="space-y-4 text-gray-700">
+                  <div className="flex items-center gap-3">
+                    <DollarSign className="h-6 w-6 text-green-500 flex-shrink-0" />
+                    <p className="text-lg font-semibold">$4M ARR with $1.5M EBIT by 2028</p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <DollarSign className="h-6 w-6 text-green-500 flex-shrink-0" />
+                    <p className="text-lg font-semibold">$5-8M ARR with 30-40% EBIT margin by Year 5 and ongoing</p>
+                  </div>
                 </div>
               </div>
             </motion.div>
