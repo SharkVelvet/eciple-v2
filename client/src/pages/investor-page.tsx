@@ -208,8 +208,8 @@ export default function InvestorPage() {
                       </p>
                     </div>
                     <div className="w-2/5 flex justify-center">
-                      <div className="relative w-32 h-32">
-                        <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
+                      <div className="relative w-40 h-40">
+                        <svg className="w-40 h-40 transform -rotate-90" viewBox="0 0 36 36">
                           <path
                             d="M18 2.0845
                               a 15.9155 15.9155 0 0 1 0 31.831
@@ -256,8 +256,8 @@ export default function InvestorPage() {
                       </p>
                     </div>
                     <div className="w-2/5 flex justify-center">
-                      <div className="relative w-32 h-32">
-                        <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
+                      <div className="relative w-40 h-40">
+                        <svg className="w-40 h-40 transform -rotate-90" viewBox="0 0 36 36">
                           <path
                             d="M18 2.0845
                               a 15.9155 15.9155 0 0 1 0 31.831
@@ -308,8 +308,8 @@ export default function InvestorPage() {
                       </p>
                     </div>
                     <div className="w-2/5 flex justify-center">
-                      <div className="relative w-32 h-32">
-                        <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
+                      <div className="relative w-40 h-40">
+                        <svg className="w-40 h-40 transform -rotate-90" viewBox="0 0 36 36">
                           <path
                             d="M18 2.0845
                               a 15.9155 15.9155 0 0 1 0 31.831
