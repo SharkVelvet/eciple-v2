@@ -667,14 +667,11 @@ export default function InvestorPage() {
             <Card className="shadow-lg">
               <CardContent className="p-8 text-center">
                 <div className="space-y-6">
-                  <div className="space-y-2">
+                  <div className="space-y-1">
                     <h3 className="text-2xl font-bold text-[#223349]">Bobby Person</h3>
                     <p className="text-lg text-gray-600">Founder & CEO | eciple</p>
-                  </div>
-                  
-                  <div className="space-y-3">
-                    <p className="text-xl text-[#223349] font-semibold">813.400.9384</p>
-                    <p className="text-xl text-[#223349] font-semibold">bobby@eciple.com</p>
+                    <p className="text-lg text-gray-600">813.400.9384</p>
+                    <p className="text-lg text-gray-600">bobby@eciple.com</p>
                   </div>
                   
                   <div className="pt-4">
