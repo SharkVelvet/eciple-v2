@@ -638,7 +638,7 @@ export default function InvestorPage() {
               </p>
 
             </div>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <div className="flex justify-center">
               <Button 
                 onClick={handleRequestDeck}
                 size="lg"
@@ -646,17 +646,6 @@ export default function InvestorPage() {
               >
                 <span className="flex items-center gap-2">
                   Request Investor Deck
-                  <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-                </span>
-              </Button>
-              <Button 
-                onClick={handleScheduleCall}
-                variant="outline"
-                size="lg"
-                className="border-[#223349] text-[#223349] hover:bg-[#223349] hover:text-white px-8 rounded-full group relative overflow-hidden"
-              >
-                <span className="flex items-center gap-2">
-                  Schedule a Call
                   <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                 </span>
               </Button>
@@ -668,108 +657,26 @@ export default function InvestorPage() {
       {/* Contact Section */}
       <section id="contact" className="py-16 bg-gray-50">
         <div className="max-w-[1180px] mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#223349] mb-4">
+          <div className="text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#223349] mb-8">
               Get In Touch
             </h2>
-            <p className="text-lg text-gray-600">
-              Ready to discuss this investment opportunity? Contact us today.
-            </p>
-          </div>
-          
-          <div className="max-w-2xl mx-auto">
-            <Card className="shadow-lg">
-              <CardContent className="p-8">
-                <form action="https://formspree.io/f/xdkznzer" method="POST" className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                        Name *
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#15BEE2] focus:border-transparent"
-                        placeholder="Your full name"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email *
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#15BEE2] focus:border-transparent"
-                        placeholder="your.email@example.com"
-                      />
-                    </div>
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                      Organization/Investment Firm
-                    </label>
-                    <input
-                      type="text"
-                      id="company"
-                      name="company"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#15BEE2] focus:border-transparent"
-                      placeholder="Your organization"
-                    />
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="interest" className="block text-sm font-medium text-gray-700 mb-2">
-                      Interest Level *
-                    </label>
-                    <select
-                      id="interest"
-                      name="interest"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#15BEE2] focus:border-transparent"
-                    >
-                      <option value="">Select your interest level</option>
-                      <option value="investor-deck">Request Investor Deck</option>
-                      <option value="schedule-call">Schedule a Call</option>
-                      <option value="due-diligence">Due Diligence Information</option>
-                      <option value="general-inquiry">General Inquiry</option>
-                    </select>
-                  </div>
-                  
-                  <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#15BEE2] focus:border-transparent"
-                      placeholder="Tell us about your investment interests and any specific questions you have..."
-                    ></textarea>
-                  </div>
-                  
-                  <input type="hidden" name="_subject" value="New Investor Inquiry - eciple" />
-                  <input type="hidden" name="_next" value={`${window.location.origin}/investor-dashboard?success=true`} />
-                  
-                  <Button 
-                    type="submit"
-                    size="lg"
-                    className="w-full bg-[#223349] hover:bg-[#223349]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#223349]/20"
-                  >
-                    <span className="flex items-center gap-2 justify-center">
-                      Send Message
-                      <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+            
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <h3 className="text-2xl font-bold text-[#223349]">Bobby Person</h3>
+                <p className="text-lg text-gray-600">Founder & CEO | eciple</p>
+              </div>
+              
+              <div className="space-y-3">
+                <p className="text-xl text-[#223349] font-semibold">813.400.9384</p>
+                <p className="text-xl text-[#223349] font-semibold">bobby@eciple.com</p>
+              </div>
+              
+              <div className="mt-8">
+                <p className="text-lg text-gray-700 font-medium">Book a time to meet!</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
