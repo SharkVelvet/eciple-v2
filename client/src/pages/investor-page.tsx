@@ -657,26 +657,32 @@ export default function InvestorPage() {
       {/* Contact Section */}
       <section id="contact" className="py-16 bg-gray-50">
         <div className="max-w-[1180px] mx-auto px-4">
-          <div className="text-center">
+          <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-[#223349] mb-8">
               Get In Touch
             </h2>
-            
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <h3 className="text-2xl font-bold text-[#223349]">Bobby Person</h3>
-                <p className="text-lg text-gray-600">Founder & CEO | eciple</p>
-              </div>
-              
-              <div className="space-y-3">
-                <p className="text-xl text-[#223349] font-semibold">813.400.9384</p>
-                <p className="text-xl text-[#223349] font-semibold">bobby@eciple.com</p>
-              </div>
-              
-              <div className="mt-8">
-                <p className="text-lg text-gray-700 font-medium">Book a time to meet!</p>
-              </div>
-            </div>
+          </div>
+          
+          <div className="max-w-lg mx-auto">
+            <Card className="shadow-lg">
+              <CardContent className="p-8 text-center">
+                <div className="space-y-6">
+                  <div className="space-y-2">
+                    <h3 className="text-2xl font-bold text-[#223349]">Bobby Person</h3>
+                    <p className="text-lg text-gray-600">Founder & CEO | eciple</p>
+                  </div>
+                  
+                  <div className="space-y-3">
+                    <p className="text-xl text-[#223349] font-semibold">813.400.9384</p>
+                    <p className="text-xl text-[#223349] font-semibold">bobby@eciple.com</p>
+                  </div>
+                  
+                  <div className="pt-4">
+                    <p className="text-lg text-gray-700 font-medium">Book a time to meet!</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
