@@ -122,7 +122,7 @@ export default function InvestorPage() {
                   className="bg-[#223349] hover:bg-[#223349]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#223349]/20"
                 >
                   <span className="flex items-center gap-2">
-                    Request Investor Deck
+                    Download Investor Pack
                     <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                   </span>
                 </Button>
@@ -645,7 +645,7 @@ export default function InvestorPage() {
                 className="bg-[#223349] hover:bg-[#223349]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#223349]/20"
               >
                 <span className="flex items-center gap-2">
-                  Request Investor Deck
+                  Download Investor Pack
                   <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                 </span>
               </Button>
