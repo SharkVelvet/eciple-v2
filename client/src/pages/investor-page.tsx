@@ -496,11 +496,9 @@ export default function InvestorPage() {
               </h2>
               <div className="space-y-4 text-gray-700">
                 <p className="text-lg">
-                  eciple is led by a high-caliber team with extensive executive-leadership experience in SaaS, church leadership, and the faith-based technology sector.
+                  With extensive executive and startup experience in the faith-based technology sector, eciple's leadership team is driven to address the devastating consequences of ineffective discipleship. Our core team includes a full-time founder (25 years in SaaS learning and performance), a co-founder (20 years executive church leadership), and accomplished strategic advisors alongside our technology partner, distinguished for their expertise in faith-based software development.
                 </p>
-                <p>
-                  eciple's leadership team, unified by a mission to transform discipleship, is led full-time by its founder, and comprises repeat founders and proven tech executives with extensive experience in SaaS, church leadership, and the faith-based technology market.
-                </p>
+
               </div>
             </motion.div>
           </div>
