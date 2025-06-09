@@ -29,10 +29,13 @@ export default function InvestorPage() {
   };
 
   const handleRequestDeck = () => {
-    const element = document.querySelector('#contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    // Create a temporary anchor element to trigger download
+    const link = document.createElement('a');
+    link.href = '/attached_assets/eciple-investor-pack_1749503839727.zip';
+    link.download = 'eciple-investor-pack.zip';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const handleScheduleCall = () => {
