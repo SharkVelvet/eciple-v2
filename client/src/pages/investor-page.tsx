@@ -520,7 +520,7 @@ export default function InvestorPage() {
               </h2>
               <div className="space-y-4 text-gray-700">
                 <p className="text-lg">
-                  With high demand & established networks revenue generation is projected in Q3 2025 and sustained profitability within 12-18 months.
+                  With high demand & established networks revenue generation is projected in Q4 2025 and sustained profitability within 18 months.
                 </p>
                 <div className="bg-gradient-to-r from-[#15BEE2]/10 to-[#223349]/10 rounded-lg p-6">
                   <h3 className="text-xl font-bold text-[#223349] mb-4">Financial forecasts:</h3>
