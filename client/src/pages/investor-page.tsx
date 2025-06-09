@@ -599,7 +599,7 @@ export default function InvestorPage() {
                   eciple offers an extraordinary investment opportunity that not only offers substantial potential returns but also ignites a discipleship movement impacting millions of lives globally.
                 </p>
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
-                  <h3 className="text-xl font-bold text-white mb-4">Seeking $400,000 in equity investment:</h3>
+                  <h3 className="text-xl font-bold text-white mb-4">Raising $400,000 in equity investment:</h3>
                   <ul className="space-y-2">
                     <li className="flex items-center">
                       <DollarSign className="h-5 w-5 text-white mr-2" />
