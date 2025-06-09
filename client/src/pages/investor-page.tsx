@@ -667,19 +667,7 @@ export default function InvestorPage() {
                 <p className="text-lg">
                   With high demand & established networks revenue generation is projected in Q4 2025 and sustained profitability within 18 months.
                 </p>
-                <div className="bg-gradient-to-r from-[#15BEE2]/10 to-[#223349]/10 rounded-lg p-6">
-                  <h3 className="text-xl font-bold text-[#223349] mb-4">Financial forecasts:</h3>
-                  <ul className="space-y-2">
-                    <li className="flex items-center">
-                      <DollarSign className="h-5 w-5 text-green-500 mr-2" />
-                      <span>$4M ARR with $1.5M EBIT by 2028</span>
-                    </li>
-                    <li className="flex items-center">
-                      <DollarSign className="h-5 w-5 text-green-500 mr-2" />
-                      <span>$5-8M ARR with 30-40% EBIT margin by Year 5 and ongoing</span>
-                    </li>
-                  </ul>
-                </div>
+
                 <p className="font-semibold">
                   Pricing Model: Tiered subscription based on church size ($99-$499/month).
                 </p>
@@ -693,10 +681,11 @@ export default function InvestorPage() {
             >
               <div className="bg-gradient-to-br from-green-100 to-[#15BEE2]/20 rounded-2xl p-8 border border-green-200">
                 <TrendingUp className="h-16 w-16 text-green-500 mb-4" />
-                <h3 className="text-2xl font-bold mb-4 text-[#223349]">Financial Growth</h3>
-                <p className="text-gray-600">
-                  Dynamic digital dashboard mockup with financial metrics glowing on-screen, or a visual of coins/seedlings growing into trees combined with tech imagery.
-                </p>
+                <h3 className="text-2xl font-bold mb-4 text-[#223349]">Financial forecasts:</h3>
+                <div className="space-y-3 text-gray-700">
+                  <p className="font-medium">$4M ARR with $1.5M EBIT by 2028</p>
+                  <p className="font-medium">$5-8M ARR with 30-40% EBIT margin by Year 5 and ongoing</p>
+                </div>
               </div>
             </motion.div>
           </div>
