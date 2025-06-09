@@ -438,7 +438,7 @@ export default function InvestorPage() {
               </h2>
               <div className="space-y-4 text-gray-700">
                 <p className="text-lg">
-                  Founder investments, nearing $200,000 since early 2024, have enabled a meticulous, validated solution development process resulting in eciple engineering the first comprehensive platform designed exclusively to enable large-scale one-to-one discipleship programs.
+                  <strong>Founder investments, nearing $200,000</strong> since early 2024, have enabled a meticulous, validated solution development process resulting in eciple engineering the first comprehensive platform designed exclusively to enable large-scale one-to-one discipleship programs.
                 </p>
                 <p>
                   A fully-functional platform has been completed and launched now entering pilot programs with a commercial launch planned for Q3 2025.
