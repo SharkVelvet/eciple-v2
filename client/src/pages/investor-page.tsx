@@ -691,6 +691,11 @@ export default function InvestorPage() {
                     <DollarSign className="h-6 w-6 text-green-500 flex-shrink-0" />
                     <p className="text-lg font-semibold">$5-8M ARR with 30-40% EBIT margin by Year 5 and ongoing</p>
                   </div>
+                  <div className="mt-6 pt-4 border-t border-gray-200">
+                    <p className="font-semibold text-[#223349]">
+                      Pricing Model: Tiered subscription based on church size ($99-$499/month).
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>
