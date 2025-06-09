@@ -441,7 +441,7 @@ export default function InvestorPage() {
                   <strong>Founder investments, nearing $200,000</strong> since early 2024, have enabled a meticulous, validated solution development process resulting in eciple engineering the first comprehensive platform designed exclusively to enable large-scale one-to-one discipleship programs.
                 </p>
                 <p>
-                  A fully-functional platform has been completed and launched now entering pilot programs with a commercial launch planned for Q3 2025.
+                  A fully-functional platform has been completed and launched now entering pilot programs with a commercial launch planned for Q4 2025.
                 </p>
               </div>
             </motion.div>
