@@ -636,9 +636,7 @@ export default function InvestorPage() {
               <p className="text-xl">
                 Your investment for eciple enables global spiritual transformation at a scale unimaginable until now, driving both financial success and eternal significance.
               </p>
-              <p className="text-lg">
-                Partner with eciple to unleash unprecedented spiritual growth, a powerful wave that will sweep across the global Church and touch countless lives.
-              </p>
+
             </div>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button 
