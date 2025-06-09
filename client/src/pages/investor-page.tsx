@@ -172,11 +172,11 @@ export default function InvestorPage() {
                   <h3 className="text-2xl font-bold text-primary mb-4">The Reality:</h3>
                   <ul className="space-y-3 text-foreground/80">
                     <li className="flex items-start gap-3">
-                      <div className="h-2 w-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                      <div className="h-2 w-2 rounded-full bg-[#15BEE2] mt-2 flex-shrink-0"></div>
                       <span>Content-heavy, group discipleship, (90% of all efforts), is ineffective and a primary driver of alarming deterioration across The Church.</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="h-2 w-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                      <div className="h-2 w-2 rounded-full bg-[#15BEE2] mt-2 flex-shrink-0"></div>
                       <span>The most effective model (80% Pastors) —relationship-driven, one-to-one mentoring—is inaccessible due to the absence of technology.</span>
                     </li>
                   </ul>
@@ -284,8 +284,9 @@ export default function InvestorPage() {
                           <span className="font-bold text-[#15BEE2] text-lg">20%</span>
                           <span className="text-gray-500 text-center text-xs leading-tight px-4">stay</span>
                           <div className="mt-1 text-center">
-                            <span className="font-bold text-gray-600 text-sm">80%</span>
-                            <span className="text-gray-500 text-center text-xs leading-tight block px-3">fall away in first year</span>
+                            <span className="font-bold text-gray-600 text-sm block">80%</span>
+                            <span className="text-gray-500 text-center text-xs leading-tight block">fall away</span>
+                            <span className="text-gray-500 text-center text-xs leading-tight block">in first year</span>
                           </div>
                         </div>
                       </div>
@@ -336,8 +337,9 @@ export default function InvestorPage() {
                           <span className="font-bold text-[#15BEE2] text-lg">36%</span>
                           <span className="text-gray-500 text-center text-xs leading-tight px-3">stay</span>
                           <div className="mt-1 text-center">
-                            <span className="font-bold text-gray-600 text-sm">64%</span>
-                            <span className="text-gray-500 text-center text-xs leading-tight block px-3">young adults leave</span>
+                            <span className="font-bold text-gray-600 text-sm block">64%</span>
+                            <span className="text-gray-500 text-center text-xs leading-tight block">young adults</span>
+                            <span className="text-gray-500 text-center text-xs leading-tight block">leave</span>
                           </div>
                         </div>
                       </div>
@@ -390,19 +392,19 @@ export default function InvestorPage() {
                   <h3 className="text-2xl font-bold text-primary mb-4">Core Functionalities:</h3>
                   <ul className="space-y-3 text-foreground/80">
                     <li className="flex items-start gap-3">
-                      <div className="h-2 w-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                      <div className="h-2 w-2 rounded-full bg-[#15BEE2] mt-2 flex-shrink-0"></div>
                       <span><strong>Automated Mentor/Mentee Matching:</strong> Leverages AI algorithms for compatible pairings.</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="h-2 w-2 rounded-full bg-primary mt-2 flex-shrink-0"></div>
+                      <div className="h-2 w-2 rounded-full bg-[#15BEE2] mt-2 flex-shrink-0"></div>
                       <span><strong>Customizable Discipleship Pathways:</strong> Churches can easily create unique, step-by-step programs tailored to specific needs and theological stances.</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="h-2 w-2 rounded-full bg-[#223349] mt-2 flex-shrink-0"></div>
+                      <div className="h-2 w-2 rounded-full bg-[#15BEE2] mt-2 flex-shrink-0"></div>
                       <span><strong>CHMS Integration:</strong> Seamlessly integrates with Church Management Software for unified member data and reduced administrative burden.</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <div className="h-2 w-2 rounded-full bg-secondary mt-2 flex-shrink-0"></div>
+                      <div className="h-2 w-2 rounded-full bg-[#15BEE2] mt-2 flex-shrink-0"></div>
                       <span><strong>"Relationship-First" Enablement Philosophy:</strong> Radically departs from content-dictated approaches, empowering churches with flexibility and control.</span>
                     </li>
                   </ul>
