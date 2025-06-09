@@ -184,23 +184,160 @@ export default function InvestorPage() {
               </motion.div>
             </div>
             
-            {/* Right side with image */}
+            {/* Right side with animated statistics */}
             <div className="lg:pl-8">
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="relative"
+                className="space-y-6"
               >
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                  <img 
-                    src={womenMentoringImage} 
-                    alt="Women engaged in one-to-one mentoring and discipleship" 
-                    className="w-full h-auto object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
-                </div>
+                {/* First Statistic */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="bg-white rounded-xl p-6 shadow-lg border border-blue-100"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1 pr-4">
+                      <p className="text-gray-700 text-sm leading-relaxed">
+                        Only 40% of evangelicals hold the entire Bible as the "actual word of God," 51% say only parts of the Bible is the "inspired word of God"
+                      </p>
+                    </div>
+                    <div className="relative w-20 h-20">
+                      <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 36 36">
+                        <path
+                          d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke="#e5e7eb"
+                          strokeWidth="3"
+                        />
+                        <motion.path
+                          d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke="#2563eb"
+                          strokeWidth="3"
+                          strokeDasharray="40, 60"
+                          initial={{ strokeDasharray: "0, 100" }}
+                          whileInView={{ strokeDasharray: "40, 60" }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 2, delay: 1 }}
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center text-xs">
+                        <span className="font-bold text-blue-600">40%</span>
+                        <span className="text-gray-500 text-center leading-tight">say entire Bible is actual word of God</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Second Statistic */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.7 }}
+                  className="bg-white rounded-xl p-6 shadow-lg border border-blue-100"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1 pr-4">
+                      <p className="text-gray-700 text-sm leading-relaxed">
+                        80% people who make a decision for Christ typically fall away from the faith within the first year
+                      </p>
+                    </div>
+                    <div className="relative w-20 h-20">
+                      <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 36 36">
+                        <path
+                          d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke="#e5e7eb"
+                          strokeWidth="3"
+                        />
+                        <motion.path
+                          d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke="#2563eb"
+                          strokeWidth="3"
+                          strokeDasharray="20, 80"
+                          initial={{ strokeDasharray: "0, 100" }}
+                          whileInView={{ strokeDasharray: "20, 80" }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 2, delay: 1.5 }}
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center text-xs">
+                        <span className="font-bold text-blue-600">20%</span>
+                        <span className="text-gray-500 text-center leading-tight">stay</span>
+                        <div className="mt-1 text-center">
+                          <span className="font-bold text-gray-600">80%</span>
+                          <span className="text-gray-500 text-center leading-tight block">fall away in the first year</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Third Statistic */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.9 }}
+                  className="bg-white rounded-xl p-6 shadow-lg border border-blue-100"
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1 pr-4">
+                      <p className="text-gray-700 text-sm leading-relaxed">
+                        64% of young adults leave the Christian faith as they enter adulthood (equating to over 1M per year)
+                      </p>
+                    </div>
+                    <div className="relative w-20 h-20">
+                      <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 36 36">
+                        <path
+                          d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke="#e5e7eb"
+                          strokeWidth="3"
+                        />
+                        <motion.path
+                          d="M18 2.0845
+                            a 15.9155 15.9155 0 0 1 0 31.831
+                            a 15.9155 15.9155 0 0 1 0 -31.831"
+                          fill="none"
+                          stroke="#2563eb"
+                          strokeWidth="3"
+                          strokeDasharray="36, 64"
+                          initial={{ strokeDasharray: "0, 100" }}
+                          whileInView={{ strokeDasharray: "36, 64" }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 2, delay: 2 }}
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex flex-col items-center justify-center text-xs">
+                        <span className="font-bold text-blue-600">36%</span>
+                        <span className="text-gray-500 text-center leading-tight">stay</span>
+                        <div className="mt-1 text-center">
+                          <span className="font-bold text-gray-600">64%</span>
+                          <span className="text-gray-500 text-center leading-tight block">young adults leave</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
               </motion.div>
             </div>
           </div>
