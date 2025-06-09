@@ -202,12 +202,12 @@ export default function InvestorPage() {
                   className="bg-white rounded-xl p-6 shadow-lg border border-blue-100"
                 >
                   <div className="flex items-center">
-                    <div className="w-1/2 pr-4">
+                    <div className="w-3/5 pr-6">
                       <p className="text-gray-700 text-sm leading-relaxed">
                         Only 40% of evangelicals hold the entire Bible as the "actual word of God," 51% say only parts of the Bible is the "inspired word of God"
                       </p>
                     </div>
-                    <div className="w-1/2 flex justify-center">
+                    <div className="w-2/5 flex justify-center">
                       <div className="relative w-32 h-32">
                         <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
                           <path
@@ -232,9 +232,9 @@ export default function InvestorPage() {
                             transition={{ duration: 2, delay: 1 }}
                           />
                         </svg>
-                        <div className="absolute inset-0 flex flex-col items-center justify-center text-xs">
-                          <span className="font-bold text-[#15BEE2]">40%</span>
-                          <span className="text-gray-500 text-center leading-tight px-2">say entire Bible is actual word of God</span>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center">
+                          <span className="font-bold text-[#15BEE2] text-lg mb-1">40%</span>
+                          <span className="text-gray-500 text-center text-xs leading-tight px-3">say entire Bible is actual word of God</span>
                         </div>
                       </div>
                     </div>
@@ -250,12 +250,12 @@ export default function InvestorPage() {
                   className="bg-white rounded-xl p-6 shadow-lg border border-blue-100"
                 >
                   <div className="flex items-center">
-                    <div className="w-1/2 pr-4">
+                    <div className="w-3/5 pr-6">
                       <p className="text-gray-700 text-sm leading-relaxed">
                         80% people who make a decision for Christ typically fall away from the faith within the first year
                       </p>
                     </div>
-                    <div className="w-1/2 flex justify-center">
+                    <div className="w-2/5 flex justify-center">
                       <div className="relative w-32 h-32">
                         <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
                           <path
@@ -280,12 +280,12 @@ export default function InvestorPage() {
                             transition={{ duration: 2, delay: 1.5 }}
                           />
                         </svg>
-                        <div className="absolute inset-0 flex flex-col items-center justify-center text-xs">
-                          <span className="font-bold text-[#15BEE2]">20%</span>
-                          <span className="text-gray-500 text-center leading-tight px-2">stay</span>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center">
+                          <span className="font-bold text-[#15BEE2] text-lg">20%</span>
+                          <span className="text-gray-500 text-center text-xs leading-tight px-4">stay</span>
                           <div className="mt-1 text-center">
-                            <span className="font-bold text-gray-600">80%</span>
-                            <span className="text-gray-500 text-center leading-tight block px-2">fall away in the first year</span>
+                            <span className="font-bold text-gray-600 text-sm">80%</span>
+                            <span className="text-gray-500 text-center text-xs leading-tight block px-3">fall away in first year</span>
                           </div>
                         </div>
                       </div>
@@ -302,12 +302,12 @@ export default function InvestorPage() {
                   className="bg-white rounded-xl p-6 shadow-lg border border-blue-100"
                 >
                   <div className="flex items-center">
-                    <div className="w-1/2 pr-4">
+                    <div className="w-3/5 pr-6">
                       <p className="text-gray-700 text-sm leading-relaxed">
                         64% of young adults leave the Christian faith as they enter adulthood (equating to over 1M per year)
                       </p>
                     </div>
-                    <div className="w-1/2 flex justify-center">
+                    <div className="w-2/5 flex justify-center">
                       <div className="relative w-32 h-32">
                         <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
                           <path
@@ -332,12 +332,12 @@ export default function InvestorPage() {
                             transition={{ duration: 2, delay: 2 }}
                           />
                         </svg>
-                        <div className="absolute inset-0 flex flex-col items-center justify-center text-xs">
-                          <span className="font-bold text-[#15BEE2]">36%</span>
-                          <span className="text-gray-500 text-center leading-tight px-2">stay</span>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center">
+                          <span className="font-bold text-[#15BEE2] text-lg">36%</span>
+                          <span className="text-gray-500 text-center text-xs leading-tight px-3">stay</span>
                           <div className="mt-1 text-center">
-                            <span className="font-bold text-gray-600">64%</span>
-                            <span className="text-gray-500 text-center leading-tight block px-2">young adults leave</span>
+                            <span className="font-bold text-gray-600 text-sm">64%</span>
+                            <span className="text-gray-500 text-center text-xs leading-tight block px-3">young adults leave</span>
                           </div>
                         </div>
                       </div>
