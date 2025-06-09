@@ -201,39 +201,41 @@ export default function InvestorPage() {
                   transition={{ duration: 0.6, delay: 0.5 }}
                   className="bg-white rounded-xl p-6 shadow-lg border border-blue-100"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1 pr-4">
+                  <div className="flex items-center">
+                    <div className="w-1/2 pr-4">
                       <p className="text-gray-700 text-sm leading-relaxed">
                         Only 40% of evangelicals hold the entire Bible as the "actual word of God," 51% say only parts of the Bible is the "inspired word of God"
                       </p>
                     </div>
-                    <div className="relative w-32 h-32">
-                      <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
-                        <path
-                          d="M18 2.0845
-                            a 15.9155 15.9155 0 0 1 0 31.831
-                            a 15.9155 15.9155 0 0 1 0 -31.831"
-                          fill="none"
-                          stroke="#e5e7eb"
-                          strokeWidth="3"
-                        />
-                        <motion.path
-                          d="M18 2.0845
-                            a 15.9155 15.9155 0 0 1 0 31.831
-                            a 15.9155 15.9155 0 0 1 0 -31.831"
-                          fill="none"
-                          stroke="#2563eb"
-                          strokeWidth="3"
-                          strokeDasharray="40, 60"
-                          initial={{ strokeDasharray: "0, 100" }}
-                          whileInView={{ strokeDasharray: "40, 60" }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 2, delay: 1 }}
-                        />
-                      </svg>
-                      <div className="absolute inset-0 flex flex-col items-center justify-center text-xs">
-                        <span className="font-bold text-blue-600">40%</span>
-                        <span className="text-gray-500 text-center leading-tight px-2">say entire Bible is actual word of God</span>
+                    <div className="w-1/2 flex justify-center">
+                      <div className="relative w-32 h-32">
+                        <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
+                          <path
+                            d="M18 2.0845
+                              a 15.9155 15.9155 0 0 1 0 31.831
+                              a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none"
+                            stroke="#e5e7eb"
+                            strokeWidth="3"
+                          />
+                          <motion.path
+                            d="M18 2.0845
+                              a 15.9155 15.9155 0 0 1 0 31.831
+                              a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none"
+                            stroke="#15BEE2"
+                            strokeWidth="3"
+                            strokeDasharray="40, 60"
+                            initial={{ strokeDasharray: "0, 100" }}
+                            whileInView={{ strokeDasharray: "40, 60" }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 2, delay: 1 }}
+                          />
+                        </svg>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center text-xs">
+                          <span className="font-bold text-[#15BEE2]">40%</span>
+                          <span className="text-gray-500 text-center leading-tight px-2">say entire Bible is actual word of God</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -247,42 +249,44 @@ export default function InvestorPage() {
                   transition={{ duration: 0.6, delay: 0.7 }}
                   className="bg-white rounded-xl p-6 shadow-lg border border-blue-100"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1 pr-4">
+                  <div className="flex items-center">
+                    <div className="w-1/2 pr-4">
                       <p className="text-gray-700 text-sm leading-relaxed">
                         80% people who make a decision for Christ typically fall away from the faith within the first year
                       </p>
                     </div>
-                    <div className="relative w-32 h-32">
-                      <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
-                        <path
-                          d="M18 2.0845
-                            a 15.9155 15.9155 0 0 1 0 31.831
-                            a 15.9155 15.9155 0 0 1 0 -31.831"
-                          fill="none"
-                          stroke="#e5e7eb"
-                          strokeWidth="3"
-                        />
-                        <motion.path
-                          d="M18 2.0845
-                            a 15.9155 15.9155 0 0 1 0 31.831
-                            a 15.9155 15.9155 0 0 1 0 -31.831"
-                          fill="none"
-                          stroke="#2563eb"
-                          strokeWidth="3"
-                          strokeDasharray="20, 80"
-                          initial={{ strokeDasharray: "0, 100" }}
-                          whileInView={{ strokeDasharray: "20, 80" }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 2, delay: 1.5 }}
-                        />
-                      </svg>
-                      <div className="absolute inset-0 flex flex-col items-center justify-center text-xs">
-                        <span className="font-bold text-blue-600">20%</span>
-                        <span className="text-gray-500 text-center leading-tight px-2">stay</span>
-                        <div className="mt-1 text-center">
-                          <span className="font-bold text-gray-600">80%</span>
-                          <span className="text-gray-500 text-center leading-tight block px-2">fall away in the first year</span>
+                    <div className="w-1/2 flex justify-center">
+                      <div className="relative w-32 h-32">
+                        <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
+                          <path
+                            d="M18 2.0845
+                              a 15.9155 15.9155 0 0 1 0 31.831
+                              a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none"
+                            stroke="#e5e7eb"
+                            strokeWidth="3"
+                          />
+                          <motion.path
+                            d="M18 2.0845
+                              a 15.9155 15.9155 0 0 1 0 31.831
+                              a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none"
+                            stroke="#15BEE2"
+                            strokeWidth="3"
+                            strokeDasharray="20, 80"
+                            initial={{ strokeDasharray: "0, 100" }}
+                            whileInView={{ strokeDasharray: "20, 80" }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 2, delay: 1.5 }}
+                          />
+                        </svg>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center text-xs">
+                          <span className="font-bold text-[#15BEE2]">20%</span>
+                          <span className="text-gray-500 text-center leading-tight px-2">stay</span>
+                          <div className="mt-1 text-center">
+                            <span className="font-bold text-gray-600">80%</span>
+                            <span className="text-gray-500 text-center leading-tight block px-2">fall away in the first year</span>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -297,42 +301,44 @@ export default function InvestorPage() {
                   transition={{ duration: 0.6, delay: 0.9 }}
                   className="bg-white rounded-xl p-6 shadow-lg border border-blue-100"
                 >
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1 pr-4">
+                  <div className="flex items-center">
+                    <div className="w-1/2 pr-4">
                       <p className="text-gray-700 text-sm leading-relaxed">
                         64% of young adults leave the Christian faith as they enter adulthood (equating to over 1M per year)
                       </p>
                     </div>
-                    <div className="relative w-32 h-32">
-                      <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
-                        <path
-                          d="M18 2.0845
-                            a 15.9155 15.9155 0 0 1 0 31.831
-                            a 15.9155 15.9155 0 0 1 0 -31.831"
-                          fill="none"
-                          stroke="#e5e7eb"
-                          strokeWidth="3"
-                        />
-                        <motion.path
-                          d="M18 2.0845
-                            a 15.9155 15.9155 0 0 1 0 31.831
-                            a 15.9155 15.9155 0 0 1 0 -31.831"
-                          fill="none"
-                          stroke="#2563eb"
-                          strokeWidth="3"
-                          strokeDasharray="36, 64"
-                          initial={{ strokeDasharray: "0, 100" }}
-                          whileInView={{ strokeDasharray: "36, 64" }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 2, delay: 2 }}
-                        />
-                      </svg>
-                      <div className="absolute inset-0 flex flex-col items-center justify-center text-xs">
-                        <span className="font-bold text-blue-600">36%</span>
-                        <span className="text-gray-500 text-center leading-tight px-2">stay</span>
-                        <div className="mt-1 text-center">
-                          <span className="font-bold text-gray-600">64%</span>
-                          <span className="text-gray-500 text-center leading-tight block px-2">young adults leave</span>
+                    <div className="w-1/2 flex justify-center">
+                      <div className="relative w-32 h-32">
+                        <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
+                          <path
+                            d="M18 2.0845
+                              a 15.9155 15.9155 0 0 1 0 31.831
+                              a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none"
+                            stroke="#e5e7eb"
+                            strokeWidth="3"
+                          />
+                          <motion.path
+                            d="M18 2.0845
+                              a 15.9155 15.9155 0 0 1 0 31.831
+                              a 15.9155 15.9155 0 0 1 0 -31.831"
+                            fill="none"
+                            stroke="#15BEE2"
+                            strokeWidth="3"
+                            strokeDasharray="36, 64"
+                            initial={{ strokeDasharray: "0, 100" }}
+                            whileInView={{ strokeDasharray: "36, 64" }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 2, delay: 2 }}
+                          />
+                        </svg>
+                        <div className="absolute inset-0 flex flex-col items-center justify-center text-xs">
+                          <span className="font-bold text-[#15BEE2]">36%</span>
+                          <span className="text-gray-500 text-center leading-tight px-2">stay</span>
+                          <div className="mt-1 text-center">
+                            <span className="font-bold text-gray-600">64%</span>
+                            <span className="text-gray-500 text-center leading-tight block px-2">young adults leave</span>
+                          </div>
                         </div>
                       </div>
                     </div>
