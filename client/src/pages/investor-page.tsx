@@ -777,7 +777,7 @@ export default function InvestorPage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-[#223349] mb-8">
-              Transform Lives. Drive Growth. Make History.
+              Transform Lives. Drive Growth. <span className="text-[#15BEE2]">Make History.</span>
             </h2>
             <div className="space-y-6 text-gray-700 max-w-4xl mx-auto mb-12">
               <p className="text-xl">
