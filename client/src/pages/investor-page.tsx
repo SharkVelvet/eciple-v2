@@ -133,7 +133,7 @@ export default function InvestorPage() {
 
               {/* Achievement Highlights */}
               <motion.div 
-                className="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-2 max-w-5xl mx-auto"
+                className="mt-16 grid grid-cols-1 lg:grid-cols-3 gap-2 max-w-5xl mx-auto"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
