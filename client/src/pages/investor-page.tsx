@@ -678,7 +678,14 @@ export default function InvestorPage() {
                   </div>
                   
                   <div className="pt-4">
-                    <p className="text-lg text-gray-700 font-medium">Book a time to meet!</p>
+                    <a 
+                      href="https://calendar.app.google/BcoqYkgNWx4gp7q87"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-lg text-[#15BEE2] hover:text-[#223349] font-medium transition-colors duration-200 hover:underline"
+                    >
+                      Book a time to meet!
+                    </a>
                   </div>
                 </div>
               </CardContent>
