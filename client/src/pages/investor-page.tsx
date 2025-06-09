@@ -207,8 +207,8 @@ export default function InvestorPage() {
                         Only 40% of evangelicals hold the entire Bible as the "actual word of God," 51% say only parts of the Bible is the "inspired word of God"
                       </p>
                     </div>
-                    <div className="relative w-28 h-28">
-                      <svg className="w-28 h-28 transform -rotate-90" viewBox="0 0 36 36">
+                    <div className="relative w-32 h-32">
+                      <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
                         <path
                           d="M18 2.0845
                             a 15.9155 15.9155 0 0 1 0 31.831
@@ -222,7 +222,7 @@ export default function InvestorPage() {
                             a 15.9155 15.9155 0 0 1 0 31.831
                             a 15.9155 15.9155 0 0 1 0 -31.831"
                           fill="none"
-                          stroke="#223349"
+                          stroke="#2563eb"
                           strokeWidth="3"
                           strokeDasharray="40, 60"
                           initial={{ strokeDasharray: "0, 100" }}
@@ -232,8 +232,8 @@ export default function InvestorPage() {
                         />
                       </svg>
                       <div className="absolute inset-0 flex flex-col items-center justify-center text-xs">
-                        <span className="font-bold text-[#223349]">40%</span>
-                        <span className="text-gray-500 text-center leading-tight px-1">say entire Bible is actual word of God</span>
+                        <span className="font-bold text-blue-600">40%</span>
+                        <span className="text-gray-500 text-center leading-tight px-2">say entire Bible is actual word of God</span>
                       </div>
                     </div>
                   </div>
@@ -253,8 +253,8 @@ export default function InvestorPage() {
                         80% people who make a decision for Christ typically fall away from the faith within the first year
                       </p>
                     </div>
-                    <div className="relative w-28 h-28">
-                      <svg className="w-28 h-28 transform -rotate-90" viewBox="0 0 36 36">
+                    <div className="relative w-32 h-32">
+                      <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
                         <path
                           d="M18 2.0845
                             a 15.9155 15.9155 0 0 1 0 31.831
@@ -268,7 +268,7 @@ export default function InvestorPage() {
                             a 15.9155 15.9155 0 0 1 0 31.831
                             a 15.9155 15.9155 0 0 1 0 -31.831"
                           fill="none"
-                          stroke="#223349"
+                          stroke="#2563eb"
                           strokeWidth="3"
                           strokeDasharray="20, 80"
                           initial={{ strokeDasharray: "0, 100" }}
@@ -278,11 +278,11 @@ export default function InvestorPage() {
                         />
                       </svg>
                       <div className="absolute inset-0 flex flex-col items-center justify-center text-xs">
-                        <span className="font-bold text-[#223349]">20%</span>
-                        <span className="text-gray-500 text-center leading-tight px-1">stay</span>
+                        <span className="font-bold text-blue-600">20%</span>
+                        <span className="text-gray-500 text-center leading-tight px-2">stay</span>
                         <div className="mt-1 text-center">
                           <span className="font-bold text-gray-600">80%</span>
-                          <span className="text-gray-500 text-center leading-tight block px-1">fall away in the first year</span>
+                          <span className="text-gray-500 text-center leading-tight block px-2">fall away in the first year</span>
                         </div>
                       </div>
                     </div>
@@ -303,8 +303,8 @@ export default function InvestorPage() {
                         64% of young adults leave the Christian faith as they enter adulthood (equating to over 1M per year)
                       </p>
                     </div>
-                    <div className="relative w-28 h-28">
-                      <svg className="w-28 h-28 transform -rotate-90" viewBox="0 0 36 36">
+                    <div className="relative w-32 h-32">
+                      <svg className="w-32 h-32 transform -rotate-90" viewBox="0 0 36 36">
                         <path
                           d="M18 2.0845
                             a 15.9155 15.9155 0 0 1 0 31.831
@@ -318,7 +318,7 @@ export default function InvestorPage() {
                             a 15.9155 15.9155 0 0 1 0 31.831
                             a 15.9155 15.9155 0 0 1 0 -31.831"
                           fill="none"
-                          stroke="#223349"
+                          stroke="#2563eb"
                           strokeWidth="3"
                           strokeDasharray="36, 64"
                           initial={{ strokeDasharray: "0, 100" }}
@@ -328,11 +328,11 @@ export default function InvestorPage() {
                         />
                       </svg>
                       <div className="absolute inset-0 flex flex-col items-center justify-center text-xs">
-                        <span className="font-bold text-[#223349]">36%</span>
-                        <span className="text-gray-500 text-center leading-tight px-1">stay</span>
+                        <span className="font-bold text-blue-600">36%</span>
+                        <span className="text-gray-500 text-center leading-tight px-2">stay</span>
                         <div className="mt-1 text-center">
                           <span className="font-bold text-gray-600">64%</span>
-                          <span className="text-gray-500 text-center leading-tight block px-1">young adults leave</span>
+                          <span className="text-gray-500 text-center leading-tight block px-2">young adults leave</span>
                         </div>
                       </div>
                     </div>
