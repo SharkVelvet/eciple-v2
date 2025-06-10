@@ -144,7 +144,7 @@ export default function InvestorPage() {
                 </div>
                 <div className="flex items-center justify-center gap-2 text-white/90">
                   <Sparkles className="h-4 w-4 text-yellow-300 flex-shrink-0" />
-                  <span className="text-xs font-medium whitespace-nowrap">Live, fully functional product launch</span>
+                  <span className="text-xs font-medium whitespace-nowrap">Live, fully functional product launched</span>
                 </div>
                 <div className="flex items-center justify-center gap-2 text-white/90">
                   <Sparkles className="h-4 w-4 text-yellow-300 flex-shrink-0" />
