@@ -31,7 +31,7 @@ export default function InvestorPage() {
   const handleRequestDeck = () => {
     // Create a temporary anchor element to trigger download
     const link = document.createElement('a');
-    link.href = '/attached_assets/eciple-investor-pack_1749503839727.zip';
+    link.href = '/eciple-investor-pack.zip';
     link.download = 'eciple-investor-pack.zip';
     document.body.appendChild(link);
     link.click();
