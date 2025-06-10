@@ -6,7 +6,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import AuthPage from "@/pages/auth-page";
 import InvestorDashboard from "@/pages/investor-dashboard";
 import InvestorPage from "@/pages/investor-page";
-import InvestorsPage from "@/pages/investors-page";
 import WelcomePage from "@/pages/welcome-page";
 import ComparisonPage from "@/pages/ComparisonPage";
 import CookiePolicyPage from "@/pages/cookie-policy";
@@ -40,7 +39,7 @@ function Router() {
       <Route path="/investor" component={InvestorPage} />
       
       {/* Investors page (exact copy of investor page) */}
-      <Route path="/investors" component={InvestorsPage} />
+      <Route path="/investors" component={InvestorPage} />
       
       {/* 404 page */}
       <Route component={NotFound} />
