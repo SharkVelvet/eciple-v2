@@ -1,4 +1,4 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, Redirect } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 
@@ -35,10 +35,12 @@ function Router() {
       {/* Investor dashboard (protected by investor authentication) */}
       <Route path="/investor-dashboard" component={InvestorDashboard} />
       
-      {/* Investor page (separate, not linked from main site) */}
-      <Route path="/investor" component={InvestorPage} />
+      {/* Investor page - redirects to /investors */}
+      <Route path="/investor">
+        <Redirect to="/investors" />
+      </Route>
       
-      {/* Investors page (exact copy of investor page) */}
+      {/* Investors page */}
       <Route path="/investors" component={InvestorPage} />
       
       {/* 404 page */}
