@@ -115,7 +115,7 @@ export default function InvestorPage() {
               </h1>
               
               <p className="text-lg md:text-xl text-white/90 leading-relaxed" style={{ textWrap: 'balance', widows: '2', orphans: '2' }}>
-                <span className="font-bold text-white">Your investment</span> in eciple will revolutionize discipleship, empowering believers globally and forever changing the face of the&nbsp;Church.
+                <span className="font-bold text-white">Your investment</span> in eciple will help revolutionize discipleship, empower believers across the globe and forever change the face of the&nbsp;Church.
               </p>
               
               <div className="flex justify-center mt-8">
