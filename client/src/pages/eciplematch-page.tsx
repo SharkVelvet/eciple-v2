@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { ArrowRight, TrendingUp, Users, Target, Code, DollarSign, Handshake, ChevronUp, Sparkles } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { ArrowRight, TrendingUp, Users, Target, Code, DollarSign, Handshake, ChevronUp, Sparkles, Download, X } from "lucide-react";
 import ecipleLogo from "@assets/eciple-white.png";
 import eCipleDashImage from "@assets/eciple-dashboard-trim.jpg";
 import mentoringImage from "@assets/eciple-Two-guys-mentoring.jpg";
@@ -14,6 +15,7 @@ import Footer from "@/components/Footer";
 
 export default function EcipleMatchPage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [showDocumentModal, setShowDocumentModal] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,11 +30,48 @@ export default function EcipleMatchPage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const documents = [
+    {
+      title: "Executive Summary",
+      filename: "eciple-executive-summary.pdf",
+      description: "Comprehensive overview of eciple's mission and market opportunity"
+    },
+    {
+      title: "Pitch Deck",
+      filename: "eciple-pitch-deck.pdf", 
+      description: "Detailed presentation of our discipleship platform solution"
+    },
+    {
+      title: "Financial Projections",
+      filename: "eciple-financial-projections.pdf",
+      description: "Revenue forecasts and investment return analysis"
+    },
+    {
+      title: "Market Analysis",
+      filename: "eciple-market-analysis.pdf",
+      description: "In-depth analysis of the discipleship technology market"
+    },
+    {
+      title: "Product Demo Guide",
+      filename: "eciple-product-demo.pdf",
+      description: "Step-by-step guide to eciple platform features"
+    },
+    {
+      title: "Technical Specifications",
+      filename: "eciple-technical-specs.pdf",
+      description: "Platform architecture and technology overview"
+    }
+  ];
+
   const handleRequestDeck = () => {
+    setShowDocumentModal(true);
+  };
+
+  const downloadDocument = (filename: string) => {
     // Create a temporary anchor element to trigger download
     const link = document.createElement('a');
-    link.href = '/eciple-investor-pack.zip';
-    link.download = 'eciple-investor-pack.zip';
+    link.href = `/documents/${filename}`;
+    link.download = filename;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -141,7 +180,7 @@ export default function EcipleMatchPage() {
                   className="bg-[#223349] hover:bg-[#223349]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#223349]/20"
                 >
                   <span className="flex items-center gap-2">
-                    Download Investor Pack
+                    View Documents
                     <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                   </span>
                 </Button>
@@ -832,7 +871,7 @@ export default function EcipleMatchPage() {
                 className="bg-[#223349] hover:bg-[#223349]/90 text-white px-8 rounded-full group relative overflow-hidden shadow-lg shadow-[#223349]/20"
               >
                 <span className="flex items-center gap-2">
-                  Download Investor Pack
+                  View Documents
                   <ArrowRight className="h-4 w-4 transform group-hover:translate-x-1 transition-transform" />
                 </span>
               </Button>
@@ -931,6 +970,55 @@ export default function EcipleMatchPage() {
           <ChevronUp className="h-6 w-6" />
         </motion.button>
       )}
+
+      {/* Document Modal */}
+      <Dialog open={showDocumentModal} onOpenChange={setShowDocumentModal}>
+        <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-[#223349] mb-4">
+              Investment Documents
+            </DialogTitle>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            {documents.map((doc, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-[#15BEE2] transition-colors"
+              >
+                <div className="flex-1 mr-4">
+                  <h3 className="font-semibold text-[#223349] text-lg mb-1">
+                    {doc.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm">
+                    {doc.description}
+                  </p>
+                </div>
+                <Button
+                  onClick={() => downloadDocument(doc.filename)}
+                  className="bg-[#15BEE2] hover:bg-[#15BEE2]/90 text-white px-6 py-2 rounded-full flex items-center gap-2 whitespace-nowrap"
+                >
+                  <Download className="h-4 w-4" />
+                  Download
+                </Button>
+              </motion.div>
+            ))}
+          </div>
+          
+          <div className="flex justify-center mt-8">
+            <Button
+              onClick={() => setShowDocumentModal(false)}
+              variant="outline"
+              className="px-8 py-2 rounded-full border-[#223349] text-[#223349] hover:bg-[#223349] hover:text-white"
+            >
+              Close
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
