@@ -12,6 +12,8 @@ import ComparisonPage from "@/pages/ComparisonPage";
 import CookiePolicyPage from "@/pages/cookie-policy";
 import PrivacyPolicyPage from "@/pages/privacy-policy";
 import TermsConditionsPage from "@/pages/terms-conditions";
+import AdminLogin from "@/pages/admin-login";
+import AdminDashboard from "@/pages/admin-dashboard";
 import NotFound from "@/pages/not-found";
 import { AuthProvider } from "@/hooks/use-auth";
 import { ProtectedRoute } from "@/lib/protected-route";
@@ -46,6 +48,10 @@ function Router() {
       
       {/* EcipleMatch page */}
       <Route path="/eciplematch" component={EcipleMatchPage} />
+      
+      {/* Admin routes */}
+      <Route path="/admin-login" component={AdminLogin} />
+      <Route path="/admin-dashboard" component={AdminDashboard} />
       
       {/* 404 page */}
       <Route component={NotFound} />

@@ -122,6 +122,9 @@ eciple is a full-stack web application designed to revolutionize discipleship ma
 ```
 Changelog:
 - June 16, 2025. Initial setup
+- June 23, 2025. Added secure admin authentication system with database storage
+- June 23, 2025. Enhanced document management with subtitle and link functionality
+- June 23, 2025. Created admin dashboard with full CRUD operations for EcipleMatch documents
 ```
 
 ## User Preferences
