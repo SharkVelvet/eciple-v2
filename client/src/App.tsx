@@ -6,6 +6,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import AuthPage from "@/pages/auth-page";
 import InvestorDashboard from "@/pages/investor-dashboard";
 import InvestorPage from "@/pages/investor-page";
+import EcipleMatchPage from "@/pages/eciplematch-page";
 import WelcomePage from "@/pages/welcome-page";
 import ComparisonPage from "@/pages/ComparisonPage";
 import CookiePolicyPage from "@/pages/cookie-policy";
@@ -42,6 +43,9 @@ function Router() {
       
       {/* Investors page */}
       <Route path="/investors" component={InvestorPage} />
+      
+      {/* EcipleMatch page */}
+      <Route path="/eciplematch" component={EcipleMatchPage} />
       
       {/* 404 page */}
       <Route component={NotFound} />
