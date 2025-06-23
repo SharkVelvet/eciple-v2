@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ArrowRight, TrendingUp, Users, Target, Code, DollarSign, Handshake, ChevronUp, Sparkles, Download, X } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import ecipleLogo from "@assets/eciple-white.png";
 import eCipleDashImage from "@assets/eciple-dashboard-trim.jpg";
 import mentoringImage from "@assets/eciple-Two-guys-mentoring.jpg";
@@ -13,9 +14,37 @@ import prayerImage from "@assets/eciple-prayer_1749237169487.jpg";
 import investmentImage from "@assets/eciple-investment_1749240889384.jpg";
 import Footer from "@/components/Footer";
 
+interface EcipleDocument {
+  id: number;
+  title: string;
+  subtitle: string | null;
+  filename: string;
+  linkUrl: string | null;
+  description: string | null;
+  displayOrder: number;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export default function EcipleMatchPage() {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [showDocumentModal, setShowDocumentModal] = useState(false);
+
+  // Fetch documents from the database
+  const { data: documentsData, isLoading } = useQuery({
+    queryKey: ['/api/eciple-documents'],
+    queryFn: async () => {
+      const response = await fetch('/api/eciple-documents');
+      if (!response.ok) {
+        throw new Error('Failed to fetch documents');
+      }
+      const data = await response.json();
+      return data.documents as EcipleDocument[];
+    },
+  });
+
+  const documents = documentsData || [];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,39 +58,6 @@ export default function EcipleMatchPage() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  const documents = [
-    {
-      title: "Executive Summary",
-      filename: "eciple-executive-summary.pdf",
-      description: "Comprehensive overview of eciple's mission and market opportunity"
-    },
-    {
-      title: "Pitch Deck",
-      filename: "eciple-pitch-deck.pdf", 
-      description: "Detailed presentation of our discipleship platform solution"
-    },
-    {
-      title: "Financial Projections",
-      filename: "eciple-financial-projections.pdf",
-      description: "Revenue forecasts and investment return analysis"
-    },
-    {
-      title: "Market Analysis",
-      filename: "eciple-market-analysis.pdf",
-      description: "In-depth analysis of the discipleship technology market"
-    },
-    {
-      title: "Product Demo Guide",
-      filename: "eciple-product-demo.pdf",
-      description: "Step-by-step guide to eciple platform features"
-    },
-    {
-      title: "Technical Specifications",
-      filename: "eciple-technical-specs.pdf",
-      description: "Platform architecture and technology overview"
-    }
-  ];
 
   const handleRequestDeck = () => {
     setShowDocumentModal(true);
@@ -981,31 +977,53 @@ export default function EcipleMatchPage() {
           </DialogHeader>
           
           <div className="space-y-4">
-            {documents.map((doc, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.1 }}
-                className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-[#15BEE2] transition-colors"
-              >
-                <div className="flex-1 mr-4">
-                  <h3 className="font-semibold text-[#223349] text-lg mb-1">
-                    {doc.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    {doc.description}
-                  </p>
-                </div>
-                <Button
-                  onClick={() => downloadDocument(doc.filename)}
-                  className="bg-[#15BEE2] hover:bg-[#15BEE2]/90 text-white px-6 py-2 rounded-full flex items-center gap-2 whitespace-nowrap"
+            {isLoading ? (
+              <div className="flex justify-center py-8">
+                <div className="animate-pulse text-gray-500">Loading documents...</div>
+              </div>
+            ) : (
+              documents.map((doc, index) => (
+                <motion.div
+                  key={doc.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.1 }}
+                  className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-[#15BEE2] transition-colors"
                 >
-                  <Download className="h-4 w-4" />
-                  Download
-                </Button>
-              </motion.div>
-            ))}
+                  <div className="flex-1 mr-4">
+                    <h3 className="font-semibold text-[#223349] text-lg mb-1">
+                      {doc.title}
+                    </h3>
+                    {doc.subtitle && (
+                      <p className="text-[#15BEE2] text-sm font-medium mb-2">
+                        {doc.subtitle}
+                      </p>
+                    )}
+                    <p className="text-gray-600 text-sm">
+                      {doc.description}
+                    </p>
+                    {doc.linkUrl && (
+                      <a 
+                        href={doc.linkUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#15BEE2] hover:text-[#223349] text-sm font-medium mt-2 inline-flex items-center gap-1 transition-colors"
+                      >
+                        View Online
+                        <ArrowRight className="h-3 w-3" />
+                      </a>
+                    )}
+                  </div>
+                  <Button
+                    onClick={() => downloadDocument(doc.filename)}
+                    className="bg-[#15BEE2] hover:bg-[#15BEE2]/90 text-white px-6 py-2 rounded-full flex items-center gap-2 whitespace-nowrap"
+                  >
+                    <Download className="h-4 w-4" />
+                    Download
+                  </Button>
+                </motion.div>
+              ))
+            )}
           </div>
           
           <div className="flex justify-center mt-8">
