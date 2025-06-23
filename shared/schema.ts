@@ -70,7 +70,9 @@ export type AdminUser = typeof adminUsers.$inferSelect;
 export const ecipleMatchDocuments = pgTable("eciple_match_documents", {
   id: serial("id").primaryKey(),
   title: varchar("title", { length: 200 }).notNull(),
+  subtitle: varchar("subtitle", { length: 300 }),
   filename: varchar("filename", { length: 255 }).notNull(),
+  linkUrl: varchar("link_url", { length: 500 }),
   description: text("description"),
   displayOrder: integer("display_order").notNull().default(0),
   isActive: boolean("is_active").notNull().default(true),
@@ -80,7 +82,9 @@ export const ecipleMatchDocuments = pgTable("eciple_match_documents", {
 
 export const insertEcipleMatchDocumentSchema = createInsertSchema(ecipleMatchDocuments).pick({
   title: true,
+  subtitle: true,
   filename: true,
+  linkUrl: true,
   description: true,
   displayOrder: true,
 });

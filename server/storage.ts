@@ -248,11 +248,15 @@ export class MemStorage implements IStorage {
 
   async cleanExpiredSessions(): Promise<void> {
     const now = new Date();
-    for (const [sessionId, session] of this.adminSessions.entries()) {
+    const sessionsToDelete: string[] = [];
+    this.adminSessions.forEach((session, sessionId) => {
       if (session.expiresAt <= now) {
-        this.adminSessions.delete(sessionId);
+        sessionsToDelete.push(sessionId);
       }
-    }
+    });
+    sessionsToDelete.forEach(sessionId => {
+      this.adminSessions.delete(sessionId);
+    });
   }
 
   // EcipleMatch document methods

@@ -2,10 +2,14 @@ import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { setupAuth } from "./auth";
+import { setupAdminAuth } from "./admin-auth";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Set up authentication routes (/api/register, /api/login, /api/logout, /api/user)
   setupAuth(app);
+  
+  // Set up secure admin authentication routes
+  setupAdminAuth(app);
 
   // Contact form submission endpoint
   app.post("/api/contact", async (req, res) => {
