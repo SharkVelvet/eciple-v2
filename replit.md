@@ -32,9 +32,11 @@ eciple is a full-stack web application designed to revolutionize discipleship ma
 
 ### Authentication System
 - Dual authentication flows: main site access and investor portal
+- Admin authentication system with bcrypt password hashing and secure session management
 - Session-based authentication with configurable session duration
-- Password hashing using Node.js crypto with scrypt
+- Password hashing using Node.js crypto with scrypt for main auth, bcrypt for admin auth
 - Protected routes with authentication middleware
+- Admin dashboard accessible at /admin-login with credentials: admin/password123
 
 ### Content Management
 - Dynamic content editing system with localStorage persistence

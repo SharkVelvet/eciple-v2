@@ -71,10 +71,10 @@ export class MemStorage implements IStorage {
     this.initializeDefaultDocuments();
   }
 
-  private async initializeDefaultAdmin() {
-    // Use bcrypt-style hash for password 'eciple2025!secure'
-    // In production, this would be properly hashed with bcrypt
-    const passwordHash = '$2b$12$LQv3c1yqBwlVHMt1xRfNE.LT8Z8jhJWKzTYb8cJU8yYcIkXVGhOIK';
+  private initializeDefaultAdmin() {
+    // Pre-computed bcrypt hash for password 'password123'
+    // Generated with: bcrypt.hash('password123', 12)
+    const passwordHash = '$2b$12$c2DVCeNZJDoEIc/OnfLAGunurnzgBo.t9MbcLytg9ynTJyUvKv/9m';
     
     const defaultAdmin: AdminUser = {
       id: this.currentAdminId++,
