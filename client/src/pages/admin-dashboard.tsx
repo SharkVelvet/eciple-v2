@@ -12,8 +12,11 @@ import { useLocation } from "wouter";
 interface Document {
   id: string;
   title: string;
+  subtitle?: string;
   filename: string;
+  linkUrl?: string;
   description: string;
+  displayOrder?: number;
 }
 
 export default function AdminDashboard() {
@@ -109,8 +112,11 @@ export default function AdminDashboard() {
     const newDoc: Document = {
       id: Date.now().toString(),
       title: "New Document",
+      subtitle: "",
       filename: "new-document.pdf",
-      description: "Document description"
+      linkUrl: "",
+      description: "Document description",
+      displayOrder: documents.length
     };
     setDocuments([...documents, newDoc]);
     setIsEditing(newDoc.id);
@@ -222,44 +228,67 @@ export default function AdminDashboard() {
                   className="border border-gray-200 rounded-lg p-6 space-y-4"
                 >
                   <div className="flex justify-between items-start">
-                    <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {/* Title */}
-                      <div className="space-y-2">
-                        <Label className="text-sm font-medium">Document Title</Label>
-                        <Input
-                          value={doc.title}
-                          onChange={(e) => updateDocument(doc.id, 'title', e.target.value)}
-                          placeholder="Document title"
-                        />
+                    <div className="flex-1 space-y-4">
+                      {/* First Row: Title and Filename */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label className="text-sm font-medium">Document Title</Label>
+                          <Input
+                            value={doc.title}
+                            onChange={(e) => updateDocument(doc.id, 'title', e.target.value)}
+                            placeholder="Document title"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label className="text-sm font-medium">File Name</Label>
+                          <div className="flex gap-2">
+                            <Input
+                              value={doc.filename}
+                              onChange={(e) => updateDocument(doc.id, 'filename', e.target.value)}
+                              placeholder="filename.pdf"
+                              className="flex-1"
+                            />
+                            <div className="relative">
+                              <input
+                                type="file"
+                                accept=".pdf,.doc,.docx"
+                                onChange={(e) => handleFileUpload(doc.id, e)}
+                                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                              />
+                              <Button
+                                type="button"
+                                size="sm"
+                                variant="outline"
+                                className="whitespace-nowrap"
+                              >
+                                <Upload className="h-4 w-4 mr-1" />
+                                Upload
+                              </Button>
+                            </div>
+                          </div>
+                        </div>
                       </div>
 
-                      {/* Filename */}
-                      <div className="space-y-2">
-                        <Label className="text-sm font-medium">File Name</Label>
-                        <div className="flex gap-2">
+                      {/* Second Row: Subtitle and Link */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <Label className="text-sm font-medium">Subtitle (Optional)</Label>
                           <Input
-                            value={doc.filename}
-                            onChange={(e) => updateDocument(doc.id, 'filename', e.target.value)}
-                            placeholder="filename.pdf"
-                            className="flex-1"
+                            value={doc.subtitle || ''}
+                            onChange={(e) => updateDocument(doc.id, 'subtitle', e.target.value)}
+                            placeholder="Brief description or tagline"
                           />
-                          <div className="relative">
-                            <input
-                              type="file"
-                              accept=".pdf,.doc,.docx"
-                              onChange={(e) => handleFileUpload(doc.id, e)}
-                              className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                            />
-                            <Button
-                              type="button"
-                              size="sm"
-                              variant="outline"
-                              className="whitespace-nowrap"
-                            >
-                              <Upload className="h-4 w-4 mr-1" />
-                              Upload
-                            </Button>
-                          </div>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label className="text-sm font-medium">Link URL (Optional)</Label>
+                          <Input
+                            value={doc.linkUrl || ''}
+                            onChange={(e) => updateDocument(doc.id, 'linkUrl', e.target.value)}
+                            placeholder="https://example.com"
+                            type="url"
+                          />
                         </div>
                       </div>
                     </div>

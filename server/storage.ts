@@ -95,38 +95,50 @@ export class MemStorage implements IStorage {
     const defaultDocs = [
       {
         title: "Executive Summary",
+        subtitle: "Comprehensive overview of eciple's mission and market opportunity",
         filename: "eciple-executive-summary.pdf",
-        description: "Comprehensive overview of eciple's mission and market opportunity",
+        linkUrl: null,
+        description: "Detailed executive summary covering our vision, market opportunity, and growth strategy",
         displayOrder: 1
       },
       {
         title: "Pitch Deck",
+        subtitle: "Detailed presentation of our discipleship platform solution",
         filename: "eciple-pitch-deck.pdf",
-        description: "Detailed presentation of our discipleship platform solution",
+        linkUrl: null,
+        description: "Complete investor presentation showcasing our platform and market opportunity",
         displayOrder: 2
       },
       {
         title: "Financial Projections",
+        subtitle: "Revenue forecasts and investment return analysis",
         filename: "eciple-financial-projections.pdf",
-        description: "Revenue forecasts and investment return analysis",
+        linkUrl: null,
+        description: "Detailed financial models and investment return projections",
         displayOrder: 3
       },
       {
         title: "Market Analysis",
+        subtitle: "In-depth analysis of the discipleship technology market",
         filename: "eciple-market-analysis.pdf",
-        description: "In-depth analysis of the discipleship technology market",
+        linkUrl: null,
+        description: "Comprehensive market research and competitive landscape analysis",
         displayOrder: 4
       },
       {
         title: "Product Demo Guide",
+        subtitle: "Step-by-step guide to eciple platform features",
         filename: "eciple-product-demo.pdf",
-        description: "Step-by-step guide to eciple platform features",
+        linkUrl: null,
+        description: "Interactive guide showcasing key platform capabilities and user experience",
         displayOrder: 5
       },
       {
         title: "Technical Specifications",
+        subtitle: "Platform architecture and technology overview",
         filename: "eciple-technical-specs.pdf",
-        description: "Platform architecture and technology overview",
+        linkUrl: null,
+        description: "Technical documentation covering architecture, security, and scalability",
         displayOrder: 6
       }
     ];
@@ -271,6 +283,8 @@ export class MemStorage implements IStorage {
     const document: EcipleMatchDocument = {
       ...insertDocument,
       id,
+      subtitle: insertDocument.subtitle || null,
+      linkUrl: insertDocument.linkUrl || null,
       description: insertDocument.description || null,
       displayOrder: insertDocument.displayOrder || 0,
       isActive: true,
