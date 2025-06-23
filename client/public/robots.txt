@@ -1,0 +1,31 @@
+User-agent: *
+Allow: /
+Disallow: /eciplematch
+
+# Block specific search engine bots from the eciplematch page
+User-agent: Googlebot
+Disallow: /eciplematch
+
+User-agent: Bingbot
+Disallow: /eciplematch
+
+User-agent: Slurp
+Disallow: /eciplematch
+
+User-agent: DuckDuckBot
+Disallow: /eciplematch
+
+User-agent: Baiduspider
+Disallow: /eciplematch
+
+User-agent: YandexBot
+Disallow: /eciplematch
+
+User-agent: facebookexternalhit
+Disallow: /eciplematch
+
+User-agent: Twitterbot
+Disallow: /eciplematch
+
+User-agent: LinkedInBot
+Disallow: /eciplematch

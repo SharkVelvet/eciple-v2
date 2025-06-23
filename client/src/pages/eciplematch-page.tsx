@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, DollarSign, TrendingUp, Users, Target, Globe, Zap, Star, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
