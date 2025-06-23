@@ -994,25 +994,9 @@ export default function EcipleMatchPage() {
                     <h3 className="font-semibold text-[#223349] text-lg mb-1">
                       {doc.title}
                     </h3>
-                    {doc.subtitle && (
-                      <p className="text-[#15BEE2] text-sm font-medium mb-2">
-                        {doc.subtitle}
-                      </p>
-                    )}
                     <p className="text-gray-600 text-sm">
                       {doc.description}
                     </p>
-                    {doc.linkUrl && (
-                      <a 
-                        href={doc.linkUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#15BEE2] hover:text-[#223349] text-sm font-medium mt-2 inline-flex items-center gap-1 transition-colors"
-                      >
-                        View Online
-                        <ArrowRight className="h-3 w-3" />
-                      </a>
-                    )}
                   </div>
                   <Button
                     onClick={() => downloadDocument(doc.filename)}

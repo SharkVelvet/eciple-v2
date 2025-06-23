@@ -12,9 +12,7 @@ import { useLocation } from "wouter";
 interface Document {
   id: string;
   title: string;
-  subtitle?: string;
   filename: string;
-  linkUrl?: string;
   description: string;
   displayOrder?: number;
 }
@@ -112,9 +110,7 @@ export default function AdminDashboard() {
     const newDoc: Document = {
       id: Date.now().toString(),
       title: "New Document",
-      subtitle: "",
       filename: "new-document.pdf",
-      linkUrl: "",
       description: "Document description",
       displayOrder: documents.length
     };
@@ -270,27 +266,7 @@ export default function AdminDashboard() {
                         </div>
                       </div>
 
-                      {/* Second Row: Subtitle and Link */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                          <Label className="text-sm font-medium">Subtitle (Optional)</Label>
-                          <Input
-                            value={doc.subtitle || ''}
-                            onChange={(e) => updateDocument(doc.id, 'subtitle', e.target.value)}
-                            placeholder="Brief description or tagline"
-                          />
-                        </div>
 
-                        <div className="space-y-2">
-                          <Label className="text-sm font-medium">Link URL (Optional)</Label>
-                          <Input
-                            value={doc.linkUrl || ''}
-                            onChange={(e) => updateDocument(doc.id, 'linkUrl', e.target.value)}
-                            placeholder="https://example.com"
-                            type="url"
-                          />
-                        </div>
-                      </div>
                     </div>
 
                     {/* Delete Button */}
