@@ -83,7 +83,7 @@ export default function AdminLogin() {
               Admin Login
             </CardTitle>
             <p className="text-gray-600 mt-2">
-              Access the EcipleMatch admin dashboard
+              Access the Eciple Admin Dashboard
             </p>
           </CardHeader>
           
@@ -137,16 +137,6 @@ export default function AdminLogin() {
                 )}
               </Button>
             </form>
-            
-            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-              <p className="text-xs text-gray-500 text-center">
-                Default credentials for testing:
-              </p>
-              <p className="text-sm text-gray-700 text-center mt-1">
-                <strong>Username:</strong> admin<br />
-                <strong>Password:</strong> password123
-              </p>
-            </div>
           </CardContent>
         </Card>
       </motion.div>
