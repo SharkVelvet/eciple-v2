@@ -335,7 +335,7 @@ export default function AdminDashboard() {
                   <div className="space-y-2">
                     <Label className="text-sm font-medium">Description</Label>
                     <Textarea
-                      value={doc.description}
+                      value={doc.description || ''}
                       onChange={(e) => updateDocument(doc.id, 'description', e.target.value)}
                       placeholder="Document description"
                       rows={2}
