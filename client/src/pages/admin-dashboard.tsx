@@ -243,7 +243,7 @@ export default function AdminDashboard() {
         {/* Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-[#223349]">EcipleMatch Admin Dashboard</h1>
+            <h1 className="text-3xl font-bold text-[#223349]">Eciple Admin Dashboard</h1>
             <p className="text-gray-600 mt-2">Manage documents and page content</p>
           </div>
           <div className="flex gap-4">
