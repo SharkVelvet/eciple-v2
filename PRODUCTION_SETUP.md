@@ -37,11 +37,13 @@ If you're using static hosting that doesn't support server-side environment vari
 - Render
 - Replit Deployments
 
-## Updated Admin Credentials (Production Ready)
+## Updated Admin Credentials (Testing)
 
-The admin system now uses these ultra-secure credentials:
-- **Username**: `eciple_admin_c1a65db7`
-- **Password**: `XKL69EE7sZ3wskomhVLqaw100!59004861`
+The admin system now uses these simple test credentials:
+- **Username**: `admin`
+- **Password**: `test123`
+
+*Note: These are simplified credentials for testing. Change to secure credentials for production use.*
 
 ## Security Features Added:
 - Automatic session secret generation for production
