@@ -36,7 +36,7 @@ eciple is a full-stack web application designed to revolutionize discipleship ma
 - Session-based authentication with configurable session duration
 - Password hashing using Node.js crypto with scrypt for main auth, bcrypt for admin auth
 - Protected routes with authentication middleware
-- Admin dashboard accessible at /admin-login with credentials: admin/password123
+- Admin dashboard accessible at /admin-login with ultra-secure credentials
 
 ### Content Management
 - Dynamic content editing system with database persistence
@@ -129,6 +129,7 @@ Changelog:
 - June 23, 2025. Enhanced document management with subtitle and link functionality
 - June 23, 2025. Created admin dashboard with full CRUD operations for EcipleMatch documents
 - June 24, 2025. Restored save buttons in admin dashboard per client preference while maintaining automatic saving functionality
+- June 24, 2025. Implemented ultra-secure admin credentials replacing weak admin/password123 with cryptographically strong username and 30+ character password
 ```
 
 ## User Preferences

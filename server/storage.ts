@@ -72,13 +72,14 @@ export class MemStorage implements IStorage {
   }
 
   private initializeDefaultAdmin() {
-    // Pre-computed bcrypt hash for password 'password123'
-    // Generated with: bcrypt.hash('password123', 12)
-    const passwordHash = '$2b$12$c2DVCeNZJDoEIc/OnfLAGunurnzgBo.t9MbcLytg9ynTJyUvKv/9m';
+    // Ultra-secure admin credentials with bcrypt hash (salt rounds: 12)
+    // Username: eciple_admin_c1a65db7
+    // Password: XKL69EE7sZ3wskomhVLqaw100!59004861
+    const passwordHash = '$2b$12$sdTcnT/3SKane9kKzdAvgu982.DMzlEQnRZWfOYFIR7O8i/frngxy';
     
     const defaultAdmin: AdminUser = {
       id: this.currentAdminId++,
-      username: 'admin',
+      username: 'eciple_admin_c1a65db7',
       passwordHash: passwordHash,
       email: 'admin@eciple.com',
       role: 'admin',
