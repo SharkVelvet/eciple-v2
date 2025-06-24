@@ -128,6 +128,7 @@ Changelog:
 - June 23, 2025. Added secure admin authentication system with database storage
 - June 23, 2025. Enhanced document management with subtitle and link functionality
 - June 23, 2025. Created admin dashboard with full CRUD operations for EcipleMatch documents
+- June 24, 2025. Restored save buttons in admin dashboard per client preference while maintaining automatic saving functionality
 ```
 
 ## User Preferences

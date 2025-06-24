@@ -332,6 +332,35 @@ export default function AdminDashboard() {
                       rows={2}
                     />
                   </div>
+
+                  {/* Save Button */}
+                  <div className="flex justify-end pt-4 border-t border-gray-100">
+                    <Button
+                      onClick={() => {
+                        // Manual save action - provides user feedback for explicit save
+                        updateDocumentMutation.mutate({
+                          id: doc.id,
+                          title: doc.title,
+                          filename: doc.filename,
+                          description: doc.description
+                        });
+                      }}
+                      disabled={updateDocumentMutation.isPending}
+                      className="bg-[#15BEE2] hover:bg-[#15BEE2]/90 text-white"
+                    >
+                      {updateDocumentMutation.isPending ? (
+                        <>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                          Saving...
+                        </>
+                      ) : (
+                        <>
+                          <Save className="h-4 w-4 mr-2" />
+                          Save Changes
+                        </>
+                      )}
+                    </Button>
+                  </div>
                 </motion.div>
               ))}
 
