@@ -26,6 +26,7 @@ export default function AdminDashboard() {
   const { toast } = useToast();
   const [pageTitle, setPageTitle] = useState("Investment Documents");
   const [isEditing, setIsEditing] = useState<number | null>(null);
+  const [documents, setDocuments] = useState<Document[]>([]);
   const queryClient = useQueryClient();
 
   // Get admin session token
@@ -58,7 +59,12 @@ export default function AdminDashboard() {
     },
   });
 
-  const documents = documentsData || [];
+  // Update local state when data changes
+  useEffect(() => {
+    if (documentsData) {
+      setDocuments(documentsData);
+    }
+  }, [documentsData]);
 
   useEffect(() => {
     // Check if logged in
@@ -174,8 +180,11 @@ export default function AdminDashboard() {
   };
 
   const updateDocument = (id: number, field: keyof Document, value: string) => {
-    const updates = { [field]: value };
-    updateDocumentMutation.mutate({ id, updates });
+    setDocuments(prev => 
+      prev.map(doc => 
+        doc.id === id ? { ...doc, [field]: value } : doc
+      )
+    );
   };
 
   const handleFileUpload = (docId: number, event: React.ChangeEvent<HTMLInputElement>) => {
@@ -193,7 +202,7 @@ export default function AdminDashboard() {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-[#223349]">EcipleMatch Admin Dashboard</h1>
-            <p className="text-gray-600 mt-2">Manage documents and page content • Changes save automatically</p>
+            <p className="text-gray-600 mt-2">Manage documents and page content</p>
           </div>
           <div className="flex gap-4">
             <Button
@@ -340,9 +349,11 @@ export default function AdminDashboard() {
                         // Manual save action - provides user feedback for explicit save
                         updateDocumentMutation.mutate({
                           id: doc.id,
-                          title: doc.title,
-                          filename: doc.filename,
-                          description: doc.description
+                          updates: {
+                            title: doc.title,
+                            filename: doc.filename,
+                            description: doc.description
+                          }
                         });
                       }}
                       disabled={updateDocumentMutation.isPending}
