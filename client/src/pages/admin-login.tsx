@@ -83,7 +83,7 @@ export default function AdminLogin() {
               Admin Login
             </CardTitle>
             <p className="text-gray-600 mt-2">
-              Access the Eciple Admin Dashboard
+              Access the Eciple Admin DashboardZ
             </p>
           </CardHeader>
           
