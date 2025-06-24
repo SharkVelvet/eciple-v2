@@ -16,26 +16,44 @@ DATABASE_URL=your-database-connection-string
 NODE_ENV=production
 ```
 
-## How to Set Environment Variables on Your Hosting Platform
+## Deployment Platform Configuration
 
-### For most hosting platforms (Vercel, Netlify, etc.):
-1. Go to your project dashboard
-2. Navigate to Environment Variables or Settings
-3. Add the following variables:
+### The Problem: Static vs Server Deployment
+The admin authentication requires a Node.js server to work. If your hosting platform is deploying this as a static site, the login won't work.
 
-**SESSION_SECRET**: Generate a secure 64-character random string:
+### Solution: Use a Node.js Hosting Platform
+
+**Recommended Platforms:**
+1. **Vercel** (Free tier available)
+   - Automatically detects Node.js
+   - Set environment variables in project settings
+   - Uses the `vercel.json` configuration file
+
+2. **Netlify** (Free tier available)  
+   - Supports serverless functions
+   - Set environment variables in site settings
+   - Uses the `netlify.toml` configuration file
+
+3. **Railway** (Free tier available)
+   - Full Node.js hosting
+   - Simple git-based deployment
+
+4. **Render** (Free tier available)
+   - Node.js web services
+   - Environment variables in dashboard
+
+### How to Set Environment Variables:
+1. Go to your hosting platform dashboard
+2. Find "Environment Variables" or "Settings"
+3. Add: `SESSION_SECRET` with a random 64-character string
+
+Generate session secret:
 ```bash
-# Use this command to generate a secure session secret:
 node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
 ```
 
-### For GitHub Pages or Static Hosting:
-If you're using static hosting that doesn't support server-side environment variables, the admin authentication won't work because it requires a Node.js server. You'll need to use a platform that supports Node.js like:
-- Vercel
-- Netlify
-- Railway
-- Render
-- Replit Deployments
+### GitHub Pages/Static Sites:
+⚠️ **Will NOT work** - GitHub Pages only serves static files, no server-side authentication possible.
 
 ## Updated Admin Credentials (Testing)
 
