@@ -15,6 +15,9 @@ interface Document {
   title: string;
   filename: string;
   description: string | null;
+  fileData: string | null;
+  contentType: string | null;
+  fileSize: number | null;
   displayOrder: number;
   isActive: boolean;
   createdAt: string;
@@ -201,7 +204,7 @@ export default function AdminDashboard() {
 
         const response = await fetch('/api/admin/upload-document', {
           method: 'POST',
-          headers: getAuthHeaders(),
+          headers: getAuthHeaders(false),
           body: formData,
         });
 

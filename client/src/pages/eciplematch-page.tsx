@@ -17,9 +17,7 @@ import Footer from "@/components/Footer";
 interface EcipleDocument {
   id: number;
   title: string;
-  subtitle: string | null;
   filename: string;
-  linkUrl: string | null;
   description: string | null;
   displayOrder: number;
   isActive: boolean;
