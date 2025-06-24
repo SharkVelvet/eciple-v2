@@ -1,7 +1,9 @@
 import { Express, Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt";
 import { randomBytes } from "crypto";
+import multer from "multer";
 import { storage } from "./storage";
+import { insertEcipleMatchDocumentSchema } from "@shared/schema";
 import { z } from "zod";
 
 // Session duration: 24 hours
@@ -58,6 +60,20 @@ async function requireAdminAuth(req: Request, res: Response, next: NextFunction)
 function generateSessionId(): string {
   return randomBytes(64).toString('hex');
 }
+
+// Setup multer for file uploads (memory storage)
+const upload = multer({ 
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only PDF and Word documents are allowed'));
+    }
+  }
+});
 
 export function setupAdminAuth(app: Express) {
   // Clean expired sessions periodically
@@ -147,6 +163,36 @@ export function setupAdminAuth(app: Express) {
     } catch (error) {
       console.error('Get documents error:', error);
       res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  // File upload endpoint
+  app.post("/api/admin/upload-document", requireAdminAuth, upload.single('file'), async (req: Request, res: Response) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+      }
+
+      const { title, description } = req.body;
+      
+      // Convert file to base64 for storage
+      const fileData = req.file.buffer.toString('base64');
+      
+      const documentData = {
+        title: title || req.file.originalname,
+        filename: req.file.originalname,
+        description: description || '',
+        fileData,
+        contentType: req.file.mimetype,
+        fileSize: req.file.size,
+        displayOrder: 0
+      };
+
+      const document = await storage.createEcipleMatchDocument(documentData);
+      res.status(201).json({ document });
+    } catch (error) {
+      console.error('File upload error:', error);
+      res.status(500).json({ error: "Failed to upload file" });
     }
   });
 
