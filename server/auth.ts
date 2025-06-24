@@ -36,14 +36,22 @@ export function setupAuth(app: Express) {
     checkPeriod: 86400000, // 24 hours
   });
 
+  // Generate secure session secret if not provided in environment
+  const sessionSecret = process.env.SESSION_SECRET || 
+    (process.env.NODE_ENV === 'production' 
+      ? require('crypto').randomBytes(64).toString('hex')
+      : "eciple-super-secret-key-for-development-only");
+
   const sessionSettings: session.SessionOptions = {
-    secret: process.env.SESSION_SECRET || "eciple-super-secret-key-for-development-only",
+    secret: sessionSecret,
     resave: false,
     saveUninitialized: false,
     store: sessionStore,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24, // 24 hours
       sameSite: "lax",
+      secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+      httpOnly: true, // Prevent XSS attacks
     }
   };
 
