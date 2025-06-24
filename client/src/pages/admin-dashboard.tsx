@@ -8,21 +8,57 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Trash2, Plus, Save, LogOut, Edit3, FileText, Upload } from "lucide-react";
 import { useLocation } from "wouter";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface Document {
-  id: string;
+  id: number;
   title: string;
   filename: string;
-  description: string;
-  displayOrder?: number;
+  description: string | null;
+  displayOrder: number;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export default function AdminDashboard() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
-  const [documents, setDocuments] = useState<Document[]>([]);
-  const [pageTitle, setPageTitle] = useState("");
-  const [isEditing, setIsEditing] = useState<string | null>(null);
+  const [pageTitle, setPageTitle] = useState("Investment Documents");
+  const [isEditing, setIsEditing] = useState<number | null>(null);
+  const queryClient = useQueryClient();
+
+  // Get admin session token
+  const getAuthHeaders = () => {
+    const token = localStorage.getItem('adminSessionToken');
+    return {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    };
+  };
+
+  // Fetch documents from database
+  const { data: documentsData, isLoading } = useQuery({
+    queryKey: ['/api/admin/eciple-documents'],
+    queryFn: async () => {
+      const response = await fetch('/api/admin/eciple-documents', {
+        headers: getAuthHeaders(),
+      });
+      if (!response.ok) {
+        if (response.status === 401) {
+          localStorage.removeItem('adminLoggedIn');
+          localStorage.removeItem('adminSessionToken');
+          setLocation('/admin-login');
+          throw new Error('Session expired');
+        }
+        throw new Error('Failed to fetch documents');
+      }
+      const data = await response.json();
+      return data.documents as Document[];
+    },
+  });
+
+  const documents = documentsData || [];
 
   useEffect(() => {
     // Check if logged in
@@ -31,65 +67,91 @@ export default function AdminDashboard() {
       setLocation('/admin-login');
       return;
     }
-
-    // Load existing data from localStorage
-    const savedDocuments = localStorage.getItem('eciplematch-documents');
-    const savedTitle = localStorage.getItem('eciplematch-title');
-    
-    if (savedDocuments) {
-      setDocuments(JSON.parse(savedDocuments));
-    } else {
-      // Initialize with default documents
-      const defaultDocs = [
-        {
-          id: "1",
-          title: "Executive Summary",
-          filename: "eciple-executive-summary.pdf",
-          description: "Comprehensive overview of eciple's mission and market opportunity"
-        },
-        {
-          id: "2",
-          title: "Pitch Deck",
-          filename: "eciple-pitch-deck.pdf", 
-          description: "Detailed presentation of our discipleship platform solution"
-        },
-        {
-          id: "3",
-          title: "Financial Projections",
-          filename: "eciple-financial-projections.pdf",
-          description: "Revenue forecasts and investment return analysis"
-        },
-        {
-          id: "4",
-          title: "Market Analysis",
-          filename: "eciple-market-analysis.pdf",
-          description: "In-depth analysis of the discipleship technology market"
-        },
-        {
-          id: "5",
-          title: "Product Demo Guide",
-          filename: "eciple-product-demo.pdf",
-          description: "Step-by-step guide to eciple platform features"
-        },
-        {
-          id: "6",
-          title: "Technical Specifications",
-          filename: "eciple-technical-specs.pdf",
-          description: "Platform architecture and technology overview"
-        }
-      ];
-      setDocuments(defaultDocs);
-    }
-
-    if (savedTitle) {
-      setPageTitle(savedTitle);
-    } else {
-      setPageTitle("Investment Documents");
-    }
   }, [setLocation]);
+
+  // Update document mutation
+  const updateDocumentMutation = useMutation({
+    mutationFn: async ({ id, updates }: { id: number; updates: Partial<Document> }) => {
+      const response = await fetch(`/api/admin/eciple-documents/${id}`, {
+        method: 'PUT',
+        headers: getAuthHeaders(),
+        body: JSON.stringify(updates),
+      });
+      if (!response.ok) throw new Error('Failed to update document');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/eciple-documents'] });
+      toast({
+        title: "Document updated",
+        description: "Document has been saved successfully",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Update failed",
+        description: "Failed to update document",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Create document mutation
+  const createDocumentMutation = useMutation({
+    mutationFn: async (newDoc: { title: string; filename: string; description: string; displayOrder: number }) => {
+      const response = await fetch('/api/admin/eciple-documents', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify(newDoc),
+      });
+      if (!response.ok) throw new Error('Failed to create document');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/eciple-documents'] });
+      toast({
+        title: "Document created",
+        description: "New document has been added successfully",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Creation failed",
+        description: "Failed to create document",
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Delete document mutation
+  const deleteDocumentMutation = useMutation({
+    mutationFn: async (id: number) => {
+      const response = await fetch(`/api/admin/eciple-documents/${id}`, {
+        method: 'DELETE',
+        headers: getAuthHeaders(),
+      });
+      if (!response.ok) throw new Error('Failed to delete document');
+      return response.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/admin/eciple-documents'] });
+      toast({
+        title: "Document deleted",
+        description: "Document has been removed successfully",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Deletion failed",
+        description: "Failed to delete document",
+        variant: "destructive",
+      });
+    },
+  });
 
   const handleLogout = () => {
     localStorage.removeItem('adminLoggedIn');
+    localStorage.removeItem('adminSessionToken');
     toast({
       title: "Logged out",
       description: "You have been logged out successfully",
@@ -97,51 +159,30 @@ export default function AdminDashboard() {
     setLocation('/admin-login');
   };
 
-  const saveChanges = () => {
-    localStorage.setItem('eciplematch-documents', JSON.stringify(documents));
-    localStorage.setItem('eciplematch-title', pageTitle);
-    toast({
-      title: "Changes saved",
-      description: "All changes have been saved successfully",
-    });
-  };
-
   const addDocument = () => {
-    const newDoc: Document = {
-      id: Date.now().toString(),
+    const newDoc = {
       title: "New Document",
       filename: "new-document.pdf",
       description: "Document description",
       displayOrder: documents.length
     };
-    setDocuments([...documents, newDoc]);
-    setIsEditing(newDoc.id);
+    createDocumentMutation.mutate(newDoc);
   };
 
-  const deleteDocument = (id: string) => {
-    setDocuments(documents.filter(doc => doc.id !== id));
-    toast({
-      title: "Document deleted",
-      description: "Document has been removed from the list",
-    });
+  const deleteDocument = (id: number) => {
+    deleteDocumentMutation.mutate(id);
   };
 
-  const updateDocument = (id: string, field: keyof Document, value: string) => {
-    setDocuments(documents.map(doc => 
-      doc.id === id ? { ...doc, [field]: value } : doc
-    ));
+  const updateDocument = (id: number, field: keyof Document, value: string) => {
+    const updates = { [field]: value };
+    updateDocumentMutation.mutate({ id, updates });
   };
 
-  const handleFileUpload = (docId: string, event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = (docId: number, event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      // In a real implementation, you would upload the file to a server
-      // For now, we'll just update the filename
+      // Update the filename in the database
       updateDocument(docId, 'filename', file.name);
-      toast({
-        title: "File selected",
-        description: `Selected file: ${file.name}`,
-      });
     }
   };
 
@@ -152,16 +193,9 @@ export default function AdminDashboard() {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-[#223349]">EcipleMatch Admin Dashboard</h1>
-            <p className="text-gray-600 mt-2">Manage documents and page content</p>
+            <p className="text-gray-600 mt-2">Manage documents and page content • Changes save automatically</p>
           </div>
           <div className="flex gap-4">
-            <Button
-              onClick={saveChanges}
-              className="bg-[#15BEE2] hover:bg-[#15BEE2]/90 text-white"
-            >
-              <Save className="h-4 w-4 mr-2" />
-              Save Changes
-            </Button>
             <Button
               onClick={handleLogout}
               variant="outline"
@@ -215,8 +249,16 @@ export default function AdminDashboard() {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="space-y-6">
-              {documents.map((doc) => (
+            {isLoading ? (
+              <div className="flex justify-center py-12">
+                <div className="text-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#15BEE2] mx-auto mb-4"></div>
+                  <p className="text-gray-500">Loading documents...</p>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-6">
+                {documents.map((doc) => (
                 <motion.div
                   key={doc.id}
                   initial={{ opacity: 0, y: 10 }}
@@ -293,13 +335,14 @@ export default function AdminDashboard() {
                 </motion.div>
               ))}
 
-              {documents.length === 0 && (
-                <div className="text-center py-12 text-gray-500">
-                  <FileText className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                  <p>No documents yet. Click "Add Document" to get started.</p>
-                </div>
-              )}
-            </div>
+                {documents.length === 0 && (
+                  <div className="text-center py-12 text-gray-500">
+                    <FileText className="h-12 w-12 mx-auto mb-4 opacity-50" />
+                    <p>No documents yet. Click "Add Document" to get started.</p>
+                  </div>
+                )}
+              </div>
+            )}
           </CardContent>
         </Card>
 
