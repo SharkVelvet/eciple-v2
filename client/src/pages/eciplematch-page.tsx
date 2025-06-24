@@ -63,10 +63,10 @@ export default function EcipleMatchPage() {
     setShowDocumentModal(true);
   };
 
-  const downloadDocument = (filename: string) => {
+  const downloadDocument = (documentId: number, filename: string) => {
     // Create a temporary anchor element to trigger download
     const link = document.createElement('a');
-    link.href = `/documents/${filename}`;
+    link.href = `/api/download-document/${documentId}`;
     link.download = filename;
     document.body.appendChild(link);
     link.click();
@@ -999,7 +999,7 @@ export default function EcipleMatchPage() {
                     </p>
                   </div>
                   <Button
-                    onClick={() => downloadDocument(doc.filename)}
+                    onClick={() => downloadDocument(doc.id, doc.filename)}
                     className="bg-[#15BEE2] hover:bg-[#15BEE2]/90 text-white px-6 py-2 rounded-full flex items-center gap-2 whitespace-nowrap"
                   >
                     <Download className="h-4 w-4" />

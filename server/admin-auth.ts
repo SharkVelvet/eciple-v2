@@ -259,11 +259,51 @@ export function setupAdminAuth(app: Express) {
     }
   });
 
+  // Download document endpoint
+  app.get("/api/download-document/:id", async (req: Request, res: Response) => {
+    try {
+      const id = parseInt(req.params.id);
+      if (isNaN(id)) {
+        return res.status(400).json({ error: "Invalid document ID" });
+      }
+
+      const documents = await storage.getEcipleMatchDocuments();
+      const document = documents.find(doc => doc.id === id);
+      
+      if (!document || !document.fileData) {
+        return res.status(404).json({ error: "Document not found" });
+      }
+
+      // Convert base64 back to buffer
+      const fileBuffer = Buffer.from(document.fileData, 'base64');
+      
+      res.setHeader('Content-Type', document.contentType || 'application/octet-stream');
+      res.setHeader('Content-Disposition', `attachment; filename="${document.filename}"`);
+      res.setHeader('Content-Length', fileBuffer.length);
+      
+      res.send(fileBuffer);
+    } catch (error) {
+      console.error('Download error:', error);
+      res.status(500).json({ error: "Failed to download file" });
+    }
+  });
+
   // Public endpoint to get EcipleMatch documents (for the modal)
   app.get("/api/eciple-documents", async (req: Request, res: Response) => {
     try {
       const documents = await storage.getEcipleMatchDocuments();
-      res.json({ documents });
+      // Don't send file data in list view for performance
+      const publicDocuments = documents.map(doc => ({
+        id: doc.id,
+        title: doc.title,
+        filename: doc.filename,
+        description: doc.description,
+        displayOrder: doc.displayOrder,
+        isActive: doc.isActive,
+        createdAt: doc.createdAt,
+        updatedAt: doc.updatedAt
+      }));
+      res.json({ documents: publicDocuments });
     } catch (error) {
       console.error('Get public documents error:', error);
       res.status(500).json({ error: "Internal server error" });

@@ -283,9 +283,10 @@ export class MemStorage implements IStorage {
     const document: EcipleMatchDocument = {
       ...insertDocument,
       id,
-      subtitle: insertDocument.subtitle || null,
-      linkUrl: insertDocument.linkUrl || null,
       description: insertDocument.description || null,
+      fileData: insertDocument.fileData || null,
+      contentType: insertDocument.contentType || null,
+      fileSize: insertDocument.fileSize || null,
       displayOrder: insertDocument.displayOrder || 0,
       isActive: true,
       createdAt: new Date(),

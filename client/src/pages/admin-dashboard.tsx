@@ -30,12 +30,15 @@ export default function AdminDashboard() {
   const queryClient = useQueryClient();
 
   // Get admin session token
-  const getAuthHeaders = () => {
+  const getAuthHeaders = (includeContentType = true) => {
     const token = localStorage.getItem('adminSessionToken');
-    return {
-      'Content-Type': 'application/json',
+    const headers: Record<string, string> = {
       'Authorization': `Bearer ${token}`
     };
+    if (includeContentType) {
+      headers['Content-Type'] = 'application/json';
+    }
+    return headers;
   };
 
   // Fetch documents from database
@@ -187,11 +190,47 @@ export default function AdminDashboard() {
     );
   };
 
-  const handleFileUpload = (docId: number, event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (docId: number, event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      // Update the filename in the database
-      updateDocument(docId, 'filename', file.name);
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('title', documents.find(doc => doc.id === docId)?.title || file.name);
+        formData.append('description', documents.find(doc => doc.id === docId)?.description || '');
+
+        const response = await fetch('/api/admin/upload-document', {
+          method: 'POST',
+          headers: getAuthHeaders(),
+          body: formData,
+        });
+
+        if (!response.ok) throw new Error('Upload failed');
+        
+        const data = await response.json();
+        
+        // Update the document with the new file data
+        updateDocumentMutation.mutate({
+          id: docId,
+          updates: {
+            filename: file.name,
+            fileData: data.document.fileData,
+            contentType: data.document.contentType,
+            fileSize: data.document.fileSize
+          }
+        });
+
+        toast({
+          title: "File uploaded",
+          description: "File has been uploaded successfully",
+        });
+      } catch (error) {
+        toast({
+          title: "Upload failed",
+          description: "Failed to upload file",
+          variant: "destructive",
+        });
+      }
     }
   };
 

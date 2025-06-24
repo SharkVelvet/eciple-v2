@@ -83,10 +83,11 @@ export const ecipleMatchDocuments = pgTable("eciple_match_documents", {
 
 export const insertEcipleMatchDocumentSchema = createInsertSchema(ecipleMatchDocuments).pick({
   title: true,
-  subtitle: true,
   filename: true,
-  linkUrl: true,
   description: true,
+  fileData: true,
+  contentType: true,
+  fileSize: true,
   displayOrder: true,
 });
 
