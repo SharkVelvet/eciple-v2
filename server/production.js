@@ -28,7 +28,7 @@ neonConfig.webSocketConstructor = ws;
 let db = null;
 if (process.env.DATABASE_URL) {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-  db = drizzle(pool, { schema: { users, adminUsers } });
+  db = drizzle(pool, { schema: { users, adminUsers, adminSessions, ecipleMatchDocuments } });
 }
 
 // Database storage for production
@@ -322,7 +322,8 @@ app.post("/api/admin/login", async (req, res) => {
     await db.insert(adminSessions).values({
       sessionId: sessionToken,
       userId: adminUser.id,
-      expiresAt: expiresAt
+      expiresAt: expiresAt,
+      createdAt: new Date()
     });
 
     // Update last login
