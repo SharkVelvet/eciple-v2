@@ -136,6 +136,7 @@ Changelog:
 - June 25, 2025. Fixed homepage branding issue - replaced FOTYPE project content with proper eciple discipleship platform branding and styling
 - June 25, 2025. Resolved admin authentication with working credentials (eciple_admin_2024/EcipleSecure2024Admin!@#$%^&*()_+) and document creation functionality fully operational
 - June 25, 2025. Removed password protection from homepage - now provides direct navigation to three main sections: Platform Overview (/home), Investor Portal (/investors), and EcipleMatch (/eciplematch)
+- June 25, 2025. Fixed file upload UI refresh and EcipleMatch modal document display - added active document visibility controls in admin dashboard
 ```
 
 ## User Preferences
