@@ -110,7 +110,7 @@ export default function InvestorPage() {
               transition={{ duration: 0.6 }}
             >
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-sans" style={{ lineHeight: '1.28', textWrap: 'balance', widows: '2', orphans: '2' }}>
-                <span className="text-[#223349]">The discipleship crisis is real:</span><br />
+                <span className="text-[#223349]">The discipleship crisis is real</span><br />
                 Join eciple in transforming the future of spiritual&nbsp;growth.
               </h1>
               
