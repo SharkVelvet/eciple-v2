@@ -369,8 +369,8 @@ app.get("/api/admin/verify", requireAdminAuth, async (req, res) => {
 app.get("/api/eciple-documents", async (req, res) => {
   try {
     const documents = await db.select().from(ecipleMatchDocuments)
-      .where(eq(ecipleMatchDocuments.isActive, true))
-      .orderBy(ecipleMatchDocuments.displayOrder);
+      .where(eq(ecipleMatchDocuments.is_active, true))
+      .orderBy(ecipleMatchDocuments.display_order);
     res.json(documents);
   } catch (error) {
     console.error('Get documents error:', error);
@@ -381,7 +381,7 @@ app.get("/api/eciple-documents", async (req, res) => {
 app.get("/api/admin/eciple-documents", requireAdminAuth, async (req, res) => {
   try {
     const documents = await db.select().from(ecipleMatchDocuments)
-      .orderBy(ecipleMatchDocuments.displayOrder);
+      .orderBy(ecipleMatchDocuments.display_order);
     res.json({ documents });
   } catch (error) {
     console.error('Get admin documents error:', error);
@@ -403,13 +403,13 @@ app.post("/api/admin/eciple-documents", requireAdminAuth, async (req, res) => {
       title,
       filename,
       description: description || null,
-      displayOrder: displayOrder || 0,
-      isActive: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      fileData: null,
-      contentType: null,
-      fileSize: null
+      display_order: displayOrder || 0,
+      is_active: true,
+      created_at: new Date(),
+      updated_at: new Date(),
+      file_data: null,
+      content_type: null,
+      file_size: null
     };
 
     const [document] = await db.insert(ecipleMatchDocuments)
@@ -434,7 +434,7 @@ app.put("/api/admin/eciple-documents/:id", requireAdminAuth, async (req, res) =>
 
     const updates = {
       ...req.body,
-      updatedAt: new Date()
+      updated_at: new Date()
     };
 
     const [document] = await db.update(ecipleMatchDocuments)
