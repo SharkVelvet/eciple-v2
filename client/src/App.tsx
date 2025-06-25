@@ -21,11 +21,11 @@ import { ProtectedRoute } from "@/lib/protected-route";
 function Router() {
   return (
     <Switch>
-      {/* Main site - show welcome page first */}
-      <Route path="/" component={WelcomePage} />
+      {/* Main site - show comparison page as homepage */}
+      <Route path="/" component={ComparisonPage} />
       
-      {/* Main site alternate route */}
-      <Route path="/home" component={ComparisonPage} />
+      {/* Welcome page route */}
+      <Route path="/welcome" component={WelcomePage} />
       
       {/* Policy pages */}
       <Route path="/cookie-policy" component={CookiePolicyPage} />
