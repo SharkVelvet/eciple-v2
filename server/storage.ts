@@ -329,7 +329,9 @@ export class MemStorage implements IStorage {
   }
 }
 
-// Database storage implementation for production
+// Remove duplicate DatabaseStorage - using production.js for live deployment
+
+// Simplified database storage that works with both dev and production
 export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
     const [user] = await db.select().from(users).where(eq(users.id, id));
@@ -342,18 +344,12 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const [user] = await db
-      .insert(users)
-      .values(insertUser)
-      .returning();
+    const [user] = await db.insert(users).values(insertUser).returning();
     return user;
   }
 
   async createContactRequest(contactData: InsertContactRequest): Promise<ContactRequest> {
-    const [contact] = await db
-      .insert(contactRequests)
-      .values(contactData)
-      .returning();
+    const [contact] = await db.insert(contactRequests).values(contactData).returning();
     return contact;
   }
 
@@ -377,29 +373,20 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createAdminUser(insertAdmin: InsertAdminUser): Promise<AdminUser> {
-    const [admin] = await db
-      .insert(adminUsers)
-      .values(insertAdmin)
-      .returning();
+    const [admin] = await db.insert(adminUsers).values(insertAdmin).returning();
     return admin;
   }
 
   async updateAdminLastLogin(id: number): Promise<void> {
-    await db
-      .update(adminUsers)
-      .set({ lastLogin: new Date() })
-      .where(eq(adminUsers.id, id));
+    await db.update(adminUsers).set({ lastLogin: new Date() }).where(eq(adminUsers.id, id));
   }
 
   async createAdminSession(sessionId: string, userId: number, expiresAt: Date): Promise<AdminSession> {
-    const [session] = await db
-      .insert(adminSessions)
-      .values({
-        id: sessionId,
-        userId,
-        expiresAt
-      })
-      .returning();
+    const [session] = await db.insert(adminSessions).values({
+      id: sessionId,
+      userId,
+      expiresAt
+    }).returning();
     return session;
   }
 
@@ -422,31 +409,24 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createEcipleMatchDocument(insertDocument: InsertEcipleMatchDocument): Promise<EcipleMatchDocument> {
-    const [document] = await db
-      .insert(ecipleMatchDocuments)
-      .values(insertDocument)
-      .returning();
-    return document;
+    const [doc] = await db.insert(ecipleMatchDocuments).values(insertDocument).returning();
+    return doc;
   }
 
   async updateEcipleMatchDocument(id: number, updates: Partial<InsertEcipleMatchDocument>): Promise<EcipleMatchDocument | undefined> {
-    const [document] = await db
-      .update(ecipleMatchDocuments)
+    const [doc] = await db.update(ecipleMatchDocuments)
       .set(updates)
       .where(eq(ecipleMatchDocuments.id, id))
       .returning();
-    return document || undefined;
+    return doc || undefined;
   }
 
   async deleteEcipleMatchDocument(id: number): Promise<void> {
-    await db
-      .update(ecipleMatchDocuments)
+    await db.update(ecipleMatchDocuments)
       .set({ isActive: false })
       .where(eq(ecipleMatchDocuments.id, id));
   }
 }
 
-// Use database storage for production, memory storage for development
-export const storage = process.env.NODE_ENV === 'production' 
-  ? new DatabaseStorage() 
-  : new MemStorage();
+// Use memory storage for now, we'll handle production separately
+export const storage = new MemStorage();

@@ -72,6 +72,13 @@ async function initializeDatabase() {
   }
 }
 
+// Auto-initialize database when DATABASE_URL is present
+if (process.env.DATABASE_URL && process.env.NODE_ENV === 'production') {
+  initializeDatabase().catch(error => {
+    console.error('Database initialization failed:', error);
+  });
+}
+
 // Run initialization if this file is executed directly
 if (require.main === module) {
   initializeDatabase()
