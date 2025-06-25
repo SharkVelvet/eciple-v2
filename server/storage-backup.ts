@@ -46,7 +46,6 @@ export interface IStorage {
   deleteEcipleMatchDocument(id: number): Promise<void>;
 }
 
-// Memory storage for development
 export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private contacts: Map<number, ContactRequest>;
@@ -68,22 +67,30 @@ export class MemStorage implements IStorage {
     this.currentContactId = 1;
     this.currentAdminId = 1;
     this.currentDocumentId = 1;
+
+    // Initialize with default admin user (securely hashed password)
     this.initializeDefaultAdmin();
     this.initializeDefaultDocuments();
   }
 
   private initializeDefaultAdmin() {
+    // Ultra-secure admin credentials
+    // Username: eciple_admin_2024
+    // Password: EcipleSecure2024Admin!@#$%^&*()_+
+    const passwordHash = '$2b$10$PKU6yrkB7QrZQxl0gR1NDeqVKbUdcVk3kYr3BtKHAktpv/dMEid.6';
+    
     const defaultAdmin: AdminUser = {
       id: this.currentAdminId++,
-      username: "eciple_admin_2024",
-      passwordHash: "$2b$12$qh3PQ8Z3PQ8Z3PQ8Z3PQ8O5K5P8Z3PQ8Z3PQ8Z3PQ8Z3PQ8Z3PQ8Z3",
-      email: "admin@eciple.com",
-      role: "admin",
+      username: 'eciple_admin_2024',
+      passwordHash: passwordHash,
+      email: 'admin@eciple.com',
+      role: 'admin',
       isActive: true,
       lastLogin: null,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
+    
     this.adminUsers.set(defaultAdmin.id, defaultAdmin);
   }
 
@@ -91,27 +98,65 @@ export class MemStorage implements IStorage {
     const defaultDocs = [
       {
         title: "Executive Summary",
-        filename: "executive-summary.pdf",
-        description: "Comprehensive overview of eciple's vision, market opportunity, and business strategy",
-        displayOrder: 0,
-        isActive: true
+        filename: "eciple-executive-summary.pdf",
+        description: "Detailed executive summary covering our vision, market opportunity, and growth strategy",
+        fileData: null,
+        contentType: null,
+        fileSize: null,
+        displayOrder: 1
       },
       {
         title: "Pitch Deck",
         filename: "eciple-pitch-deck.pdf",
-        description: "Detailed presentation outlining eciple's innovative discipleship platform",
-        displayOrder: 1,
-        isActive: true
-      }
-    ];
-
-    defaultDocs.forEach(docData => {
-      const document: EcipleMatchDocument = {
-        id: this.currentDocumentId++,
-        ...docData,
+        description: "Complete investor presentation showcasing our platform and market opportunity",
         fileData: null,
         contentType: null,
         fileSize: null,
+        displayOrder: 2
+      },
+      {
+        title: "Financial Projections",
+        filename: "eciple-financial-projections.pdf",
+        description: "Detailed financial models and investment return projections",
+        fileData: null,
+        contentType: null,
+        fileSize: null,
+        displayOrder: 3
+      },
+      {
+        title: "Market Analysis",
+        filename: "eciple-market-analysis.pdf",
+        description: "Comprehensive market research and competitive landscape analysis",
+        fileData: null,
+        contentType: null,
+        fileSize: null,
+        displayOrder: 4
+      },
+      {
+        title: "Product Demo Guide",
+        filename: "eciple-product-demo.pdf",
+        description: "Interactive guide showcasing key platform capabilities and user experience",
+        fileData: null,
+        contentType: null,
+        fileSize: null,
+        displayOrder: 5
+      },
+      {
+        title: "Technical Specifications",
+        filename: "eciple-technical-specs.pdf",
+        description: "Technical documentation covering architecture, security, and scalability",
+        fileData: null,
+        contentType: null,
+        fileSize: null,
+        displayOrder: 6
+      }
+    ];
+
+    defaultDocs.forEach(doc => {
+      const document: EcipleMatchDocument = {
+        id: this.currentDocumentId++,
+        ...doc,
+        isActive: true,
         createdAt: new Date(),
         updatedAt: new Date(),
       };
@@ -124,12 +169,9 @@ export class MemStorage implements IStorage {
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    for (const user of this.users.values()) {
-      if (user.username === username) {
-        return user;
-      }
-    }
-    return undefined;
+    return Array.from(this.users.values()).find(
+      (user) => user.username === username,
+    );
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
@@ -141,11 +183,14 @@ export class MemStorage implements IStorage {
 
   async createContactRequest(contactData: InsertContactRequest): Promise<ContactRequest> {
     const id = this.currentContactId++;
+    const timestamp = new Date();
     const contactRequest: ContactRequest = { 
       ...contactData, 
-      id, 
-      createdAt: new Date(),
-      updatedAt: new Date() 
+      id,
+      message: contactData.message || null,
+      phone: contactData.phone || null,
+      churchSize: contactData.churchSize || null,
+      createdAt: timestamp
     };
     this.contacts.set(id, contactRequest);
     return contactRequest;
@@ -159,17 +204,16 @@ export class MemStorage implements IStorage {
     return Array.from(this.contacts.values());
   }
 
+  // Admin authentication methods
   async getAdminByUsername(username: string): Promise<AdminUser | undefined> {
-    for (const admin of this.adminUsers.values()) {
-      if (admin.username === username) {
-        return admin;
-      }
-    }
-    return undefined;
+    return Array.from(this.adminUsers.values()).find(
+      (admin) => admin.username === username && admin.isActive
+    );
   }
 
   async getAdminById(id: number): Promise<AdminUser | undefined> {
-    return this.adminUsers.get(id);
+    const admin = this.adminUsers.get(id);
+    return admin && admin.isActive ? admin : undefined;
   }
 
   async createAdminUser(insertAdmin: InsertAdminUser): Promise<AdminUser> {
@@ -177,6 +221,7 @@ export class MemStorage implements IStorage {
     const admin: AdminUser = {
       ...insertAdmin,
       id,
+      role: insertAdmin.role || 'admin',
       isActive: true,
       lastLogin: null,
       createdAt: new Date(),
@@ -195,6 +240,7 @@ export class MemStorage implements IStorage {
     }
   }
 
+  // Admin session methods
   async createAdminSession(sessionId: string, userId: number, expiresAt: Date): Promise<AdminSession> {
     const session: AdminSession = {
       id: sessionId,
@@ -207,7 +253,14 @@ export class MemStorage implements IStorage {
   }
 
   async getAdminSession(sessionId: string): Promise<AdminSession | undefined> {
-    return this.adminSessions.get(sessionId);
+    const session = this.adminSessions.get(sessionId);
+    if (session && session.expiresAt > new Date()) {
+      return session;
+    }
+    if (session) {
+      this.adminSessions.delete(sessionId);
+    }
+    return undefined;
   }
 
   async deleteAdminSession(sessionId: string): Promise<void> {
@@ -216,15 +269,22 @@ export class MemStorage implements IStorage {
 
   async cleanExpiredSessions(): Promise<void> {
     const now = new Date();
-    for (const [sessionId, session] of this.adminSessions.entries()) {
-      if (session.expiresAt < now) {
-        this.adminSessions.delete(sessionId);
+    const sessionsToDelete: string[] = [];
+    this.adminSessions.forEach((session, sessionId) => {
+      if (session.expiresAt <= now) {
+        sessionsToDelete.push(sessionId);
       }
-    }
+    });
+    sessionsToDelete.forEach(sessionId => {
+      this.adminSessions.delete(sessionId);
+    });
   }
 
+  // EcipleMatch document methods
   async getEcipleMatchDocuments(): Promise<EcipleMatchDocument[]> {
-    return Array.from(this.ecipleMatchDocuments.values());
+    return Array.from(this.ecipleMatchDocuments.values())
+      .filter(doc => doc.isActive)
+      .sort((a, b) => a.displayOrder - b.displayOrder);
   }
 
   async createEcipleMatchDocument(insertDocument: InsertEcipleMatchDocument): Promise<EcipleMatchDocument> {
@@ -232,7 +292,12 @@ export class MemStorage implements IStorage {
     const document: EcipleMatchDocument = {
       ...insertDocument,
       id,
-      isActive: insertDocument.isActive !== false,
+      description: insertDocument.description || null,
+      fileData: insertDocument.fileData || null,
+      contentType: insertDocument.contentType || null,
+      fileSize: insertDocument.fileSize || null,
+      displayOrder: insertDocument.displayOrder || 0,
+      isActive: true,
       createdAt: new Date(),
       updatedAt: new Date(),
     };
@@ -264,7 +329,7 @@ export class MemStorage implements IStorage {
   }
 }
 
-// Database storage for production
+// Database storage implementation
 export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
     const [user] = await db.select().from(users).where(eq(users.id, id));
@@ -342,16 +407,16 @@ export class DatabaseStorage implements IStorage {
   }
 
   async createEcipleMatchDocument(insertDocument: InsertEcipleMatchDocument): Promise<EcipleMatchDocument> {
-    const [document] = await db.insert(ecipleMatchDocuments).values(insertDocument).returning();
-    return document;
+    const [doc] = await db.insert(ecipleMatchDocuments).values(insertDocument).returning();
+    return doc;
   }
 
   async updateEcipleMatchDocument(id: number, updates: Partial<InsertEcipleMatchDocument>): Promise<EcipleMatchDocument | undefined> {
-    const [document] = await db.update(ecipleMatchDocuments)
+    const [doc] = await db.update(ecipleMatchDocuments)
       .set(updates)
       .where(eq(ecipleMatchDocuments.id, id))
       .returning();
-    return document || undefined;
+    return doc || undefined;
   }
 
   async deleteEcipleMatchDocument(id: number): Promise<void> {
@@ -361,7 +426,5 @@ export class DatabaseStorage implements IStorage {
   }
 }
 
-// Use database storage when DATABASE_URL is available
-export const storage = process.env.DATABASE_URL 
-  ? new DatabaseStorage() 
-  : new MemStorage();
+// Use memory storage for now, we'll handle production separately
+export const storage = new MemStorage();

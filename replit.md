@@ -138,6 +138,7 @@ Changelog:
 - June 25, 2025. Removed password protection from homepage - now provides direct navigation to three main sections: Platform Overview (/home), Investor Portal (/investors), and EcipleMatch (/eciplematch)
 - June 25, 2025. Fixed file upload UI refresh and EcipleMatch modal document display - added active document visibility controls in admin dashboard
 - June 25, 2025. Implemented DatabaseStorage for production PostgreSQL compatibility - system now works with external databases on Kinsta deployment
+- June 25, 2025. Fixed storage class conflicts and created clean database integration - production system now automatically switches to DatabaseStorage when DATABASE_URL is present
 ```
 
 ## User Preferences

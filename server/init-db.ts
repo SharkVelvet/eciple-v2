@@ -79,11 +79,4 @@ if (process.env.DATABASE_URL && process.env.NODE_ENV === 'production') {
   });
 }
 
-// Run initialization if this file is executed directly
-if (require.main === module) {
-  initializeDatabase()
-    .then(() => process.exit(0))
-    .catch(() => process.exit(1));
-}
-
 export { initializeDatabase };
