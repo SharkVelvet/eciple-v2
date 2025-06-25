@@ -17,9 +17,7 @@ const loginSchema = z.object({
 
 const documentSchema = z.object({
   title: z.string().min(1, "Title is required").max(200),
-  subtitle: z.string().max(300).optional(),
   filename: z.string().min(1, "Filename is required").max(255),
-  linkUrl: z.string().url("Must be a valid URL").max(500).optional().or(z.literal("")),
   description: z.string().optional(),
   displayOrder: z.number().int().min(0).optional(),
 });

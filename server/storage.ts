@@ -72,14 +72,14 @@ export class MemStorage implements IStorage {
   }
 
   private initializeDefaultAdmin() {
-    // Simple test credentials for easier testing
-    // Username: admin
-    // Password: test123
-    const passwordHash = '$2b$12$GsuG3ll03yigw4Xf/eELUuzcLgcPlqJ1ajMFAaRjGgLBeBiIG8H52';
+    // Ultra-secure admin credentials
+    // Username: eciple_admin_2024
+    // Password: EcipleSecure2024Admin!@#$%^&*()_+
+    const passwordHash = '$2b$10$PKU6yrkB7QrZQxl0gR1NDeqVKbUdcVk3kYr3BtKHAktpv/dMEid.6';
     
     const defaultAdmin: AdminUser = {
       id: this.currentAdminId++,
-      username: 'admin',
+      username: 'eciple_admin_2024',
       passwordHash: passwordHash,
       email: 'admin@eciple.com',
       role: 'admin',
@@ -96,50 +96,56 @@ export class MemStorage implements IStorage {
     const defaultDocs = [
       {
         title: "Executive Summary",
-        subtitle: "Comprehensive overview of eciple's mission and market opportunity",
         filename: "eciple-executive-summary.pdf",
-        linkUrl: null,
         description: "Detailed executive summary covering our vision, market opportunity, and growth strategy",
+        fileData: null,
+        contentType: null,
+        fileSize: null,
         displayOrder: 1
       },
       {
         title: "Pitch Deck",
-        subtitle: "Detailed presentation of our discipleship platform solution",
         filename: "eciple-pitch-deck.pdf",
-        linkUrl: null,
         description: "Complete investor presentation showcasing our platform and market opportunity",
+        fileData: null,
+        contentType: null,
+        fileSize: null,
         displayOrder: 2
       },
       {
         title: "Financial Projections",
-        subtitle: "Revenue forecasts and investment return analysis",
         filename: "eciple-financial-projections.pdf",
-        linkUrl: null,
         description: "Detailed financial models and investment return projections",
+        fileData: null,
+        contentType: null,
+        fileSize: null,
         displayOrder: 3
       },
       {
         title: "Market Analysis",
-        subtitle: "In-depth analysis of the discipleship technology market",
         filename: "eciple-market-analysis.pdf",
-        linkUrl: null,
         description: "Comprehensive market research and competitive landscape analysis",
+        fileData: null,
+        contentType: null,
+        fileSize: null,
         displayOrder: 4
       },
       {
         title: "Product Demo Guide",
-        subtitle: "Step-by-step guide to eciple platform features",
         filename: "eciple-product-demo.pdf",
-        linkUrl: null,
         description: "Interactive guide showcasing key platform capabilities and user experience",
+        fileData: null,
+        contentType: null,
+        fileSize: null,
         displayOrder: 5
       },
       {
         title: "Technical Specifications",
-        subtitle: "Platform architecture and technology overview",
         filename: "eciple-technical-specs.pdf",
-        linkUrl: null,
         description: "Technical documentation covering architecture, security, and scalability",
+        fileData: null,
+        contentType: null,
+        fileSize: null,
         displayOrder: 6
       }
     ];
