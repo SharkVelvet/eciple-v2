@@ -189,6 +189,46 @@ app.get("/api/user", (req, res) => {
   }
 });
 
+// Database connection test endpoint
+app.get('/api/db-test', async (req, res) => {
+  try {
+    console.log('Testing database connection...');
+    console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL);
+    
+    if (!process.env.DATABASE_URL) {
+      return res.status(500).json({ 
+        error: 'DATABASE_URL not found', 
+        env: Object.keys(process.env).filter(key => key.includes('DATABASE'))
+      });
+    }
+
+    const { Pool } = require('pg');
+    const pool = new Pool({ 
+      connectionString: process.env.DATABASE_URL,
+      ssl: { rejectUnauthorized: false }
+    });
+
+    const result = await pool.query('SELECT COUNT(*) as user_count FROM users');
+    const userCount = result.rows[0].user_count;
+    
+    await pool.end();
+
+    res.json({ 
+      success: true, 
+      message: 'Database connected successfully',
+      userCount: userCount,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('Database test error:', error);
+    res.status(500).json({ 
+      error: error.message,
+      code: error.code,
+      timestamp: new Date().toISOString()
+    });
+  }
+});
+
 // Serve static files from dist/public
 const distPath = resolve(process.cwd(), "dist", "public");
 
