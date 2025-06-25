@@ -21,8 +21,8 @@ import { ProtectedRoute } from "@/lib/protected-route";
 function Router() {
   return (
     <Switch>
-      {/* Main site - now the home page */}
-      <Route path="/" component={ComparisonPage} />
+      {/* Main site - show welcome page first */}
+      <Route path="/" component={WelcomePage} />
       
       {/* Main site alternate route */}
       <Route path="/home" component={ComparisonPage} />
