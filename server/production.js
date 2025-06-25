@@ -202,7 +202,8 @@ app.get('/db-test', async (req, res) => {
       });
     }
 
-    const { Pool } = require('pg');
+    const pg = await import('pg');
+    const { Pool } = pg.default;
     const pool = new Pool({ 
       connectionString: process.env.DATABASE_URL,
       ssl: { rejectUnauthorized: false }
@@ -241,7 +242,8 @@ app.get('/api/db-test', async (req, res) => {
       });
     }
 
-    const { Pool } = require('pg');
+    const pg = await import('pg');
+    const { Pool } = pg.default;
     const pool = new Pool({ 
       connectionString: process.env.DATABASE_URL,
       ssl: { rejectUnauthorized: false }
