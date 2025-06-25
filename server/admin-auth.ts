@@ -22,7 +22,12 @@ const documentSchema = z.object({
   displayOrder: z.number().int().min(0).optional(),
 });
 
-const updateDocumentSchema = documentSchema.partial();
+const updateDocumentSchema = documentSchema.extend({
+  isActive: z.boolean().optional(),
+  fileData: z.string().optional(),
+  contentType: z.string().optional(),
+  fileSize: z.number().optional()
+}).partial();
 
 // Middleware to verify admin session
 async function requireAdminAuth(req: Request, res: Response, next: NextFunction) {

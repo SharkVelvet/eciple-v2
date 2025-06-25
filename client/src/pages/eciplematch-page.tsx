@@ -979,8 +979,12 @@ export default function EcipleMatchPage() {
               <div className="flex justify-center py-8">
                 <div className="animate-pulse text-gray-500">Loading documents...</div>
               </div>
+            ) : documents.length === 0 ? (
+              <div className="text-center py-8">
+                <p className="text-gray-500">No documents available yet.</p>
+              </div>
             ) : (
-              documents.map((doc, index) => (
+              documents.filter(doc => doc.isActive).map((doc, index) => (
                 <motion.div
                   key={doc.id}
                   initial={{ opacity: 0, y: 10 }}
@@ -1005,6 +1009,12 @@ export default function EcipleMatchPage() {
                   </Button>
                 </motion.div>
               ))
+            )}
+            
+            {documents.filter(doc => doc.isActive).length === 0 && documents.length > 0 && (
+              <div className="text-center py-8">
+                <p className="text-gray-500">No active documents available.</p>
+              </div>
             )}
           </div>
           

@@ -196,10 +196,13 @@ export default function AdminDashboard() {
     deleteDocumentMutation.mutate(id);
   };
 
-  const updateDocument = (id: number, field: keyof Document, value: string) => {
+  const updateDocument = (id: number, field: keyof Document, value: string | boolean) => {
     setDocuments(prev => 
       prev.map(doc => 
-        doc.id === id ? { ...doc, [field]: value } : doc
+        doc.id === id ? { 
+          ...doc, 
+          [field]: field === 'isActive' ? (value === 'true' || value === true) : value 
+        } : doc
       )
     );
   };
@@ -234,11 +237,19 @@ export default function AdminDashboard() {
           }
         });
 
+        // Clear the file input to allow re-uploading
+        event.target.value = '';
+
+        // Refresh the documents list to show updated filename
+        queryClient.invalidateQueries({ queryKey: ['/api/admin/eciple-documents'] });
+
         toast({
           title: "File uploaded",
           description: "File has been uploaded successfully",
         });
       } catch (error) {
+        // Clear the file input even on error
+        event.target.value = '';
         toast({
           title: "Upload failed",
           description: "Failed to upload file",
@@ -384,15 +395,33 @@ export default function AdminDashboard() {
                     </Button>
                   </div>
 
-                  {/* Description */}
-                  <div className="space-y-2">
-                    <Label className="text-sm font-medium">Description</Label>
-                    <Textarea
-                      value={doc.description || ''}
-                      onChange={(e) => updateDocument(doc.id, 'description', e.target.value)}
-                      placeholder="Document description"
-                      rows={2}
-                    />
+                  {/* Description and Active Status */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="space-y-2 md:col-span-2">
+                      <Label className="text-sm font-medium">Description</Label>
+                      <Textarea
+                        value={doc.description || ''}
+                        onChange={(e) => updateDocument(doc.id, 'description', e.target.value)}
+                        placeholder="Document description"
+                        rows={2}
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label className="text-sm font-medium">Visibility</Label>
+                      <div className="flex items-center space-x-2 h-20 bg-gray-50 rounded-md px-3">
+                        <input
+                          type="checkbox"
+                          id={`active-${doc.id}`}
+                          checked={doc.isActive}
+                          onChange={(e) => updateDocument(doc.id, 'isActive', e.target.checked ? 'true' : 'false')}
+                          className="h-4 w-4 text-[#15BEE2] focus:ring-[#15BEE2] border-gray-300 rounded"
+                        />
+                        <label htmlFor={`active-${doc.id}`} className="text-sm text-gray-700">
+                          Show in EcipleMatch modal
+                        </label>
+                      </div>
+                    </div>
                   </div>
 
                   {/* Save Button */}
@@ -405,7 +434,8 @@ export default function AdminDashboard() {
                           updates: {
                             title: doc.title,
                             filename: doc.filename,
-                            description: doc.description
+                            description: doc.description,
+                            isActive: doc.isActive
                           }
                         });
                       }}
