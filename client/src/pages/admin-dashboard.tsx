@@ -111,12 +111,17 @@ export default function AdminDashboard() {
   // Create document mutation
   const createDocumentMutation = useMutation({
     mutationFn: async (newDoc: { title: string; filename: string; description: string; displayOrder: number }) => {
+      console.log('Creating document with token:', localStorage.getItem('adminSessionToken'));
       const response = await fetch('/api/admin/eciple-documents', {
         method: 'POST',
         headers: getAuthHeaders(),
         body: JSON.stringify(newDoc),
       });
-      if (!response.ok) throw new Error('Failed to create document');
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Document creation failed:', response.status, errorText);
+        throw new Error(`Failed to create document: ${response.status}`);
+      }
       return response.json();
     },
     onSuccess: () => {
@@ -126,10 +131,11 @@ export default function AdminDashboard() {
         description: "New document has been added successfully",
       });
     },
-    onError: () => {
+    onError: (error) => {
+      console.error('Create document error:', error);
       toast({
         title: "Creation failed",
-        description: "Failed to create document",
+        description: `Failed to create document: ${error.message}`,
         variant: "destructive",
       });
     },
@@ -172,12 +178,17 @@ export default function AdminDashboard() {
   };
 
   const addDocument = () => {
+    console.log('Add Document button clicked');
+    const token = localStorage.getItem('adminSessionToken');
+    console.log('Current session token:', token);
+    
     const newDoc = {
       title: "New Document",
       filename: "new-document.pdf",
       description: "Document description",
       displayOrder: documents.length
     };
+    console.log('Creating document:', newDoc);
     createDocumentMutation.mutate(newDoc);
   };
 
