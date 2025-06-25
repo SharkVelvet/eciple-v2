@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 
-import fotypeLogo from "@assets/fotype-logo-hi-five.png";
+import ecipleLogo from "@assets/eciple-white.png";
 
 export default function WelcomePage() {
   const [password, setPassword] = useState("");
@@ -29,10 +29,8 @@ export default function WelcomePage() {
     setTimeout(() => {
       if (password === "VanNuno@41456") {
         localStorage.setItem("mainSiteAuthenticated", "true");
-        // No toast notification
         setLocation("/home");
       } else {
-        // No toast notification
         console.log("Access denied - incorrect password");
         setIsLoading(false);
       }
@@ -40,7 +38,7 @@ export default function WelcomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-foreground to-background flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#223349] to-[#15BEE2] flex items-center justify-center px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -49,13 +47,13 @@ export default function WelcomePage() {
       >
         <div className="text-center mb-8">
           <img 
-            src={fotypeLogo} 
-            alt="FOTYPE" 
+            src={ecipleLogo} 
+            alt="eciple" 
             className="mx-auto h-16 mb-6" 
           />
-          <h1 className="text-white text-2xl md:text-3xl font-bold">Welcome to FOTYPE PROJECTS</h1>
+          <h1 className="text-white text-2xl md:text-3xl font-bold">Welcome to eciple</h1>
           <p className="text-white/70 mt-2">
-            Please enter the access code to continue
+            One-to-one discipleship platform - Please enter the access code to continue
           </p>
         </div>
         
@@ -75,18 +73,18 @@ export default function WelcomePage() {
               
               <Button 
                 type="submit" 
-                className="w-full bg-[#FF4041] hover:bg-[#FF4041]/90 text-white"
+                className="w-full bg-gradient-to-r from-[#15BEE2] to-[#223349] hover:from-[#223349] hover:to-[#15BEE2] text-white"
                 disabled={isLoading}
               >
-                {isLoading ? "Verifying..." : "Access Project"}
+                {isLoading ? "Verifying..." : "Access Platform"}
               </Button>
             </form>
           </CardContent>
         </Card>
         
         <div className="mt-8 text-center text-white/50 text-sm">
-          <p>Creative Digital Solutions</p>
-          <p className="mt-1">© {new Date().getFullYear()} FOTYPE PROJECTS. All rights reserved.</p>
+          <p>Transforming Discipleship Through Technology</p>
+          <p className="mt-1">© {new Date().getFullYear()} eciple. All rights reserved.</p>
         </div>
       </motion.div>
     </div>
