@@ -131,6 +131,8 @@ Changelog:
 - June 24, 2025. Restored save buttons in admin dashboard per client preference while maintaining automatic saving functionality
 - June 24, 2025. Implemented ultra-secure admin credentials replacing weak admin/password123 with cryptographically strong username and 30+ character password
 - June 24, 2025. Fixed production deployment authentication by adding automatic session secret generation and secure cookie configuration for live domains
+- June 25, 2025. Fixed "Add Document" functionality by resolving database column naming mismatch between camelCase and snake_case in production server
+- June 25, 2025. Completed full document CRUD operations with proper error handling and authentication for EcipleMatch content management
 ```
 
 ## User Preferences
