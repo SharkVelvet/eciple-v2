@@ -14,12 +14,12 @@ async function initializeDatabase() {
       // Create default admin user
       const hashedPassword = await bcrypt.hash("EcipleSecure2024Admin!@#$%^&*()_+", 12);
       
-      await db.insert(adminUsers).values({
+      const [newAdmin] = await db.insert(adminUsers).values({
         username: "eciple_admin_2024",
-        password: hashedPassword,
+        passwordHash: hashedPassword,
         email: "admin@eciple.com",
         isActive: true,
-      });
+      }).returning();
       
       console.log("✓ Default admin user created");
     } else {

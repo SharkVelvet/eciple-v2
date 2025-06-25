@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { initializeDatabase } from "./init-db";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
@@ -60,6 +61,11 @@ app.use((req, res, next) => {
     await setupVite(app, server);
   } else {
     serveStatic(app);
+  }
+
+  // Initialize database in production
+  if (process.env.NODE_ENV === 'production') {
+    await initializeDatabase().catch(console.error);
   }
 
   // Use PORT environment variable for production, fallback to 5000 for development
