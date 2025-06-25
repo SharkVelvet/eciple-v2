@@ -11,9 +11,10 @@ import { promisify } from "util";
 import createMemoryStore from "memorystore";
 import { Pool, neonConfig } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-serverless';
-import { users, adminUsers } from './schema.js';
+import { users, adminUsers, adminSessions, ecipleMatchDocuments } from './schema.js';
 import { eq } from 'drizzle-orm';
 import ws from "ws";
+import bcrypt from "bcrypt";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -284,6 +285,115 @@ app.get('/api/db-test', async (req, res) => {
       code: error.code,
       timestamp: new Date().toISOString()
     });
+  }
+});
+
+// Admin authentication endpoints
+app.post("/api/admin/login", async (req, res) => {
+  try {
+    console.log('Admin login attempt:', req.body.username);
+    const { username, password } = req.body;
+    
+    if (!username || !password) {
+      return res.status(400).json({ error: "Username and password required" });
+    }
+
+    // Get admin user from database
+    const [adminUser] = await db.select().from(adminUsers).where(eq(adminUsers.username, username));
+    
+    if (!adminUser) {
+      console.log('Admin user not found:', username);
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
+    // Verify password
+    const isValid = await bcrypt.compare(password, adminUser.password_hash);
+    
+    if (!isValid) {
+      console.log('Invalid password for admin:', username);
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
+    // Generate session token
+    const sessionToken = randomBytes(32).toString('hex');
+    const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+
+    // Store session in database
+    await db.insert(adminSessions).values({
+      sessionId: sessionToken,
+      userId: adminUser.id,
+      expiresAt: expiresAt
+    });
+
+    // Update last login
+    await db.update(adminUsers)
+      .set({ last_login: new Date() })
+      .where(eq(adminUsers.id, adminUser.id));
+
+    console.log('Admin login successful:', username);
+    res.json({ sessionToken, user: { id: adminUser.id, username: adminUser.username } });
+  } catch (error) {
+    console.error('Admin login error:', error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// Admin authentication middleware
+async function requireAdminAuth(req, res, next) {
+  try {
+    const sessionToken = req.headers.authorization?.replace('Bearer ', '');
+    
+    if (!sessionToken) {
+      return res.status(401).json({ error: "Authentication required" });
+    }
+
+    // Verify session
+    const [session] = await db.select().from(adminSessions).where(eq(adminSessions.sessionId, sessionToken));
+    
+    if (!session || new Date() > session.expiresAt) {
+      return res.status(401).json({ error: "Session expired" });
+    }
+
+    // Get admin user
+    const [adminUser] = await db.select().from(adminUsers).where(eq(adminUsers.id, session.userId));
+    
+    if (!adminUser) {
+      return res.status(401).json({ error: "Invalid session" });
+    }
+
+    req.adminUser = adminUser;
+    next();
+  } catch (error) {
+    console.error('Admin auth middleware error:', error);
+    res.status(500).json({ error: "Authentication error" });
+  }
+}
+
+app.get("/api/admin/verify", requireAdminAuth, async (req, res) => {
+  res.json({ user: { id: req.adminUser.id, username: req.adminUser.username } });
+});
+
+// EcipleMatch document endpoints
+app.get("/api/eciple-documents", async (req, res) => {
+  try {
+    const documents = await db.select().from(ecipleMatchDocuments)
+      .where(eq(ecipleMatchDocuments.isActive, true))
+      .orderBy(ecipleMatchDocuments.displayOrder);
+    res.json(documents);
+  } catch (error) {
+    console.error('Get documents error:', error);
+    res.status(500).json({ error: "Failed to fetch documents" });
+  }
+});
+
+app.get("/api/admin/eciple-documents", requireAdminAuth, async (req, res) => {
+  try {
+    const documents = await db.select().from(ecipleMatchDocuments)
+      .orderBy(ecipleMatchDocuments.displayOrder);
+    res.json(documents);
+  } catch (error) {
+    console.error('Get admin documents error:', error);
+    res.status(500).json({ error: "Failed to fetch documents" });
   }
 });
 
