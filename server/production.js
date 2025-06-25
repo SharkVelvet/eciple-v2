@@ -393,23 +393,17 @@ app.get("/api/admin/eciple-documents", requireAdminAuth, async (req, res) => {
 app.post("/api/admin/eciple-documents", requireAdminAuth, async (req, res) => {
   try {
     console.log('Creating new document:', req.body);
-    const { title, filename, description, displayOrder } = req.body;
+    const { title, filename, description } = req.body;
     
     if (!title || !filename) {
       return res.status(400).json({ error: "Title and filename are required" });
     }
 
+    // Create minimal document structure matching existing database
     const newDocument = {
       title,
       filename,
-      description: description || null,
-      display_order: displayOrder || 0,
-      is_active: true,
-      created_at: new Date(),
-      updated_at: new Date(),
-      file_data: null,
-      content_type: null,
-      file_size: null
+      description: description || null
     };
 
     const [document] = await db.insert(ecipleMatchDocuments)
