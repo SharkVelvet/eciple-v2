@@ -89,6 +89,7 @@ export const insertEcipleMatchDocumentSchema = createInsertSchema(ecipleMatchDoc
   contentType: true,
   fileSize: true,
   displayOrder: true,
+  isActive: true,
 });
 
 export type InsertEcipleMatchDocument = z.infer<typeof insertEcipleMatchDocumentSchema>;

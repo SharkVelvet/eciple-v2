@@ -14,6 +14,8 @@ import {
   type EcipleMatchDocument,
   type InsertEcipleMatchDocument
 } from "@shared/schema";
+import { db } from "./db";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
@@ -327,4 +329,124 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+// Database storage implementation for production
+export class DatabaseStorage implements IStorage {
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
+    return user;
+  }
+
+  async createContactRequest(contactData: InsertContactRequest): Promise<ContactRequest> {
+    const [contact] = await db
+      .insert(contactRequests)
+      .values(contactData)
+      .returning();
+    return contact;
+  }
+
+  async getContactRequest(id: number): Promise<ContactRequest | undefined> {
+    const [contact] = await db.select().from(contactRequests).where(eq(contactRequests.id, id));
+    return contact || undefined;
+  }
+
+  async getAllContactRequests(): Promise<ContactRequest[]> {
+    return await db.select().from(contactRequests);
+  }
+
+  async getAdminByUsername(username: string): Promise<AdminUser | undefined> {
+    const [admin] = await db.select().from(adminUsers).where(eq(adminUsers.username, username));
+    return admin || undefined;
+  }
+
+  async getAdminById(id: number): Promise<AdminUser | undefined> {
+    const [admin] = await db.select().from(adminUsers).where(eq(adminUsers.id, id));
+    return admin || undefined;
+  }
+
+  async createAdminUser(insertAdmin: InsertAdminUser): Promise<AdminUser> {
+    const [admin] = await db
+      .insert(adminUsers)
+      .values(insertAdmin)
+      .returning();
+    return admin;
+  }
+
+  async updateAdminLastLogin(id: number): Promise<void> {
+    await db
+      .update(adminUsers)
+      .set({ lastLogin: new Date() })
+      .where(eq(adminUsers.id, id));
+  }
+
+  async createAdminSession(sessionId: string, userId: number, expiresAt: Date): Promise<AdminSession> {
+    const [session] = await db
+      .insert(adminSessions)
+      .values({
+        id: sessionId,
+        userId,
+        expiresAt
+      })
+      .returning();
+    return session;
+  }
+
+  async getAdminSession(sessionId: string): Promise<AdminSession | undefined> {
+    const [session] = await db.select().from(adminSessions).where(eq(adminSessions.id, sessionId));
+    return session || undefined;
+  }
+
+  async deleteAdminSession(sessionId: string): Promise<void> {
+    await db.delete(adminSessions).where(eq(adminSessions.id, sessionId));
+  }
+
+  async cleanExpiredSessions(): Promise<void> {
+    const now = new Date();
+    await db.delete(adminSessions).where(eq(adminSessions.expiresAt, now));
+  }
+
+  async getEcipleMatchDocuments(): Promise<EcipleMatchDocument[]> {
+    return await db.select().from(ecipleMatchDocuments);
+  }
+
+  async createEcipleMatchDocument(insertDocument: InsertEcipleMatchDocument): Promise<EcipleMatchDocument> {
+    const [document] = await db
+      .insert(ecipleMatchDocuments)
+      .values(insertDocument)
+      .returning();
+    return document;
+  }
+
+  async updateEcipleMatchDocument(id: number, updates: Partial<InsertEcipleMatchDocument>): Promise<EcipleMatchDocument | undefined> {
+    const [document] = await db
+      .update(ecipleMatchDocuments)
+      .set(updates)
+      .where(eq(ecipleMatchDocuments.id, id))
+      .returning();
+    return document || undefined;
+  }
+
+  async deleteEcipleMatchDocument(id: number): Promise<void> {
+    await db
+      .update(ecipleMatchDocuments)
+      .set({ isActive: false })
+      .where(eq(ecipleMatchDocuments.id, id));
+  }
+}
+
+// Use database storage for production, memory storage for development
+export const storage = process.env.NODE_ENV === 'production' 
+  ? new DatabaseStorage() 
+  : new MemStorage();
