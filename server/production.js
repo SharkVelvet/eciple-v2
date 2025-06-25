@@ -9,6 +9,11 @@ import session from "express-session";
 import { scrypt, randomBytes, timingSafeEqual } from "crypto";
 import { promisify } from "util";
 import createMemoryStore from "memorystore";
+import { Pool, neonConfig } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/neon-serverless';
+import { users, adminUsers } from './schema.js';
+import { eq } from 'drizzle-orm';
+import ws from "ws";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -16,53 +21,61 @@ const __dirname = dirname(__filename);
 const MemoryStore = createMemoryStore(session);
 const scryptAsync = promisify(scrypt);
 
-// Simple in-memory storage for production
-const storage = {
-  users: new Map(),
-  adminUsers: new Map(),
-  adminSessions: new Map(),
-  currentUserId: 1,
-  currentAdminId: 1,
+// Database setup
+neonConfig.webSocketConstructor = ws;
 
+let db = null;
+if (process.env.DATABASE_URL) {
+  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  db = drizzle(pool, { schema: { users, adminUsers } });
+}
+
+// Database storage for production
+const storage = {
   async getUserByUsername(username) {
-    for (const user of this.users.values()) {
-      if (user.username === username) return user;
+    if (!db) return undefined;
+    try {
+      const [user] = await db.select().from(users).where(eq(users.username, username));
+      return user || undefined;
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      return undefined;
     }
-    return undefined;
   },
 
   async createUser(userData) {
-    const user = { ...userData, id: this.currentUserId++ };
-    this.users.set(user.id, user);
-    return user;
+    if (!db) return null;
+    try {
+      const [user] = await db.insert(users).values(userData).returning();
+      return user;
+    } catch (error) {
+      console.error('Error creating user:', error);
+      return null;
+    }
   },
 
   async getAdminByUsername(username) {
-    for (const admin of this.adminUsers.values()) {
-      if (admin.username === username) return admin;
+    if (!db) return undefined;
+    try {
+      const [admin] = await db.select().from(adminUsers).where(eq(adminUsers.username, username));
+      return admin || undefined;
+    } catch (error) {
+      console.error('Error fetching admin:', error);
+      return undefined;
     }
-    return undefined;
   },
 
   async createAdminUser(adminData) {
-    const admin = { ...adminData, id: this.currentAdminId++ };
-    this.adminUsers.set(admin.id, admin);
-    return admin;
+    if (!db) return null;
+    try {
+      const [admin] = await db.insert(adminUsers).values(adminData).returning();
+      return admin;
+    } catch (error) {
+      console.error('Error creating admin:', error);
+      return null;
+    }
   }
 };
-
-// Initialize default admin
-const defaultAdmin = {
-  id: 1,
-  username: "discipleship_admin_2024",
-  password: "$2b$12$vKzQ8nF2mL9pR6sT4wX3eO.hY1nC7bA9fG5jK8sL2mN4pQ6rS8tU2v", // Ultra-secure password hash
-  email: "admin@eciple.com",
-  isActive: true,
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
-  lastLoginAt: null
-};
-storage.adminUsers.set(1, defaultAdmin);
 
 const app = express();
 app.use(express.json());
@@ -92,7 +105,7 @@ app.use(session({
   saveUninitialized: false,
   store: sessionStore,
   cookie: {
-    secure: process.env.NODE_ENV === 'production',
+    secure: false, // Set to false for now to troubleshoot
     httpOnly: true,
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
@@ -118,8 +131,9 @@ passport.use(new LocalStrategy(async (username, password, done) => {
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = storage.users.get(id);
-    done(null, user);
+    if (!db) return done(null, false);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    done(null, user || false);
   } catch (error) {
     done(error);
   }
