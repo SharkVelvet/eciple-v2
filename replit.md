@@ -158,6 +158,7 @@ Changelog:
 - June 26, 2025. Production server still returns "Invalid credentials" while local authentication works perfectly - manual GitHub deployment required to resolve production authentication issue
 - June 26, 2025. Fixed admin authentication response format and session structure - local authentication confirmed working with proper admin object response
 - June 26, 2025. Identified GitHub file contained old authentication code returning "user" instead of "admin" object - deployed fix via GitHub web interface with Kinsta auto-deploy
+- June 26, 2025. Multiple deployment attempts failing with persistent "Invalid credentials" - considering rollback to working commit from 4 hours ago to restore functionality
 ```
 
 ## User Preferences
