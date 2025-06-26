@@ -1,15 +1,23 @@
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import ws from "ws";
-import * as schema from "@shared/schema";
+import { Pool } from "pg";
+import { drizzle } from "drizzle-orm/node-postgres";
+import * as schema from "../shared/schema.js";
 
-neonConfig.webSocketConstructor = ws;
+// Create connection pool
+const pool = new Pool({
+  connectionString: "postgres://silverfish:tS4=uY3+aB3=lF8=zO1=@uncomfortable-coffee-bison-467dg-postgresql.services.clever-cloud.com:50013/uncomfortable-coffee-bison",
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
-if (!process.env.DATABASE_URL) {
-  throw new Error(
-    "DATABASE_URL must be set. Did you forget to provision a database?",
-  );
-}
+export const db = drizzle(pool, { schema });
 
-export const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-export const db = drizzle({ client: pool, schema });
+// Test connection
+pool.connect((err, client, release) => {
+  if (err) {
+    console.error('Error connecting to database:', err);
+  } else {
+    console.log('Successfully connected to PostgreSQL database');
+    release();
+  }
+});
