@@ -57,24 +57,33 @@ app.use((req, res, next) => {
   // importantly only setup vite in development and after
   // setting up all the other routes so the catch-all route
   // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
-  }
+
 
   // Initialize database in production
   if (process.env.NODE_ENV === 'production') {
-    await initializeDatabase().catch(console.error);
+    try {
+      await initializeDatabase();
+      console.log('Database initialized successfully');
+    } catch (error) {
+      console.error('Database initialization failed:', error);
+      // Continue server startup even if database fails
+    }
   }
 
   // Use PORT environment variable for production, fallback to 5000 for development
   const port = process.env.PORT || 5000;
+  
+  console.log('Starting server with config:', {
+    port,
+    nodeEnv: process.env.NODE_ENV,
+    hasDatabase: !!process.env.DATABASE_URL
+  });
+  
   server.listen({
     port,
     host: "0.0.0.0",
     reusePort: true,
   }, () => {
+    console.log(`Server successfully started on port ${port}`);
     log(`serving on port ${port}`);
   });
-})();
