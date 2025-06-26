@@ -1,16 +1,13 @@
 import express from "express";
 import { createServer } from "http";
-import { Pool, neonConfig } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
+import { Pool } from 'pg';
+import { drizzle } from 'drizzle-orm/node-postgres';
 import { eq } from 'drizzle-orm';
-import ws from "ws";
 import bcrypt from "bcrypt";
 import { randomBytes } from "crypto";
 import { resolve } from "path";
 import fs from "fs";
 import { pgTable, text, integer, timestamp, boolean } from "drizzle-orm/pg-core";
-
-neonConfig.webSocketConstructor = ws;
 
 // Database schema matching EXACT production structure
 const ecipleMatchDocuments = pgTable("eciple_match_documents", {
@@ -43,8 +40,11 @@ if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL must be set");
 }
 
-const pool = new Pool({ connectionString: process.env.DATABASE_URL });
-const db = drizzle({ client: pool, schema: { ecipleMatchDocuments, adminUsers } });
+const pool = new Pool({ 
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+});
+const db = drizzle(pool, { schema: { ecipleMatchDocuments, adminUsers } });
 
 const app = express();
 app.use(express.json());
