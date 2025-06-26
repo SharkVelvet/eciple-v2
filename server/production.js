@@ -163,7 +163,8 @@ app.post("/api/admin/login", async (req, res) => {
     }
 
     // Get admin user from database
-    const [adminUser] = await db.select().from(adminUsers).where(eq(adminUsers.username, username));
+    const adminUser = await pool.query('SELECT * FROM admin_users WHERE username = $1', [username]);
+    if (adminUser.rows.length === 0) {
     
     if (!adminUser) {
       console.log('Admin user not found:', username);
