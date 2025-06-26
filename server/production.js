@@ -10,8 +10,7 @@ import { resolve } from "path";
 import fs from "fs";
 import { pgTable, text, integer, timestamp, boolean, serial } from "drizzle-orm/pg-core";
 import session from "express-session";
-import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
+import createMemoryStore from "memorystore";
 
 // Database schema matching EXACT production structure
 const ecipleMatchDocuments = pgTable("eciple_match_documents", {
@@ -137,10 +136,18 @@ app.set('trust proxy', 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Session configuration
+// Session configuration with proper store for production
 const sessionSecret = process.env.SESSION_SECRET || randomBytes(64).toString('hex');
+
+// Use memory store for now (in production you'd want a proper session store)
+const MemoryStore = createMemoryStore(session);
+const sessionStore = new MemoryStore({
+  checkPeriod: 86400000, // 24 hours
+});
+
 app.use(session({
   secret: sessionSecret,
+  store: sessionStore,
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -246,12 +253,25 @@ app.post("/api/login", async (req, res) => {
     }
 
     // Compare passwords using the same hash format as the test data
-    const [hashed, salt] = user.password.split(".");
-    const hashedBuf = Buffer.from(hashed, "hex");
-    const scryptAsync = promisify(scrypt);
-    const suppliedBuf = await scryptAsync(password, salt, 64);
-    
-    if (!timingSafeEqual(hashedBuf, suppliedBuf)) {
+    try {
+      const [hashed, salt] = user.password.split(".");
+      if (!hashed || !salt) {
+        console.error('Invalid password format in database');
+        return res.status(401).json({ message: "Invalid username or password" });
+      }
+      
+      const hashedBuf = Buffer.from(hashed, "hex");
+      const scryptAsync = promisify(scrypt);
+      const suppliedBuf = await scryptAsync(password, salt, 64);
+      
+      if (!timingSafeEqual(hashedBuf, suppliedBuf)) {
+        console.log('Password comparison failed for user:', username);
+        return res.status(401).json({ message: "Invalid username or password" });
+      }
+      
+      console.log('Password validated successfully for user:', username);
+    } catch (passwordError) {
+      console.error('Password comparison error:', passwordError);
       return res.status(401).json({ message: "Invalid username or password" });
     }
 
