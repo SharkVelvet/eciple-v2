@@ -43,7 +43,7 @@ export default function AdminDashboard() {
       if (!response.ok) {
         if (response.status === 401) {
           localStorage.removeItem('adminLoggedIn');
-          localStorage.removeItem('adminSessionToken');
+          localStorage.removeItem('adminToken');
           setLocation('/admin-login');
           throw new Error('Session expired');
         }

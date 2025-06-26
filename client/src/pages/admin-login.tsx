@@ -33,7 +33,7 @@ export default function AdminLogin() {
       if (response.ok) {
         const data = await response.json();
         // Store the session token
-        localStorage.setItem('adminSessionToken', data.sessionToken);
+        localStorage.setItem('adminToken', data.token);
         localStorage.setItem('adminLoggedIn', 'true');
         
         toast({
