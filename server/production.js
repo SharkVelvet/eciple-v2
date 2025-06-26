@@ -192,7 +192,9 @@ app.post("/api/admin/login", async (req, res) => {
     }
 
     // Get admin user from database
-    const adminResult = await pool.query('SELECT * FROM admin_users WHERE username = $1', [username]);
+    const client = await pool.connect();
+    const adminResult = await client.query('SELECT * FROM admin_users WHERE username = $1', [username]);
+    client.release();
     
     if (adminResult.rows.length === 0) {
       console.log('Admin user not found:', username);
@@ -201,9 +203,11 @@ app.post("/api/admin/login", async (req, res) => {
 
     const adminUser = adminResult.rows[0];
     console.log('Found admin user, verifying password...');
+    console.log('Hash from DB:', adminUser.password_hash);
     
     // Verify password using bcrypt
     const isValid = await bcrypt.compare(password, adminUser.password_hash);
+    console.log('Password validation result:', isValid);
     
     if (!isValid) {
       console.log('Invalid password for admin:', username);
