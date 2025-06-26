@@ -232,6 +232,32 @@ app.delete("/api/admin/eciple-documents/:id", requireAdminAuth, async (req, res)
   }
 });
 
+// Public endpoint to get EcipleMatch documents (for the modal)
+app.get("/api/eciple-documents", async (req, res) => {
+  try {
+    const documents = await db.select().from(ecipleMatchDocuments)
+      .where(eq(ecipleMatchDocuments.is_active, true))
+      .orderBy(ecipleMatchDocuments.display_order);
+    
+    // Map snake_case to camelCase for frontend compatibility
+    const publicDocuments = documents.map(doc => ({
+      id: doc.id,
+      title: doc.title,
+      filename: doc.filename,
+      description: doc.description,
+      displayOrder: doc.display_order,
+      isActive: doc.is_active,
+      createdAt: doc.created_at.toISOString(),
+      updatedAt: doc.updated_at.toISOString()
+    }));
+    
+    res.json({ documents: publicDocuments });
+  } catch (error) {
+    console.error('Get public documents error:', error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 // Test database connection
 app.get("/api/test-db", async (req, res) => {
   try {
