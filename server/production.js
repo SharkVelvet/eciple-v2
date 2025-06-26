@@ -39,17 +39,33 @@ const adminUsers = pgTable("admin_users", {
 console.log('Environment variables check:');
 console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL);
 console.log('DB_URL exists:', !!process.env.DB_URL);
+console.log('DB_HOST exists:', !!process.env.DB_HOST);
+console.log('DB_USERNAME exists:', !!process.env.DB_USERNAME);
+console.log('DB_DATABASE exists:', !!process.env.DB_DATABASE);
 console.log('NODE_ENV:', process.env.NODE_ENV);
 
 // Use DB_URL from Kinsta connection or fallback to DATABASE_URL
-const databaseUrl = process.env.DB_URL || process.env.DATABASE_URL;
+let databaseUrl = process.env.DB_URL || process.env.DATABASE_URL;
+
+// If no full URL, construct from individual variables
+if (!databaseUrl && process.env.DB_HOST) {
+  const host = process.env.DB_HOST;
+  const username = process.env.DB_USERNAME || 'fowl';
+  const password = process.env.DB_PASSWORD;
+  const database = process.env.DB_DATABASE || 'drunk-emerald-angelfish';
+  const port = process.env.DB_PORT || '5432';
+  
+  databaseUrl = `postgresql://${username}:${password}@${host}:${port}/${database}`;
+  console.log('Constructed database URL from individual variables');
+}
 
 if (!databaseUrl) {
-  console.error("No database URL found (checked DB_URL and DATABASE_URL)");
+  console.error("No database URL found (checked DB_URL, DATABASE_URL, and individual variables)");
   throw new Error("Database URL must be set");
 }
 
 console.log('Using database URL:', databaseUrl ? 'Found' : 'Missing');
+console.log('Database URL preview:', databaseUrl ? databaseUrl.replace(/:[^:@]*@/, ':***@') : 'None');
 
 console.log('Attempting database connection...');
 const pool = new Pool({ 
@@ -151,13 +167,16 @@ app.get("/api/admin/verify", requireAdminAuth, async (req, res) => {
 // Document endpoints - matching EXACT production database schema
 app.get("/api/eciple-documents", async (req, res) => {
   try {
+    console.log('Attempting to fetch documents from database...');
     const documents = await db.select().from(ecipleMatchDocuments)
       .where(eq(ecipleMatchDocuments.is_active, true))
       .orderBy(ecipleMatchDocuments.display_order);
+    console.log('Documents fetched successfully:', documents.length);
     res.json(documents);
   } catch (error) {
     console.error('Get documents error:', error);
-    res.status(500).json({ error: "Failed to fetch documents" });
+    console.error('Error stack:', error.stack);
+    res.status(500).json({ error: "Failed to fetch documents", details: error.message });
   }
 });
 
