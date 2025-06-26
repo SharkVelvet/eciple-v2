@@ -20,10 +20,10 @@ interface EcipleDocument {
   title: string;
   filename: string;
   description: string | null;
-  displayOrder: number;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
+  display_order: number;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
 }
 
 export default function EcipleMatchPage() {
@@ -987,7 +987,7 @@ export default function EcipleMatchPage() {
                 <p className="text-gray-500">No documents available yet.</p>
               </div>
             ) : (
-              documents.filter(doc => doc.isActive).map((doc, index) => (
+              documents.filter(doc => doc.is_active).map((doc, index) => (
                 <motion.div
                   key={doc.id}
                   initial={{ opacity: 0, y: 10 }}
@@ -1014,7 +1014,7 @@ export default function EcipleMatchPage() {
               ))
             )}
             
-            {documents.filter(doc => doc.isActive).length === 0 && documents.length > 0 && (
+            {documents.filter(doc => doc.is_active).length === 0 && documents.length > 0 && (
               <div className="text-center py-8">
                 <p className="text-gray-500">No active documents available.</p>
               </div>
