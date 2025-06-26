@@ -136,27 +136,24 @@ app.set('trust proxy', 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Session configuration with proper store for production
-const sessionSecret = process.env.SESSION_SECRET || randomBytes(64).toString('hex');
+// Simple session store for production
+const activeSessions = new Map();
 
-// Use memory store for now (in production you'd want a proper session store)
-const MemoryStore = createMemoryStore(session);
-const sessionStore = new MemoryStore({
-  checkPeriod: 86400000, // 24 hours
-});
-
-app.use(session({
-  secret: sessionSecret,
-  store: sessionStore,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24, // 24 hours
-    secure: true, // Use secure cookies in production
-    httpOnly: true,
-    sameSite: 'lax'
+// Middleware to parse sessions from Authorization header
+function parseSession(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const sessionToken = authHeader.replace('Bearer ', '');
+    const sessionData = activeSessions.get(sessionToken);
+    if (sessionData && sessionData.expires > Date.now()) {
+      req.user = sessionData.user;
+      req.sessionToken = sessionToken;
+    }
   }
-}));
+  next();
+}
+
+app.use(parseSession);
 
 // Simple admin authentication middleware
 async function requireAdminAuth(req, res, next) {
@@ -275,12 +272,19 @@ app.post("/api/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid username or password" });
     }
 
-    // Create session
-    req.session.userId = user.id;
-    req.session.username = user.username;
+    // Create session token
+    const sessionToken = randomBytes(32).toString('hex');
+    const sessionData = {
+      user: { id: user.id, username: user.username },
+      expires: Date.now() + (24 * 60 * 60 * 1000) // 24 hours
+    };
     
-    const { password: _, ...userWithoutPassword } = user;
-    res.json(userWithoutPassword);
+    activeSessions.set(sessionToken, sessionData);
+    
+    res.json({ 
+      sessionToken,
+      user: { id: user.id, username: user.username }
+    });
   } catch (error) {
     console.error('Login error:', error);
     res.status(500).json({ message: "Login failed" });
@@ -329,25 +333,18 @@ app.post("/api/register", async (req, res) => {
 });
 
 app.post("/api/logout", (req, res) => {
-  req.session.destroy((err) => {
-    if (err) {
-      console.error('Logout error:', err);
-      return res.status(500).json({ message: "Logout failed" });
-    }
-    res.clearCookie('connect.sid');
-    res.json({ message: "Logged out successfully" });
-  });
+  if (req.sessionToken) {
+    activeSessions.delete(req.sessionToken);
+  }
+  res.json({ message: "Logged out successfully" });
 });
 
 app.get("/api/user", (req, res) => {
-  if (!req.session.userId) {
+  if (!req.user) {
     return res.status(401).json({ message: "Not authenticated" });
   }
   
-  res.json({
-    id: req.session.userId,
-    username: req.session.username
-  });
+  res.json(req.user);
 });
 
 // Document endpoints - matching EXACT production database schema
