@@ -1,0 +1,440 @@
+import express from "express";
+import { createServer } from "http";
+import { Pool } from 'pg';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { eq } from 'drizzle-orm';
+import bcrypt from "bcrypt";
+import { randomBytes, scrypt, timingSafeEqual } from "crypto";
+import { promisify } from "util";
+import { resolve } from "path";
+import fs from "fs";
+import { pgTable, text, integer, timestamp, boolean, serial } from "drizzle-orm/pg-core";
+import session from "express-session";
+import createMemoryStore from "memorystore";
+
+// Database schema matching EXACT production structure
+const ecipleMatchDocuments = pgTable("eciple_match_documents", {
+  id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+  title: text("title").notNull(),
+  filename: text("filename").notNull(),
+  description: text("description"),
+  file_data: text("file_data"),
+  content_type: text("content_type"),
+  file_size: integer("file_size"),
+  display_order: integer("display_order").default(0).notNull(),
+  is_active: boolean("is_active").default(true).notNull(),
+  created_at: timestamp("created_at").defaultNow().notNull(),
+  updated_at: timestamp("updated_at").defaultNow().notNull(),
+});
+
+const users = pgTable("users", {
+  id: serial("id").primaryKey(),
+  username: text("username").notNull().unique(),
+  password: text("password").notNull(),
+});
+
+const adminUsers = pgTable("admin_users", {
+  id: integer("id").primaryKey().generatedByDefaultAsIdentity(),
+  username: text("username").unique().notNull(),
+  password_hash: text("password_hash").notNull(),
+  created_at: timestamp("created_at").defaultNow().notNull(),
+  updated_at: timestamp("updated_at").defaultNow().notNull(),
+  last_login: timestamp("last_login"),
+});
+
+console.log('Environment variables check:');
+console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL);
+
+// Use external database connection for Kinsta
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  max: 20,
+  idleTimeoutMillis: 30000,
+  connectionTimeoutMillis: 2000,
+});
+
+// Test database connection
+async function testConnection() {
+  try {
+    const client = await pool.connect();
+    console.log('Database connection successful');
+    
+    const result = await client.query("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'");
+    console.log('Table existence check:', result.rows);
+    
+    client.release();
+  } catch (err) {
+    console.error('Connection test failed:', err);
+  }
+}
+testConnection();
+
+const db = drizzle(pool, { schema: { ecipleMatchDocuments, adminUsers } });
+
+const app = express();
+
+// Trust proxy for secure cookies behind load balancer
+app.set('trust proxy', 1);
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// Simple session store for production
+const activeSessions = new Map();
+
+// Middleware to parse sessions from Authorization header
+function parseSession(req, res, next) {
+  const authHeader = req.headers.authorization;
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    const sessionToken = authHeader.replace('Bearer ', '');
+    const sessionData = activeSessions.get(sessionToken);
+    if (sessionData && sessionData.expires > Date.now()) {
+      req.user = sessionData.user;
+      req.sessionToken = sessionToken;
+    }
+  }
+  next();
+}
+
+app.use(parseSession);
+
+// Simple admin authentication middleware
+async function requireAdminAuth(req, res, next) {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: "Authentication required" });
+    }
+    
+    // Get fresh admin data
+    const client = await pool.connect();
+    const adminResult = await client.query('SELECT * FROM admin_users WHERE id = $1', [req.user.id]);
+    client.release();
+    
+    if (adminResult.rows.length === 0) {
+      return res.status(401).json({ error: "Invalid session" });
+    }
+    
+    req.adminUser = adminResult.rows[0];
+    next();
+  } catch (error) {
+    console.error('Admin auth error:', error);
+    res.status(500).json({ error: "Authentication error" });
+  }
+}
+
+// Admin login endpoint
+app.post("/api/admin/login", async (req, res) => {
+  let client;
+  try {
+    console.log('Admin login attempt for user:', req.body.username);
+    const { username, password } = req.body;
+    
+    if (!username || !password) {
+      console.log('Missing username or password');
+      return res.status(400).json({ error: "Username and password required" });
+    }
+
+    // Get admin user from database
+    client = await pool.connect();
+    console.log('Database connection established');
+    
+    const adminResult = await client.query('SELECT id, username, password_hash FROM admin_users WHERE username = $1', [username]);
+    console.log('Query result rows:', adminResult.rows.length);
+    
+    if (adminResult.rows.length === 0) {
+      console.log('Admin user not found in database:', username);
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
+    const adminUser = adminResult.rows[0];
+    console.log('Found admin user:', adminUser.username);
+    
+    // Verify password using bcrypt
+    console.log('Starting bcrypt comparison...');
+    const isValid = await bcrypt.compare(password, adminUser.password_hash);
+    console.log('Bcrypt comparison result:', isValid);
+    
+    if (!isValid) {
+      console.log('Password validation failed for admin:', username);
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
+    // Generate session token
+    const sessionToken = randomBytes(32).toString('hex');
+    console.log('Generated session token for:', username);
+    
+    // Store session
+    const sessionData = {
+      user: { id: adminUser.id, username: adminUser.username },
+      expires: Date.now() + (24 * 60 * 60 * 1000) // 24 hours
+    };
+    activeSessions.set(sessionToken, sessionData);
+    
+    console.log('Admin login successful for:', username);
+    res.json({ 
+      sessionToken,
+      user: { 
+        id: adminUser.id, 
+        username: adminUser.username 
+      }
+    });
+    
+  } catch (error) {
+    console.error('Admin login error:', error);
+    res.status(500).json({ error: "Login failed", details: error.message });
+  } finally {
+    if (client) {
+      client.release();
+    }
+  }
+});
+
+app.get("/api/admin/verify", requireAdminAuth, async (req, res) => {
+  res.json({ user: { id: req.adminUser.id, username: req.adminUser.username } });
+});
+
+// User Authentication Endpoints
+app.post("/api/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    
+    if (!username || !password) {
+      return res.status(400).json({ message: "Username and password are required" });
+    }
+
+    const client = await pool.connect();
+    const result = await client.query('SELECT * FROM users WHERE username = $1', [username]);
+    client.release();
+    
+    const user = result.rows[0];
+    if (!user) {
+      return res.status(401).json({ message: "Invalid username or password" });
+    }
+
+    // Compare passwords using the same hash format as the test data
+    try {
+      const [hashed, salt] = user.password.split(".");
+      if (!hashed || !salt) {
+        console.error('Invalid password format in database');
+        return res.status(401).json({ message: "Invalid username or password" });
+      }
+      
+      const hashedBuf = Buffer.from(hashed, "hex");
+      const scryptAsync = promisify(scrypt);
+      const suppliedBuf = await scryptAsync(password, salt, 64);
+      
+      if (!timingSafeEqual(hashedBuf, suppliedBuf)) {
+        console.log('Password comparison failed for user:', username);
+        return res.status(401).json({ message: "Invalid username or password" });
+      }
+      
+      // Generate session token for regular user
+      const sessionToken = randomBytes(32).toString('hex');
+      const sessionData = {
+        user: { id: user.id, username: user.username },
+        expires: Date.now() + (24 * 60 * 60 * 1000) // 24 hours
+      };
+      activeSessions.set(sessionToken, sessionData);
+      
+      res.json({ 
+        sessionToken,
+        user: { 
+          id: user.id, 
+          username: user.username 
+        }
+      });
+      
+    } catch (hashError) {
+      console.error('Error comparing passwords:', hashError);
+      return res.status(401).json({ message: "Invalid username or password" });
+    }
+    
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ message: "Login failed" });
+  }
+});
+
+app.post("/api/logout", (req, res) => {
+  if (req.sessionToken) {
+    activeSessions.delete(req.sessionToken);
+  }
+  res.json({ message: "Logged out successfully" });
+});
+
+app.get("/api/user", (req, res) => {
+  if (!req.user) {
+    return res.status(401).json({ message: "Not authenticated" });
+  }
+  res.json(req.user);
+});
+
+// EcipleMatch Documents API (public endpoint)
+app.get("/api/eciple-documents", async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query(`
+      SELECT id, title, filename, description, display_order, is_active, created_at, updated_at
+      FROM eciple_match_documents 
+      WHERE is_active = true 
+      ORDER BY display_order ASC, created_at DESC
+    `);
+    client.release();
+    
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching eciple documents:', error);
+    res.status(500).json({ error: "Failed to fetch documents" });
+  }
+});
+
+// Download document endpoint
+app.get("/api/download-document/:id", async (req, res) => {
+  try {
+    const documentId = parseInt(req.params.id);
+    
+    const client = await pool.connect();
+    const result = await client.query('SELECT * FROM eciple_match_documents WHERE id = $1', [documentId]);
+    client.release();
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Document not found" });
+    }
+    
+    const document = result.rows[0];
+    
+    if (!document.file_data) {
+      return res.status(404).json({ error: "File data not found" });
+    }
+    
+    // Decode base64 file data
+    const fileBuffer = Buffer.from(document.file_data, 'base64');
+    
+    // Set appropriate headers
+    res.set({
+      'Content-Type': document.content_type || 'application/octet-stream',
+      'Content-Disposition': `attachment; filename="${document.filename}"`,
+      'Content-Length': fileBuffer.length
+    });
+    
+    res.send(fileBuffer);
+  } catch (error) {
+    console.error('Error downloading document:', error);
+    res.status(500).json({ error: "Failed to download document" });
+  }
+});
+
+// Admin CRUD endpoints for EcipleMatch documents
+app.get("/api/admin/eciple-documents", requireAdminAuth, async (req, res) => {
+  try {
+    const client = await pool.connect();
+    const result = await client.query(`
+      SELECT id, title, filename, description, display_order, is_active, created_at, updated_at, file_size
+      FROM eciple_match_documents 
+      ORDER BY display_order ASC, created_at DESC
+    `);
+    client.release();
+    
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching admin documents:', error);
+    res.status(500).json({ error: "Failed to fetch documents" });
+  }
+});
+
+app.post("/api/admin/eciple-documents", requireAdminAuth, async (req, res) => {
+  try {
+    const { title, filename, description, file_data, content_type, file_size, display_order, is_active } = req.body;
+    
+    if (!title || !filename || !file_data) {
+      return res.status(400).json({ error: "Title, filename, and file data are required" });
+    }
+    
+    const client = await pool.connect();
+    const result = await client.query(`
+      INSERT INTO eciple_match_documents (title, filename, description, file_data, content_type, file_size, display_order, is_active, created_at, updated_at)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW(), NOW())
+      RETURNING *
+    `, [title, filename, description, file_data, content_type, file_size, display_order || 0, is_active !== false]);
+    client.release();
+    
+    res.status(201).json(result.rows[0]);
+  } catch (error) {
+    console.error('Error creating document:', error);
+    res.status(500).json({ error: "Failed to create document" });
+  }
+});
+
+app.put("/api/admin/eciple-documents/:id", requireAdminAuth, async (req, res) => {
+  try {
+    const documentId = parseInt(req.params.id);
+    const { title, filename, description, display_order, is_active } = req.body;
+    
+    const client = await pool.connect();
+    const result = await client.query(`
+      UPDATE eciple_match_documents 
+      SET title = $1, filename = $2, description = $3, display_order = $4, is_active = $5, updated_at = NOW()
+      WHERE id = $6
+      RETURNING *
+    `, [title, filename, description, display_order, is_active, documentId]);
+    client.release();
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Document not found" });
+    }
+    
+    res.json(result.rows[0]);
+  } catch (error) {
+    console.error('Error updating document:', error);
+    res.status(500).json({ error: "Failed to update document" });
+  }
+});
+
+app.delete("/api/admin/eciple-documents/:id", requireAdminAuth, async (req, res) => {
+  try {
+    const documentId = parseInt(req.params.id);
+    
+    const client = await pool.connect();
+    const result = await client.query('DELETE FROM eciple_match_documents WHERE id = $1 RETURNING *', [documentId]);
+    client.release();
+    
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Document not found" });
+    }
+    
+    res.json({ message: "Document deleted successfully" });
+  } catch (error) {
+    console.error('Error deleting document:', error);
+    res.status(500).json({ error: "Failed to delete document" });
+  }
+});
+
+// Serve static files
+const clientDistPath = resolve(process.cwd(), "dist");
+if (fs.existsSync(clientDistPath)) {
+  app.use(express.static(clientDistPath));
+  
+  app.get("*", (req, res) => {
+    if (req.path.startsWith("/api/")) {
+      return res.status(404).json({ error: "API endpoint not found" });
+    }
+    res.sendFile(resolve(clientDistPath, "index.html"));
+  });
+} else {
+  console.warn("Client dist directory not found. Serving API only.");
+  app.get("*", (req, res) => {
+    if (!req.path.startsWith("/api/")) {
+      return res.status(404).json({ error: "Client not built. Please run build process." });
+    }
+  });
+}
+
+const port = process.env.PORT || 8080;
+const server = createServer(app);
+
+server.listen(port, "0.0.0.0", () => {
+  console.log(`Server running on port ${port}`);
+});
+
+export default server;
