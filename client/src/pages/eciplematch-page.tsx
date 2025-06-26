@@ -38,7 +38,9 @@ export default function EcipleMatchPage() {
         throw new Error('Failed to fetch documents');
       }
       const data = await response.json();
-      return data.documents as EcipleDocument[];
+      // Handle both old format (array) and new format (object with documents key)
+      const documents = Array.isArray(data) ? data : data.documents;
+      return documents as EcipleDocument[];
     },
   });
 

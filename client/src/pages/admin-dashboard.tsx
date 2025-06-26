@@ -237,6 +237,19 @@ export default function AdminDashboard() {
           }
         });
 
+        // Update local state immediately to show the new filename
+        setDocuments(prev => 
+          prev.map(doc => 
+            doc.id === docId ? {
+              ...doc,
+              filename: file.name,
+              fileData: data.document.fileData,
+              contentType: data.document.contentType,
+              fileSize: data.document.fileSize
+            } : doc
+          )
+        );
+
         // Clear the file input to allow re-uploading
         event.target.value = '';
 
@@ -248,6 +261,7 @@ export default function AdminDashboard() {
           description: "File has been uploaded successfully",
         });
       } catch (error) {
+        console.error('File upload error:', error);
         // Clear the file input even on error
         event.target.value = '';
         toast({
