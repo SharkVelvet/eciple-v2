@@ -197,6 +197,7 @@ export default function AdminDashboard() {
   };
 
   const updateDocument = (id: number, field: keyof Document, value: string | boolean) => {
+    // Update local state immediately for responsive UI
     setDocuments(prev => 
       prev.map(doc => 
         doc.id === id ? { 
@@ -205,6 +206,16 @@ export default function AdminDashboard() {
         } : doc
       )
     );
+
+    // Save to database
+    const updates = {
+      [field]: field === 'isActive' ? (value === 'true' || value === true) : value
+    };
+    
+    updateDocumentMutation.mutate({
+      id,
+      updates
+    });
   };
 
   const handleFileUpload = async (docId: number, event: React.ChangeEvent<HTMLInputElement>) => {
@@ -428,7 +439,7 @@ export default function AdminDashboard() {
                           type="checkbox"
                           id={`active-${doc.id}`}
                           checked={doc.isActive}
-                          onChange={(e) => updateDocument(doc.id, 'isActive', e.target.checked ? 'true' : 'false')}
+                          onChange={(e) => updateDocument(doc.id, 'isActive', e.target.checked)}
                           className="h-4 w-4 text-[#15BEE2] focus:ring-[#15BEE2] border-gray-300 rounded"
                         />
                         <label htmlFor={`active-${doc.id}`} className="text-sm text-gray-700">
