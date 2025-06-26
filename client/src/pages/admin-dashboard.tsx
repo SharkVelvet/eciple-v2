@@ -33,23 +33,11 @@ export default function AdminDashboard() {
   const [documents, setDocuments] = useState<Document[]>([]);
   const queryClient = useQueryClient();
 
-  // Get admin session token
-  const getAuthHeaders = (includeContentType = true) => {
-    const token = localStorage.getItem('adminSessionToken');
-    const headers: Record<string, string> = {
-      'Authorization': `Bearer ${token}`
-    };
-    if (includeContentType) {
-      headers['Content-Type'] = 'application/json';
-    }
-    return headers;
-  };
-
   // Fetch documents from database
   const { data: documentsData, isLoading } = useQuery({
     queryKey: ['/api/admin/eciple-documents'],
     queryFn: async () => {
-      const response = await fetch('/api/admin/eciple-documents', {
+      const response = await fetch(API_ENDPOINTS.adminDocuments, {
         headers: getAuthHeaders(),
       });
       if (!response.ok) {
