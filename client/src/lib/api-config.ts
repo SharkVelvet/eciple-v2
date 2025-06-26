@@ -14,7 +14,7 @@ export const API_ENDPOINTS = {
 
 // Helper function to get auth headers
 export const getAuthHeaders = (includeContentType = true) => {
-  const token = localStorage.getItem('adminSessionToken');
+  const token = localStorage.getItem('adminToken');
   const headers: Record<string, string> = {};
   
   if (token) {

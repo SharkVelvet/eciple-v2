@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Switch, Route } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
-import WelcomePage from "@/pages/welcome-page";
+import HomePage from "@/pages/home-page";
 import EcipleMatchPage from "@/pages/eciplematch-page";
 import InvestorPage from "@/pages/investor-page";
 import InvestorDashboard from "@/pages/investor-dashboard";
@@ -38,8 +38,8 @@ const queryClient = new QueryClient({
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={WelcomePage} />
-      <Route path="/home" component={EcipleMatchPage} />
+      <Route path="/" component={HomePage} />
+      <Route path="/home" component={HomePage} />
       <Route path="/eciplematch" component={EcipleMatchPage} />
       <Route path="/investors" component={InvestorPage} />
       <Route path="/investor-dashboard" component={InvestorDashboard} />
