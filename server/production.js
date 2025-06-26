@@ -130,8 +130,26 @@ testConnection();
 const db = drizzle(pool, { schema: { ecipleMatchDocuments, adminUsers } });
 
 const app = express();
+
+// Trust proxy for secure cookies behind load balancer
+app.set('trust proxy', 1);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// Session configuration
+const sessionSecret = process.env.SESSION_SECRET || randomBytes(64).toString('hex');
+app.use(session({
+  secret: sessionSecret,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24, // 24 hours
+    secure: true, // Use secure cookies in production
+    httpOnly: true,
+    sameSite: 'lax'
+  }
+}));
 
 // Simple admin authentication middleware
 async function requireAdminAuth(req, res, next) {
@@ -207,6 +225,109 @@ app.post("/api/admin/login", async (req, res) => {
 
 app.get("/api/admin/verify", requireAdminAuth, async (req, res) => {
   res.json({ user: { id: req.adminUser.id, username: req.adminUser.username } });
+});
+
+// User Authentication Endpoints
+app.post("/api/login", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    
+    if (!username || !password) {
+      return res.status(400).json({ message: "Username and password are required" });
+    }
+
+    const client = await pool.connect();
+    const result = await client.query('SELECT * FROM users WHERE username = $1', [username]);
+    client.release();
+    
+    const user = result.rows[0];
+    if (!user) {
+      return res.status(401).json({ message: "Invalid username or password" });
+    }
+
+    // Compare passwords using the same hash format as the test data
+    const [hashed, salt] = user.password.split(".");
+    const hashedBuf = Buffer.from(hashed, "hex");
+    const scryptAsync = promisify(scrypt);
+    const suppliedBuf = await scryptAsync(password, salt, 64);
+    
+    if (!timingSafeEqual(hashedBuf, suppliedBuf)) {
+      return res.status(401).json({ message: "Invalid username or password" });
+    }
+
+    // Create session
+    req.session.userId = user.id;
+    req.session.username = user.username;
+    
+    const { password: _, ...userWithoutPassword } = user;
+    res.json(userWithoutPassword);
+  } catch (error) {
+    console.error('Login error:', error);
+    res.status(500).json({ message: "Login failed" });
+  }
+});
+
+app.post("/api/register", async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    
+    if (!username || !password) {
+      return res.status(400).json({ message: "Username and password are required" });
+    }
+    
+    // Check if user exists
+    const client = await pool.connect();
+    const existingUser = await client.query('SELECT * FROM users WHERE username = $1', [username]);
+    
+    if (existingUser.rows.length > 0) {
+      client.release();
+      return res.status(400).json({ message: "Username already exists" });
+    }
+
+    // Hash password
+    const salt = randomBytes(16).toString("hex");
+    const scryptAsync = promisify(scrypt);
+    const buf = await scryptAsync(password, salt, 64);
+    const hashedPassword = `${buf.toString("hex")}.${salt}`;
+
+    // Create user
+    const result = await client.query(
+      'INSERT INTO users (username, password) VALUES ($1, $2) RETURNING id, username',
+      [username, hashedPassword]
+    );
+    client.release();
+
+    const user = result.rows[0];
+    req.session.userId = user.id;
+    req.session.username = user.username;
+    
+    res.status(201).json(user);
+  } catch (error) {
+    console.error('Registration error:', error);
+    res.status(500).json({ message: "Registration failed" });
+  }
+});
+
+app.post("/api/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Logout error:', err);
+      return res.status(500).json({ message: "Logout failed" });
+    }
+    res.clearCookie('connect.sid');
+    res.json({ message: "Logged out successfully" });
+  });
+});
+
+app.get("/api/user", (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).json({ message: "Not authenticated" });
+  }
+  
+  res.json({
+    id: req.session.userId,
+    username: req.session.username
+  });
 });
 
 // Document endpoints - matching EXACT production database schema
