@@ -9,6 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Trash2, Plus, Save, LogOut, Edit3, FileText, Upload } from "lucide-react";
 import { useLocation } from "wouter";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { API_ENDPOINTS, getAuthHeaders } from "@/lib/api-config";
 
 interface Document {
   id: number;

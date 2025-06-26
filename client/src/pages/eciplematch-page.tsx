@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ArrowRight, TrendingUp, Users, Target, Code, DollarSign, Handshake, ChevronUp, Sparkles, Download, X } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { API_ENDPOINTS } from "@/lib/api-config";
 import ecipleLogo from "@assets/eciple-white.png";
 import eCipleDashImage from "@assets/eciple-dashboard-trim.jpg";
 import mentoringImage from "@assets/eciple-Two-guys-mentoring.jpg";
@@ -33,7 +34,7 @@ export default function EcipleMatchPage() {
   const { data: documentsData, isLoading } = useQuery({
     queryKey: ['/api/eciple-documents'],
     queryFn: async () => {
-      const response = await fetch('/api/eciple-documents');
+      const response = await fetch(API_ENDPOINTS.documents);
       if (!response.ok) {
         throw new Error('Failed to fetch documents');
       }
