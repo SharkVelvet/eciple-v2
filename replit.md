@@ -140,6 +140,7 @@ Changelog:
 - June 25, 2025. Implemented DatabaseStorage for production PostgreSQL compatibility - system now works with external databases on Kinsta deployment
 - June 25, 2025. Fixed storage class conflicts and created clean database integration - production system now automatically switches to DatabaseStorage when DATABASE_URL is present
 - June 26, 2025. Fixed missing public API endpoint in production.js - added /api/eciple-documents route for EcipleMatch page document fetching
+- June 26, 2025. Fixed admin dashboard checkbox persistence - "Show in EcipleMatch modal" now saves to database and stays checked/unchecked properly
 ```
 
 ## User Preferences
