@@ -83,6 +83,24 @@ pool.on('connect', () => {
 pool.on('error', (err) => {
   console.error('Database connection error:', err);
 });
+
+// Test connection immediately
+async function testConnection() {
+  try {
+    const client = await pool.connect();
+    console.log('Pool connection test successful');
+    
+    // Test table existence
+    const result = await client.query("SELECT table_name FROM information_schema.tables WHERE table_name = 'eciple_match_documents'");
+    console.log('Table existence check:', result.rows);
+    
+    client.release();
+  } catch (err) {
+    console.error('Connection test failed:', err);
+  }
+}
+testConnection();
+
 const db = drizzle(pool, { schema: { ecipleMatchDocuments, adminUsers } });
 
 const app = express();
@@ -168,11 +186,21 @@ app.get("/api/admin/verify", requireAdminAuth, async (req, res) => {
 app.get("/api/eciple-documents", async (req, res) => {
   try {
     console.log('Attempting to fetch documents from database...');
-    const documents = await db.select().from(ecipleMatchDocuments)
-      .where(eq(ecipleMatchDocuments.is_active, true))
-      .orderBy(ecipleMatchDocuments.display_order);
-    console.log('Documents fetched successfully:', documents.length);
-    res.json(documents);
+    
+    // First try raw query to test connection
+    const client = await pool.connect();
+    console.log('Raw connection established');
+    
+    const rawResult = await client.query('SELECT COUNT(*) FROM eciple_match_documents');
+    console.log('Raw query result:', rawResult.rows);
+    
+    const rawDocs = await client.query('SELECT * FROM eciple_match_documents WHERE is_active = true ORDER BY display_order');
+    console.log('Raw documents found:', rawDocs.rows.length);
+    
+    client.release();
+    
+    // Return raw results for now
+    res.json(rawDocs.rows);
   } catch (error) {
     console.error('Get documents error:', error);
     console.error('Error stack:', error.stack);
