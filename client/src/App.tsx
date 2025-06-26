@@ -1,12 +1,18 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Switch, Route } from "wouter";
 import { Toaster } from "@/components/ui/toaster";
-import Landing from "@/pages/Landing";
-import Home from "@/pages/Home";
-import EcipleMatch from "@/pages/EcipleMatch";
-import Investors from "@/pages/Investors";
-import AdminLogin from "@/pages/AdminLogin";
-import AdminDashboard from "@/pages/AdminDashboard";
+import WelcomePage from "@/pages/welcome-page";
+import EcipleMatchPage from "@/pages/eciplematch-page";
+import InvestorPage from "@/pages/investor-page";
+import InvestorDashboard from "@/pages/investor-dashboard";
+import AdminLogin from "@/pages/admin-login";
+import AdminDashboard from "@/pages/admin-dashboard";
+import ComparisonPage from "@/pages/ComparisonPage";
+import PrivacyPolicy from "@/pages/privacy-policy";
+import TermsConditions from "@/pages/terms-conditions";
+import CookiePolicy from "@/pages/cookie-policy";
+import AuthPage from "@/pages/auth-page";
+import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,20 +38,19 @@ const queryClient = new QueryClient({
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Landing} />
-      <Route path="/home" component={Home} />
-      <Route path="/eciplematch" component={EcipleMatch} />
-      <Route path="/investors" component={Investors} />
+      <Route path="/" component={WelcomePage} />
+      <Route path="/home" component={EcipleMatchPage} />
+      <Route path="/eciplematch" component={EcipleMatchPage} />
+      <Route path="/investors" component={InvestorPage} />
+      <Route path="/investor-dashboard" component={InvestorDashboard} />
       <Route path="/admin-login" component={AdminLogin} />
       <Route path="/admin-dashboard" component={AdminDashboard} />
-      <Route>
-        <div className="min-h-screen flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">404</h1>
-            <p className="text-gray-600">Page not found</p>
-          </div>
-        </div>
-      </Route>
+      <Route path="/comparison" component={ComparisonPage} />
+      <Route path="/privacy-policy" component={PrivacyPolicy} />
+      <Route path="/terms-conditions" component={TermsConditions} />
+      <Route path="/cookie-policy" component={CookiePolicy} />
+      <Route path="/auth" component={AuthPage} />
+      <Route component={NotFound} />
     </Switch>
   );
 }
@@ -53,10 +58,8 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-        <Router />
-        <Toaster />
-      </div>
+      <Router />
+      <Toaster />
     </QueryClientProvider>
   );
 }
