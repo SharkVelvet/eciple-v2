@@ -3,18 +3,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLocation } from "wouter";
 import { ArrowRight, Users, BarChart3, BookOpen } from "lucide-react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 export default function HomePage() {
   const [, setLocation] = useLocation();
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#223349] to-[#15BEE2]">
-      <Header />
-      
       {/* Main Content */}
-      <div className="flex items-center justify-center min-h-[80vh] px-4">
+      <div className="flex items-center justify-center min-h-screen px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -117,8 +113,6 @@ export default function HomePage() {
           </div>
         </motion.div>
       </div>
-
-      <Footer />
     </div>
   );
 }
