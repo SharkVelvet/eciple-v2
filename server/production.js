@@ -497,8 +497,12 @@ if (!fs.existsSync(distPath)) {
 
 app.use(express.static(distPath));
 
-// Fall through to index.html for client-side routing
-app.use("*", (_req, res) => {
+// Fall through to index.html for client-side routing - but NOT for API routes
+app.use("*", (req, res) => {
+  // Don't serve index.html for API routes
+  if (req.originalUrl.startsWith('/api/')) {
+    return res.status(404).json({ error: "API endpoint not found" });
+  }
   res.sendFile(resolve(distPath, "index.html"));
 });
 
