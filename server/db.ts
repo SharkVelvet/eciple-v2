@@ -9,8 +9,10 @@ const databaseUrl = process.env.DATABASE_URL ||
 // Create connection pool
 const pool = new Pool({
   connectionString: databaseUrl,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
+  ssl: databaseUrl.includes('kinsta.app') ? { rejectUnauthorized: false } : false
 });
+
+
 
 export const db = drizzle(pool, { schema });
 
