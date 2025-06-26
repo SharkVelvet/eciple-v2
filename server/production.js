@@ -47,7 +47,7 @@ console.log('NODE_ENV:', process.env.NODE_ENV);
 // Use DB_URL from Kinsta connection or fallback to DATABASE_URL
 let databaseUrl = process.env.DB_URL || process.env.DATABASE_URL;
 
-// If no full URL, construct from individual variables
+// If no full URL, construct from individual variables or use Kinsta defaults
 if (!databaseUrl && process.env.DB_HOST) {
   const host = process.env.DB_HOST;
   const username = process.env.DB_USERNAME || 'fowl';
@@ -57,6 +57,12 @@ if (!databaseUrl && process.env.DB_HOST) {
   
   databaseUrl = `postgresql://${username}:${password}@${host}:${port}/${database}`;
   console.log('Constructed database URL from individual variables');
+}
+
+// Fallback to known Kinsta internal connection if no environment variables
+if (!databaseUrl) {
+  console.log('No environment variables found, using Kinsta internal connection');
+  databaseUrl = 'postgresql://fowl:zE8_lL4=bJ2_uD9=qD1=@eciple-db-45y1v-postgresql.eciple-db-45y1v.svc.cluster.local:5432/drunk-emerald-angelfish';
 }
 
 if (!databaseUrl) {
