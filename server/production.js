@@ -38,16 +38,22 @@ const adminUsers = pgTable("admin_users", {
 
 console.log('Environment variables check:');
 console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL);
+console.log('DB_URL exists:', !!process.env.DB_URL);
 console.log('NODE_ENV:', process.env.NODE_ENV);
 
-if (!process.env.DATABASE_URL) {
-  console.error("DATABASE_URL environment variable is missing");
-  throw new Error("DATABASE_URL must be set");
+// Use DB_URL from Kinsta connection or fallback to DATABASE_URL
+const databaseUrl = process.env.DB_URL || process.env.DATABASE_URL;
+
+if (!databaseUrl) {
+  console.error("No database URL found (checked DB_URL and DATABASE_URL)");
+  throw new Error("Database URL must be set");
 }
+
+console.log('Using database URL:', databaseUrl ? 'Found' : 'Missing');
 
 console.log('Attempting database connection...');
 const pool = new Pool({ 
-  connectionString: process.env.DATABASE_URL,
+  connectionString: databaseUrl,
   ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
   connectionTimeoutMillis: 10000,
   idleTimeoutMillis: 30000
