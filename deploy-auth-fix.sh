@@ -1,18 +1,24 @@
 #!/bin/bash
+# Deploy admin authentication fix to production
 
-# Manual deployment script for admin authentication fix
-echo "Deploying admin authentication fix..."
-
-# Remove git locks
-rm -f .git/index.lock .git/objects/*/tmp_obj_* 2>/dev/null || true
-
-# Add files
-git add server/production.js server/production-fixed.js replit.md
-
-# Commit changes
-git commit -m "Deploy admin authentication fix - working locally with bcrypt validation"
-
-# Push to origin
-git push origin main
-
-echo "Deployment complete. Please redeploy your Kinsta application."
+echo "Admin authentication fix deployment script"
+echo "========================================="
+echo ""
+echo "Your local authentication is working perfectly."
+echo "Production needs the updated server code."
+echo ""
+echo "Deploy Steps:"
+echo "1. Go to: https://github.com/SharkVelvet/eciple/blob/main/server/production.js"
+echo "2. Click 'Edit this file' (pencil icon)"
+echo "3. Replace entire file content with the fixed version from this Replit"
+echo "4. Commit: 'Deploy admin authentication fix'"
+echo "5. Redeploy Kinsta application"
+echo ""
+echo "Your credentials:"
+echo "Username: eciple_admin_2024"
+echo "Password: EcipleSecure2024Admin!@#\$%^&*()_+"
+echo ""
+echo "Test after deployment:"
+echo "curl -X POST https://eciple-kin-05g9p.kinsta.app/api/admin/login \\"
+echo "  -H 'Content-Type: application/json' \\"
+echo "  -d '{\"username\": \"eciple_admin_2024\", \"password\": \"EcipleSecure2024Admin!@#\$%^&*()_+\"}'"

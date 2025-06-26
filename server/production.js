@@ -149,9 +149,11 @@ app.post("/api/admin/login", async (req, res) => {
 
     const adminUser = adminResult.rows[0];
     console.log('Found admin user:', adminUser.username);
+    console.log('Password hash from DB:', adminUser.password_hash);
     
     // Verify password using bcrypt
     console.log('Starting bcrypt comparison...');
+    console.log('Input password:', password);
     const isValid = await bcrypt.compare(password, adminUser.password_hash);
     console.log('Bcrypt comparison result:', isValid);
     
@@ -160,13 +162,25 @@ app.post("/api/admin/login", async (req, res) => {
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
-    // Generate session token
-    const sessionToken = randomBytes(32).toString('hex');
+    // Update last login
+    await client.query('UPDATE admin_users SET last_login = NOW() WHERE id = $1', [adminUser.id]);
+
+    // Generate session token (64 chars to match local)
+    const sessionToken = randomBytes(64).toString('hex');
     console.log('Generated session token for:', username);
     
-    // Store session
+    // Store session with admin structure matching local
     const sessionData = {
-      user: { id: adminUser.id, username: adminUser.username },
+      admin: { 
+        id: adminUser.id, 
+        username: adminUser.username,
+        email: "admin@eciple.com",
+        role: "admin",
+        isActive: true,
+        lastLogin: new Date().toISOString(),
+        createdAt: adminUser.created_at,
+        updatedAt: adminUser.updated_at
+      },
       expires: Date.now() + (24 * 60 * 60 * 1000) // 24 hours
     };
     activeSessions.set(sessionToken, sessionData);
@@ -174,10 +188,8 @@ app.post("/api/admin/login", async (req, res) => {
     console.log('Admin login successful for:', username);
     res.json({ 
       sessionToken,
-      user: { 
-        id: adminUser.id, 
-        username: adminUser.username 
-      }
+      admin: sessionData.admin,
+      expiresAt: new Date(sessionData.expires).toISOString()
     });
     
   } catch (error) {
