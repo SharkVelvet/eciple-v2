@@ -179,55 +179,70 @@ async function requireAdminAuth(req, res, next) {
 
 // Admin login endpoint
 app.post("/api/admin/login", async (req, res) => {
+  let client;
   try {
-    console.log('Admin login attempt:', req.body.username);
+    console.log('Admin login attempt for user:', req.body.username);
     const { username, password } = req.body;
     
     if (!username || !password) {
+      console.log('Missing username or password');
       return res.status(400).json({ error: "Username and password required" });
     }
 
-    if (!db) {
-      return res.status(500).json({ error: "Database not available" });
-    }
-
     // Get admin user from database
-    const client = await pool.connect();
-    const adminResult = await client.query('SELECT * FROM admin_users WHERE username = $1', [username]);
-    client.release();
+    client = await pool.connect();
+    console.log('Database connection established');
+    
+    const adminResult = await client.query('SELECT id, username, password_hash FROM admin_users WHERE username = $1', [username]);
+    console.log('Query result rows:', adminResult.rows.length);
     
     if (adminResult.rows.length === 0) {
-      console.log('Admin user not found:', username);
+      console.log('Admin user not found in database:', username);
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
     const adminUser = adminResult.rows[0];
-    console.log('Found admin user, verifying password...');
-    console.log('Hash from DB:', adminUser.password_hash);
+    console.log('Found admin user:', adminUser.username);
     
     // Verify password using bcrypt
+    console.log('Starting bcrypt comparison...');
     const isValid = await bcrypt.compare(password, adminUser.password_hash);
-    console.log('Password validation result:', isValid);
+    console.log('Bcrypt comparison result:', isValid);
     
     if (!isValid) {
-      console.log('Invalid password for admin:', username);
+      console.log('Password validation failed for admin:', username);
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
-    // Generate simple session token
+    // Generate session token
     const sessionToken = randomBytes(32).toString('hex');
+    console.log('Generated session token for:', username);
     
-    console.log('Admin login successful:', username);
+    // Store session
+    const sessionData = {
+      user: { id: adminUser.id, username: adminUser.username },
+      expires: Date.now() + (24 * 60 * 60 * 1000) // 24 hours
+    };
+    activeSessions.set(sessionToken, sessionData);
+    
+    console.log('Admin login successful for:', username);
     res.json({ 
-      sessionToken, 
+      sessionToken,
       user: { 
         id: adminUser.id, 
         username: adminUser.username 
-      } 
+      }
     });
+    
   } catch (error) {
     console.error('Admin login error:', error);
-    res.status(500).json({ error: "Internal server error", details: error.message });
+    res.status(500).json({ error: "Login failed", details: error.message });
+  } finally {
+    if (client) {
+      client.release();
+    }
+  }
+});
   }
 });
 
