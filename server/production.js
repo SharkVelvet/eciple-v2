@@ -44,6 +44,12 @@ console.log('DB_USERNAME exists:', !!process.env.DB_USERNAME);
 console.log('DB_DATABASE exists:', !!process.env.DB_DATABASE);
 console.log('NODE_ENV:', process.env.NODE_ENV);
 
+// Log all environment variables that start with DB or DATABASE
+console.log('All database-related environment variables:');
+Object.keys(process.env).filter(key => key.includes('DB') || key.includes('DATABASE')).forEach(key => {
+  console.log(`${key}: ${key.includes('PASSWORD') || key.includes('URL') ? '***' : process.env[key]}`);
+});
+
 // Use DB_URL from Kinsta connection or fallback to DATABASE_URL
 let databaseUrl = process.env.DB_URL || process.env.DATABASE_URL;
 
@@ -63,6 +69,7 @@ if (!databaseUrl && process.env.DB_HOST) {
 if (!databaseUrl) {
   console.log('No environment variables found, using Kinsta internal connection');
   databaseUrl = 'postgresql://fowl:zE8_lL4=bJ2_uD9=qD1=@eciple-db-45y1v-postgresql.eciple-db-45y1v.svc.cluster.local:5432/drunk-emerald-angelfish';
+  console.log('Using fallback connection string');
 }
 
 if (!databaseUrl) {
