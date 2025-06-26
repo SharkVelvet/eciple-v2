@@ -54,7 +54,7 @@ console.log('Using database URL:', databaseUrl ? 'Found' : 'Missing');
 console.log('Attempting database connection...');
 const pool = new Pool({ 
   connectionString: databaseUrl,
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+  ssl: false, // Kinsta internal connections don't use SSL
   connectionTimeoutMillis: 10000,
   idleTimeoutMillis: 30000
 });
