@@ -163,14 +163,14 @@ app.post("/api/admin/login", async (req, res) => {
     }
 
     // Get admin user from database
-    const adminUser = await pool.query('SELECT * FROM admin_users WHERE username = $1', [username]);
-    if (adminUser.rows.length === 0) {
+    const adminResult = await pool.query('SELECT * FROM admin_users WHERE username = $1', [username]);
     
-    if (!adminUser) {
+    if (adminResult.rows.length === 0) {
       console.log('Admin user not found:', username);
       return res.status(401).json({ error: "Invalid credentials" });
     }
 
+    const adminUser = adminResult.rows[0];
     console.log('Found admin user, verifying password...');
     
     // Verify password using bcrypt
