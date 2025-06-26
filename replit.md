@@ -145,6 +145,7 @@ Changelog:
 - June 26, 2025. Fixed production database driver compatibility - changed from neon-serverless to node-postgres for Kinsta Database connection
 - June 26, 2025. Discovered Kinsta's automatic application-database connection feature for seamless internal network integration
 - June 26, 2025. Fixed SSL configuration for Kinsta internal database connection - disabled SSL requirement for internal network access
+- June 26, 2025. Switched to Kinsta external database connection due to internal network timeout issues
 ```
 
 ## User Preferences

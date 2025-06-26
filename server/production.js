@@ -65,11 +65,11 @@ if (!databaseUrl && process.env.DB_HOST) {
   console.log('Constructed database URL from individual variables');
 }
 
-// Fallback to known Kinsta internal connection if no environment variables
+// Fallback to known Kinsta connection if no environment variables
 if (!databaseUrl) {
-  console.log('No environment variables found, using Kinsta internal connection');
-  databaseUrl = 'postgres://fowl:zE8_lL4=bJ2_uD9=qD1=@eciple-db-45y1v-postgresql.eciple-db-45y1v.svc.cluster.local:5432/drunk-emerald-angelfish';
-  console.log('Using fallback connection string');
+  console.log('No environment variables found, trying Kinsta external connection');
+  databaseUrl = 'postgres://fowl:zE8_lL4=bJ2_uD9=qD1=@us-east1-001.proxy.kinsta.app:30635/drunk-emerald-angelfish';
+  console.log('Using external connection string');
 }
 
 // Ensure connection string uses postgres:// format (some libraries prefer this)
@@ -89,8 +89,8 @@ console.log('Database URL preview:', databaseUrl ? databaseUrl.replace(/:[^:@]*@
 console.log('Attempting database connection...');
 const pool = new Pool({ 
   connectionString: databaseUrl,
-  ssl: false, // Kinsta internal connections don't use SSL
-  connectionTimeoutMillis: 10000,
+  ssl: databaseUrl.includes('proxy.kinsta.app') ? { rejectUnauthorized: false } : false,
+  connectionTimeoutMillis: 15000,
   idleTimeoutMillis: 30000
 });
 
