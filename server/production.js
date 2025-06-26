@@ -36,7 +36,12 @@ const adminUsers = pgTable("admin_users", {
   last_login: timestamp("last_login"),
 });
 
+console.log('Environment variables check:');
+console.log('DATABASE_URL exists:', !!process.env.DATABASE_URL);
+console.log('NODE_ENV:', process.env.NODE_ENV);
+
 if (!process.env.DATABASE_URL) {
+  console.error("DATABASE_URL environment variable is missing");
   throw new Error("DATABASE_URL must be set");
 }
 
