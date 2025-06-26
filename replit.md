@@ -161,6 +161,7 @@ Changelog:
 - June 26, 2025. Multiple deployment attempts failing with persistent "Invalid credentials" - considering rollback to working commit from 4 hours ago to restore functionality
 - June 26, 2025. Created fresh eciple-v2 project with clean PostgreSQL database and working admin authentication (admin/admin123) - eliminated all legacy deployment conflicts
 - June 26, 2025. Fixed homepage routing to display client-approved three-section navigation structure (Platform Overview, Investor Portal, EcipleMatch) with proper eciple branding
+- June 26, 2025. Restored correct comprehensive homepage (ComparisonPage) with detailed platform features, statistics, problem/solution sections, and contact form that client spent hours developing
 ```
 
 ## User Preferences
