@@ -68,8 +68,14 @@ if (!databaseUrl && process.env.DB_HOST) {
 // Fallback to known Kinsta internal connection if no environment variables
 if (!databaseUrl) {
   console.log('No environment variables found, using Kinsta internal connection');
-  databaseUrl = 'postgresql://fowl:zE8_lL4=bJ2_uD9=qD1=@eciple-db-45y1v-postgresql.eciple-db-45y1v.svc.cluster.local:5432/drunk-emerald-angelfish';
+  databaseUrl = 'postgres://fowl:zE8_lL4=bJ2_uD9=qD1=@eciple-db-45y1v-postgresql.eciple-db-45y1v.svc.cluster.local:5432/drunk-emerald-angelfish';
   console.log('Using fallback connection string');
+}
+
+// Ensure connection string uses postgres:// format (some libraries prefer this)
+if (databaseUrl && databaseUrl.startsWith('postgresql://')) {
+  databaseUrl = databaseUrl.replace('postgresql://', 'postgres://');
+  console.log('Normalized connection string to postgres:// format');
 }
 
 if (!databaseUrl) {
