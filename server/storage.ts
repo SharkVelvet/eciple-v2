@@ -1,312 +1,57 @@
+import { eq } from "drizzle-orm";
+import { db } from "./db.js";
 import { 
-  users, 
-  contactRequests, 
   adminUsers, 
   adminSessions, 
-  ecipleMatchDocuments,
-  type User, 
-  type InsertUser, 
-  type ContactRequest, 
-  type InsertContactRequest,
+  ecipleDocuments, 
+  contactRequests,
   type AdminUser,
   type InsertAdminUser,
   type AdminSession,
-  type EcipleMatchDocument,
-  type InsertEcipleMatchDocument
-} from "@shared/schema";
-import { db } from "./db";
-import { eq } from "drizzle-orm";
+  type InsertAdminSession,
+  type EcipleDocument,
+  type InsertEcipleDocument,
+  type ContactRequest,
+  type InsertContactRequest
+} from "../shared/schema.js";
 
 export interface IStorage {
-  getUser(id: number): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
-  
-  // Contact form related methods
-  createContactRequest(contactData: InsertContactRequest): Promise<ContactRequest>;
-  getContactRequest(id: number): Promise<ContactRequest | undefined>;
-  getAllContactRequests(): Promise<ContactRequest[]>;
-
-  // Admin authentication methods
+  // Admin user operations
   getAdminByUsername(username: string): Promise<AdminUser | undefined>;
   getAdminById(id: number): Promise<AdminUser | undefined>;
   createAdminUser(user: InsertAdminUser): Promise<AdminUser>;
   updateAdminLastLogin(id: number): Promise<void>;
   
-  // Admin session methods
+  // Admin session operations
   createAdminSession(sessionId: string, userId: number, expiresAt: Date): Promise<AdminSession>;
   getAdminSession(sessionId: string): Promise<AdminSession | undefined>;
   deleteAdminSession(sessionId: string): Promise<void>;
-  cleanExpiredSessions(): Promise<void>;
-
-  // EcipleMatch document methods
-  getEcipleMatchDocuments(): Promise<EcipleMatchDocument[]>;
-  createEcipleMatchDocument(document: InsertEcipleMatchDocument): Promise<EcipleMatchDocument>;
-  updateEcipleMatchDocument(id: number, document: Partial<InsertEcipleMatchDocument>): Promise<EcipleMatchDocument | undefined>;
-  deleteEcipleMatchDocument(id: number): Promise<void>;
+  
+  // Document operations
+  getEcipleDocuments(): Promise<EcipleDocument[]>;
+  createEcipleDocument(document: InsertEcipleDocument): Promise<EcipleDocument>;
+  updateEcipleDocument(id: number, document: Partial<InsertEcipleDocument>): Promise<EcipleDocument | undefined>;
+  deleteEcipleDocument(id: number): Promise<void>;
+  
+  // Contact operations
+  createContactRequest(contact: InsertContactRequest): Promise<ContactRequest>;
+  getAllContactRequests(): Promise<ContactRequest[]>;
 }
 
-// Memory storage for development
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private contacts: Map<number, ContactRequest>;
-  private adminUsers: Map<number, AdminUser>;
-  private adminSessions: Map<string, AdminSession>;
-  private ecipleMatchDocuments: Map<number, EcipleMatchDocument>;
-  currentUserId: number;
-  currentContactId: number;
-  currentAdminId: number;
-  currentDocumentId: number;
-
-  constructor() {
-    this.users = new Map();
-    this.contacts = new Map();
-    this.adminUsers = new Map();
-    this.adminSessions = new Map();
-    this.ecipleMatchDocuments = new Map();
-    this.currentUserId = 1;
-    this.currentContactId = 1;
-    this.currentAdminId = 1;
-    this.currentDocumentId = 1;
-    this.initializeDefaultAdmin();
-    this.initializeDefaultDocuments();
-  }
-
-  private initializeDefaultAdmin() {
-    const defaultAdmin: AdminUser = {
-      id: this.currentAdminId++,
-      username: "eciple_admin_2024",
-      passwordHash: "$2b$12$qh3PQ8Z3PQ8Z3PQ8Z3PQ8O5K5P8Z3PQ8Z3PQ8Z3PQ8Z3PQ8Z3PQ8Z3",
-      email: "admin@eciple.com",
-      role: "admin",
-      isActive: true,
-      lastLogin: null,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    this.adminUsers.set(defaultAdmin.id, defaultAdmin);
-  }
-
-  private initializeDefaultDocuments() {
-    const defaultDocs = [
-      {
-        title: "Executive Summary",
-        filename: "executive-summary.pdf",
-        description: "Comprehensive overview of eciple's vision, market opportunity, and business strategy",
-        displayOrder: 0,
-        isActive: true
-      },
-      {
-        title: "Pitch Deck",
-        filename: "eciple-pitch-deck.pdf",
-        description: "Detailed presentation outlining eciple's innovative discipleship platform",
-        displayOrder: 1,
-        isActive: true
-      }
-    ];
-
-    defaultDocs.forEach(docData => {
-      const document: EcipleMatchDocument = {
-        id: this.currentDocumentId++,
-        ...docData,
-        fileData: null,
-        contentType: null,
-        fileSize: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      };
-      this.ecipleMatchDocuments.set(document.id, document);
-    });
-  }
-
-  async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    for (const user of this.users.values()) {
-      if (user.username === username) {
-        return user;
-      }
-    }
-    return undefined;
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.currentUserId++;
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
-  }
-
-  async createContactRequest(contactData: InsertContactRequest): Promise<ContactRequest> {
-    const id = this.currentContactId++;
-    const contactRequest: ContactRequest = { 
-      ...contactData, 
-      id, 
-      createdAt: new Date(),
-      updatedAt: new Date() 
-    };
-    this.contacts.set(id, contactRequest);
-    return contactRequest;
-  }
-
-  async getContactRequest(id: number): Promise<ContactRequest | undefined> {
-    return this.contacts.get(id);
-  }
-
-  async getAllContactRequests(): Promise<ContactRequest[]> {
-    return Array.from(this.contacts.values());
-  }
-
-  async getAdminByUsername(username: string): Promise<AdminUser | undefined> {
-    for (const admin of this.adminUsers.values()) {
-      if (admin.username === username) {
-        return admin;
-      }
-    }
-    return undefined;
-  }
-
-  async getAdminById(id: number): Promise<AdminUser | undefined> {
-    return this.adminUsers.get(id);
-  }
-
-  async createAdminUser(insertAdmin: InsertAdminUser): Promise<AdminUser> {
-    const id = this.currentAdminId++;
-    const admin: AdminUser = {
-      ...insertAdmin,
-      id,
-      isActive: true,
-      lastLogin: null,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    this.adminUsers.set(id, admin);
-    return admin;
-  }
-
-  async updateAdminLastLogin(id: number): Promise<void> {
-    const admin = this.adminUsers.get(id);
-    if (admin) {
-      admin.lastLogin = new Date();
-      admin.updatedAt = new Date();
-      this.adminUsers.set(id, admin);
-    }
-  }
-
-  async createAdminSession(sessionId: string, userId: number, expiresAt: Date): Promise<AdminSession> {
-    const session: AdminSession = {
-      id: sessionId,
-      userId,
-      expiresAt,
-      createdAt: new Date(),
-    };
-    this.adminSessions.set(sessionId, session);
-    return session;
-  }
-
-  async getAdminSession(sessionId: string): Promise<AdminSession | undefined> {
-    return this.adminSessions.get(sessionId);
-  }
-
-  async deleteAdminSession(sessionId: string): Promise<void> {
-    this.adminSessions.delete(sessionId);
-  }
-
-  async cleanExpiredSessions(): Promise<void> {
-    const now = new Date();
-    for (const [sessionId, session] of this.adminSessions.entries()) {
-      if (session.expiresAt < now) {
-        this.adminSessions.delete(sessionId);
-      }
-    }
-  }
-
-  async getEcipleMatchDocuments(): Promise<EcipleMatchDocument[]> {
-    return Array.from(this.ecipleMatchDocuments.values());
-  }
-
-  async createEcipleMatchDocument(insertDocument: InsertEcipleMatchDocument): Promise<EcipleMatchDocument> {
-    const id = this.currentDocumentId++;
-    const document: EcipleMatchDocument = {
-      ...insertDocument,
-      id,
-      isActive: insertDocument.isActive !== false,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    };
-    this.ecipleMatchDocuments.set(id, document);
-    return document;
-  }
-
-  async updateEcipleMatchDocument(id: number, updates: Partial<InsertEcipleMatchDocument>): Promise<EcipleMatchDocument | undefined> {
-    const document = this.ecipleMatchDocuments.get(id);
-    if (document) {
-      const updatedDocument = {
-        ...document,
-        ...updates,
-        updatedAt: new Date(),
-      };
-      this.ecipleMatchDocuments.set(id, updatedDocument);
-      return updatedDocument;
-    }
-    return undefined;
-  }
-
-  async deleteEcipleMatchDocument(id: number): Promise<void> {
-    const document = this.ecipleMatchDocuments.get(id);
-    if (document) {
-      document.isActive = false;
-      document.updatedAt = new Date();
-      this.ecipleMatchDocuments.set(id, document);
-    }
-  }
-}
-
-// Database storage for production
 export class DatabaseStorage implements IStorage {
-  async getUser(id: number): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.id, id));
-    return user || undefined;
-  }
-
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    const [user] = await db.select().from(users).where(eq(users.username, username));
-    return user || undefined;
-  }
-
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const [user] = await db.insert(users).values(insertUser).returning();
-    return user;
-  }
-
-  async createContactRequest(contactData: InsertContactRequest): Promise<ContactRequest> {
-    const [contact] = await db.insert(contactRequests).values(contactData).returning();
-    return contact;
-  }
-
-  async getContactRequest(id: number): Promise<ContactRequest | undefined> {
-    const [contact] = await db.select().from(contactRequests).where(eq(contactRequests.id, id));
-    return contact || undefined;
-  }
-
-  async getAllContactRequests(): Promise<ContactRequest[]> {
-    return await db.select().from(contactRequests);
-  }
-
+  // Admin user operations
   async getAdminByUsername(username: string): Promise<AdminUser | undefined> {
     const [admin] = await db.select().from(adminUsers).where(eq(adminUsers.username, username));
-    return admin || undefined;
+    return admin;
   }
 
   async getAdminById(id: number): Promise<AdminUser | undefined> {
     const [admin] = await db.select().from(adminUsers).where(eq(adminUsers.id, id));
-    return admin || undefined;
+    return admin;
   }
 
-  async createAdminUser(insertAdmin: InsertAdminUser): Promise<AdminUser> {
-    const [admin] = await db.insert(adminUsers).values(insertAdmin).returning();
+  async createAdminUser(user: InsertAdminUser): Promise<AdminUser> {
+    const [admin] = await db.insert(adminUsers).values(user).returning();
     return admin;
   }
 
@@ -314,6 +59,7 @@ export class DatabaseStorage implements IStorage {
     await db.update(adminUsers).set({ lastLogin: new Date() }).where(eq(adminUsers.id, id));
   }
 
+  // Admin session operations
   async createAdminSession(sessionId: string, userId: number, expiresAt: Date): Promise<AdminSession> {
     const [session] = await db.insert(adminSessions).values({
       id: sessionId,
@@ -325,43 +71,47 @@ export class DatabaseStorage implements IStorage {
 
   async getAdminSession(sessionId: string): Promise<AdminSession | undefined> {
     const [session] = await db.select().from(adminSessions).where(eq(adminSessions.id, sessionId));
-    return session || undefined;
+    return session;
   }
 
   async deleteAdminSession(sessionId: string): Promise<void> {
     await db.delete(adminSessions).where(eq(adminSessions.id, sessionId));
   }
 
-  async cleanExpiredSessions(): Promise<void> {
-    const now = new Date();
-    await db.delete(adminSessions).where(eq(adminSessions.expiresAt, now));
+  // Document operations
+  async getEcipleDocuments(): Promise<EcipleDocument[]> {
+    return await db.select().from(ecipleDocuments).where(eq(ecipleDocuments.isActive, true));
   }
 
-  async getEcipleMatchDocuments(): Promise<EcipleMatchDocument[]> {
-    return await db.select().from(ecipleMatchDocuments);
+  async createEcipleDocument(document: InsertEcipleDocument): Promise<EcipleDocument> {
+    const [doc] = await db.insert(ecipleDocuments).values({
+      ...document,
+      updatedAt: new Date()
+    }).returning();
+    return doc;
   }
 
-  async createEcipleMatchDocument(insertDocument: InsertEcipleMatchDocument): Promise<EcipleMatchDocument> {
-    const [document] = await db.insert(ecipleMatchDocuments).values(insertDocument).returning();
-    return document;
+  async updateEcipleDocument(id: number, document: Partial<InsertEcipleDocument>): Promise<EcipleDocument | undefined> {
+    const [doc] = await db.update(ecipleDocuments).set({
+      ...document,
+      updatedAt: new Date()
+    }).where(eq(ecipleDocuments.id, id)).returning();
+    return doc;
   }
 
-  async updateEcipleMatchDocument(id: number, updates: Partial<InsertEcipleMatchDocument>): Promise<EcipleMatchDocument | undefined> {
-    const [document] = await db.update(ecipleMatchDocuments)
-      .set(updates)
-      .where(eq(ecipleMatchDocuments.id, id))
-      .returning();
-    return document || undefined;
+  async deleteEcipleDocument(id: number): Promise<void> {
+    await db.delete(ecipleDocuments).where(eq(ecipleDocuments.id, id));
   }
 
-  async deleteEcipleMatchDocument(id: number): Promise<void> {
-    await db.update(ecipleMatchDocuments)
-      .set({ isActive: false })
-      .where(eq(ecipleMatchDocuments.id, id));
+  // Contact operations
+  async createContactRequest(contact: InsertContactRequest): Promise<ContactRequest> {
+    const [request] = await db.insert(contactRequests).values(contact).returning();
+    return request;
+  }
+
+  async getAllContactRequests(): Promise<ContactRequest[]> {
+    return await db.select().from(contactRequests);
   }
 }
 
-// Use database storage when DATABASE_URL is available
-export const storage = process.env.DATABASE_URL 
-  ? new DatabaseStorage() 
-  : new MemStorage();
+export const storage = new DatabaseStorage();

@@ -2,12 +2,14 @@ import { Pool } from "pg";
 import { drizzle } from "drizzle-orm/node-postgres";
 import * as schema from "../shared/schema.js";
 
+// Use environment variable for database connection (Kinsta auto-linking)
+const databaseUrl = process.env.DATABASE_URL || 
+  "postgres://silverfish:tS4=uY3+aB3=lF8=zO1=@uncomfortable-coffee-bison-467dg-postgresql.services.clever-cloud.com:50013/uncomfortable-coffee-bison";
+
 // Create connection pool
 const pool = new Pool({
-  connectionString: "postgres://silverfish:tS4=uY3+aB3=lF8=zO1=@uncomfortable-coffee-bison-467dg-postgresql.services.clever-cloud.com:50013/uncomfortable-coffee-bison",
-  ssl: {
-    rejectUnauthorized: false
-  }
+  connectionString: databaseUrl,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
 
 export const db = drizzle(pool, { schema });

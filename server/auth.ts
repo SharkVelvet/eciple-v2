@@ -1,151 +1,44 @@
-import passport from "passport";
-import { Strategy as LocalStrategy } from "passport-local";
-import { Express } from "express";
-import session from "express-session";
-import { scrypt, randomBytes, timingSafeEqual } from "crypto";
-import { promisify } from "util";
-import { storage } from "./storage";
-import { User as SelectUser } from "@shared/schema";
-import createMemoryStore from "memorystore";
+import bcrypt from "bcrypt";
+import crypto from "crypto";
+import { storage } from "./storage.js";
+import type { Request, Response, NextFunction } from "express";
 
-const MemoryStore = createMemoryStore(session);
+export async function hashPassword(password: string): Promise<string> {
+  return await bcrypt.hash(password, 12);
+}
 
-declare global {
-  namespace Express {
-    interface User extends SelectUser {}
+export async function verifyPassword(password: string, hash: string): Promise<boolean> {
+  return await bcrypt.compare(password, hash);
+}
+
+export function generateSessionId(): string {
+  return crypto.randomBytes(32).toString('hex');
+}
+
+export async function requireAuth(req: Request, res: Response, next: NextFunction) {
+  const sessionId = req.headers.authorization?.replace('Bearer ', '');
+  
+  if (!sessionId) {
+    return res.status(401).json({ error: 'No session token provided' });
   }
-}
 
-const scryptAsync = promisify(scrypt);
-
-async function hashPassword(password: string) {
-  const salt = randomBytes(16).toString("hex");
-  const buf = (await scryptAsync(password, salt, 64)) as Buffer;
-  return `${buf.toString("hex")}.${salt}`;
-}
-
-async function comparePasswords(supplied: string, stored: string) {
-  const [hashed, salt] = stored.split(".");
-  const hashedBuf = Buffer.from(hashed, "hex");
-  const suppliedBuf = (await scryptAsync(supplied, salt, 64)) as Buffer;
-  return timingSafeEqual(hashedBuf, suppliedBuf);
-}
-
-export function setupAuth(app: Express) {
-  const sessionStore = new MemoryStore({
-    checkPeriod: 86400000, // 24 hours
-  });
-
-  // Generate secure session secret if not provided in environment
-  const sessionSecret = process.env.SESSION_SECRET || 
-    (process.env.NODE_ENV === 'production' 
-      ? require('crypto').randomBytes(64).toString('hex')
-      : "eciple-super-secret-key-for-development-only");
-
-  const sessionSettings: session.SessionOptions = {
-    secret: sessionSecret,
-    resave: false,
-    saveUninitialized: false,
-    store: sessionStore,
-    cookie: {
-      maxAge: 1000 * 60 * 60 * 24, // 24 hours
-      sameSite: "lax",
-      secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
-      httpOnly: true, // Prevent XSS attacks
+  try {
+    const session = await storage.getAdminSession(sessionId);
+    
+    if (!session || session.expiresAt < new Date()) {
+      return res.status(401).json({ error: 'Invalid or expired session' });
     }
-  };
 
-  app.set("trust proxy", 1);
-  app.use(session(sessionSettings));
-  app.use(passport.initialize());
-  app.use(passport.session());
-
-  passport.use(
-    new LocalStrategy(async (username, password, done) => {
-      try {
-        const user = await storage.getUserByUsername(username);
-        if (!user || !(await comparePasswords(password, user.password))) {
-          return done(null, false);
-        } else {
-          return done(null, user);
-        }
-      } catch (error) {
-        return done(error);
-      }
-    }),
-  );
-
-  passport.serializeUser((user, done) => done(null, user.id));
-  passport.deserializeUser(async (id: number, done) => {
-    try {
-      const user = await storage.getUser(id);
-      done(null, user);
-    } catch (error) {
-      done(error);
+    const admin = await storage.getAdminById(session.userId);
+    if (!admin) {
+      return res.status(401).json({ error: 'Admin not found' });
     }
-  });
 
-  app.post("/api/register", async (req, res, next) => {
-    try {
-      const { username, password } = req.body;
-      
-      if (!username || !password) {
-        return res.status(400).json({ message: "Username and password are required" });
-      }
-      
-      const existingUser = await storage.getUserByUsername(username);
-      if (existingUser) {
-        return res.status(400).json({ message: "Username already exists" });
-      }
-
-      const user = await storage.createUser({
-        username,
-        password: await hashPassword(password),
-      });
-
-      req.login(user, (err) => {
-        if (err) return next(err);
-        // Don't send password back to client
-        const { password, ...userWithoutPassword } = user;
-        res.status(201).json(userWithoutPassword);
-      });
-    } catch (error) {
-      next(error);
-    }
-  });
-
-  app.post("/api/login", (req, res, next) => {
-    passport.authenticate("local", (err: any, user: SelectUser | false, info: any) => {
-      if (err) {
-        return next(err);
-      }
-      if (!user) {
-        return res.status(401).json({ message: "Invalid username or password" });
-      }
-      req.login(user, (loginErr) => {
-        if (loginErr) {
-          return next(loginErr);
-        }
-        // Don't send password back to client
-        const { password, ...userWithoutPassword } = user;
-        return res.status(200).json(userWithoutPassword);
-      });
-    })(req, res, next);
-  });
-
-  app.post("/api/logout", (req, res, next) => {
-    req.logout((err) => {
-      if (err) return next(err);
-      res.sendStatus(200);
-    });
-  });
-
-  app.get("/api/user", (req, res) => {
-    if (!req.isAuthenticated()) {
-      return res.status(401).json({ message: "Not authenticated" });
-    }
-    // Don't send password back to client
-    const { password, ...userWithoutPassword } = req.user as SelectUser;
-    res.json(userWithoutPassword);
-  });
+    (req as any).admin = admin;
+    (req as any).sessionId = sessionId;
+    next();
+  } catch (error) {
+    console.error('Auth error:', error);
+    return res.status(401).json({ error: 'Authentication failed' });
+  }
 }
