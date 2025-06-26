@@ -1,60 +1,51 @@
-import { Switch, Route, Redirect } from "wouter";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Switch, Route } from "wouter";
+import { Toaster } from "@/components/ui/toaster";
+import Landing from "@/pages/Landing";
+import Home from "@/pages/Home";
+import EcipleMatch from "@/pages/EcipleMatch";
+import Investors from "@/pages/Investors";
+import AdminLogin from "@/pages/AdminLogin";
+import AdminDashboard from "@/pages/AdminDashboard";
 
-import { TooltipProvider } from "@/components/ui/tooltip";
-import AuthPage from "@/pages/auth-page";
-import InvestorDashboard from "@/pages/investor-dashboard";
-import InvestorPage from "@/pages/investor-page";
-import EcipleMatchPage from "@/pages/eciplematch-page";
-import WelcomePage from "@/pages/welcome-page";
-import ComparisonPage from "@/pages/ComparisonPage";
-import CookiePolicyPage from "@/pages/cookie-policy";
-import PrivacyPolicyPage from "@/pages/privacy-policy";
-import TermsConditionsPage from "@/pages/terms-conditions";
-import AdminLogin from "@/pages/admin-login";
-import AdminDashboard from "@/pages/admin-dashboard";
-import NotFound from "@/pages/not-found";
-import { AuthProvider } from "@/hooks/use-auth";
-import { ProtectedRoute } from "@/lib/protected-route";
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      queryFn: async ({ queryKey }) => {
+        const response = await fetch(queryKey[0] as string);
+        if (!response.ok) {
+          if (response.status >= 500) {
+            throw new Error(`Server error: ${response.status}`);
+          }
+          if (response.status === 404) {
+            throw new Error(`Not found: ${response.status}`);
+          }
+          const errorText = await response.text();
+          throw new Error(`Error ${response.status}: ${errorText}`);
+        }
+        return response.json();
+      },
+    },
+  },
+});
 
 function Router() {
   return (
     <Switch>
-      {/* Main site - show comparison page as homepage */}
-      <Route path="/" component={ComparisonPage} />
-      
-      {/* Welcome page route */}
-      <Route path="/welcome" component={WelcomePage} />
-      
-      {/* Policy pages */}
-      <Route path="/cookie-policy" component={CookiePolicyPage} />
-      <Route path="/privacy-policy" component={PrivacyPolicyPage} />
-      <Route path="/terms-conditions" component={TermsConditionsPage} />
-      
-      {/* Investor portal authentication */}
-      <Route path="/auth" component={AuthPage} />
-      
-      {/* Investor dashboard (protected by investor authentication) */}
-      <Route path="/investor-dashboard" component={InvestorDashboard} />
-      
-      {/* Investor page - redirects to /investors */}
-      <Route path="/investor">
-        <Redirect to="/investors" />
-      </Route>
-      
-      {/* Investors page */}
-      <Route path="/investors" component={InvestorPage} />
-      
-      {/* EcipleMatch page */}
-      <Route path="/eciplematch" component={EcipleMatchPage} />
-      
-      {/* Admin routes */}
+      <Route path="/" component={Landing} />
+      <Route path="/home" component={Home} />
+      <Route path="/eciplematch" component={EcipleMatch} />
+      <Route path="/investors" component={Investors} />
       <Route path="/admin-login" component={AdminLogin} />
       <Route path="/admin-dashboard" component={AdminDashboard} />
-      
-      {/* 404 page */}
-      <Route component={NotFound} />
+      <Route>
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">404</h1>
+            <p className="text-gray-600">Page not found</p>
+          </div>
+        </div>
+      </Route>
     </Switch>
   );
 }
@@ -62,12 +53,10 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <TooltipProvider>
-
-          <Router />
-        </TooltipProvider>
-      </AuthProvider>
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+        <Router />
+        <Toaster />
+      </div>
     </QueryClientProvider>
   );
 }
